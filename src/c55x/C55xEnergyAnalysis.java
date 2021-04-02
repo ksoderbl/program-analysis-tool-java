@@ -61,7 +61,7 @@ public class C55xEnergyAnalysis implements Analysis
         // contributions from bb nodes
         TiwariResults nodeResults = new TiwariResults(machine);
         Graph basicBlocks = program.getBasicBlocks();
-        Iterator iter = basicBlocks.getNodes().iterator();
+        Iterator<Node> iter = basicBlocks.getNodes().iterator();
         while (iter.hasNext()) {
             BasicBlock bb = (BasicBlock) iter.next();
             estimateBasicBlockEnergy(bb, machine, r);
@@ -86,9 +86,9 @@ public class C55xEnergyAnalysis implements Analysis
 
         // contributions from bb edges
         TiwariResults edgeResults = new TiwariResults(machine);
-        iter = basicBlocks.getEdges().iterator();
-        while (iter.hasNext()) {
-            BasicBlockEdge edge = (BasicBlockEdge) iter.next();
+        Iterator<Edge> edgeIter = basicBlocks.getEdges().iterator();
+        while (edgeIter.hasNext()) {
+            BasicBlockEdge edge = (BasicBlockEdge) edgeIter.next();
             estimateBasicBlockEdgeEnergy(edge, machine, r);
             String edge_str = BBEdgetoString(edge);
             if (edge_str.length() > 0)
@@ -120,9 +120,9 @@ public class C55xEnergyAnalysis implements Analysis
         System.out.println("--- CONTRIBUTIONS BY PROCEDURES ---");
         String s = ""; while (s.length() < 20) s += " ";
         System.out.println(s + TiwariResults.getHeaderString());
-        iter = program.getProcedures().values().iterator();
-        while (iter.hasNext()) {
-            Procedure proc = (Procedure)iter.next();
+        Iterator<Procedure> procIter = program.getProcedures().values().iterator();
+        while (procIter.hasNext()) {
+            Procedure proc = procIter.next();
             String name = proc.getName();
             if (name == null || name.equals("program_entry"))
                 continue;

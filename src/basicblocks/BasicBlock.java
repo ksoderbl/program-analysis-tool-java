@@ -14,7 +14,6 @@ import program.Procedure;
 import program.TiwariResults;
 import cfg.CFGNode;
 import input.Input;
-import loop.*;
 import scratchpad.CodeAllocationObject;
 
 /**
@@ -27,16 +26,14 @@ import scratchpad.CodeAllocationObject;
 public class BasicBlock extends Node implements CodeAllocationObject {
 
     /** 
-     * Labels that point to entry node of this basic block. Elements of
-     * the list are of type Label.
+     * Labels that point to entry node of this basic block.
      */
-    private List labels;
+    private List<String> labels;
 
     /**
-     * Nodes of this basic block. Elements of the list are of type
-     * CFGNode.
+     * Nodes of this basic block.
      */
-    private List nodes;
+    private List<CFGNode> nodes;
 
     /** type of the basic block. Represented as a bit mask. */
     private int type;
@@ -72,15 +69,15 @@ public class BasicBlock extends Node implements CodeAllocationObject {
      */
     public BasicBlock(String name) {
         super(name);
-        labels = new ArrayList();
-        nodes = new ArrayList();
+        labels = new ArrayList<String>();
+        nodes = new ArrayList<CFGNode>();
         type = 0;
     }
 
     /**
      * @return first label of this basic block
      */
-    public List getLabels() {
+    public List<String> getLabels() {
         return labels;
     }
 
@@ -96,7 +93,7 @@ public class BasicBlock extends Node implements CodeAllocationObject {
     /**
      * @return first node of this basic block
      */
-    public List getNodes() {
+    public List<CFGNode> getNodes() {
         return nodes;
     }
 
@@ -226,16 +223,16 @@ public class BasicBlock extends Node implements CodeAllocationObject {
      */
     public String toString() {
         String result = new String();
-        Iterator iter;
+
         // if basic block has labels, split the node into two records
         if (labels.size() > 0) {
             result = result + "{";
             // labels of this basic block
-            iter = labels.iterator();
+            Iterator<String> iter = labels.iterator();
             result = result + this.getName() +" S:"+this.getDFSNum()+ " "+this.getExecutions() +"|";
             while (iter.hasNext()) {
                 //result = result + this.getName() +" S:"+this.getDFSNum()+ " E:"+this.getDFSEndNum() +"|";
-                result = result + ((String) iter.next()) + ":\t";
+                result = result + iter.next() + ":\t";
             }
             result = result + "|";
         }
@@ -248,9 +245,9 @@ public class BasicBlock extends Node implements CodeAllocationObject {
 
 
         // instructions of this basic block
-        iter = nodes.iterator();
+        Iterator<CFGNode> iter = nodes.iterator();
         while (iter.hasNext()) {
-            CFGNode node = (CFGNode) iter.next();
+            CFGNode node = iter.next();
             if (node.getInstruction() == null) {
                 continue;
             }

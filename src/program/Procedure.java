@@ -5,7 +5,6 @@
 package program;
 
 import cfg.CFGNode;
-import input.Input;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,10 +25,10 @@ public class Procedure {
     private CFGNode entry;
 
     /** exit nodes of the procedure */
-    private ArrayList exits;
+    private ArrayList<CFGNode> exits;
 
     /** set of procedures called by this procedure */
-    private HashSet calls;
+    private HashSet<Procedure> calls;
 
     /** size of procedure in bytes */
     private int byteSize = 0;
@@ -45,8 +44,8 @@ public class Procedure {
     protected Procedure(String name, CFGNode entry) {
         this.name = name;
         this.entry = entry;
-        exits = new ArrayList();
-        calls = new HashSet();
+        exits = new ArrayList<CFGNode>();
+        calls = new HashSet<Procedure>();
     }
 
     /**
@@ -66,7 +65,7 @@ public class Procedure {
     /**
      * @return exit nodes of the procedure
      */
-    public List getExits() {
+    public List<CFGNode> getExits() {
         return exits;
     }
 
@@ -88,7 +87,7 @@ public class Procedure {
     /**
      * @return set of procedures called by this procedure
      */
-    public HashSet getCalls() {
+    public HashSet<Procedure> getCalls() {
         return calls;
     }
 
@@ -133,13 +132,13 @@ public class Procedure {
      */
     public String toString() {
         String callsNames = "";
-        Iterator iter = calls.iterator();
+        Iterator<Procedure> iter = calls.iterator();
         if (iter.hasNext()) {
-            callsNames = ((Procedure) iter.next()).getName();
+            callsNames = iter.next().getName();
         }
         while (iter.hasNext()) {
             callsNames =
-                callsNames + ", " + ((Procedure) iter.next()).getName();
+                callsNames + ", " + iter.next().getName();
         }
         return "[Procedure " + getName() + ", entry=" + entry +", size="+ byteSize
             + ", exits=" + exits + ", calls={" + callsNames + "}]";

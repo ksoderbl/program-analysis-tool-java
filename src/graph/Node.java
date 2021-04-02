@@ -25,10 +25,10 @@ public class Node {
     private String name;
 
     /** edges arriving at this node */
-    private List incomingEdges;
+    private List<Edge> incomingEdges;
 
     /** edges leaving this node */
-    private List outgoingEdges;
+    private List<Edge> outgoingEdges;
 
     /** parents for tree-graphs */
     private Node parentNode;
@@ -48,8 +48,8 @@ public class Node {
      */
     public Node(String _name) {
         name = _name;
-        incomingEdges = new ArrayList();
-        outgoingEdges = new ArrayList();
+        incomingEdges = new ArrayList<Edge>();
+        outgoingEdges = new ArrayList<Edge>();
     }
 
     /**
@@ -62,14 +62,14 @@ public class Node {
     /**
      * @return edges arriving at this node
      */
-    public List getIncomingEdges() {
+    public List<Edge> getIncomingEdges() {
         return incomingEdges;
     }
 
     /**
      * @return edges leaving this node
      */
-    public List getOutgoingEdges() {
+    public List<Edge> getOutgoingEdges() {
         return outgoingEdges;
     }
 

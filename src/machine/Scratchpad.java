@@ -14,7 +14,6 @@ import java.util.Enumeration;
 import basicblocks.BasicBlock;
 import stabs.MemoryBlock;
 import program.Procedure;
-import misc.keyComparator;
 
 public class Scratchpad{
     
@@ -26,16 +25,16 @@ public class Scratchpad{
     private int nextAdd = 0;
 
     /** of type int */
-    private Vector basicBlocks = new Vector();
+    private Vector<BasicBlock> basicBlocks = new Vector<BasicBlock>();
     /** of type int */
-    private Vector procedures = new Vector();
+    private Vector<Procedure> procedures = new Vector<Procedure>();
     /** of type int */
-    private Vector variables = new Vector();
+    //private Vector variables = new Vector();
     /** of type int */
-    private Vector memoryBlocks = new Vector();
+    private Vector<MemoryBlock> memoryBlocks = new Vector<MemoryBlock>();
 
     /** of Procedure, BasicBlock, Variable, or MemoryBlock type */
-    private Vector selectedObjects = new Vector();
+    private Vector<Object> selectedObjects = new Vector<>();
     
     public Scratchpad(int baseAdd, int blocks, int blockSize){
         
@@ -60,7 +59,7 @@ public class Scratchpad{
     }
 
 
-    public Vector getSelectedObjects(){
+    public Vector<Object> getSelectedObjects(){
         return selectedObjects;
     }
 
@@ -84,10 +83,10 @@ public class Scratchpad{
     }
 
     public void printPriorities(){
-        Enumeration e = basicBlocks.elements();
+        Enumeration<BasicBlock> e = basicBlocks.elements();
         System.out.println("Basic Blocks");
         while (e.hasMoreElements()){
-            BasicBlock bb =  (BasicBlock) e.nextElement();
+            BasicBlock bb = e.nextElement();
 //            System.out.println("bb:" + bb.getName() 
 //                               +" priority:"+ bb.getPriority()+ " size:"+bb.getByteSize());
         }
@@ -96,9 +95,9 @@ public class Scratchpad{
         //iter = set2.iterator();
         System.out.println("Procedures");
 
-        e = procedures.elements();
-        while (e.hasMoreElements()){
-            Procedure proc = (Procedure) e.nextElement();
+        Enumeration<Procedure> ep = procedures.elements();
+        while (ep.hasMoreElements()){
+            Procedure proc = ep.nextElement();
             System.out.println("proc:"+ proc.getName()
                                +" priority:"+ proc.getPriority()+ " size:"+proc.getByteSize());
                 
@@ -111,11 +110,11 @@ public class Scratchpad{
         return "Scratchpad blocksize:"+blockSize+" blocks:"+blocks+" baseadd:"+baseAdd; 
     }
 
-    public Vector getProcedures(){
+    public Vector<Procedure> getProcedures(){
         return procedures;
     }
 
-    public Vector getBasicBlocks(){
+    public Vector<BasicBlock> getBasicBlocks(){
         return basicBlocks;
     }
     

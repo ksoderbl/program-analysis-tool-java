@@ -2,7 +2,6 @@
 package instr;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Iterator;
 import program.BranchTarget;
 import microinstr.Microinstruction;
@@ -18,7 +17,7 @@ import machine.Machine;
 public class Operation
 {
     String mnemonic; // opcode mnemonic
-    List args;
+    List<Operand> args;
     String syntax;
 
 
@@ -26,7 +25,7 @@ public class Operation
         return mnemonic;
     }
 
-    public List getArgs() {
+    public List<Operand> getArgs() {
         return args;
     }
 
@@ -35,16 +34,16 @@ public class Operation
     }
 
 
-    public Operation(String mnemonic, List args, String syntax) {
+    public Operation(String mnemonic, List<Operand> args, String syntax) {
         this.mnemonic = mnemonic;
         this.args = args;
         this.syntax = syntax;
     }
 
     public boolean hasMemoryAccess() {
-        Iterator iter = args.iterator();
+        Iterator<Operand> iter = args.iterator();
         while (iter.hasNext()) {
-            Operand oper = (Operand)iter.next();
+            Operand oper = iter.next();
             if (oper.isMemoryAccess())
                 return true;
         }
@@ -52,7 +51,7 @@ public class Operation
     }
 
     // must be overridden ;microInstructions of the instruction
-    public List getMicroinstrs(Machine machine) {
+    public List<Microinstruction> getMicroinstrs(Machine machine) {
         return null;
     }
 

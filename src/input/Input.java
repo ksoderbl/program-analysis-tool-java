@@ -34,7 +34,7 @@ public abstract class Input {
     private String fileName;
 
     /** list of source files that were used to generate this input */
-    private List sourceFiles;
+    private List<SourceFile> sourceFiles;
 
     /** the type of file */
     private String type;
@@ -44,7 +44,7 @@ public abstract class Input {
      * The objects can represent e.g. an instruction, a label or
      * a pseudo operation; these implement the InputLineObject interface.
      */
-    private List inputLines;
+    private List<InputLineObject> inputLines;
 
 
     /**
@@ -55,8 +55,8 @@ public abstract class Input {
      */
     public Input(String fileName) {
         this.fileName = fileName;
-        sourceFiles = new ArrayList();
-        inputLines = new ArrayList();
+        sourceFiles = new ArrayList<SourceFile>();
+        inputLines = new ArrayList<InputLineObject>();
     }
 
     /**
@@ -87,14 +87,14 @@ public abstract class Input {
     /**
      * @eturn list of source files that were used to generate this input
      */
-    public List getSourceFiles() {
+    public List<SourceFile> getSourceFiles() {
         return sourceFiles;
     }
 
     /**
      * @eturn list of input line objects
      */
-    public List getInputLines() {
+    public List<InputLineObject> getInputLines() {
         return inputLines;
     }
 
@@ -112,13 +112,13 @@ public abstract class Input {
     protected void createPartialCFG(Program program) {
         CFG cfg = program.getCFG();
         CFGNode prevnode = null, next = null, node = null;
-        Iterator iterator = this.getInputLines().iterator();
-        ArrayList tmpLabels = new ArrayList();
-        Iterator li; // label iterator
+        Iterator<InputLineObject> iterator = this.getInputLines().iterator();
+        ArrayList<Label> tmpLabels = new ArrayList<Label>();
+        Iterator<Label> li; // label iterator
         Long ilc = new Long(0); // instruction location counter
 
         while (iterator.hasNext()) {
-            InputLineObject io = (InputLineObject)iterator.next();
+            InputLineObject io = iterator.next();
 
             Instruction i = io.getInstruction();
             Label label = io.getLabel();
@@ -150,7 +150,7 @@ public abstract class Input {
                  */
                 li = tmpLabels.iterator();
                 while (li.hasNext()) {
-                    Label l = (Label)li.next();
+                    Label l = li.next();
                     program.addSymbol(l.getName(),
                                       node.getInstruction().getAddr(),
                                       node);
@@ -199,7 +199,7 @@ public abstract class Input {
         // which are after the last instruction
         li = tmpLabels.iterator();
         while (li.hasNext()) {
-            Label l = (Label)li.next();
+            Label l = li.next();
             program.addLabel(l.getName(), ilc);
         }
     }

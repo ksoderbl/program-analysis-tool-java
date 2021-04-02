@@ -23,10 +23,10 @@ public class Graph {
     private String name;
 
     /** graph edges */
-    private List edges;
+    private List<Edge> edges;
 
     /** graph nodes */
-    private List nodes;
+    private List<Node> nodes;
 
     /**
      * Constructs a new graph.
@@ -36,8 +36,8 @@ public class Graph {
      */
     public Graph(String _name) {
         name = _name;
-        nodes = new ArrayList();
-        edges = new ArrayList();
+        nodes = new ArrayList<Node>();
+        edges = new ArrayList<Edge>();
     }
 
     /**
@@ -50,14 +50,14 @@ public class Graph {
     /**
      * @return graph edges
      */
-    public List getEdges() {
+    public List<Edge> getEdges() {
         return edges;
     }
 
     /**
      * @return graph nodes
      */
-    public List getNodes() {
+    public List<Node> getNodes() {
         return nodes;
     }
 
@@ -116,9 +116,9 @@ public class Graph {
      *         Node end 
      */
     public boolean containsEdge(Node start, Node end) {
-        Iterator iter = getEdges().iterator();
+        Iterator<Edge> iter = getEdges().iterator();
         while (iter.hasNext()) {
-            Edge edge = (Edge)iter.next();
+            Edge edge = iter.next();
             if (edge.getStart().equals(start)
                 && edge.getEnd().equals(end)) {
                 return true;
@@ -128,10 +128,10 @@ public class Graph {
     }
 
     public Edge findEdge(Node start, Node end){
-         List inBranches = end.getIncomingEdges();
-            Iterator edgeIter = inBranches.iterator();
+         List<Edge> inBranches = end.getIncomingEdges();
+            Iterator<Edge> edgeIter = inBranches.iterator();
             while (edgeIter.hasNext()){
-                Edge edge = (Edge)edgeIter.next();
+                Edge edge = edgeIter.next();
                 if (edge.getStart().equals(start))
                    return edge;
             }

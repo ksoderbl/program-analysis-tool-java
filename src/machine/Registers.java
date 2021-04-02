@@ -16,7 +16,7 @@ import java.util.Hashtable;
 
 public class Registers {
 
-    private Hashtable registers = new Hashtable(); 
+    private Hashtable<String, Register> registers = new Hashtable<String, Register>(); 
 
     /** the registers */
     public Register[] r;
@@ -26,13 +26,13 @@ public class Registers {
      *
      * @return the registers
      */
-    public Registers(ArrayList regs) {
+    public Registers(ArrayList<Register> regs) {
         int numRegs = regs.size();
 
         r = new Register[numRegs];
         for (int i = 0; i < numRegs; i++) {
-            Register reg = (Register)regs.get(i);
-                 r[i] = reg;
+            Register reg = regs.get(i);
+            r[i] = reg;
             registers.put(reg.getName(), reg);
         }
     }
@@ -48,7 +48,7 @@ public class Registers {
 
     public Register getRegister(String name){
         if (registers.get(name) != null)
-            return (Register)registers.get(name);
+            return registers.get(name);
         else throw new NullPointerException("getRegister:no register found:"+name);
     }
     

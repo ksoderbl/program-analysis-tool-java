@@ -18,10 +18,10 @@ import graph.*;
  */
 
 public class Bucket{
-    private Hashtable bucket;
+    private Hashtable<String, LinkedList<Object>> bucket;
 
     public Bucket(){
-        bucket = new Hashtable();
+        bucket = new Hashtable<String, LinkedList<Object>>();
     }
 
 
@@ -31,17 +31,17 @@ public class Bucket{
      */ 
     public void addItem(String key, Object obj){
         if (bucket.get(key) == null){
-            LinkedList lL = new LinkedList();
+            LinkedList<Object> lL = new LinkedList<Object>();
             bucket.put(key, lL);
         }
-        LinkedList lL = (LinkedList)bucket.get(key);
+        LinkedList<Object> lL = bucket.get(key);
         if (!lL.contains(obj)) // xxx should be removed, the buckets may contain duplicates -pgm 
             lL.add(obj);
         
     }
 
     /** insert a whole linked list at a time */
-    public boolean addItemList(String key, LinkedList l){
+    public boolean addItemList(String key, LinkedList<Object> l){
         if (bucket.get(key) != null) return false;
         else { 
             bucket.put(key, l);
@@ -50,13 +50,13 @@ public class Bucket{
         }
     }
 
-    public LinkedList getEntry(String key){
-        return (LinkedList)bucket.get(key);
+    public LinkedList<Object> getEntry(String key){
+        return bucket.get(key);
     }
 
 
     public boolean deleteEntry(String key){
-        LinkedList lL = (LinkedList)bucket.get(key);
+        LinkedList<Object> lL = bucket.get(key);
         if (lL == null) return false;
         lL.clear(); // delete linkedlist associated with this key
         bucket.remove(key); //also remove the bucket key from hashtable
@@ -64,12 +64,12 @@ public class Bucket{
     }
 
     public void deleteEmptyEntries(){
-        Vector strings = new Vector();
-        Enumeration e = bucket.keys();
+        Vector<String> strings = new Vector<String>();
+        Enumeration<String> e = bucket.keys();
 
         while (e.hasMoreElements()){
-          String key = (String)e.nextElement();
-          LinkedList lL = (LinkedList)bucket.get(key);
+          String key = e.nextElement();
+          LinkedList<Object> lL = bucket.get(key);
           if (lL.size() == 0) { System.out.println(" Empty: "); strings.add(key);}
         }
         
@@ -82,17 +82,17 @@ public class Bucket{
     }
 
 
-    public Iterator listIterator(){
+    public Iterator<LinkedList<Object>> listIterator(){
         return bucket.values().iterator();
     }
  
     public void printEntry(String key){
-        LinkedList l = getEntry(key);
+        LinkedList<Object> l = getEntry(key);
         if (l == null){ 
             System.out.println("Bucket: Empty entry");
             return;
         }
-        ListIterator LL = l.listIterator();
+        ListIterator<Object> LL = l.listIterator();
           System.out.print("key: "+key+"\t\t");
         while (LL.hasNext()){
             Node node = (Node)(LL.next());
@@ -103,19 +103,19 @@ public class Bucket{
     
     public int size(){
         int number = 0;
-        Enumeration e = bucket.keys();
+        Enumeration<String> e = bucket.keys();
         while (e.hasMoreElements()){
             number++;
-            String key = (String)e.nextElement();
+            String key = e.nextElement();
         }
       return number;
     }
 
     public void printBucket(){
-        Enumeration e = bucket.keys();
+        Enumeration<String> e = bucket.keys();
         System.out.println("Start of bucket");
         while (e.hasMoreElements()){
-            String key = (String)e.nextElement();
+            String key = e.nextElement();
             printEntry(key);
         }
         System.out.println("End of bucket");
@@ -130,8 +130,8 @@ public class Bucket{
         System.out.println("size:"+b.size());
         b.deleteEntry("koh");
         System.out.println("size:"+b.size());
-        LinkedList l = (LinkedList)b.getEntry("ff");
-        ListIterator LL = l.listIterator();
+        LinkedList<Object> l = b.getEntry("ff");
+        ListIterator<Object> LL = l.listIterator();
         while (LL.hasNext()){
             System.out.println(LL.next());
         }

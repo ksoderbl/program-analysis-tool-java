@@ -43,7 +43,7 @@ public class UserOptions {
     /** input file type */
     String machineArch = "unknown"; // no default, machine must be specified on cmd line
     /** input files */
-    ArrayList inputFiles = new ArrayList();
+    ArrayList<String> inputFiles = new ArrayList<String>();
     /** graphviz output */ 
     String graphSize = "a4";
     /** temp storage for programName */
@@ -138,7 +138,7 @@ public class UserOptions {
         return machineArch;
     }
 
-    public ArrayList getInputFiles() {
+    public ArrayList<String> getInputFiles() {
         return inputFiles;
     }
 
@@ -338,10 +338,10 @@ public class UserOptions {
         
         // construct program name
         String progName = null;
-        Iterator iter = inputFiles.iterator();
+        Iterator<String> iter = inputFiles.iterator();
         while (iter.hasNext()) {
             if (progName == null) {
-                progName = (String) iter.next();
+                progName = iter.next();
             }
             else {
                 progName = progName + ", " + iter.next();
@@ -353,9 +353,9 @@ public class UserOptions {
     
 
     public void printArgs(){
-        Iterator iter = inputFiles.iterator();
+        Iterator<String> iter = inputFiles.iterator();
         while (iter.hasNext()) {
-            System.out.println((String) iter.next());
+            System.out.println(iter.next());
         }
     }
 

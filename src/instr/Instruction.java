@@ -43,7 +43,7 @@ public class Instruction implements InputLineObject
 
 
     /** the operations this instruction consists of */
-    private ArrayList operations = new ArrayList();
+    private ArrayList<Operation> operations = new ArrayList<Operation>();
 
     ////////////////////////////////////////////////////////////////////////        
     /** the amount of executions of this instructions in the simulation */
@@ -61,9 +61,9 @@ public class Instruction implements InputLineObject
     public String getCode() {
         String code = "";
         int numops = 0;
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op == null)
                 continue;
             if (numops > 0)
@@ -87,14 +87,14 @@ public class Instruction implements InputLineObject
 
     public Operation getOperation(int index) {
         try {
-            Operation oper = (Operation)operations.get(index);
+            Operation oper = operations.get(index);
             return oper;
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }
 
-    public ArrayList getOperations() {
+    public ArrayList<Operation> getOperations() {
         return operations;
     }
 
@@ -258,9 +258,9 @@ public class Instruction implements InputLineObject
 
     // stuff for generic instruction interface
     public boolean isBranch() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op != null && op.isBranch())
                 return true;
         }
@@ -268,10 +268,10 @@ public class Instruction implements InputLineObject
     }
 
     public BranchTarget getBranchTarget() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         BranchTarget bt = null;
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op == null)
                 continue;
             bt = op.getBranchTarget();
@@ -282,9 +282,9 @@ public class Instruction implements InputLineObject
     }
 
     public boolean isCall() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op != null && op.isCall())
                 return true;
         }
@@ -292,9 +292,9 @@ public class Instruction implements InputLineObject
     }
 
     public boolean isReturn() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op != null && op.isReturn())
                 return true;
         }
@@ -303,9 +303,9 @@ public class Instruction implements InputLineObject
 
 
     public boolean isCondBranch() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op != null && op.isCondBranch())
                 return true;
         }
@@ -313,9 +313,9 @@ public class Instruction implements InputLineObject
     }
 
     public boolean isCondCall() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op != null && op.isCondCall())
                 return true;
         }
@@ -323,9 +323,9 @@ public class Instruction implements InputLineObject
     }
 
     public boolean isCondReturn() {
-        Iterator iter = operations.iterator();
+        Iterator<Operation> iter = operations.iterator();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op != null && op.isCondReturn())
                 return true;
         }
@@ -364,7 +364,7 @@ public class Instruction implements InputLineObject
 
     //must be overridden in implementing classes
     
-    public List getParallelMicroinstrs(Machine machine){
+    public List<Microinstruction> getParallelMicroinstrs(Machine machine){
         return null;
     }
 

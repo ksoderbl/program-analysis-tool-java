@@ -18,7 +18,7 @@ import main.*;
 
 public class StateSet {
 
-    private HashSet states;
+    private HashSet<State> states;
 
     /**
      * Constructs a new state set
@@ -26,7 +26,7 @@ public class StateSet {
      * @return the new state set
      */
     public StateSet() {
-        states = new HashSet();
+        states = new HashSet<State>();
     }
 
     /**
@@ -65,12 +65,12 @@ public class StateSet {
             return true;
         }
 
-        Iterator iter = iterator();
+        Iterator<State> iter = iterator();
         State containedState;
 
         // compare each contained state with the specified state
         while (iter.hasNext()) {
-            containedState = (State) iter.next();
+            containedState = iter.next();
             if (containedState.equals(state)) {
                 return true;
             }
@@ -89,7 +89,7 @@ public class StateSet {
     /**
      * @return an iterator over the states of this state set
      */
-    public Iterator iterator() {
+    public Iterator<State> iterator() {
         return states.iterator();
     }
 
@@ -105,12 +105,12 @@ public class StateSet {
             return actualRemove(state);
         }
 
-        Iterator iter = iterator();
+        Iterator<State> iter = iterator();
         State containedState;
 
         // compare each contained state with the specified state
         while (iter.hasNext()) {
-            containedState = (State) iter.next();
+            containedState = iter.next();
             if (containedState.equals(state)) {
                 return actualRemove(containedState);
             }
@@ -131,9 +131,9 @@ public class StateSet {
      */
     public String toString() {
         String result = null;
-        Iterator iter = iterator();
+        Iterator<State> iter = iterator();
         while (iter.hasNext()) {
-            State state = (State) iter.next();
+            State state = iter.next();
             if (result == null) {
                 result = state.toString();
             } else {
