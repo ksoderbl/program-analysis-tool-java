@@ -1,0 +1,80 @@
+
+Disassembly of cfg:
+
+TEXT Section .text, 0xD6 bytes at 0x0
+000000:               _main:
+000000: d66355           ADD *AR3+,T1,T1
+000003: ee6142           SUB dual(*AR3),AC1,AC0
+000006: 6690             BCC #0x000015,AC0 != #0
+000008: 3a01             POP AC0,AC1
+00000a: 08000d           CALL #0x00001a
+00000d: 080053           CALL #0x000063
+000010: 080079           CALL #0x00008c
+000013: 4a6e             B #0x000003
+000015: 10101e           AND AC1 << #30,AC0
+000018: 4804             RET
+00001a: 7dffff01         AND #65535,AC1,AC0
+00001e: 6e650011         CALCC #0x000033,TC2
+000022: 20               NOP
+000023: 20               NOP
+000024: 20               NOP
+000025: 858184d0_3d12    MAS uns(*AR4),uns(*CDP),AC1 :: MAS uns(*AR3),uns(*CDP),AC0 || MOV #1,AC2
+00002b: 026400           RETCC TC1
+00002e: e00100           BTST AC0,*AR0,TC1
+000031: 4804             RET
+000033: e361c4           BTSTCLR #12,*AR3,TC1
+000036: 9618             XCC AR0 != #0
+000038: d64300           ADD *AR2+,AC0,AC0
+00003b: 5e04             SWAP T0,T2
+00003d: 9618             XCC AR0 != #0
+00003f: 3a02_4311        POP AC0,AC2 || SUB #1,AC1
+000043: 5e04             SWAP T0,T2
+000045: 4210_9e18        XCC AR0 != #0 || SUB #1,AC0
+000049: d64300           ADD *AR2+,AC0,AC0
+00004c: 5e04             SWAP T0,T2
+00004e: 4210_9f18        SUB #1,AC0 || XCC AR0 != #0
+000052: d64300           ADD *AR2+,AC0,AC0
+000055: 5e04             SWAP T0,T2
+000057: 4210_9f18        SUB #1,AC0 || XCC AR0 != #0
+00005b: 3a02_4311        POP AC0,AC2 || SUB #1,AC1
+00005f: 5e04             SWAP T0,T2
+000061: 4804             RET
+000063: 4214             SUB #1,T0
+000065: 524e             MOV T0,BRC0
+000067: 7c000345         SUB #3,T1,T0
+00006b: 524c_4b91        MOV T0,CSR || RPTBLOCAL #0x000080
+00006f: 800604              MOV *AR0+,*AR4
+000072: 86261000_4900       MPYM *AR1+,*AR4+,AC0 || RPT CSR
+000078: 86261020            MACM *AR1+,*AR4+,AC0,AC0
+00007c: 86266021            MACMR *AR1+,*(AR4-T1),AC0,AC0
+000080: bc43                MOV HI(AC0),*AR2+
+000082:               loop1:
+000082: cc7b_3d04        MOV AR4,*-AR3 || MOV #0,T0
+000086: 3c14_9ee0        XCCPART overflow(AC0) || MOV #1,T0
+00008a: 4804             RET
+00008c: 4682             BCLR ST1_SXMD
+00008e: 2240_4d0f        MOV T0,AC0 || RPT #15
+000092: de4203_98        SUBC mmap(@T1),AC0,AC0
+000096: bc40_98          MOV HI(AC0),mmap(@T0)
+000099: c060_98          MOV AC0,mmap(@BK47)
+00009c: 4230             SUB #3,AC0
+00009e: c076_98          MOV AC0,mmap(@CSR)
+0000a1: d64244_98        ADD mmap(@T1),T0,T0
+0000a5: 4014             ADD #1,T0
+0000a7: 4683             BSET ST1_SXMD
+0000a9: 7c000165         SUB #1,T1,T2
+0000ad: 526d             MOV T2,BRC1
+0000af: 4a95             RPTBLOCAL L2
+0000b1: 800604_4b8e         MOV *AR0+,*AR4 || RPTBLOCAL #0x0000c4
+0000b6: 8684c000_4900          MPYM *AR4+,*(AR1+T1),AC0 || RPT CSR
+0000bc: 8684c020               MACM *AR4+,*(AR1+T1),AC0,AC0
+0000c0: 8684b021               MACMR *AR4+,*(AR1+T0),AC0,AC0
+0000c4: bc43                   MOV HI(AC0),*AR2+
+0000c6:               L2:
+0000c6: 8b3a24b4            AMAR *(AR1-T1) || AMAR *AR4-
+0000ca:               L1:
+0000ca: 0e0004           RPTB L3-3
+0000cd: 7c000165            SUB #1,T1,T2
+0000d1: bc40_98             MOV HI(AC0),mmap(@T0)
+0000d4:               L3:
+0000d4: 4804             RET
