@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import simulation.SimulationStatistics;
 import basicblocks.BasicBlock;
 import traces.Trace;
+import graph.Node;
 
 /**
  * Program representation.
@@ -408,7 +409,7 @@ public class Program {
 
      public int getByteSize() {
         int size = 0;
-        Iterator iter = this.getBasicBlocks().getNodes().iterator();
+        Iterator<Node> iter = this.getBasicBlocks().getNodes().iterator();
         while (iter.hasNext()){
             BasicBlock bb = (BasicBlock)iter.next();
             size += bb.getByteSize();
@@ -430,10 +431,10 @@ public class Program {
 
         // add each input to the result
         String result = inputs.size() + " inputs:\n";
-        Iterator iter = inputs.iterator();
+        Iterator<Input> inputIter = inputs.iterator();
 
-        while (iter.hasNext()) {
-            result = result + (Input) iter.next() + "\n";
+        while (inputIter.hasNext()) {
+            result = result + inputIter.next() + "\n";
         }
 
         // add cfg and labels to the result
@@ -441,9 +442,9 @@ public class Program {
 
         // add each procedure to the result
         result = result + procedures.size() + " procedures:\n";
-        iter = procedures.values().iterator();
-        while (iter.hasNext()) {
-            result = result + (Procedure) iter.next() + "\n";
+        Iterator<Procedure> procIter = procedures.values().iterator();
+        while (procIter.hasNext()) {
+            result = result + procIter.next() + "\n";
         }
         return result;
     }

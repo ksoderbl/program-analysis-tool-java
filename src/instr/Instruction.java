@@ -81,7 +81,7 @@ public class Instruction implements InputLineObject
     public void addOperation(Operation op) {
         operations.add(op);
     }
-    public void addOperation(String mnemonic, List args, String syntax) {
+    public void addOperation(String mnemonic, List<Operand> args, String syntax) {
         this.addOperation(new Operation(mnemonic, args, syntax));
     }
 

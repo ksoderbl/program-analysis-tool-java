@@ -228,7 +228,7 @@ public class StabsParser{
         while (!java.lang.Character.isDigit(string.charAt(a))){a++;}
         while (java.lang.Character.isDigit(string.charAt(a+b))){b++;}
         //        return string.substring(a, a+b);
-        Integer integer = new Integer(string.substring(a, a+b));
+        Integer integer = Integer.parseInt(string.substring(a, a+b));
         return integer.intValue();  
         
     }
@@ -242,15 +242,15 @@ public class StabsParser{
 
     // parses a parenthesis with format (#1,#2,..#n) where n is the number of fields
     // and stores integers into a vector
-    public static Vector parseValueField(String string){
+    public static Vector<Integer> parseValueField(String string){
         String newStr;
-        Vector num = new Vector();
+        Vector<Integer> num = new Vector<Integer>();
         newStr = string.replace('(',' ');
         newStr = newStr.replace(')',' ');
         newStr = newStr.trim();
         StringTokenizer numbers = new StringTokenizer(newStr,",");
         while (numbers.hasMoreTokens()){
-            Integer integer = new Integer(numbers.nextToken());
+            Integer integer = Integer.parseInt(numbers.nextToken());
             num.addElement(integer);
         }
         

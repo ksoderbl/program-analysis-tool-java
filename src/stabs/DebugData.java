@@ -18,17 +18,17 @@ import java.util.*;
 public class DebugData{
 
     // mapping from typeIds (keys) -> typenames
-    private HashMap types;
+    private HashMap<String, Type> types;
     // mapping from variable names (keys) -> typeId's 
-    private HashMap variables;
+    private HashMap<String, Variable> variables;
     
     /** storage for global tables & structs of the program  */
-    private HashMap memoryBlocks;
+    private HashMap<String, MemoryBlock> memoryBlocks;
 
     public DebugData(){
-        types = new HashMap();
-        variables = new HashMap();
-        memoryBlocks = new HashMap(); 
+        types = new HashMap<String, Type>();
+        variables = new HashMap<String, Variable>();
+        memoryBlocks = new HashMap<String, MemoryBlock>(); 
     }
     
     public void addMemoryBlock(String name, MemoryBlock memBlock){
@@ -36,43 +36,43 @@ public class DebugData{
     }
     
     
-    public HashMap getTypes(){
+    public HashMap<String, Type> getTypes(){
         return types;
     }
     
-    public HashMap getVariables(){
+    public HashMap<String, Variable> getVariables(){
         return variables;
     }
     
-    public HashMap getMemoryBlocks(){
+    public HashMap<String, MemoryBlock> getMemoryBlocks(){
         return memoryBlocks;
     }
     
     public void printTypes(){
-        Iterator iter = types.values().iterator();
+        Iterator<Type> iter = types.values().iterator();
         System.out.println("*** Types ***");
         while (iter.hasNext()){
-            Type pType = (Type)iter.next();
+            Type pType = iter.next();
             System.out.println(pType.getName());
         }
         
     }
     
     public void printVariables(){
-        Iterator iter = variables.values().iterator();
+        Iterator<Variable> iter = variables.values().iterator();
         System.out.println("*** Global Variables ***");
         while (iter.hasNext()){
-            Variable var = (Variable)iter.next();
+            Variable var = iter.next();
             System.out.println(var.getName());
         }
         
     }
     
      public void printMemoryBlocks(){
-        Iterator iter = memoryBlocks.values().iterator();
+        Iterator<MemoryBlock> iter = memoryBlocks.values().iterator();
         System.out.println("*** Memory Blocks ***");
         while (iter.hasNext()){
-            MemoryBlock memBlock = (MemoryBlock)iter.next();
+            MemoryBlock memBlock = iter.next();
             System.out.println(memBlock.getName());
         }
         

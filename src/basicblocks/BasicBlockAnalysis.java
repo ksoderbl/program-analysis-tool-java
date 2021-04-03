@@ -39,9 +39,9 @@ public class BasicBlockAnalysis implements Analysis {
     private Graph basicBlocks;
 
     /** a mapping from a control flow graph node to a basic block */
-    private HashMap nodeToBasicBlock = new HashMap();
+    private HashMap<CFGNode, BasicBlock> nodeToBasicBlock = new HashMap<CFGNode, BasicBlock>();
 
-    private HashSet visited;
+    private HashSet<CFGNode> visited;
 
     /**
      * Performs basic block analysis of the program
@@ -51,13 +51,13 @@ public class BasicBlockAnalysis implements Analysis {
      */
     public void analyze(Program program, Machine machine) {
 
-        visited = new HashSet();
+        visited = new HashSet<CFGNode>();
         CFG cfg = program.getCFG();
         basicBlocks = new Graph("Basic blocks of program " + cfg.getName());
 
         // find entry node of the main procedure
         String firstLabel = "program_entry";
-        CFGNode firstNode = (CFGNode) program.getNode(firstLabel);
+        CFGNode firstNode = program.getNode(firstLabel);
 
         if (firstNode == null) {
             Main.fatal("BasicBlockAnalysis: no node with name '"
@@ -78,7 +78,7 @@ public class BasicBlockAnalysis implements Analysis {
             if ((start != null) && (end != null)) {
                 if (start == end) {
                     // edge to a node in the same basic block
-                    CFGNode entry = (CFGNode) start.getNodes().get(0);
+                    CFGNode entry = start.getNodes().get(0);
 
                     if (((CFGNode) edge.getEnd()).equals(entry)) {
                         // only add edges to the entry node of the basic block
@@ -100,7 +100,7 @@ public class BasicBlockAnalysis implements Analysis {
 
             if (block == null) {
                 //      Main.warn("label '" + label + "' does not point to any basic block (dead code?)");
-            } else if (node == (CFGNode) block.getNodes().get(0)) {
+            } else if (node == block.getNodes().get(0)) {
                 // label points to entry of this basic block
                 block.addLabel(label);
             } else {
@@ -197,7 +197,7 @@ public class BasicBlockAnalysis implements Analysis {
         basicBlocks.addNode(block);
 
         // recursively analyze outgoing nodes
-        Iterator iter = outgoing.iterator();
+        Iterator<Edge> iter = outgoing.iterator();
         while (iter.hasNext()) {
             CFGEdge edge = (CFGEdge) iter.next();
             //      System.out.println(edge.getStart().getName() + "->" + edge.getEnd().getName());
@@ -217,7 +217,7 @@ public class BasicBlockAnalysis implements Analysis {
     }
 
     private BasicBlock getBasicBlock(Node node) {
-        return (BasicBlock) nodeToBasicBlock.get(node);
+        return nodeToBasicBlock.get(node);
     }
 
     private void addNode(CFGNode node, BasicBlock block) {
@@ -229,7 +229,7 @@ public class BasicBlockAnalysis implements Analysis {
 
         // add node to the specified basic block 
         block.addNode(node);
-        Instruction instr = (Instruction)node.getInstruction();
+        Instruction instr = node.getInstruction();
         block.addByteSize(instr.getSize());
         if (nodeToBasicBlock.containsKey(node)) {
             Main.warn("Node " + node +

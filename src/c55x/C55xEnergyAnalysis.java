@@ -774,7 +774,6 @@ public class C55xEnergyAnalysis implements Analysis
         List<String> labels = bb.getLabels();
         List<CFGNode> nodes = bb.getNodes();
         String result = new String(), s1;
-        Iterator iter;
         TiwariResults tr_bb_total = new TiwariResults(machine);
 
         s1 = ""; while (s1.length() < 120) s1 += "="; result += s1 + "\n";
@@ -791,9 +790,9 @@ public class C55xEnergyAnalysis implements Analysis
         result += "BB TYPE: " + type + "\n";
         if (labels.size() > 0) {
             result += "LABELS : ";
-            iter = labels.iterator();
+            Iterator<String> iter = labels.iterator();
             while (iter.hasNext()) {
-                result += ((String) iter.next()) + ":, ";
+                result += iter.next() + ":, ";
             }
             result += "\n";
         }
@@ -812,9 +811,9 @@ public class C55xEnergyAnalysis implements Analysis
         result += s1 + "\n";
 
         // loop over all instructions
-        iter = nodes.iterator();
+        Iterator<CFGNode> iter = nodes.iterator();
         while (iter.hasNext()) {
-            CFGNode node = (CFGNode) iter.next();
+            CFGNode node = iter.next();
             if (node.getInstruction() == null) {
                 continue;
             }

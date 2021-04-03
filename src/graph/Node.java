@@ -123,9 +123,9 @@ public class Node {
     public boolean removeIncomingEdges(Graph graph) {
         boolean result = !outgoingEdges.isEmpty();
 
-        Iterator iter = incomingEdges.iterator();
+        Iterator<Edge> iter = incomingEdges.iterator();
         while (iter.hasNext()) {
-            Edge edge = (Edge) iter.next();
+            Edge edge = iter.next();
             edge.getStart().removeOutgoingEdge(edge);
             graph.removeEdge(edge);
             result = true;
@@ -144,9 +144,9 @@ public class Node {
     public boolean removeOutgoingEdges(Graph graph) {
         boolean result = !outgoingEdges.isEmpty();
 
-        Iterator iter = outgoingEdges.iterator();
+        Iterator<Edge> iter = outgoingEdges.iterator();
         while (iter.hasNext()) {
-            Edge edge = (Edge) iter.next();
+            Edge edge = iter.next();
             edge.getEnd().removeIncomingEdge(edge);
             graph.removeEdge(edge);
             result = true;

@@ -6,6 +6,7 @@ import basicblocks.*;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
+import graph.Edge;;
 
 /**
  * A trace is a collection of basicblocks that connects 
@@ -26,13 +27,13 @@ public class Trace {
     private int size = 0;
 
     /** we use a list so we can find first item trivially */
-    private List basicBlocks;
+    private List<BasicBlock> basicBlocks;
     
     /** name of the trace */
     private String name;
 
     public Trace(BasicBlock bb, String name){
-        basicBlocks = new ArrayList();
+        basicBlocks = new ArrayList<BasicBlock>();
         basicBlocks.add(bb);
         this.name = name;
     }
@@ -42,7 +43,7 @@ public class Trace {
 
     }
 
-    public Iterator getIterator(){
+    public Iterator<BasicBlock> getIterator(){
         return basicBlocks.iterator();
     }
 
@@ -71,8 +72,8 @@ public class Trace {
 
 
     public BasicBlock evaluate(BasicBlock bb){
-        List outgoing = bb.getOutgoingEdges();
-        Iterator iter = outgoing.iterator();
+        List<Edge> outgoing = bb.getOutgoingEdges();
+        Iterator<Edge> iter = outgoing.iterator();
         BasicBlockEdge bestEdge = null;
         double executionFreq;
         if (bb.isPartOfTrace()) return null;

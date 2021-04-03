@@ -62,7 +62,7 @@ public class BBDynamicExecutionAnalysis implements Analysis {
                 BasicBlockEdge bbEdge = (BasicBlockEdge)edgeIter.next();
                 BasicBlock bb2 = (BasicBlock)bbEdge.getEnd();
                 List<CFGNode> instrList2 = bb2.getNodes();
-                CFGNode firstInstrNode = (CFGNode)instrList2.get(0);
+                CFGNode firstInstrNode = instrList2.get(0);
                 Instruction i2 = firstInstrNode.getInstruction();
                 CFGEdge cfgEdge = (CFGEdge)cfg.findEdge(lastInstrNode,firstInstrNode);
                 bbEdge.setExecutions(cfgEdge.getExecutions());

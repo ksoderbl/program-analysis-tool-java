@@ -148,7 +148,7 @@ public class MemoryBank{
 
         if (instrMem){
             while (i.hasNext()){
-                Long add = (Long)i.next();
+                Long add = i.next();
                 Instruction instr = (Instruction)memory.get(add);
                 System.out.println(Long.toHexString(add.longValue())+": "+
                                                     instr.getMachineCode());
