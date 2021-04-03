@@ -1,0 +1,202 @@
+
+Disassembly of simple_loop3:
+
+TEXT Section .text, 0x1E3 bytes at 0x100
+000100:               _main:
+000100: 4ef9             AADD #-7,SP
+000102: e60000           MOV #0,@#00h
+000105: e60200           MOV #0,@#01h
+000108: e60400           MOV #0,@#02h
+00010b: e60600           MOV #0,@#03h
+00010e: e60800           MOV #0,@#04h
+000111: e60a00           MOV #0,@#05h
+000114: e60000           MOV #0,@#00h
+000117: aa00_3da9        MOV @#00h,AR2 || MOV #10,AR1
+00011b: 12a890_21        CMP AR2 >= AR1, TC1 || NOP
+00011f: 046451           BCC #0x000173,TC1
+000122: f7060001         ADD #1,@#03h
+000126: e60200           MOV #0,@#01h
+000129: aa02_3da9        MOV @#01h,AR2 || MOV #10,AR1
+00012d: 12a890_21        CMP AR2 >= AR1, TC1 || NOP
+000131: 3caa             MOV #10,AR2
+000133: 04642e           BCC #0x000164,TC1
+000136: f7080001         ADD #1,@#04h
+00013a: e60400           MOV #0,@#02h
+00013d: a904             MOV @#02h,AR1
+00013f: 1298a0_21        CMP AR1 >= AR2, TC1 || NOP
+000143: 046411           BCC #0x000157,TC1
+000146: f70a0001         ADD #1,@#05h
+00014a: f7040001         ADD #1,@#02h
+00014e: a904             MOV @#02h,AR1
+000150: 1294a0_21        CMP AR1 < AR2, TC1 || NOP
+000154: 0464ef           BCC #0x000146,TC1
+000157: f7020001         ADD #1,@#01h
+00015b: a902             MOV @#01h,AR1
+00015d: 1294a0_21        CMP AR1 < AR2, TC1 || NOP
+000161: 0464d2           BCC #0x000136,TC1
+000164: f7000001         ADD #1,@#00h
+000168: a900_3daa        MOV @#00h,AR1 || MOV #10,AR2
+00016c: 1294a0_21        CMP AR1 < AR2, TC1 || NOP
+000170: 0464af           BCC #0x000122,TC1
+000173: a908             MOV @#04h,AR1
+000175: d60699           ADD @#03h,AR1,AR1
+000178: d60a49           ADD @#05h,AR1,T0
+00017b: 4e07             AADD #7,SP
+00017d: 4804             RET
+00017f:               _exit:
+00017f: 38d6             PSH AR5,T2
+000181: ed11088046       MOV dbl(*abs16(#08046h)),AC0
+000186: 4eff             AADD #-1,SP
+000188: 9200             CALL AC0
+00018a: a6118000         MOV *abs16(#08000h),T2
+00018e: 040614           BCC #0x0001a5,T2 == #0
+000191: 2269             MOV T2,AR1
+000193: 5090             SFTL AR1,#1
+000195: 7b8002d9         ADD #-32766,AR1,AR5
+000199: edaf08fffe       MOV dbl(*+AR5(#-0002h)),AC0
+00019e: 9200             CALL AC0
+0001a0: 4216             SUB #1,T2
+0001a2: 0416f4           BCC #0x000199,T2 != #0
+0001a5: ed11088044       MOV dbl(*abs16(#08044h)),AC0
+0001aa: 6380             BCC #0x0001b3,AC0 == #0
+0001ac: ed11088044       MOV dbl(*abs16(#08044h)),AC0
+0001b1: 9200             CALL AC0
+0001b3: ed11088042       MOV dbl(*abs16(#08042h)),AC0
+0001b8: 6380             BCC #0x0001c1,AC0 == #0
+0001ba: ed11088042       MOV dbl(*abs16(#08042h)),AC0
+0001bf: 9200             CALL AC0
+0001c1: ed11088048       MOV dbl(*abs16(#08048h)),AC0
+0001c6: 9200             CALL AC0
+0001c8: 6c0002db         CALL _abort
+0001cc: 4a7e             B #0x0001cc
+0001ce:               _atexit:
+0001ce: 4efd             AADD #-3,SP
+0001d0: eb0008           MOV AC0,dbl(@#00h)
+0001d3: ed11088046       MOV dbl(*abs16(#08046h)),AC0
+0001d8: 9200             CALL AC0
+0001da: 76002098         MOV #32,AR1
+0001de: aa118000         MOV *abs16(#08000h),AR2
+0001e2: 12a490_21        CMP AR2 < AR1, TC1 || NOP
+0001e6: 65e4             BCC #0x0001f3,TC1
+0001e8: ed11088048       MOV dbl(*abs16(#08048h)),AC0
+0001ed: 9200             CALL AC0
+0001ef: 3c14             MOV #1,T0
+0001f1: 4a21             B #0x000214
+0001f3: a4118000         MOV *abs16(#08000h),T0
+0001f7: 768002b8         MOV #-32766,AR3
+0001fb: 7b000194         ADD #1,T0,AR1
+0001ff: 5040             SFTL T0,#1
+000201: ed0008           MOV dbl(@#00h),AC0
+000204: c9118000         MOV AR1,*abs16(#08000h)
+000208: eb6b08           MOV AC0,dbl(*AR3(T0))
+00020b: ed11088048       MOV dbl(*abs16(#08048h)),AC0
+000210: 9200             CALL AC0
+000212: 3c04             MOV #0,T0
+000214: 4e03             AADD #3,SP
+000216: 4804             RET
+000218:               _auto_init:
+000218: 4eff             AADD #-1,SP
+00021a: ec318e000172     AMAR *(#00172h),XAR0
+000220: 368f             NOT AR0,AR7
+000222: 040f29           BCC #0x00024e,AR7 == #0
+000225: aa03             MOV *AR0+,AR2
+000227: 040a24           BCC #0x00024e,AR2 == #0
+00022a: f9038808_431a    MOV uns(*AR0+) << #8,AC0 || SUB #1,AR2
+000230: df0315_53ac      MOV uns(*AR0+),AC1 || MOV AR2,CSR
+000235: 101138           OR AC1 << #-8, AC0
+000238: 18ff11           AND #255,AC1,AC1
+00023b: 900e             MOV AC0,XAR6
+00023d: 6391             BCC #0x000246,AC1 != #0
+00023f: 4800             RPT CSR
+000241: 800714           MOV *AR0+,*AR6+
+000244: 4a5f             B #0x000225
+000246: 4800             RPT CSR
+000248: 800714_9a        MOV *AR0+,port(*AR6+)
+00024c: 4a57             B #0x000225
+00024e: ec318e008000     AMAR *(#08000h),XAR0
+000254: ec31eeffffff     AMAR *(#0ffffffh),XAR6
+00025a: 36ef             NOT AR6,AR7
+00025c: 040f1a           BCC #0x000279,AR7 == #0
+00025f: edc308           MOV dbl(*AR6+),AC0
+000262: 040014           BCC #0x000279,AC0 == #0
+000265: ce00             MOV AR6,@#00h
+000267: ec31ee008000     AMAR *(#08000h),XAR6
+00026d: 9200             CALL AC0
+00026f: ec31eeffffff     AMAR *(#0ffffffh),XAR6
+000275: ae00             MOV @#00h,AR6
+000277: 4a66             B #0x00025f
+000279: ec31ee008000     AMAR *(#08000h),XAR6
+00027f: 4e01             AADD #1,SP
+000281: 4804             RET
+000283:               _c_int00:
+000283: ec314e000380     AMAR *(#00380h),XSP
+000289: 78057402         MOV #1396,SSP
+00028d: f406f91f_98      AND #63775,mmap(@ST1_55)
+000292: f5064100_98      OR #16640,mmap(@ST1_55)
+000297: f496fa00_98      AND #64000,mmap(@ST2_55)
+00029c: f5968000_98      OR #32768,mmap(@ST2_55)
+0002a1: 4656             BCLR ST3_SATA
+0002a3: 4617             BSET ST3_SMUL
+0002a5: ec318e008000     AMAR *(#08000h),XAR0
+0002ab: 9089             MOV XAR0,XAR1
+0002ad: 908a             MOV XAR0,XAR2
+0002af: 908b             MOV XAR0,XAR3
+0002b1: 908c             MOV XAR0,XAR4
+0002b3: 908d             MOV XAR0,XAR5
+0002b5: 908e             MOV XAR0,XAR6
+0002b7: 908f             MOV XAR0,XAR7
+0002b9: 9087             MOV XAR0,XCDP
+0002bb: 9086             MOV XAR0,XDP
+0002bd: 6c000218         CALL _auto_init
+0002c1: 6c000100         CALL ___text__
+0002c5: 3c19             MOV #1,AR1
+0002c7: 6c00017f         CALL _exit
+0002cb:               __nop:
+0002cb: 4804             RET
+0002cd:               __register_lock:
+0002cd: eb11088046       MOV AC0,dbl(*abs16(#08046h))
+0002d2: 4804             RET
+0002d4:               __register_unlock:
+0002d4: eb11088048       MOV AC0,dbl(*abs16(#08048h))
+0002d9: 4804             RET
+0002db:               _abort:
+0002db:               .text:CIO_breakpoint:
+0002db: 20               NOP
+0002dc:               C$$EXIT:
+0002dc: 20               NOP
+0002dd: 16000c           SIM_TRIG
+0002e0: 4a7e             B #0x0002e0
+0002e2: 20               NOP
+0002e3:               ___etext__:
+0002e3:               etext:
+
+DATA Section .cinit, 0x19 words at 0x172
+000172:               ___cinit__:
+000172:               cinit:
+000172:               .cinit:
+000172: 0001             .word 0x0001
+000173: 0080             .word 0x0080
+000174: 0000             .word 0x0000
+000175: 0000             .word 0x0000
+000176: 0002             .word 0x0002
+000177: 0080             .word 0x0080
+000178: 4200             .word 0x4200
+000179: 0000             .word 0x0000
+00017a: 0000             .word 0x0000
+00017b: 0002             .word 0x0002
+00017c: 0080             .word 0x0080
+00017d: 4400             .word 0x4400
+00017e: 0000             .word 0x0000
+00017f: 0000             .word 0x0000
+000180:               .cinit:
+000180: 0002             .word 0x0002
+000181: 0080             .word 0x0080
+000182: 4600             .word 0x4600
+000183: 0000             .word 0x0000
+000184: 02cb             .word 0x02cb
+000185: 0002             .word 0x0002
+000186: 0080             .word 0x0080
+000187: 4800             .word 0x4800
+000188: 0000             .word 0x0000
+000189: 02cb             .word 0x02cb
+00018a: 0000             .word 0x0000

@@ -40,12 +40,12 @@ public abstract class Machine {
 
 
     /** ArrayList of memoryBanks */
-    protected List memoryBanks;
+    protected List<MemoryBank> memoryBanks;
 
 
 
     /** scratchpad units */
-    private List scratchpads;
+    private List<Scratchpad> scratchpads;
 
 
     /** the value on address bus as read by a microinstruction, note you must initialize these! */ 
@@ -95,13 +95,13 @@ public abstract class Machine {
     protected boolean partialExecutionMode = false;
 
     /** loop counters */
-    protected LinkedList loopCounters;
+    protected LinkedList<RepeatLoop> loopCounters;
 
     /** break points */
-    protected HashMap breakpoints;
+    protected HashMap<Long, Long> breakpoints;
 
     /** memory mapped register address -> registername */
-    protected HashMap memoryMappedRegs;
+    protected HashMap<Long, String> memoryMappedRegs;
     
     /** the next address of program counter */
     private long nextPCAddr;
@@ -112,12 +112,12 @@ public abstract class Machine {
      * @return the new machine
      */
     public Machine(String name) {
-        memoryBanks = new ArrayList();
+        memoryBanks = new ArrayList<MemoryBank>();
         initMemory();
-        scratchpads = new ArrayList();
-        loopCounters = new LinkedList();
-        breakpoints = new HashMap();
-        memoryMappedRegs = new HashMap();
+        scratchpads = new ArrayList<Scratchpad>();
+        loopCounters = new LinkedList<RepeatLoop>();
+        breakpoints = new HashMap<Long, Long>();
+        memoryMappedRegs = new HashMap<Long, String>();
         arch = name;
     }
 
@@ -139,10 +139,10 @@ public abstract class Machine {
     public abstract int getDataBankNum();
 
     public MemoryBank getMemoryBank(int numBank){
-        return (MemoryBank)memoryBanks.get(numBank);
+        return memoryBanks.get(numBank);
     }
 
-    public List getMemoryBanks(){
+    public List<MemoryBank> getMemoryBanks(){
         return memoryBanks;
     }
     
@@ -190,7 +190,7 @@ public abstract class Machine {
 
 
     public void addInstruction(Instruction i, int mBIndex){
-        MemoryBank mB = (MemoryBank)memoryBanks.get(mBIndex);
+        MemoryBank mB = memoryBanks.get(mBIndex);
         mB.addInstruction(i);
     }
 
@@ -206,10 +206,10 @@ public abstract class Machine {
      */
     public void printChangesMemory(){
         int i = 1;
-               Iterator iter = memoryBanks.iterator();
+        Iterator<MemoryBank> iter = memoryBanks.iterator();
         System.out.println("Banks:"+memoryBanks.size());
         while (iter.hasNext()){
-            MemoryBank mb = (MemoryBank)iter.next();
+            MemoryBank mb = iter.next();
             if (!mb.getInstructionMem())
             mb.printChangesMemory(i, this);
             i++;
@@ -223,7 +223,7 @@ public abstract class Machine {
     public long readMem(long address, int numBank){
         Long value;
         Long longAdd = new Long(address);
-        MemoryBank mb = (MemoryBank)memoryBanks.get(numBank);
+        MemoryBank mb = memoryBanks.get(numBank);
 
         /* String regName = (String)memoryMappedRegs.get(longAdd);
            if (regName != null) { 
@@ -239,7 +239,7 @@ public abstract class Machine {
     public void writeMem(long address, long value, int numBank){
         Long longAdd  = new Long(address);
         Long longValue = new Long(value);
-        MemoryBank mb = (MemoryBank)memoryBanks.get(numBank);
+        MemoryBank mb = memoryBanks.get(numBank);
         /* check for memory mapped registers
         String regName = (String)memoryMappedRegs.get(new Long(address));
         if (regName != null) { 
@@ -314,9 +314,9 @@ public abstract class Machine {
     }
 
     public void printBreakpoints(){
-        Iterator iter = breakpoints.values().iterator();
+        Iterator<Long> iter = breakpoints.values().iterator();
         while (iter.hasNext()){
-         System.out.println(Long.toHexString(((Long)iter.next()).longValue()));
+         System.out.println(Long.toHexString((iter.next()).longValue()));
         }
     }
 
@@ -372,7 +372,7 @@ public abstract class Machine {
      * get scratchpads of the machine
      * @return scratchpads
      */
-    public List getScratchpads(){
+    public List<Scratchpad> getScratchpads(){
         return scratchpads;
     }
 
@@ -392,7 +392,7 @@ public abstract class Machine {
     public boolean handleRepeats(){
         if (loopCounters.size() == 0) return false;
 
-        RepeatLoop repeat = (RepeatLoop)loopCounters.getLast();
+        RepeatLoop repeat = loopCounters.getLast();
         
         if (this.getPCAddr() == repeat.getEndAddr()){
             if (repeat.decrementCounter()){

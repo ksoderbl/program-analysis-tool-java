@@ -1,0 +1,279 @@
+
+Disassembly of quicksort:
+
+TEXT Section .text, 0x25A bytes at 0x100
+000100:               _main:
+000100: 7601c7b8         MOV #455,AR3
+000104: 4ef5             AADD #-11,SP
+000106: 448a             MOV SP,AR2
+000108: 4c09             RPT #9
+00010a: 806514           MOV *AR3+,*AR2+
+00010d: 4488             MOV SP,AR0
+00010f: fb147000         MOV #28672,@#0ah
+000113: 3c95             MOV #9,T1
+000115: 3c04             MOV #0,T0
+000117: 08000e           CALL _quicksort
+00011a: ab14             MOV @#0ah,AR3
+00011c: 4489             MOV SP,AR1
+00011e: 3c04             MOV #0,T0
+000120: c961             MOV AR1,*AR3
+000122: 4e0b             AADD #11,SP
+000124: 4804             RET
+000126: 5e80             NOP_16
+000128:               _quicksort:
+000128: 4efb             AADD #-5,SP
+00012a: c504             MOV T1,@#02h
+00012c: c402             MOV T0,@#01h
+00012e: c800             MOV AR0,@#00h
+000130: aa04             MOV @#02h,AR2
+000132: a902             MOV @#01h,AR1
+000134: 1298a0_21        CMP AR1 >= AR2, TC1 || NOP
+000138: 046423           BCC #0x00015e,TC1
+00013b: 22a5             MOV AR2,T1
+00013d: 2294             MOV AR1,T0
+00013f: 080022           CALL _partition
+000142: c406             MOV T0,@#03h
+000144: a800             MOV @#00h,AR0
+000146: a402_2349        MOV @#01h,T0 || MOV T0,AR1
+00014a: 7c000159         SUB #1,AR1,T1
+00014e: 08ffd7           CALL _quicksort
+000151: a906             MOV @#03h,AR1
+000153: a800             MOV @#00h,AR0
+000155: a504             MOV @#02h,T1
+000157: 7b000149         ADD #1,AR1,T0
+00015b: 08ffca           CALL _quicksort
+00015e: 4e05             AADD #5,SP
+000160: 4804             RET
+000162: 5e80             NOP_16
+000164:               _partition:
+000164: 4ef9             AADD #-7,SP
+000166: 228b             MOV AR0,AR3
+000168: c504             MOV T1,@#02h
+00016a: c402             MOV T0,@#01h
+00016c: c800             MOV AR0,@#00h
+00016e: a402             MOV @#01h,T0
+000170: a96b             MOV *AR3(T0),AR1
+000172: c906             MOV AR1,@#03h
+000174: a902             MOV @#01h,AR1
+000176: c908             MOV AR1,@#04h
+000178: a904             MOV @#02h,AR1
+00017a: 4019             ADD #1,AR1
+00017c: c90a             MOV AR1,@#05h
+00017e: f7080001         ADD #1,@#04h
+000182: a408             MOV @#04h,T0
+000184: ab00             MOV @#00h,AR3
+000186: aa06             MOV @#03h,AR2
+000188: a96b             MOV *AR3(T0),AR1
+00018a: 12a490_21        CMP AR2 < AR1, TC1 || NOP
+00018e: 65e4             BCC #0x00019b,TC1
+000190: aa04_2349        MOV @#02h,AR2 || MOV T0,AR1
+000194: 12a490_21        CMP AR2 < AR1, TC1 || NOP
+000198: 0474e3           BCC #0x00017e,!TC1
+00019b: f70affff         ADD #-1,@#05h
+00019f: a40a             MOV @#05h,T0
+0001a1: ab00             MOV @#00h,AR3
+0001a3: a906             MOV @#03h,AR1
+0001a5: aa6b             MOV *AR3(T0),AR2
+0001a7: 1294a0_21        CMP AR1 < AR2, TC1 || NOP
+0001ab: 0464ed           BCC #0x00019b,TC1
+0001ae: aa08_2349        MOV @#04h,AR2 || MOV T0,AR1
+0001b2: 12a490_21        CMP AR2 < AR1, TC1 || NOP
+0001b6: 04741d           BCC #0x0001d6,!TC1
+0001b9: 22a4             MOV AR2,T0
+0001bb: a96b             MOV *AR3(T0),AR1
+0001bd: c90c             MOV AR1,@#06h
+0001bf: aa00             MOV @#00h,AR2
+0001c1: a40a             MOV @#05h,T0
+0001c3: 22ab             MOV AR2,AR3
+0001c5: d608bb           ADD @#04h,AR3,AR3
+0001c8: 805d84           MOV *AR2(T0),*AR3
+0001cb: a40a             MOV @#05h,T0
+0001cd: ab00             MOV @#00h,AR3
+0001cf: a90c             MOV @#06h,AR1
+0001d1: c96b             MOV AR1,*AR3(T0)
+0001d3: 06ffa8           B #0x00017e
+0001d6: a402             MOV @#01h,T0
+0001d8: a96b             MOV *AR3(T0),AR1
+0001da: c90c             MOV AR1,@#06h
+0001dc: aa00             MOV @#00h,AR2
+0001de: a40a             MOV @#05h,T0
+0001e0: 22ab             MOV AR2,AR3
+0001e2: d602bb           ADD @#01h,AR3,AR3
+0001e5: 805d84           MOV *AR2(T0),*AR3
+0001e8: a40a             MOV @#05h,T0
+0001ea: ab00             MOV @#00h,AR3
+0001ec: a90c             MOV @#06h,AR1
+0001ee: c96b             MOV AR1,*AR3(T0)
+0001f0: a40a             MOV @#05h,T0
+0001f2: 4e07             AADD #7,SP
+0001f4: 4804             RET
+0001f6:               _exit:
+0001f6: 38d6             PSH AR5,T2
+0001f8: ed11088046       MOV dbl(*abs16(#08046h)),AC0
+0001fd: 4eff             AADD #-1,SP
+0001ff: 9200             CALL AC0
+000201: a6118000         MOV *abs16(#08000h),T2
+000205: 040614           BCC #0x00021c,T2 == #0
+000208: 2269             MOV T2,AR1
+00020a: 5090             SFTL AR1,#1
+00020c: 7b8002d9         ADD #-32766,AR1,AR5
+000210: edaf08fffe       MOV dbl(*+AR5(#-0002h)),AC0
+000215: 9200             CALL AC0
+000217: 4216             SUB #1,T2
+000219: 0416f4           BCC #0x000210,T2 != #0
+00021c: ed11088044       MOV dbl(*abs16(#08044h)),AC0
+000221: 6380             BCC #0x00022a,AC0 == #0
+000223: ed11088044       MOV dbl(*abs16(#08044h)),AC0
+000228: 9200             CALL AC0
+00022a: ed11088042       MOV dbl(*abs16(#08042h)),AC0
+00022f: 6380             BCC #0x000238,AC0 == #0
+000231: ed11088042       MOV dbl(*abs16(#08042h)),AC0
+000236: 9200             CALL AC0
+000238: ed11088048       MOV dbl(*abs16(#08048h)),AC0
+00023d: 9200             CALL AC0
+00023f: 6c000352         CALL _abort
+000243: 4a7e             B #0x000243
+000245:               _atexit:
+000245: 4efd             AADD #-3,SP
+000247: eb0008           MOV AC0,dbl(@#00h)
+00024a: ed11088046       MOV dbl(*abs16(#08046h)),AC0
+00024f: 9200             CALL AC0
+000251: 76002098         MOV #32,AR1
+000255: aa118000         MOV *abs16(#08000h),AR2
+000259: 12a490_21        CMP AR2 < AR1, TC1 || NOP
+00025d: 65e4             BCC #0x00026a,TC1
+00025f: ed11088048       MOV dbl(*abs16(#08048h)),AC0
+000264: 9200             CALL AC0
+000266: 3c14             MOV #1,T0
+000268: 4a21             B #0x00028b
+00026a: a4118000         MOV *abs16(#08000h),T0
+00026e: 768002b8         MOV #-32766,AR3
+000272: 7b000194         ADD #1,T0,AR1
+000276: 5040             SFTL T0,#1
+000278: ed0008           MOV dbl(@#00h),AC0
+00027b: c9118000         MOV AR1,*abs16(#08000h)
+00027f: eb6b08           MOV AC0,dbl(*AR3(T0))
+000282: ed11088048       MOV dbl(*abs16(#08048h)),AC0
+000287: 9200             CALL AC0
+000289: 3c04             MOV #0,T0
+00028b: 4e03             AADD #3,SP
+00028d: 4804             RET
+00028f:               _auto_init:
+00028f: 4eff             AADD #-1,SP
+000291: ec318e0001ae     AMAR *(#001aeh),XAR0
+000297: 368f             NOT AR0,AR7
+000299: 040f29           BCC #0x0002c5,AR7 == #0
+00029c: aa03             MOV *AR0+,AR2
+00029e: 040a24           BCC #0x0002c5,AR2 == #0
+0002a1: f9038808_431a    MOV uns(*AR0+) << #8,AC0 || SUB #1,AR2
+0002a7: df0315_53ac      MOV uns(*AR0+),AC1 || MOV AR2,CSR
+0002ac: 101138           OR AC1 << #-8, AC0
+0002af: 18ff11           AND #255,AC1,AC1
+0002b2: 900e             MOV AC0,XAR6
+0002b4: 6391             BCC #0x0002bd,AC1 != #0
+0002b6: 4800             RPT CSR
+0002b8: 800714           MOV *AR0+,*AR6+
+0002bb: 4a5f             B #0x00029c
+0002bd: 4800             RPT CSR
+0002bf: 800714_9a        MOV *AR0+,port(*AR6+)
+0002c3: 4a57             B #0x00029c
+0002c5: ec318e008000     AMAR *(#08000h),XAR0
+0002cb: ec31eeffffff     AMAR *(#0ffffffh),XAR6
+0002d1: 36ef             NOT AR6,AR7
+0002d3: 040f1a           BCC #0x0002f0,AR7 == #0
+0002d6: edc308           MOV dbl(*AR6+),AC0
+0002d9: 040014           BCC #0x0002f0,AC0 == #0
+0002dc: ce00             MOV AR6,@#00h
+0002de: ec31ee008000     AMAR *(#08000h),XAR6
+0002e4: 9200             CALL AC0
+0002e6: ec31eeffffff     AMAR *(#0ffffffh),XAR6
+0002ec: ae00             MOV @#00h,AR6
+0002ee: 4a66             B #0x0002d6
+0002f0: ec31ee008000     AMAR *(#08000h),XAR6
+0002f6: 4e01             AADD #1,SP
+0002f8: 4804             RET
+0002fa:               _c_int00:
+0002fa: ec314e0003c6     AMAR *(#003c6h),XSP
+000300: 7805ba02         MOV #1466,SSP
+000304: f406f91f_98      AND #63775,mmap(@ST1_55)
+000309: f5064100_98      OR #16640,mmap(@ST1_55)
+00030e: f496fa00_98      AND #64000,mmap(@ST2_55)
+000313: f5968000_98      OR #32768,mmap(@ST2_55)
+000318: 4656             BCLR ST3_SATA
+00031a: 4617             BSET ST3_SMUL
+00031c: ec318e008000     AMAR *(#08000h),XAR0
+000322: 9089             MOV XAR0,XAR1
+000324: 908a             MOV XAR0,XAR2
+000326: 908b             MOV XAR0,XAR3
+000328: 908c             MOV XAR0,XAR4
+00032a: 908d             MOV XAR0,XAR5
+00032c: 908e             MOV XAR0,XAR6
+00032e: 908f             MOV XAR0,XAR7
+000330: 9087             MOV XAR0,XCDP
+000332: 9086             MOV XAR0,XDP
+000334: 6c00028f         CALL _auto_init
+000338: 6c000100         CALL ___text__
+00033c: 3c19             MOV #1,AR1
+00033e: 6c0001f6         CALL _exit
+000342:               __nop:
+000342: 4804             RET
+000344:               __register_lock:
+000344: eb11088046       MOV AC0,dbl(*abs16(#08046h))
+000349: 4804             RET
+00034b:               __register_unlock:
+00034b: eb11088048       MOV AC0,dbl(*abs16(#08048h))
+000350: 4804             RET
+000352:               _abort:
+000352:               .text:CIO_breakpoint:
+000352: 20               NOP
+000353:               C$$EXIT:
+000353: 20               NOP
+000354: 16000c           SIM_TRIG
+000357: 4a7e             B #0x000357
+000359: 20               NOP
+00035a:               ___etext__:
+00035a:               etext:
+
+DATA Section .cinit, 0x19 words at 0x1AE
+0001ae:               ___cinit__:
+0001ae:               cinit:
+0001ae:               .cinit:
+0001ae: 0001             .word 0x0001
+0001af: 0080             .word 0x0080
+0001b0: 0000             .word 0x0000
+0001b1: 0000             .word 0x0000
+0001b2: 0002             .word 0x0002
+0001b3: 0080             .word 0x0080
+0001b4: 4200             .word 0x4200
+0001b5: 0000             .word 0x0000
+0001b6: 0000             .word 0x0000
+0001b7: 0002             .word 0x0002
+0001b8: 0080             .word 0x0080
+0001b9: 4400             .word 0x4400
+0001ba: 0000             .word 0x0000
+0001bb: 0000             .word 0x0000
+0001bc:               .cinit:
+0001bc: 0002             .word 0x0002
+0001bd: 0080             .word 0x0080
+0001be: 4600             .word 0x4600
+0001bf: 0000             .word 0x0000
+0001c0: 0342             .word 0x0342
+0001c1: 0002             .word 0x0002
+0001c2: 0080             .word 0x0080
+0001c3: 4800             .word 0x4800
+0001c4: 0000             .word 0x0000
+0001c5: 0342             .word 0x0342
+0001c6: 0000             .word 0x0000
+
+DATA Section .const, 0xA words at 0x1C7
+0001c7:               .const:
+0001c7: 0007             .word 0x0007
+0001c8: 000c             .word 0x000c
+0001c9: 0001             .word 0x0001
+0001ca: fffe             .word 0xfffe
+0001cb: 0000             .word 0x0000
+0001cc: 000f             .word 0x000f
+0001cd: 0004             .word 0x0004
+0001ce: fff5             .word 0xfff5
+0001cf: 0009             .word 0x0009
+0001d0: 5000             .word 0x5000

@@ -18,7 +18,7 @@ public class C55xOperation extends Operation
 {
     C55xOperation next;
     int page; // page in SPRU374G
-    List microinstrs;
+    List<Microinstruction> microinstrs;
     int cycles_in_basic_block;
     int cycles_cond_true;
     int cycles_cond_false;
@@ -43,7 +43,7 @@ public class C55xOperation extends Operation
         return page;
     }
 
-    //public C55xOperation(String mnemonic, List args, String syntax, int page) {
+    //public C55xOperation(String mnemonic, List<Operand> args, String syntax, int page) {
     //        super(mnemonic, args, syntax);
     //        this.page = page;
     //}
@@ -51,7 +51,7 @@ public class C55xOperation extends Operation
     // C55x instruction classes according to paper
     // Power Consumption Characterisation of the Texas Instruments
     // TMS320VC5510 DSP, Table 2
-    private int findInstructionClass(String mnemonic, List args, int page) {
+    private int findInstructionClass(String mnemonic, List<Operand> args, int page) {
         int cl = UnknownOp; // instruction class
 
         // java main/Main -E -v -Oc -march=c55x c55x/test/example.dis
@@ -171,13 +171,13 @@ public class C55xOperation extends Operation
 
 
     public String emitArgs() {
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         if (args == null)
             return "";
         
         int numargs = 0;
         String argstring = "";
-        ListIterator liter = args.listIterator();
+        ListIterator<Operand> liter = args.listIterator();
         
         while (liter.hasNext()) {
             if (numargs > 0)
@@ -223,7 +223,7 @@ public class C55xOperation extends Operation
     }
 
 
-    public C55xOperation(String mnemonic, List args, String syntax, 
+    public C55xOperation(String mnemonic, List<Operand> args, String syntax, 
                          boolean parallel_enable,
                          int size,
                          int cycles_in_basic_block,
@@ -272,7 +272,7 @@ public class C55xOperation extends Operation
         microinstrs.add(mi);
     }
     
-    public List getMicroinstrList(){
+    public List<Microinstruction> getMicroinstrList(){
         // don't return any microinstrs for MAC in MAS::MAC
         if (true)
             throw new NullPointerException("getMicroinstrList for " + this);
@@ -284,7 +284,7 @@ public class C55xOperation extends Operation
     }    
 
 
-    public List getMicroinstrs(Machine machine) {
+    public List<Microinstruction> getMicroinstrs(Machine machine) {
 
         //System.out.println("  getMicroinstrs for " + this);
         //if (this.getImplicitlyParallelOperation() != null) {
@@ -299,7 +299,7 @@ public class C55xOperation extends Operation
 
         if (microinstrs == null) {
             //System.out.println("  microinstrs null for " + this);
-            microinstrs = new ArrayList();
+            microinstrs = new ArrayList<Microinstruction>();
             makeMicroinstrs(machine);
         }
         return microinstrs;
@@ -637,10 +637,10 @@ public class C55xOperation extends Operation
         // ADD TAx, TAy
         // TAy = TAy + TAx
         // used in mmul_t after label mmul_dual_mac
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction add = new MicroArithmetic(mRegOp0, mRegOp1, "ADD", 0);
@@ -652,9 +652,9 @@ public class C55xOperation extends Operation
     
     public void make_AADD_p97_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side        
-        List args = this.getArgs();
-        MicroOperand constant            = new Constant(((Operand)args.get(0)).getValue(),8);
-        Register reg0                    =  ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant            = new Constant(args.get(0).getValue(),8);
+        Register reg0                    = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
         
         Microinstruction add          = new MicroArithmetic(constant, mRegOp0, "ADD",0);
@@ -667,9 +667,9 @@ public class C55xOperation extends Operation
 
     public void make_AADD_p98_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand  sp  = new C55xMicroRegisterOperand(machine.getRegister("sp"));
-        MicroOperand constant         = new Constant(((Operand)args.get(0)).getValue(),16);
+        MicroOperand constant         = new Constant(args.get(0).getValue(),16);
         Microinstruction add          = new MicroArithmetic(constant, sp, "ADD",0);
         Microinstruction writeReg     = new WriteReg(machine.getDataResult(0), sp);        
         this.addMicroinstr(add);
@@ -687,9 +687,9 @@ public class C55xOperation extends Operation
     public void make_ABS_p101_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // ABS [src,] dst
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
@@ -704,9 +704,9 @@ public class C55xOperation extends Operation
     public void make_ADD_p106_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // ADD [src],dst
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
@@ -723,16 +723,16 @@ public class C55xOperation extends Operation
         // make_ADD_p107 ; hopefully conditionally generating microcode can be 
         // avoided most of the time - pgm
         // ADD K16,[src],dst
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         Microinstruction writeReg;
         Microinstruction add = new MicroArithmetic(constant, mRegOp1, "ADD",0);
 
         if (args.size() == 3){
-            Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+            Register reg2 = args.get(2).getFirstReg(machine);
             C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
             writeReg = new WriteReg(machine.getDataResult(0), mRegOp2);
         }
@@ -755,11 +755,11 @@ public class C55xOperation extends Operation
         checkImplicitParallelism(); // to be on safe side
         // ADD Smem, [src], dst
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
@@ -782,12 +782,12 @@ public class C55xOperation extends Operation
     public void make_ADD_p113_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // ADD AC1 << #16, AC0
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xShiftOperand c55xShift = (C55xShiftOperand)args.get(0);
         Register reg2 = ((C55xRegisterOperand)c55xShift.getOp1()).getFirstReg(machine);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
 
@@ -834,15 +834,15 @@ public class C55xOperation extends Operation
 
         // WORKS?: used in dsplib sqrtv
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShift = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)c55xShift.getOp1();
         long c55xImmValue = c55xShift.getOp2().getValue();
         Constant shiftVal = new Constant(c55xImmValue, 6);
 
-        Register ACx = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACx = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
-        Register ACy = ((Operand)args.get(2)).getFirstReg(machine);
+        Register ACy = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mACy = new C55xMicroRegisterOperand(ACy);
 
         Microinstruction computeSmem = new C55xComputeSmem(Smem, 0);
@@ -865,14 +865,14 @@ public class C55xOperation extends Operation
     public void make_ADD_p122_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // add dbl(Lmem), [ACx,] ACy
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
              Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem,0);
@@ -890,12 +890,12 @@ public class C55xOperation extends Operation
    public void make_ADD_p123_Instr(Machine machine) { 
        checkImplicitParallelism(); // to be on safe side
         //ADD Xmem, Ymem, ACx (shifts also operands by 16 bits left)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         MicroOperand constant16  = new Constant(16,16); // shift value 16 bits left
         C55xMemoryAccessOperand c55xSmem1 = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem2 = (C55xMemoryAccessOperand)args.get(1);        
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
@@ -922,8 +922,8 @@ public class C55xOperation extends Operation
         checkImplicitParallelism(); // to be on safe side
         //ADD K16, Smem
         
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         //        MicroOperand dataResult = new DataResult(this,16);
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem,0);
@@ -942,14 +942,14 @@ public class C55xOperation extends Operation
         checkImplicitParallelism(); // to be on safe side
         //ADD dual(Lmem), [ACx,] ACy - DOES NOT WORK pgm
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
 
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
@@ -978,12 +978,12 @@ public class C55xOperation extends Operation
     public void make_ADDSUB_p133_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // ADDSUB Tx, Smem, ACx DOES NOT WORK -pgm
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2); 
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -1014,7 +1014,7 @@ public class C55xOperation extends Operation
     
     public void make_AMAR_p146_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem,0);
         this.addMicroinstr(c55xSmemAccess);
@@ -1024,11 +1024,11 @@ public class C55xOperation extends Operation
     public void make_AMAR_p148_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // AMAR Smem, XAdst
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -1074,10 +1074,10 @@ public class C55xOperation extends Operation
 
     public void make_AMOV_p161_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction writeReg = new WriteReg(mRegOp1, mRegOp2);
@@ -1088,9 +1088,9 @@ public class C55xOperation extends Operation
     public void make_AMOV_p162_Instr(Machine machine) { // kps quality code
         checkImplicitParallelism(); // to be on safe side
         // AMOV P8, TAx
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(), 8);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(), 8);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction writeReg = new WriteReg(constant, mRegOp1);
@@ -1100,11 +1100,11 @@ public class C55xOperation extends Operation
     public void make_AND_p165_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // AND src, dst
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction and = new Logical(mRegOp1, mRegOp2, "AND", 0);
@@ -1121,11 +1121,11 @@ public class C55xOperation extends Operation
     public void make_AND_p166_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // AND k8/k16, src, dst
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction and = new Logical(constant, mRegOp1, "AND", 0);
@@ -1148,11 +1148,11 @@ public class C55xOperation extends Operation
         // AND #32768 << 16,AC0,AC1
         // e.g. AND k16 << #16, [ACx,] ACy
         // ACy = ACx & (k16 <<< #16)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand shiftOp = (C55xShiftOperand)args.get(0);
-        Register ACx = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACx = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACx = new C55xMicroRegisterOperand(ACx);
-        Register ACy = ((Operand)args.get(2)).getFirstReg(machine);
+        Register ACy = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACy = new C55xMicroRegisterOperand(ACy);
 
         Microinstruction shift = new C55xShift(shiftOp, 0, 0, 0);
@@ -1172,9 +1172,9 @@ public class C55xOperation extends Operation
     public void make_AND_p172_Instr(Machine machine) { // kps bug fixed
         // AND k16, Smem
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(), 16);
+        MicroOperand constant = new Constant(args.get(0).getValue(), 16);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -1196,10 +1196,10 @@ public class C55xOperation extends Operation
         // TAy = TAy – TAx
         // XXX TODO: ARnLC stuff
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        Register TAx = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register TAx = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand TAxOp = new C55xMicroRegisterOperand(TAx);
-        Register TAy = ((Operand)args.get(1)).getFirstReg(machine);
+        Register TAy = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand TAyOp = new C55xMicroRegisterOperand(TAy);
         Microinstruction sub = new MicroArithmetic(TAxOp, TAyOp, "SUB", 0);
         Microinstruction writeReg = new WriteReg(machine.getDataResult(0), TAyOp);
@@ -1214,10 +1214,10 @@ public class C55xOperation extends Operation
         // TAx = TAx – P8
         // XXX TODO: ARnLC stuff
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         // 16: this will make the constant positive, as it is not sign extended
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(), 16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        MicroOperand constant = new Constant(args.get(0).getValue(), 16);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction sub = new MicroArithmetic(constant, mRegOp1, "SUB", 0);
@@ -1245,7 +1245,7 @@ public class C55xOperation extends Operation
 
     public void make_BCC_p182_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xConditionFieldOperand condOp = (C55xConditionFieldOperand)args.get(1);
              Microinstruction cond = new C55xCondition(condOp);
         Microinstruction condBranch = new ConditionalBranch(this);
@@ -1280,7 +1280,7 @@ public class C55xOperation extends Operation
     public void make_BCLR_p194_No5_Instr(Machine machine) {
         // e.g. BCLR ST1_CPL
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xBitOperand bitOp = (C55xBitOperand)args.get(0);
         Constant bit = new Constant(bitOp.getBit(machine), 16);
         Register reg = bitOp.getRegister(machine);
@@ -1297,7 +1297,7 @@ public class C55xOperation extends Operation
         //throw new NullPointerException("not implemented: " + this);
 
         /*checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xBitOperand bitOp = (C55xBitOperand)args.get(0);
         
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(machine.getRegister(bitOp.getName()));
@@ -1315,11 +1315,11 @@ public class C55xOperation extends Operation
         checkImplicitParallelism(); // to be on safe side
         // BFXPA k16, ACx, dst
 
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(), 16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(), 16);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         if (true)
@@ -1336,11 +1336,11 @@ public class C55xOperation extends Operation
         checkImplicitParallelism(); // to be on safe side
         // BFXTR k16, ACx, dst
         // BFXTR #32768,AC0,T2
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(), 16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(), 16);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction bfxtr = new C55xBitFieldOperation(constant, mRegOp1, "XTR", 0);
@@ -1374,7 +1374,7 @@ public class C55xOperation extends Operation
     public void make_BSET_p204_No5_Instr(Machine machine) { // kps quality code
         // e.g. BSET ST1_CPL
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xBitOperand bitOp = (C55xBitOperand)args.get(0);
         Constant bit = new Constant(bitOp.getBit(machine), 16);
         Register reg = bitOp.getRegister(machine);
@@ -1394,14 +1394,14 @@ public class C55xOperation extends Operation
         // e.g. BTST @#00h,AR7,TC1
         // used in craw
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xBaddrOperand baddrOp = (C55xBaddrOperand)args.get(0);
         C55xRegisterOperand baddrReg = (C55xRegisterOperand)baddrOp.getRegister();        
         C55xImmediateOperand baddrImm = (C55xImmediateOperand)baddrOp.getImmediate();
         C55xMemoryAccessOperand baddrMa = (C55xMemoryAccessOperand)baddrOp.getMemoryAccess();
 
-        Register src = ((Operand)args.get(1)).getFirstReg(machine);
+        Register src = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mSrc = new C55xMicroRegisterOperand(src);
 
         C55xBitOperand bitOp = (C55xBitOperand)args.get(2);
@@ -1445,8 +1445,8 @@ public class C55xOperation extends Operation
         // tests a single bit of a memory (Smem) location. The bit tested is defined by a
         // 4-bit immediate value, k4. The tested bit is copied into the selected TCx status
         // bit.
-        List args = this.getArgs();
-        MicroOperand k4 = new Constant(((Operand)args.get(0)).getValue(), 4);
+        List<Operand> args = this.getArgs();
+        MicroOperand k4 = new Constant(args.get(0).getValue(), 4);
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(1);
         C55xBitOperand bitOp = (C55xBitOperand)args.get(2);
         Constant bit = new Constant(bitOp.getBit(machine), 16);
@@ -1487,8 +1487,8 @@ public class C55xOperation extends Operation
     public void make_CALL_p218_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side        
         // dynamic CFG : CALL ACx
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg0);
         
         Microinstruction call = new C55xCall(mRegOp1);
@@ -1515,7 +1515,7 @@ public class C55xOperation extends Operation
     public void make_CMP_p227_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // CMP Smem == K16, TC1
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xRelOpOperand relOp = (C55xRelOpOperand)args.get(0);
         C55xBitOperand   bitOp = (C55xBitOperand)args.get(1);
@@ -1537,7 +1537,7 @@ public class C55xOperation extends Operation
         // CMP src RELOP dst, TC1
         //System.out.println("make_CMP_p229_Instr: " + instr + " (" + syntax + ")") ;
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xRelOpOperand relOp = (C55xRelOpOperand)args.get(0);
         C55xBitOperand   bitOp = (C55xBitOperand)args.get(1);
         
@@ -1556,7 +1556,7 @@ public class C55xOperation extends Operation
         checkImplicitParallelism(); // to be on safe side
         // CMPU src RELOP dst, TC1 , for 64 bit signed longs, this is same as CMP.
        
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
                C55xRelOpOperand relOp = (C55xRelOpOperand)args.get(0);
         C55xBitOperand   bitOp = (C55xBitOperand)args.get(1);
 
@@ -1585,10 +1585,10 @@ public class C55xOperation extends Operation
     public void make_EXP_p243_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // e.g. EXP AC0,T3
-        List args = this.getArgs();
-        Register ACx = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register ACx = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACx = new C55xMicroRegisterOperand(ACx);
-        Register Tx =  ((Operand)args.get(1)).getFirstReg(machine);
+        Register Tx =  args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpTx  = new C55xMicroRegisterOperand(Tx);
 
         Microinstruction exponent = new C55xExponent(mRegOpACx, "EXP", 0);
@@ -1611,7 +1611,7 @@ public class C55xOperation extends Operation
         // the content of a data memory operand Cmem, addressed using the coefficient
         // addressing mode, sign extended to 17 bits.
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         // Xmem
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)args.get(0);
@@ -1641,13 +1641,13 @@ public class C55xOperation extends Operation
         this.addMicroinstr(readCmem);
 
         // ACx
-        Register ACx = ((Operand)args.get(3)).getFirstReg(machine);
+        Register ACx = args.get(3).getFirstReg(machine);
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
         Microinstruction extractACx = new ExtractSignExtend(mACx, 17, 16, 3); // ACx(32–16)
         this.addMicroinstr(extractACx);
 
         // ACy
-        Register ACy = ((Operand)args.get(4)).getFirstReg(machine);
+        Register ACy = args.get(4).getFirstReg(machine);
         C55xMicroRegisterOperand mACy = new C55xMicroRegisterOperand(ACy);
 
         // ACy = ACy + ACx * Cmem
@@ -1724,11 +1724,11 @@ public class C55xOperation extends Operation
         // to 0.
 
         checkImplicitParallelism();
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
-        Register reg3 = ((Operand)args.get(3)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
+        Register reg3 = args.get(3).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0); // ACy
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1); // Tx
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2); // ACx
@@ -1756,11 +1756,11 @@ public class C55xOperation extends Operation
 
     public void make_MACM_p260_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side // rounding not implemented for R
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand memAccessOp1 = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand memAccessOp2 = (C55xMemoryAccessOperand)args.get(1);
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction memAccess1 = new C55xComputeSmem(memAccessOp1,0);
@@ -1789,10 +1789,10 @@ public class C55xOperation extends Operation
 
         // used in dsplib firlat
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1); // ACx
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2); // ACy
         
@@ -1828,11 +1828,11 @@ public class C55xOperation extends Operation
         // ACy = ACx + (Tx * Smem)
 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(0);
-        Register Tx  = ((Operand)args.get(1)).getFirstReg(machine);
-        Register ACx = ((Operand)args.get(2)).getFirstReg(machine);
-        Register ACy = ((Operand)args.get(3)).getFirstReg(machine);
+        Register Tx  = args.get(1).getFirstReg(machine);
+        Register ACx = args.get(2).getFirstReg(machine);
+        Register ACy = args.get(3).getFirstReg(machine);
         C55xMicroRegisterOperand mTx  = new C55xMicroRegisterOperand(Tx);
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
         C55xMicroRegisterOperand mACy = new C55xMicroRegisterOperand(ACy);
@@ -1865,15 +1865,15 @@ public class C55xOperation extends Operation
 
     public void make_MACMK_p264_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side        
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xMemoryAccessOperand memAccessOp1 = (C55xMemoryAccessOperand)args.get(0);
         
-        MicroOperand constant = new Constant(((Operand)args.get(1)).getValue(),8);
+        MicroOperand constant = new Constant(args.get(1).getValue(),8);
         
         
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(3)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
+        Register reg2 = args.get(3).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
@@ -1899,14 +1899,14 @@ public class C55xOperation extends Operation
         // WORKS: used in dsplib convol
 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)args.get(1);
 
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(3)).getFirstReg(machine);
+        Register reg2 = args.get(3).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
             Microinstruction computeXmem = new C55xComputeSmem(Xmem, 0);
@@ -1946,11 +1946,11 @@ public class C55xOperation extends Operation
         // ACy = (ACx >> #16) + (Xmem * Ymem)
         // used in dsplib mul32
         //if (true) throw new NullPointerException("foo");
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)args.get(1);
         C55xShiftOperand shiftOp = (C55xShiftOperand)args.get(2);
-        Register reg = ((Operand)args.get(3)).getFirstReg(machine);
+        Register reg = args.get(3).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(reg);
 
         Microinstruction XmemAccess = new C55xComputeSmem(Xmem, 0);
@@ -2009,8 +2009,8 @@ public class C55xOperation extends Operation
         if (this.isImplicitlyParallel)
             throw new NullPointerException("bug: " + this);
 
-        List mac1Args = mac1.getArgs();
-        List mac2Args = mac2.getArgs();
+        List<Operand> mac1Args = mac1.getArgs();
+        List<Operand> mac2Args = mac2.getArgs();
 
         // check mac2 opcode
         if (mac2.getMnemonic().equals("MAC")) {
@@ -2024,7 +2024,7 @@ public class C55xOperation extends Operation
         //MAC Xmem, Cmem, ACx
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)mac1Args.get(0);
         C55xMemoryAccessOperand Cmem = (C55xMemoryAccessOperand)mac1Args.get(1);        
-        Register reg1 = ((Operand)mac1Args.get(2)).getFirstReg(machine);
+        Register reg1 = mac1Args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction XmemAccess = new C55xComputeSmem(Xmem, 0);
@@ -2058,7 +2058,7 @@ public class C55xOperation extends Operation
         //MAC Ymem, Cmem, ACy
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)mac2Args.get(0);
         // Cmem from mac1
-        Register reg2 = ((Operand)mac2Args.get(2)).getFirstReg(machine);
+        Register reg2 = mac2Args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction YmemAccess = new C55xComputeSmem(Ymem, 2);
@@ -2105,8 +2105,8 @@ public class C55xOperation extends Operation
         if (this.isImplicitlyParallel)
             throw new NullPointerException("bug: " + this);
 
-        List mac1Args = mac1.getArgs();
-        List mac2Args = mac2.getArgs();
+        List<Operand> mac1Args = mac1.getArgs();
+        List<Operand> mac2Args = mac2.getArgs();
 
         // check mac2 opcode
         if (!mac2.getMnemonic().equals("MAC"))
@@ -2202,16 +2202,16 @@ public class C55xOperation extends Operation
         // e.g. MANT AC0,AC1 :: NEXP AC0,T1, in arct2_t.dis
         C55xOperation mant = this;
         C55xOperation nexp = getImplicitlyParallelOperation();
-        List mantArgs = mant.getArgs();
-        List nexpArgs = nexp.getArgs();
+        List<Operand> mantArgs = mant.getArgs();
+        List<Operand> nexpArgs = nexp.getArgs();
         if (!nexp.getMnemonic().equals("NEXP"))
             throw new NullPointerException("not nexp: " + nexp);
 
-        Register ACx = ((Operand)mantArgs.get(0)).getFirstReg(machine);
+        Register ACx = mantArgs.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACx = new C55xMicroRegisterOperand(ACx);
-        Register ACy = ((Operand)mantArgs.get(1)).getFirstReg(machine);
+        Register ACy = mantArgs.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACy = new C55xMicroRegisterOperand(ACy);
-        Register Tx =  ((Operand)nexpArgs.get(1)).getFirstReg(machine);
+        Register Tx =  nexpArgs.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpTx  = new C55xMicroRegisterOperand(Tx);
 
         Microinstruction mantissa = new C55xMantissa(mRegOpACx, 0);
@@ -2261,11 +2261,11 @@ public class C55xOperation extends Operation
         // MASM[R][40] [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], [ACx,] ACy
         // ACy = ACx – (Xmem * Ymem)
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem1 = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem2 = (C55xMemoryAccessOperand)args.get(1);        
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(3)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
+        Register reg2 = args.get(3).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -2305,8 +2305,8 @@ public class C55xOperation extends Operation
         if (this.isImplicitlyParallel)
             throw new NullPointerException("bug: " + this);
 
-        List masArgs = mas.getArgs();
-        List macArgs = mac.getArgs();
+        List<Operand> masArgs = mas.getArgs();
+        List<Operand> macArgs = mac.getArgs();
 
         // check mac opcode
         //if (!mac.getMnemonic().equals("MAC"))
@@ -2320,7 +2320,7 @@ public class C55xOperation extends Operation
         // mas
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)masArgs.get(0);
         C55xMemoryAccessOperand Cmem = (C55xMemoryAccessOperand)masArgs.get(1);        
-        Register reg1 = ((Operand)masArgs.get(2)).getFirstReg(machine);
+        Register reg1 = masArgs.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction XmemAccess = new C55xComputeSmem(Xmem, 0);
@@ -2349,7 +2349,7 @@ public class C55xOperation extends Operation
         // mac
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)macArgs.get(0);
         // Cmem from mas
-        Register reg2 = ((Operand)macArgs.get(2)).getFirstReg(machine);
+        Register reg2 = macArgs.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction YmemAccess = new C55xComputeSmem(Ymem, 2);
@@ -2406,11 +2406,11 @@ public class C55xOperation extends Operation
         // MAX [src,] dst
         // exists in arct2_t.dis
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        Register src = ((Operand)args.get(0)).getFirstReg(machine);
+        Register src = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand msrc = new C55xMicroRegisterOperand(src);
-        Register dst = ((Operand)args.get(1)).getFirstReg(machine);
+        Register dst = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mdst = new C55xMicroRegisterOperand(dst);
 
         Microinstruction max = new C55xMax(msrc, mdst, 0);
@@ -2434,11 +2434,11 @@ public class C55xOperation extends Operation
         // e.g. MIN T1,T0
         // exists in bexp_t.dis
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        Register src = ((Operand)args.get(0)).getFirstReg(machine);
+        Register src = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand msrc = new C55xMicroRegisterOperand(src);
-        Register dst = ((Operand)args.get(1)).getFirstReg(machine);
+        Register dst = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mdst = new C55xMicroRegisterOperand(dst);
 
         Microinstruction min = new C55xMin(msrc, mdst, 0);
@@ -2468,12 +2468,12 @@ public class C55xOperation extends Operation
         // memory (Smem) location shifted by the
         // content of Tx to the accumulator (ACx):
         // ACx = Smem << Tx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmemOp = (C55xMemoryAccessOperand)c55xShiftOp.getOp1();
         Register Tx = c55xShiftOp.getOp2().getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpTx = new C55xMicroRegisterOperand(Tx);
-        Register ACx = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACx = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACx = new C55xMicroRegisterOperand(ACx);
 
         Microinstruction smemAccess = new C55xComputeSmem(c55xSmemOp, 0);
@@ -2500,11 +2500,11 @@ public class C55xOperation extends Operation
     public void make_MOV_p335_Instr(Machine machine) { // kps quality code
         checkImplicitParallelism(); // to be on safe side
         // MOV Smem << #16, ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShift = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)c55xShift.getOp1();
 
-        Register ACx = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACx = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand ACxMRegOp = new C55xMicroRegisterOperand(ACx);
 
         Microinstruction computeSmem = new C55xComputeSmem(Smem, 0);
@@ -2526,9 +2526,9 @@ public class C55xOperation extends Operation
     public void make_MOV_p336_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOV [uns(]Smem[)], ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(0);
-        Register ACx = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACx = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
         
         Microinstruction computeSmem = new C55xComputeSmem(Smem, 0);
@@ -2544,13 +2544,13 @@ public class C55xOperation extends Operation
     public void make_MOV_p337_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV [uns(]Smem[)] << #SHIFTW, ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xShiftOperand c55xShift = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)c55xShift.getOp1();
         C55xImmediateOperand imm = (C55xImmediateOperand)c55xShift.getOp2();
 
-        Register reg = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(reg);
 
         Microinstruction computeSmem = new C55xComputeSmem(Smem, 0);
@@ -2574,10 +2574,10 @@ public class C55xOperation extends Operation
 public void make_MOV_p338_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV[40] dbl(Lmem), ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -2591,10 +2591,10 @@ public void make_MOV_p338_Instr(Machine machine) {
     public void  make_MOV40_p338_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side 
         // MOV40 dbl(Lmem), ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -2620,9 +2620,9 @@ public void make_MOV_p338_Instr(Machine machine) {
         // (Lmem) to the 16 highest bits of accumulator AC(x + 1):
         // pair(HI(ACx)) = Lmem
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg = args.get(1).getFirstReg(machine);
         Register reg1 = null;
         Register reg2 = null;
         String regName = reg.getName();
@@ -2675,9 +2675,9 @@ public void make_MOV_p338_Instr(Machine machine) {
 public void make_MOV_p345_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV K16 << #SHFT, ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShift = (C55xShiftOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
@@ -2692,11 +2692,11 @@ public void make_MOV_p347_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOV Smem,dst
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
     
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);   
         
 
@@ -2722,11 +2722,11 @@ public void make_MOV_p347_Instr(Machine machine) {
 public void make_MOV_p353_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV k4,dst /-k4,dst / k16,dst
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
         Microinstruction writeReg  = new WriteReg(constant, mRegOp1);
         
         this.addMicroinstr(writeReg);
@@ -2741,11 +2741,11 @@ public void make_MOV_p353_Instr(Machine machine) {
     public void make_MOV_p359_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOV Smem, reg
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction sMemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -2770,9 +2770,9 @@ public void make_MOV_p353_Instr(Machine machine) {
 
     public void  make_MOV_p360_k12_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();        
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),12);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();        
+        MicroOperand constant = new Constant(args.get(0).getValue(),12);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         Microinstruction writeReg = new WriteReg(constant, mRegOp1);
         this.addMicroinstr(writeReg);
@@ -2781,9 +2781,9 @@ public void make_MOV_p353_Instr(Machine machine) {
     
     public void  make_MOV_p360_k16_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side        
-        List args = this.getArgs();        
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();        
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         Microinstruction writeReg = new WriteReg(constant, mRegOp1);
         
@@ -2795,10 +2795,10 @@ public void make_MOV_p353_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOVE dbl(Lmem), XAdst
         // -pgm does a full 32 bit write, but should only do 24 bits, fix if necessary, fixed -pgm
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -2813,8 +2813,8 @@ public void make_MOV_p353_Instr(Machine machine) {
 public void make_MOV_p363_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV [k8/k16, Smem]
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
         C55xMemoryAccessOperand c55xMem = (C55xMemoryAccessOperand)args.get(1);
 
         Microinstruction c55xMemAccess = new C55xComputeSmem(c55xMem, 0);
@@ -2827,11 +2827,11 @@ public void make_MOV_p363_Instr(Machine machine) {
 public void make_MOV_p364_Instr(Machine machine) { 
             checkImplicitParallelism(); // to be on safe side
         // MOV HI(ACx), TAx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xRegisterOperand regOp = (C55xRegisterOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
 
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -2844,10 +2844,10 @@ public void make_MOV_p365_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOV src,dst
         
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         Microinstruction writeReg  = new WriteReg(mRegOp1, mRegOp2);
@@ -2862,9 +2862,9 @@ public void make_MOV_p365_Instr(Machine machine) {
         // This instruction moves the content of the auxiliary or temporary register (TAx)
         // to the high part of the accumulator, ACx(31–16):
         // HI(ACx) = TAx
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         Microinstruction writeReg = new WriteReg(mRegOp1, mRegOp2, 16, 16);
@@ -2874,9 +2874,9 @@ public void make_MOV_p365_Instr(Machine machine) {
 public void make_MOV_p368_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
        // MOV src,dst
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         Microinstruction writeReg = new WriteReg(mRegOp1, mRegOp2);
@@ -2885,9 +2885,9 @@ public void make_MOV_p368_Instr(Machine machine) {
 
     public void make_MOV_p370_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         Microinstruction writeReg  = new WriteReg(mRegOp1, mRegOp2);
@@ -2898,9 +2898,9 @@ public void make_MOV_p368_Instr(Machine machine) {
 
     public void make_MOV_p372_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         Microinstruction writeReg  = new WriteReg(mRegOp1, mRegOp2);
@@ -2931,7 +2931,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // e.g. MOV dbl(*AR3),dbl(*(AR4+T1))
         // dbl(Ymem) = dbl(Xmem)
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand dblXMem = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand dblYMem = (C55xMemoryAccessOperand)args.get(1);
@@ -2952,7 +2952,7 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MOV_p379_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV *AR5, *AR3
-        List args = this.getArgs();        
+        List<Operand> args = this.getArgs();        
         C55xMemoryAccessOperand sMem1 = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand sMem2 = (C55xMemoryAccessOperand)args.get(1);
 
@@ -2970,8 +2970,8 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MOV_p382_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV HI(ACx), Smem
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xRegisterOperand regOp = (C55xRegisterOperand)args.get(0);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
@@ -2993,8 +2993,8 @@ public void make_MOV_p368_Instr(Machine machine) {
         // Rounding is performed in the D-unit shifter according to RDM, if the optional
         // rnd keyword is applied to the input operand.
         // used in e.g. iir32_t.dis
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xRegisterOperand regOp = (C55xRegisterOperand)args.get(0);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
@@ -3014,7 +3014,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // Smem = LO(ACx << Tx)
         // MOV AC0 << T2,*AR3+
         // used in e.g. iir32_t.dis
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
 
@@ -3038,7 +3038,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // Smem = HI(ACx << Tx)
         // used in e.g. iir32_t.dis
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
 
@@ -3063,7 +3063,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // stores the low part of the accumulator, ACx(15–0), to the memory (Smem)
         // location:
         // Smem = LO(ACx << #SHIFTW)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand shiftOp = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(1);
 
@@ -3086,7 +3086,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // stores the high part of the accumulator, ACx(31–16), to the memory (Smem)
         // location:
         // Smem = HI(ACx << #SHIFTW)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
 
@@ -3122,9 +3122,9 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MOV_p395_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MOV ACx, dbl(Lmem)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
@@ -3155,9 +3155,9 @@ public void make_MOV_p368_Instr(Machine machine) {
         //      MOV pair(HI(ACx)), dbl(Lmem)
         // e.g. MOV [pair(HI(AC0)), dbl(*AR2+)]
         // used in dsplib fir2
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
-        C55xRegister ACx = (C55xRegister)((Operand)args.get(0)).getFirstReg(machine);
+        C55xRegister ACx = (C55xRegister)args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
         C55xRegister pair = ACx.getACxPair();
         C55xMicroRegisterOperand mPair = new C55xMicroRegisterOperand(pair);
@@ -3192,9 +3192,9 @@ public void make_MOV_p368_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOV pair(LO(ACx)), dbl(Lmem) 
         
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
@@ -3207,8 +3207,8 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MOV_p404_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1, 16);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
@@ -3248,9 +3248,9 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MOV_p412_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // MOV XAsrc, dbl(Lmem)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
      
@@ -3275,9 +3275,9 @@ public void make_MOV_p368_Instr(Machine machine) {
         // This instruction performs a multiplication in the D-unit MAC. The input
         // operands of the multiplier are ACx(32–16) and ACy(32–16):
         
-        List args = this.getArgs();
-        Register ACx = ((Operand)args.get(0)).getFirstReg(machine);
-        Register ACy = ((Operand)args.get(1)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register ACx = args.get(0).getFirstReg(machine);
+        Register ACy = args.get(1).getFirstReg(machine);
 
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
         C55xMicroRegisterOperand mACy = new C55xMicroRegisterOperand(ACy);
@@ -3303,10 +3303,10 @@ public void make_MOV_p368_Instr(Machine machine) {
         // extended to 17 bits:
         // ACy = ACx * Tx
 
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3325,11 +3325,11 @@ public void make_MOV_p368_Instr(Machine machine) {
     }
     public void make_MPYK_p420_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
 
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3347,10 +3347,10 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MPYM_p421_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MPYM[R] Smem, Cmem, ACx
-        List args = this.getArgs();   
+        List<Operand> args = this.getArgs();   
         C55xMemoryAccessOperand c55xSmem1 = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem2 = (C55xMemoryAccessOperand)args.get(1);
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction c55xSmemAccess1 = new C55xComputeSmem(c55xSmem1, 0);
@@ -3372,10 +3372,10 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MPYM_p423_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // MPYM[R] [T3 = ]Smem, [ACx,] ACy
-        List args = this.getArgs();   
+        List<Operand> args = this.getArgs();   
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
     
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3395,12 +3395,12 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MPYMK_p424_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        MicroOperand constant = new Constant(((Operand)args.get(1)).getValue(),8);
+        MicroOperand constant = new Constant(args.get(1).getValue(),8);
         
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -3423,10 +3423,10 @@ public void make_MOV_p368_Instr(Machine machine) {
 
         checkImplicitParallelism(); // to be on safe side
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)args.get(1);
-        Register reg1 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction XmemAccess = new C55xComputeSmem(Xmem, 0);
@@ -3456,12 +3456,12 @@ public void make_MOV_p368_Instr(Machine machine) {
     public void make_MPYM_p427_Instr(Machine machine) { 
         // MPYM[R][U] [T3 = ]Smem, Tx, ACx
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -3512,8 +3512,8 @@ public void make_MOV_p368_Instr(Machine machine) {
         if (this.isImplicitlyParallel)
             throw new NullPointerException("bug: " + this);
 
-        List mpy1Args = mpy1.getArgs();
-        List mpy2Args = mpy2.getArgs();
+        List<Operand> mpy1Args = mpy1.getArgs();
+        List<Operand> mpy2Args = mpy2.getArgs();
 
         // check mpy2 opcode
         if (!mpy2.getMnemonic().equals("MPY"))
@@ -3522,7 +3522,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // mpy1
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)mpy1Args.get(0);
         C55xMemoryAccessOperand Cmem = (C55xMemoryAccessOperand)mpy1Args.get(1);        
-        Register reg1 = ((Operand)mpy1Args.get(2)).getFirstReg(machine);
+        Register reg1 = mpy1Args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction XmemAccess = new C55xComputeSmem(Xmem, 0);
@@ -3551,7 +3551,7 @@ public void make_MOV_p368_Instr(Machine machine) {
         // mpy2
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)mpy2Args.get(0);
         // Cmem from mpy1
-        Register reg2 = ((Operand)mpy2Args.get(2)).getFirstReg(machine);
+        Register reg2 = mpy2Args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction YmemAccess = new C55xComputeSmem(Ymem, 2);
@@ -3580,10 +3580,10 @@ public void make_MOV_p368_Instr(Machine machine) {
 public void make_NEG_p434_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
          // neg [src],dst
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction neg = new Neg(mRegOp1, 0);
@@ -3608,10 +3608,10 @@ public void make_NEG_p434_Instr(Machine machine) {
     
     public void make_NOT_p437_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3628,10 +3628,10 @@ public void make_NEG_p434_Instr(Machine machine) {
         // OR src, dst
         // dst = dst | src
         // e.g. OR AC1,AC0
-        List args = this.getArgs();
-        Register src = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register src = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpSrc = new C55xMicroRegisterOperand(src);
-        Register dst = ((Operand)args.get(1)).getFirstReg(machine);
+        Register dst = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpDst = new C55xMicroRegisterOperand(dst);
 
         Microinstruction or = new Logical(mRegOpSrc, mRegOpDst, "OR", 0);
@@ -3643,10 +3643,10 @@ public void make_NEG_p434_Instr(Machine machine) {
 
     public void make_OR_p440_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        MicroOperand constant         = new Constant(((Operand)args.get(0)).getValue(),16);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant         = new Constant(args.get(0).getValue(),16);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3665,12 +3665,12 @@ public void make_NEG_p434_Instr(Machine machine) {
         // example from fl2q_t.dis
         // dst = src | Smem
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(0);
-        Register src = ((Operand)args.get(1)).getFirstReg(machine);
+        Register src = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpSrc = new C55xMicroRegisterOperand(src);
-        Register dst = ((Operand)args.get(2)).getFirstReg(machine);
+        Register dst = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpDst = new C55xMicroRegisterOperand(dst);
 
         Microinstruction smemAccess = new C55xComputeSmem(Smem, 0);
@@ -3689,10 +3689,10 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_OR_p443_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // OR ACx << #SHIFTW, [ACy]
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         Microinstruction shift = new C55xShift(c55xShiftOp, c55xShiftOp.getOp1().getValue(), c55xShiftOp.getOp2().getValue(), 0);
@@ -3716,8 +3716,8 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_OR_p446_Instr(Machine machine) {  // kps bug fixed
         checkImplicitParallelism(); // to be on safe side
         // or k16, Smem
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(), 16);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(), 16);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -3735,12 +3735,12 @@ public void make_NEG_p434_Instr(Machine machine) {
 
     public void make_POP_p448_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand  sp  = new
             C55xMicroRegisterOperand(machine.getRegister("sp"));
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3764,11 +3764,11 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_POP_p449_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // POP dst
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand  sp  = new
             C55xMicroRegisterOperand(machine.getRegister("sp"));
         
-        Register reg = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(reg);
         
         MicroOperand     constant  = new Constant(0x1L,16);
@@ -3794,7 +3794,7 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_POP_p452_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         //POP Smem pgm - dunno if this works
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         MicroOperand     constant  = new Constant(0x1L,16);
         
         C55xMicroRegisterOperand  sp  = new
@@ -3831,10 +3831,10 @@ public void make_NEG_p434_Instr(Machine machine) {
         // XXX TODO handle ssp
         // XXX TODO CHECK IF THIS WORKS IN iir32_t.dis
         // XXX TODO this does not handle taking only the bits 15-0
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand sp = new C55xMicroRegisterOperand(machine.getRegister("sp"));
 
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         MicroOperand constant = new Constant(0x1L,16);
@@ -3849,12 +3849,12 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_PSH_p458_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // PSH src1, src2
-        List args = this.getArgs();        
+        List<Operand> args = this.getArgs();        
         C55xMicroRegisterOperand  sp  = new
             C55xMicroRegisterOperand(machine.getRegister("sp"));
 
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -3876,11 +3876,11 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_PSH_p459_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         //PSH src
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand  sp  = new
             C55xMicroRegisterOperand(machine.getRegister("sp"));
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(reg1);
         
         
@@ -3911,7 +3911,7 @@ public void make_NEG_p434_Instr(Machine machine) {
     public void make_PSH_p462_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         //PSH Smem
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand sp
             = new C55xMicroRegisterOperand(machine.getRegister("sp"));
 
@@ -3945,11 +3945,11 @@ public void make_NEG_p434_Instr(Machine machine) {
 
     public void make_PSHBOTH_p464_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMicroRegisterOperand  sp  = new
             C55xMicroRegisterOperand(machine.getRegister("sp"));
         
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(reg1);
         
         
@@ -4006,10 +4006,10 @@ public void make_NEG_p434_Instr(Machine machine) {
         // ROUND [ACx,] ACy
         // ACy = rnd(ACx)
         // XXX TODO - kps hack, this as a MOV for now
-        List args = this.getArgs();
-        Register ACx = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register ACx = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mACx = new C55xMicroRegisterOperand(ACx);
-        Register ACy = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACy = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mACy = new C55xMicroRegisterOperand(ACy);
 
         Microinstruction writeReg = new WriteReg(mACx, mACy);
@@ -4018,8 +4018,8 @@ public void make_NEG_p434_Instr(Machine machine) {
 
     public void make_RPT_p482_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);  
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);  
         Microinstruction repeat = new Repeat(constant.getValue());
         this.addMicroinstr(repeat);
     } 
@@ -4028,8 +4028,8 @@ public void make_NEG_p434_Instr(Machine machine) {
 public void make_RPT_p484_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
     //RPT CSR
-            List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);  
+            List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);  
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         Microinstruction repeat = new Repeat(mRegOp1);
         this.addMicroinstr(repeat);
@@ -4043,11 +4043,11 @@ public void make_RPT_p484_Instr(Machine machine) {
     public void make_RPTADD_p488_Instr(Machine machine) { // copied from rptsub and modified
         checkImplicitParallelism(); // to be on safe side
         //RPTADD CSR, k4
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);  
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);  
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
-        MicroOperand constant  = new Constant(((Operand)args.get(1)).getValue(), 4);
+        MicroOperand constant  = new Constant(args.get(1).getValue(), 4);
 
         Microinstruction repeat = new Repeat(mRegOp1);
         Microinstruction add = new MicroArithmetic(constant, mRegOp1, "ADD", 0);
@@ -4063,7 +4063,7 @@ public void make_RPT_p484_Instr(Machine machine) {
     public void make_RPTBLOCAL_p490_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // RPTBLOCAL pmad
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xProgramAddressOperand addressOp = (C55xProgramAddressOperand)args.get(0);
         long address = addressOp.getOffset();
         Microinstruction repeat = new Repeat(addressOp);
@@ -4072,7 +4072,7 @@ public void make_RPT_p484_Instr(Machine machine) {
 
     public void make_RPTB_p497_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xProgramAddressOperand addressOp = (C55xProgramAddressOperand)args.get(0);
         long address = addressOp.getOffset();
         Microinstruction repeat = new Repeat(addressOp);
@@ -4086,12 +4086,12 @@ public void make_RPT_p484_Instr(Machine machine) {
 public void make_RPTSUB_p503_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
     //RPTSUB CSR, k4
-    List args = this.getArgs();
-    Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);  
+    List<Operand> args = this.getArgs();
+    Register reg1 = args.get(0).getFirstReg(machine);  
     C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
 
-    MicroOperand constant  = new Constant(((Operand)args.get(1)).getValue(),4);
+    MicroOperand constant  = new Constant(args.get(1).getValue(),4);
 
     Microinstruction repeat = new Repeat(mRegOp1);
     Microinstruction sub = new MicroArithmetic(constant, mRegOp1, "SUB", 0);
@@ -4117,12 +4117,12 @@ public void make_RPTSUB_p503_Instr(Machine machine) {
         // SFTL ACx, Tx[, ACy]
         // e.g. SFTL AC2,T1,AC2
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         // XXX: TODO support CARRY, etc.
@@ -4136,11 +4136,11 @@ public void make_RPTSUB_p503_Instr(Machine machine) {
 public void make_SFTL_p511_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // SFTL ACx, #SHIFTW[, ACy]
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
-        MicroOperand constant  = new Constant(((Operand)args.get(1)).getValue(),6);
+        MicroOperand constant  = new Constant(args.get(1).getValue(),6);
         Microinstruction shift = new Shift(mRegOp1, constant, "LS",0);
         
         this.addMicroinstr(shift);
@@ -4151,7 +4151,7 @@ public void make_SFTL_p511_Instr(Machine machine) {
         }
         
         if (args.size() == 3){
-            Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+            Register reg2 = args.get(2).getFirstReg(machine);
             C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
             Microinstruction writeReg = new WriteReg(machine.getDataResult(0), mRegOp2);   
             this.addMicroinstr(writeReg);
@@ -4162,8 +4162,8 @@ public void make_SFTL_p511_Instr(Machine machine) {
     public void make_SFTL_p513_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SFTL dst, #1
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         MicroOperand constant  = new Constant(1, 1); // value, bitsize
@@ -4178,12 +4178,12 @@ public void make_SFTL_p511_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SFTS ACx, Tx[, ACy]
         // e.g. SFTS AC0,T0,AC1
-        List args = this.getArgs();
-        Register reg0 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg0 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp0 = new C55xMicroRegisterOperand(reg0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         // XXX: TODO support CARRY, etc.
@@ -4202,13 +4202,13 @@ public void make_SFTL_p511_Instr(Machine machine) {
     public void make_SFTS_p520_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SFTS ACx, #SHIFTW, [ACy]
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         if (args.size() == 2) { // SFTS ACx, #SHIFTW, kps quality code
 
             // XXX TODO CHECK IF THIS WORKS IN cifft32_t.dis
-            Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-            MicroOperand constant  = new Constant(((Operand)args.get(1)).getValue(),6);
+            Register reg1 = args.get(0).getFirstReg(machine);
+            MicroOperand constant  = new Constant(args.get(1).getValue(),6);
             C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
             Microinstruction shift = new Shift(mRegOp1, constant, "AS",0);
@@ -4218,9 +4218,9 @@ public void make_SFTL_p511_Instr(Machine machine) {
             this.addMicroinstr(writeReg);
         }
         else { // SFTS ACx, #SHIFTW, ACy
-            Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-            MicroOperand constant  = new Constant(((Operand)args.get(1)).getValue(),6);
-            Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+            Register reg1 = args.get(0).getFirstReg(machine);
+            MicroOperand constant  = new Constant(args.get(1).getValue(),6);
+            Register reg2 = args.get(2).getFirstReg(machine);
             C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
             C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
@@ -4241,11 +4241,11 @@ public void make_SFTL_p511_Instr(Machine machine) {
     public void make_SFTSC_p522_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SFTSC ACx, #SHIFTW[, ACy]
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        MicroOperand constant  = new Constant(((Operand)args.get(1)).getValue(), 6);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(0).getFirstReg(machine);
+        MicroOperand constant  = new Constant(args.get(1).getValue(), 6);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
@@ -4261,8 +4261,8 @@ public void make_SFTL_p511_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         
         // SFTL dst, #-1
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
         MicroOperand constant  = new Constant(-1, 1); // value, bitsize
@@ -4285,13 +4285,13 @@ public void make_SFTL_p511_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SQAM[R] [T3 = ]Smem, [ACx,] ACy
         // ACy = ACx + (Smem * Smem)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -4326,10 +4326,10 @@ public void make_SFTL_p511_Instr(Machine machine) {
     public void make_SQRM_p536_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SQRM[R] [T3 = ]Smem, ACx
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -4358,13 +4358,13 @@ public void make_SFTL_p511_Instr(Machine machine) {
 
         // WORKS?: used in dsplib sqrtv
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Smem = (C55xMemoryAccessOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction computeSmem = new C55xComputeSmem(Smem, 0);
@@ -4396,14 +4396,14 @@ public void make_SFTL_p511_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side        
         //SUB dual(Lmem), [ACx,] ACy - not completed
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
 
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
@@ -4434,10 +4434,10 @@ public void make_SFTL_p511_Instr(Machine machine) {
     public void make_SUB_p551_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SUB [src,] dst
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         if (args.size() == 1) {
-            Register dst = ((Operand)args.get(0)).getFirstReg(machine);
+            Register dst = args.get(0).getFirstReg(machine);
             C55xMicroRegisterOperand dstOp = new C55xMicroRegisterOperand(dst);
 
             Microinstruction sub = new MicroArithmetic(dstOp, dstOp, "SUB", 0);
@@ -4447,9 +4447,9 @@ public void make_SFTL_p511_Instr(Machine machine) {
         }
 
         if (args.size() == 2) {
-                 Register src = ((Operand)args.get(0)).getFirstReg(machine);
+                 Register src = args.get(0).getFirstReg(machine);
             C55xMicroRegisterOperand srcOp = new C55xMicroRegisterOperand(src);
-            Register dst = ((Operand)args.get(1)).getFirstReg(machine);
+            Register dst = args.get(1).getFirstReg(machine);
             C55xMicroRegisterOperand dstOp = new C55xMicroRegisterOperand(dst);
         
             Microinstruction sub = new MicroArithmetic(srcOp, dstOp, "SUB", 0);
@@ -4464,11 +4464,11 @@ public void make_SUB_p552_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SUB K16, [src,] dst
         
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
         
         if (args.size() == 2){
-            Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+            Register reg1 = args.get(1).getFirstReg(machine);
             C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
             Microinstruction sub = new MicroArithmetic(constant, mRegOp1, "SUB", 0);
@@ -4479,9 +4479,9 @@ public void make_SUB_p552_Instr(Machine machine) {
         
         if (args.size() == 3){
      
-            Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+            Register reg1 = args.get(1).getFirstReg(machine);
             C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-            Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+            Register reg2 = args.get(2).getFirstReg(machine);
             C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
             Microinstruction sub      = new MicroArithmetic(constant, mRegOp1, "SUB", 0);
@@ -4497,14 +4497,14 @@ public void make_SUB_p552_Instr(Machine machine) {
     public void make_SUB_p556_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // SUB Smem, [src], dst
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -4532,9 +4532,9 @@ public void make_SUB_p552_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
         // SUB ACx << #SHIFTW, ACy
         // ACy = ACy – (ACx << #SHIFTW)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         Microinstruction shift = new C55xShift(c55xShiftOp,
@@ -4579,14 +4579,14 @@ public void make_SUB_p552_Instr(Machine machine) {
     public void make_SUB_p569_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // SUB uns[(Smem)], ACx, ACy -implement uns properly
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
         
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         
@@ -4605,15 +4605,15 @@ public void make_SUB_p552_Instr(Machine machine) {
         // e.g. SUB *AR2+ << #1,AC0,AC0
         // ACy = ACx – (Smem << #SHIFTW)
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShift = (C55xShiftOperand)args.get(0);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)c55xShift.getOp1();
         long c55xImmValue = c55xShift.getOp2().getValue();
         Constant shiftVal = new Constant(c55xImmValue, 6);
 
-        Register ACx = ((Operand)args.get(1)).getFirstReg(machine);
+        Register ACx = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACx = new C55xMicroRegisterOperand(ACx);
-        Register ACy = ((Operand)args.get(2)).getFirstReg(machine);
+        Register ACy = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOpACy = new C55xMicroRegisterOperand(ACy);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -4640,12 +4640,12 @@ public void make_SUB_p552_Instr(Machine machine) {
 
         // XXX TODO CHECK IF THIS WORKS IN cifft32_t.dis
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
 
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -4663,13 +4663,13 @@ public void make_SUB_p552_Instr(Machine machine) {
 public void make_SUB_p573_Instr(Machine machine) {
         checkImplicitParallelism(); // to be on safe side
          // SUB ACx, dbl(Lmem), ACy
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
 
         C55xMemoryAccessOperand lMem = (C55xMemoryAccessOperand)args.get(1);
 
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         Microinstruction lMemAccess = new C55xComputeSmem(lMem, 0);
@@ -4693,10 +4693,10 @@ public void make_SUB_p573_Instr(Machine machine) {
 
         // WORKS: used in dsplib sub
 
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xMemoryAccessOperand Xmem = (C55xMemoryAccessOperand)args.get(0);
         C55xMemoryAccessOperand Ymem = (C55xMemoryAccessOperand)args.get(1);
-        Register reg = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp = new C55xMicroRegisterOperand(reg);
 
         Microinstruction xmemAccess = new C55xComputeSmem(Xmem, 0);
@@ -4741,12 +4741,12 @@ public void make_SUB_p573_Instr(Machine machine) {
     public void make_SUBADD_p578_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // SUBADD Tx, Smem, ACx DOES NOT WORK -pgm
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2); 
 
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
@@ -4763,12 +4763,12 @@ public void make_SUB_p573_Instr(Machine machine) {
         // SUBC @#00h,AC0,AC0
         // SUBC Smem, [ACx,] ACy
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         // XXX TODO: CARRY??? ETC
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
         Microinstruction readMem = new ReadMem(machine.getAddressResult(0),
@@ -4791,10 +4791,10 @@ public void make_SUB_p573_Instr(Machine machine) {
         // e.g. SWAP T0,T2
         // The content of T0 is moved to T2 and the content of T2 is moved to T0
         // XXX TODO test in cifft32_t.dis
-        List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
+        List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
 
         MicroOperand zero = new Constant(0, 64);
@@ -4826,7 +4826,7 @@ public void make_SUB_p573_Instr(Machine machine) {
     public void make_XCC_p600_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // XCC [label], cond
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xConditionFieldOperand condOp = (C55xConditionFieldOperand)args.get(0);
         Microinstruction cond = new C55xCondition(condOp);
         Microinstruction partial = new C55xPartialExec();
@@ -4837,7 +4837,7 @@ public void make_SUB_p573_Instr(Machine machine) {
     
     public void make_XCCPART_p603_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xConditionFieldOperand condOp = (C55xConditionFieldOperand)args.get(0);
         Microinstruction cond = new C55xCondition(condOp);
         Microinstruction partial = new C55xPartialExec();
@@ -4851,9 +4851,9 @@ public void make_SUB_p573_Instr(Machine machine) {
     public void make_XOR_p607_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side
         // XOR src,dst
-            List args = this.getArgs();
-        Register reg1 = ((Operand)args.get(0)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(1)).getFirstReg(machine);
+            List<Operand> args = this.getArgs();
+        Register reg1 = args.get(0).getFirstReg(machine);
+        Register reg2 = args.get(1).getFirstReg(machine);
         
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -4873,11 +4873,11 @@ public void make_SUB_p573_Instr(Machine machine) {
         // XOR Smem, src, dst -pgm
         checkImplicitParallelism(); // to be on safe side
         
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
                 
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(0);
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
 
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
@@ -4905,12 +4905,12 @@ public void make_SUB_p573_Instr(Machine machine) {
         // accumulator (ACx) content and a 16-bit unsigned constant, k16, shifted left by
         // 16 bits:
         // ACy = ACx ^ (k16 <<< #16)
-        List args = this.getArgs();
+        List<Operand> args = this.getArgs();
         C55xShiftOperand c55xShiftOp = (C55xShiftOperand)args.get(0);
 
-        Register reg1 = ((Operand)args.get(1)).getFirstReg(machine);
+        Register reg1 = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp1 = new C55xMicroRegisterOperand(reg1);
-        Register reg2 = ((Operand)args.get(2)).getFirstReg(machine);
+        Register reg2 = args.get(2).getFirstReg(machine);
         C55xMicroRegisterOperand mRegOp2 = new C55xMicroRegisterOperand(reg2);
         
         Microinstruction shift = new C55xShift(c55xShiftOp, 0, 0, 0);
@@ -4930,8 +4930,8 @@ public void make_SUB_p573_Instr(Machine machine) {
     public void make_XOR_p614_Instr(Machine machine) { 
         checkImplicitParallelism(); // to be on safe side        
         // XOR k16, Smem
-        List args = this.getArgs();
-        MicroOperand constant = new Constant(((Operand)args.get(0)).getValue(),16);
+        List<Operand> args = this.getArgs();
+        MicroOperand constant = new Constant(args.get(0).getValue(),16);
         C55xMemoryAccessOperand c55xSmem = (C55xMemoryAccessOperand)args.get(1);
         Microinstruction c55xSmemAccess = new C55xComputeSmem(c55xSmem, 0);
         Microinstruction readMem = new ReadMem(machine.getAddressResult(0),

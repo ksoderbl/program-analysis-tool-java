@@ -15,7 +15,7 @@ import machine.Machine;
 public class C55xInstruction extends Instruction {
 
     /** the microcode for a parallel execution of an instruction */
-    private List parallelMicroinstrs;
+    private List<Microinstruction> parallelMicroinstrs;
 
 
 
@@ -58,10 +58,10 @@ public class C55xInstruction extends Instruction {
         parallelMicroinstrs.add(mi);
     }
     
-    public List getParallelMicroinstrs(Machine machine) {
+    public List<Microinstruction> getParallelMicroinstrs(Machine machine) {
         //System.out.println("getting parallel microinstructions for " + this);
         if (parallelMicroinstrs == null) {
-            parallelMicroinstrs = new ArrayList();
+            parallelMicroinstrs = new ArrayList<Microinstruction>();
             //System.out.println("  need reschedule for " + this);
             this.reschedule(machine);
         }
@@ -70,28 +70,28 @@ public class C55xInstruction extends Instruction {
     
     
     private void reschedule(Machine machine){
-        ArrayList operations;
+        ArrayList<Operation> operations;
         
-        Iterator iter;
+        Iterator<Microinstruction> iter;
         operations = this.getOperations();
         //System.out.println("  operations = " + operations);
 
         if ((operations.get(0) != null) && (operations.get(2) != null)){
-            Operation op1 = (Operation)operations.get(0);
-            Operation op2 = (Operation)operations.get(2);
+            Operation op1 = operations.get(0);
+            Operation op2 = operations.get(2);
             //System.out.println("  op1 = " + op1);
             //System.out.println("  op2 = " + op2);
             machine.setMachineResultOffset(0);
-            ArrayList microinstrs1 = (ArrayList)op1.getMicroinstrs(machine);
+            List<Microinstruction> microinstrs1 = op1.getMicroinstrs(machine);
             machine.setMachineResultOffset(10);
-            ArrayList microinstrs2 = (ArrayList)op2.getMicroinstrs(machine);
-            ArrayList rescheduledInstrs = new ArrayList();
+            List<Microinstruction> microinstrs2 = op2.getMicroinstrs(machine);
+            List<Microinstruction> rescheduledInstrs = new ArrayList<Microinstruction>();
 
 
             // microinstructions from instruction 1
             iter = microinstrs1.iterator();
             while (iter.hasNext()){
-                Microinstruction mi = (Microinstruction)iter.next();
+                Microinstruction mi = iter.next();
                 mi.setResultOffset(0); // kps hack, assumes <= 10 temporaries
                 if (mi.getName().equals("WriteReg")){
                    // mi.setMicroMemNum(2);
@@ -104,7 +104,7 @@ public class C55xInstruction extends Instruction {
             // microinstructions from instruction 2
             iter = microinstrs2.iterator();
             while (iter.hasNext()){
-                Microinstruction mi = (Microinstruction)iter.next();
+                Microinstruction mi = iter.next();
                 mi.setResultOffset(10); // kps hack, assumes <= 10 temporaries
                 //mi.setMicroMemNum(2);
                        this.addParallelMicroinstr(mi);
@@ -113,7 +113,7 @@ public class C55xInstruction extends Instruction {
             
             iter = rescheduledInstrs.iterator();
             while (iter.hasNext()){
-                Microinstruction mi = (Microinstruction)iter.next();
+                Microinstruction mi = iter.next();
                 mi.setResultOffset(0); // kps hack, assumes <= 10 temporaries
                 //mi.setResultOffset(20);
                 this.addParallelMicroinstr(mi);
@@ -124,20 +124,20 @@ public class C55xInstruction extends Instruction {
            
         // single instruction, just copy to new array
         else if (true){
-            Operation op1 = (Operation)operations.get(0);
+            Operation op1 = operations.get(0);
             machine.setMachineResultOffset(0);
-            ArrayList microinstrs = (ArrayList)op1.getMicroinstrs(machine);
+            List<Microinstruction> microinstrs = op1.getMicroinstrs(machine);
             iter = microinstrs.iterator();
             while (iter.hasNext()){
-                this.addParallelMicroinstr((Microinstruction)iter.next());
+                this.addParallelMicroinstr(iter.next());
             }
             
             
         }
         
-        else {
-            System.out.println("No parallel version available");
-        }
+        // else {
+        //     System.out.println("No parallel version available");
+        // }
         
         
     }
