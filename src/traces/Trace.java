@@ -66,7 +66,7 @@ public class Trace {
     public BasicBlock getHeader(){
         if (basicBlocks.size() == 0)
             return null;
-        else return (BasicBlock)basicBlocks.get(0);
+        else return basicBlocks.get(0);
     }
 
 
@@ -98,9 +98,9 @@ public class Trace {
 
 
     public void computeSize(){
-        Iterator iter = basicBlocks.listIterator();
+        Iterator<BasicBlock> iter = basicBlocks.listIterator();
         while (iter.hasNext()){
-            BasicBlock bb = (BasicBlock)iter.next();
+            BasicBlock bb = iter.next();
             
         }
         

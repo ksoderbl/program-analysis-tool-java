@@ -76,8 +76,8 @@ public class Bucket{
         e = strings.elements();
 
         while (e.hasMoreElements()){
-         String key = (String)e.nextElement();
-         bucket.remove(key);
+            String key = e.nextElement();
+            bucket.remove(key);
         }
     }
 

@@ -353,7 +353,7 @@ public class Program {
      * @return the named procedure
      */
     public Procedure getProcedure(Long addr) {
-        Procedure proc = (Procedure) procedures.get(addr);
+        Procedure proc = procedures.get(addr);
         if (proc == null) {
             //Main.warn("getProcedure: Could not find proc at " + addr);
         }

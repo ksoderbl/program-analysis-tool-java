@@ -5,6 +5,8 @@
 package cfg;
 
 import graph.Graph;
+import graph.Node;
+import graph.Edge;
 import java.util.Iterator;
 import java.util.List;
 import instr.Instruction;
@@ -91,17 +93,17 @@ public class CFG extends Graph {
             + "\n\n" + getNodes().size() + " nodes:\n";
 
         // add all nodes to the result string
-        Iterator iter = getNodes().iterator();
+        Iterator<Node> nodeIter = getNodes().iterator();
 
-        while (iter.hasNext()) {
-            CFGNode node = (CFGNode) iter.next();
+        while (nodeIter.hasNext()) {
+            CFGNode node = (CFGNode)nodeIter.next();
 
             result = result + node.toString() + "\n";
         }
         result = result + "\n" + getEdges().size() + " edges:\n";
 
         // add all edges to the result string
-        iter = getEdges().iterator();
+        Iterator<Edge> iter = getEdges().iterator();
         while (iter.hasNext()) {
             CFGEdge edge = (CFGEdge) iter.next();
 

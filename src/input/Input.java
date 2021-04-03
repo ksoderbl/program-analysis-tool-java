@@ -127,20 +127,19 @@ public abstract class Input {
             if (i != null) {
                 // If we get the addresses from the input, we use those.
                 // Otherwise, we start from address 0.
-                if (i.getAddr().equals(new Long(0)))
+                if (i.getAddr().equals(0L))
                     i.setAddr(ilc);
                 else
                     ilc = i.getAddr();
 
-                if (true) {
-                    // kps - name CFG nodes as "n" + a number
-                    node = cfg.createNode("n" + cfgNodeNum, i);
-                    cfgNodeNum++;
-                }
-                else {
-                    // kps - old code
-                    node = cfg.createNode(ilc.toString(), i);
-                }
+                // kps - name CFG nodes as "n" + a number
+                node = cfg.createNode("n" + cfgNodeNum, i);
+                cfgNodeNum++;
+
+                // else {
+                //     // kps - old code
+                //     node = cfg.createNode(ilc.toString(), i);
+                // }
 
                 program.addAddress(ilc, node);
 
@@ -158,14 +157,14 @@ public abstract class Input {
                 // ok we've handled these labels, forget about them
                 tmpLabels.clear();
 
-                ilc = new Long(ilc.longValue() + i.getSize());
+                ilc = ilc.longValue() + i.getSize();
 
                 /*
                  * Possibly create a cfg edge.
                  */
                 if (prevnode != null) {
                     // previous instruction
-                    Instruction pi = (Instruction)prevnode.getInstruction();
+                    Instruction pi = prevnode.getInstruction();
                     
                     if (pi.isBranch()) {
                         Instruction b = pi;
