@@ -1397,9 +1397,9 @@ public class C55xOperation extends Operation
         List<Operand> args = this.getArgs();
 
         C55xBaddrOperand baddrOp = (C55xBaddrOperand)args.get(0);
-        C55xRegisterOperand baddrReg = (C55xRegisterOperand)baddrOp.getRegister();        
-        C55xImmediateOperand baddrImm = (C55xImmediateOperand)baddrOp.getImmediate();
-        C55xMemoryAccessOperand baddrMa = (C55xMemoryAccessOperand)baddrOp.getMemoryAccess();
+        C55xRegisterOperand baddrReg = baddrOp.getRegister();        
+        C55xImmediateOperand baddrImm = baddrOp.getImmediate();
+        C55xMemoryAccessOperand baddrMa = baddrOp.getMemoryAccess();
 
         Register src = args.get(1).getFirstReg(machine);
         C55xMicroRegisterOperand mSrc = new C55xMicroRegisterOperand(src);

@@ -75,9 +75,9 @@ public class BasicBlockOutput extends Output {
             }
             // output basic blocks of the program
 
-            Iterator iter = basicBlocks.getNodes().iterator();
-            while (iter.hasNext()) {
-                BasicBlock node = (BasicBlock) iter.next();
+            Iterator<Node> nodeIter = basicBlocks.getNodes().iterator();
+            while (nodeIter.hasNext()) {
+                BasicBlock node = (BasicBlock) nodeIter.next();
 
                 String type;
                 switch (node.getType()) {
@@ -128,10 +128,10 @@ public class BasicBlockOutput extends Output {
             fw.write("}\n");
         */
             // output edges between basic blocks
-            iter = program.getBasicBlocks().getEdges().iterator();
+            Iterator<Edge> edgeIter = program.getBasicBlocks().getEdges().iterator();
             int m = 0;
-            while (iter.hasNext()) {
-                BasicBlockEdge edge = (BasicBlockEdge) iter.next();
+            while (edgeIter.hasNext()) {
+                BasicBlockEdge edge = (BasicBlockEdge) edgeIter.next();
                 if (edge == null) {
                     Main.warn("null edge between basic blocks");
                 } else {
@@ -161,7 +161,7 @@ public class BasicBlockOutput extends Output {
                         String edgeString = "  " + edge.getStart().getName() +
                             " -> " + edge.getEnd().getName();
                         if (simAnalysis) edgeString = edgeString + " [label="+"\" "
-                                             +((BasicBlockEdge)edge).getExecutions() 
+                                             +edge.getExecutions() 
                                              +"\""+ type + "]";
                         edgeString = edgeString + ";\n";
                         

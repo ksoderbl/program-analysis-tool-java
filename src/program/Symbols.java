@@ -15,7 +15,12 @@ import java.util.Iterator;
  * @author Mikko Reinikainen
  */
 
-public class Symbols extends HashMap {
+public class Symbols extends HashMap<Object, Object> {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * @return contents of the symbol table as a String
@@ -23,7 +28,7 @@ public class Symbols extends HashMap {
     public String toString() {
         String result = "(" + size() + " elements):\n";
 
-        Iterator iterator = keySet().iterator();
+        Iterator<Object> iterator = keySet().iterator();
 
         while (iterator.hasNext()) {
             Object o = iterator.next();

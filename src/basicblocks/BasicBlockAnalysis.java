@@ -67,10 +67,10 @@ public class BasicBlockAnalysis implements Analysis {
         analyzeBasicBlock(basicBlocks, firstNode);
 
         // add edges between basic blocks
-        Iterator iter = cfg.getEdges().iterator();
+        Iterator<Edge> edgeIter = cfg.getEdges().iterator();
 
-        while (iter.hasNext()) {
-            CFGEdge edge = (CFGEdge) iter.next();
+        while (edgeIter.hasNext()) {
+            CFGEdge edge = (CFGEdge) edgeIter.next();
             BasicBlock start = getBasicBlock(edge.getStart());
             BasicBlock end = getBasicBlock(edge.getEnd());
             int type = edge.getType();
@@ -92,9 +92,9 @@ public class BasicBlockAnalysis implements Analysis {
         }
 
         // add labels to basic blocks
-        iter = program.getLabels().keySet().iterator();
-        while (iter.hasNext()) {
-            String label = (String) iter.next();
+        Iterator<Object> objIter = program.getLabels().keySet().iterator();
+        while (objIter.hasNext()) {
+            String label = (String) objIter.next();
             CFGNode node = program.getNode(label);
             BasicBlock block = getBasicBlock(node);
 
@@ -110,9 +110,9 @@ public class BasicBlockAnalysis implements Analysis {
         }
 
         // mark procedure entries and exits
-        iter = program.getProcedures().values().iterator();
-        while (iter.hasNext()) {
-            Procedure proc = (Procedure) iter.next();
+        Iterator<Procedure> procIter = program.getProcedures().values().iterator();
+        while (procIter.hasNext()) {
+            Procedure proc = procIter.next();
             BasicBlock block = getBasicBlock(proc.getEntry());
 
             if (block == null) {
@@ -123,9 +123,9 @@ public class BasicBlockAnalysis implements Analysis {
                               PROCEDURE_ENTRY);
             }
 
-            Iterator exits = proc.getExits().iterator();
+            Iterator<CFGNode> exits = proc.getExits().iterator();
             while (exits.hasNext()) {
-                CFGNode exitNode = (CFGNode) exits.next();
+                CFGNode exitNode = exits.next();
 
                 block = getBasicBlock(exitNode);
                 if (block == null) {
@@ -163,7 +163,7 @@ public class BasicBlockAnalysis implements Analysis {
         addNode(node, block);
 
         // list of edges from this node
-        List outgoing = node.getOutgoingEdges();
+        List<Edge> outgoing = node.getOutgoingEdges();
 
         // calculate contents of the basic block
         while (outgoing.size() == 1) {

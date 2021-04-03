@@ -786,7 +786,7 @@ public class C55xMachine extends Machine {
     // /cvs/bib/ti/spru374g.pdf
     //
 
-    public C55xOperation make_AADD_p95_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AADD_p95_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD,
                                                95);
@@ -794,7 +794,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AADD_p97_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AADD_p97_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD,
                                                97);
@@ -802,7 +802,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AADD_p98_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AADD_p98_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineAD,
                                                98);
@@ -813,7 +813,7 @@ public class C55xMachine extends Machine {
     //
     // ABDST, p.99
     //
-    public C55xOperation make_ABDST_p99_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ABDST_p99_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                99);
@@ -824,7 +824,7 @@ public class C55xMachine extends Machine {
     //
     // ABS, p. 101
     //
-    public C55xOperation make_ABS_p101_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ABS_p101_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                101);
@@ -835,7 +835,7 @@ public class C55xMachine extends Machine {
     //
     // ADD
     //
-    public C55xOperation make_ADD_p106_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p106_Instr(String opcode, List<Operand> args, String syntax) {
         // ADD [src],dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
@@ -844,7 +844,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p107_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p107_Instr(String opcode, List<Operand> args, String syntax) {
         // ADD k4, dst
         // ADD K16,[src],dst p.108
         // TODO
@@ -855,7 +855,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p110_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p110_Instr(String opcode, List<Operand> args, String syntax) {
         // ADD Smem, [src], dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
@@ -864,7 +864,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p112_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p112_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                112);
@@ -872,7 +872,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p113_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p113_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                113);
@@ -880,7 +880,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p114_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p114_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                114);
@@ -888,7 +888,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p115_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p115_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                115);
@@ -896,7 +896,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p116_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p116_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                116);
@@ -904,7 +904,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p118_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p118_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                118);
@@ -912,7 +912,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p119_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p119_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                119);
@@ -920,7 +920,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p120_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p120_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                120);
@@ -928,7 +928,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p121_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p121_Instr(String opcode, List<Operand> args, String syntax) {
         
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -937,7 +937,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
     
-    public C55xOperation make_ADD_p122_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p122_Instr(String opcode, List<Operand> args, String syntax) {
         // add dbl(Lmem), [ACx,] ACy
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
@@ -946,7 +946,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p123_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p123_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                123);
@@ -954,7 +954,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p124_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p124_Instr(String opcode, List<Operand> args, String syntax) {
         //ADD K16, Smem
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -963,7 +963,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p126_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p126_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                126);
@@ -971,7 +971,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADD_p128_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADD_p128_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                128);
@@ -999,7 +999,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADDSUB_p133_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADDSUB_p133_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                133);
@@ -1007,7 +1007,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADDSUB_p135_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADDSUB_p135_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                135);
@@ -1016,7 +1016,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_ADDSUBCC_p137_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADDSUBCC_p137_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                137);
@@ -1024,7 +1024,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADDSUBCC_p139_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADDSUBCC_p139_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                139);
@@ -1033,7 +1033,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_ADDSUB2CC_p141_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADDSUB2CC_p141_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                141);
@@ -1041,7 +1041,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ADDV_p144_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ADDV_p144_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                144);
@@ -1049,7 +1049,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AMAR_p146_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AMAR_p146_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineAD,
                                                146);
@@ -1057,7 +1057,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AMAR_p148_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AMAR_p148_Instr(String opcode, List<Operand> args, String syntax) {
         // AMAR Smem, XAdst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD,
@@ -1066,7 +1066,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AMAR_p149_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AMAR_p149_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                149);
@@ -1146,7 +1146,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AMOV_p159_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AMOV_p159_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 6, 1, 0, 0, PipelineAD, // TODO, is 6 right????
                                                159);
@@ -1154,7 +1154,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AMOV_p161_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AMOV_p161_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD,
                                                161);
@@ -1162,7 +1162,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AMOV_p162_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AMOV_p162_Instr(String opcode, List<Operand> args, String syntax) {
         // TODO: P8 or D16 here
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD, // size 4 for D16
@@ -1171,7 +1171,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p165_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p165_Instr(String opcode, List<Operand> args, String syntax) {
         // AND src, dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
@@ -1180,7 +1180,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p166_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p166_Instr(String opcode, List<Operand> args, String syntax) {
         // AND k8/k16, src, dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX, // TODO
@@ -1189,7 +1189,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p168_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p168_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                168);
@@ -1197,7 +1197,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p169_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p169_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                169);
@@ -1205,7 +1205,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p170_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p170_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                170);
@@ -1213,7 +1213,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p171_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p171_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                171);
@@ -1221,7 +1221,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_AND_p172_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_AND_p172_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                172);
@@ -1229,7 +1229,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ASUB_p174_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ASUB_p174_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD,
                                                174);
@@ -1237,7 +1237,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ASUB_p176_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ASUB_p176_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineAD,
                                                176);
@@ -1245,7 +1245,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BAND_p181_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BAND_p181_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                181);
@@ -1253,7 +1253,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCLR_p192_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCLR_p192_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                192);
@@ -1261,7 +1261,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCLR_p193_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCLR_p193_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                193);
@@ -1269,7 +1269,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCLR_p194_No1234_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCLR_p194_No1234_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX, // TODO: ST3_55 in 5 cycles
                                                194);
@@ -1277,7 +1277,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCLR_p194_No5_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCLR_p194_No5_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX, // TODO: ST3_55 in 5 cycles
                                                1945);
@@ -1286,7 +1286,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCNT_p197_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCNT_p197_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                197);
@@ -1294,7 +1294,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BFXPA_p198_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BFXPA_p198_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                198);
@@ -1302,7 +1302,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BFXTR_p199_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BFXTR_p199_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                199);
@@ -1310,7 +1310,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BNOT_p200_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BNOT_p200_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                200);
@@ -1318,7 +1318,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BNOT_p201_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BNOT_p201_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                201);
@@ -1326,7 +1326,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BSET_p202_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BSET_p202_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                202);
@@ -1334,7 +1334,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BSET_p203_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BSET_p203_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                203);
@@ -1342,7 +1342,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BSET_p204_No1234_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BSET_p204_No1234_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX, // TODO 5 cycles
                                                204);
@@ -1350,7 +1350,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BSET_p204_No5_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BSET_p204_No5_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX, // TODO 5 cycles
                                                2045);
@@ -1358,7 +1358,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTST_p207_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTST_p207_Instr(String opcode, List<Operand> args, String syntax) {
         // BTST Baddr, src, TC1
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
@@ -1367,7 +1367,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTST_p210_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTST_p210_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                210);
@@ -1375,7 +1375,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTST_p211_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTST_p211_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                211);
@@ -1383,7 +1383,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTSTCLR_p212_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTSTCLR_p212_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                212);
@@ -1391,7 +1391,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTSTNOT_p213_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTSTNOT_p213_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                213);
@@ -1399,7 +1399,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTSTP_p214_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTSTP_p214_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                214);
@@ -1407,7 +1407,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BTSTSET_p216_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BTSTSET_p216_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                216);
@@ -1415,7 +1415,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_CMP_p227_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CMP_p227_Instr(String opcode, List<Operand> args, String syntax) {
         // CMP Smem == K16, TC1
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1424,7 +1424,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_CMP_p229_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CMP_p229_Instr(String opcode, List<Operand> args, String syntax) {
         // CMP src RELOP dst, TC1
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
@@ -1433,7 +1433,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_CMPU_p229_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CMPU_p229_Instr(String opcode, List<Operand> args, String syntax) {
         // CMPU src RELOP dst, TC1 , for 64 bit signed longs, this is same as CMP.
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX, // TODO: wtf????
@@ -1442,7 +1442,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_CMPAND_p231_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CMPAND_p231_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                231);
@@ -1450,7 +1450,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_CMPOR_p236_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CMPOR_p236_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                236);
@@ -1458,7 +1458,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_DELAY_p242_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_DELAY_p242_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                242);
@@ -1466,7 +1466,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_EXP_p243_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_EXP_p243_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                243);
@@ -1474,7 +1474,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_FIRSADD_p244_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_FIRSADD_p244_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                244);
@@ -1482,7 +1482,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_FIRSSUB_p246_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_FIRSSUB_p246_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                246);
@@ -1490,7 +1490,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_IDLE_p248_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_IDLE_p248_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineD, // TODO: cycles = ?
                                                248);
@@ -1498,7 +1498,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_LMS_p251_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_LMS_p251_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                251);
@@ -1506,7 +1506,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MAC_p256_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MAC_p256_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                256);
@@ -1514,7 +1514,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MAC_p257_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MAC_p257_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                257);
@@ -1522,7 +1522,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACK_p258_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACK_p258_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: K8/K16 p.259
                                                258);
@@ -1530,7 +1530,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACM_p260_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACM_p260_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                260);
@@ -1538,7 +1538,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACM_p262_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACM_p262_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                262);
@@ -1546,7 +1546,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACM_p263_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACM_p263_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                263);
@@ -1554,7 +1554,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACMK_p264_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACMK_p264_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                264);
@@ -1562,7 +1562,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACM_p265_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACM_p265_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                265);
@@ -1570,7 +1570,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACM_p267_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACM_p267_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                267);
@@ -1578,7 +1578,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MACMZ_p269_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MACMZ_p269_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                269);
@@ -1730,7 +1730,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MAS_p288_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MAS_p288_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                288);
@@ -1738,7 +1738,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MASM_p290_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MASM_p290_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                290);
@@ -1746,7 +1746,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MASM_p292_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MASM_p292_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                292);
@@ -1754,7 +1754,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MASM_p293_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MASM_p293_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                293);
@@ -1762,7 +1762,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MASM_p294_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MASM_p294_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                294);
@@ -1878,7 +1878,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MAX_p311_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MAX_p311_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                311);
@@ -1887,7 +1887,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_MAXDIFF_p315_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MAXDIFF_p315_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                315);
@@ -1895,7 +1895,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_DMAXDIFF_p318_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_DMAXDIFF_p318_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                318);
@@ -1903,7 +1903,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MIN_p320_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MIN_p320_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                320);
@@ -1911,7 +1911,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MINDIFF_p324_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MINDIFF_p324_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                324);
@@ -1919,7 +1919,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_DMINDIFF_p327_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_DMINDIFF_p327_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                327);
@@ -1927,7 +1927,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MMAP_p329_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MMAP_p329_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 1, 1, 0, 0, PipelineD,
                                                329);
@@ -1935,7 +1935,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p332_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p332_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                332);
@@ -1943,7 +1943,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p333_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p333_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                333);
@@ -1951,7 +1951,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p334_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p334_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                334);
@@ -1959,7 +1959,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p335_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p335_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                335);
@@ -1967,7 +1967,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p336_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p336_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                336);
@@ -1975,7 +1975,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p337_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p337_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                337);
@@ -1983,7 +1983,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p338_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p338_Instr(String opcode, List<Operand> args, String syntax) {
         // MOV[40] dbl(Lmem), ACx
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
@@ -1992,7 +1992,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV40_p338_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV40_p338_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                33840);
@@ -2000,7 +2000,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p339_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p339_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                339);
@@ -2008,7 +2008,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p341_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p341_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                341);
@@ -2016,7 +2016,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p342_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p342_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                342);
@@ -2024,7 +2024,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p344_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p344_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                344);
@@ -2032,7 +2032,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p345_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p345_Instr(String opcode, List<Operand> args, String syntax) {
         // MOV K16 << #SHFT, ACx
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -2041,7 +2041,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p347_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p347_Instr(String opcode, List<Operand> args, String syntax) {
         // MOV Smem,dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
@@ -2050,7 +2050,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p348_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p348_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                348);
@@ -2058,7 +2058,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p350_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p350_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                350);
@@ -2066,7 +2066,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p353_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p353_Instr(String opcode, List<Operand> args, String syntax) {
         // MOV k4,dst /-k4,dst / k16,dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: k4/K16
@@ -2075,7 +2075,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p356_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p356_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                356);
@@ -2083,7 +2083,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p359_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p359_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD, // TODO k12, K16 etc.
                                                359);
@@ -2091,7 +2091,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p360_k7_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p360_k7_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD,
                                                36007);
@@ -2099,7 +2099,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p360_k9_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p360_k9_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD,
                                                36009);
@@ -2107,7 +2107,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p360_k12_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p360_k12_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD,
                                                36012);
@@ -2115,7 +2115,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p360_k16_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p360_k16_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineAD,
                                                36016);
@@ -2123,7 +2123,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p362_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p362_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                362);
@@ -2131,7 +2131,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p363_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p363_Instr(String opcode, List<Operand> args, String syntax) {
         // MOV [k8/k16, Smem]
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: K8/K16
@@ -2140,7 +2140,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p364_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p364_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                364);
@@ -2148,7 +2148,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p365_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p365_Instr(String opcode, List<Operand> args, String syntax) {
         // MOV src,dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
@@ -2157,7 +2157,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p367_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p367_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                367);
@@ -2165,7 +2165,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p368_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p368_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                368);
@@ -2173,7 +2173,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p370_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p370_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                370);
@@ -2181,7 +2181,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p372_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p372_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                372);
@@ -2189,7 +2189,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p374_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p374_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                374);
@@ -2197,7 +2197,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p375_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p375_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                375);
@@ -2205,7 +2205,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p376_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p376_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                376);
@@ -2213,7 +2213,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p377_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p377_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                377);
@@ -2221,7 +2221,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p378_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p378_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                378);
@@ -2229,7 +2229,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p379_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p379_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                379);
@@ -2238,7 +2238,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p382_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p382_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                382);
@@ -2246,7 +2246,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p383_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p383_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                383);
@@ -2254,7 +2254,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p384_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p384_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                384);
@@ -2262,7 +2262,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p385_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p385_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                385);
@@ -2270,7 +2270,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p386_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p386_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                386);
@@ -2278,7 +2278,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p387_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p387_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                387);
@@ -2286,7 +2286,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p388_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p388_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                388);
@@ -2294,7 +2294,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p389_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p389_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                389);
@@ -2302,7 +2302,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p391_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p391_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                391);
@@ -2310,7 +2310,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p393_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p393_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                393);
@@ -2318,7 +2318,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p395_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p395_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                395);
@@ -2326,7 +2326,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p396_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p396_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                396);
@@ -2334,7 +2334,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p398_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p398_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                398);
@@ -2342,7 +2342,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p399_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p399_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                399);
@@ -2350,7 +2350,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p401_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p401_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                401);
@@ -2358,7 +2358,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p402_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p402_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                402);
@@ -2366,7 +2366,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p404_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p404_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                404);
@@ -2374,7 +2374,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p405_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p405_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                405);
@@ -2382,7 +2382,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p406_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p406_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                406);
@@ -2390,7 +2390,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p407_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p407_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                407);
@@ -2398,7 +2398,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p408_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p408_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                408);
@@ -2406,7 +2406,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p412_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p412_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                412);
@@ -2432,7 +2432,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MPY_p417_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPY_p417_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                417);
@@ -2440,7 +2440,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MPY_p418_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPY_p418_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                418);
@@ -2448,7 +2448,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MPYK_p420_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPYK_p420_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                420);
@@ -2456,7 +2456,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MPYM_p421_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPYM_p421_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                421);
@@ -2464,7 +2464,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MPYM_p423_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPYM_p423_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                423);
@@ -2474,7 +2474,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_MPYMK_p424_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPYMK_p424_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                424);
@@ -2483,7 +2483,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_MPYM_p425_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPYM_p425_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                425);
@@ -2491,7 +2491,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MPYM_p427_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MPYM_p427_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                427);
@@ -2554,7 +2554,7 @@ public class C55xMachine extends Machine {
     }
 
     
-    public C55xOperation make_NEG_p434_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_NEG_p434_Instr(String opcode, List<Operand> args, String syntax) {
         // neg [src],dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
@@ -2563,7 +2563,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_NOP_p436_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_NOP_p436_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 1, 1, 0, 0, PipelineD,
                                                436);
@@ -2571,7 +2571,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_NOP16_p436_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_NOP16_p436_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineD,
                                                43616);
@@ -2579,7 +2579,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_NOT_p437_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_NOT_p437_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                437);
@@ -2587,7 +2587,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p439_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p439_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                439);
@@ -2595,7 +2595,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p440_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p440_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                440);
@@ -2603,7 +2603,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p442_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p442_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                442);
@@ -2611,7 +2611,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p443_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p443_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                443);
@@ -2619,7 +2619,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p444_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p444_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                444);
@@ -2627,7 +2627,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p445_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p445_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                445);
@@ -2635,7 +2635,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_OR_p446_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_OR_p446_Instr(String opcode, List<Operand> args, String syntax) {
         // or k16, Smem
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -2644,7 +2644,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_POP_p448_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POP_p448_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                448);
@@ -2653,7 +2653,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_POP_p449_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POP_p449_Instr(String opcode, List<Operand> args, String syntax) {
         // POP dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
@@ -2662,7 +2662,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_POP_p450_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POP_p450_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                450);
@@ -2671,7 +2671,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_POP_p451_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POP_p451_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                451);
@@ -2679,7 +2679,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_POP_p452_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POP_p452_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                452);
@@ -2687,7 +2687,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_POP_p453_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POP_p453_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                453);
@@ -2695,7 +2695,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_POPBOTH_p454_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_POPBOTH_p454_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                454);
@@ -2703,7 +2703,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_PSH_p458_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSH_p458_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                458);
@@ -2711,7 +2711,7 @@ public class C55xMachine extends Machine {
          return oper;
     }
 
-    public C55xOperation make_PSH_p459_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSH_p459_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                459);
@@ -2719,7 +2719,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_PSH_p460_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSH_p460_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                460);
@@ -2728,7 +2728,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_PSH_p461_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSH_p461_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                461);
@@ -2736,7 +2736,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_PSH_p462_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSH_p462_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                462);
@@ -2744,7 +2744,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_PSH_p463_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSH_p463_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                463);
@@ -2752,7 +2752,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_PSHBOTH_p464_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_PSHBOTH_p464_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                464);
@@ -2760,7 +2760,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ROL_p475_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ROL_p475_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                475);
@@ -2769,7 +2769,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_ROR_p477_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ROR_p477_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                477);
@@ -2777,7 +2777,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_ROUND_p479_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_ROUND_p479_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                479);
@@ -2785,7 +2785,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPT_p482_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPT_p482_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD, // TODO: k8|k16
                                                482);
@@ -2793,7 +2793,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPT_p484_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPT_p484_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineAD,
                                                484);
@@ -2801,7 +2801,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPTADD_p487_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPTADD_p487_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                487);
@@ -2809,7 +2809,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPTADD_p488_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPTADD_p488_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                488);
@@ -2817,7 +2817,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPTBLOCAL_p490_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPTBLOCAL_p490_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineAD,
                                                490);
@@ -2831,7 +2831,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPTB_p497_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPTB_p497_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD,
                                                497);
@@ -2846,7 +2846,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_RPTCC_p500_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPTCC_p500_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineAD,
                                                500);
@@ -2854,7 +2854,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RPTSUB_p503_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RPTSUB_p503_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                503);
@@ -2862,7 +2862,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SAT_p505_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SAT_p505_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                505);
@@ -2870,7 +2870,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTCC_p507_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTCC_p507_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                507);
@@ -2878,7 +2878,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTL_p510_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTL_p510_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                510);
@@ -2886,7 +2886,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTL_p511_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTL_p511_Instr(String opcode, List<Operand> args, String syntax) {
         // SFTL ACx, #SHIFTW[, ACy]
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
@@ -2895,7 +2895,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTL_p513_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTL_p513_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                513);
@@ -2903,7 +2903,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTS_p516_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTS_p516_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                516);
@@ -2911,7 +2911,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTSC_p518_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTSC_p518_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                518);
@@ -2919,7 +2919,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTS_p520_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTS_p520_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                520);
@@ -2927,7 +2927,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTSC_p522_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTSC_p522_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                522);
@@ -2935,7 +2935,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SFTS_p525_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SFTS_p525_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                525);
@@ -2943,7 +2943,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SQA_p530_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQA_p530_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                530);
@@ -2951,7 +2951,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SQAM_p531_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQAM_p531_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                531);
@@ -2959,7 +2959,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SQDST_p532_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQDST_p532_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                532);
@@ -2967,7 +2967,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SQR_p535_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQR_p535_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                535);
@@ -2975,7 +2975,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SQRM_p536_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQRM_p536_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                536);
@@ -2984,7 +2984,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_SQS_p538_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQS_p538_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                538);
@@ -2992,7 +2992,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SQSM_p539_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SQSM_p539_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                539);
@@ -3000,7 +3000,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p541_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p541_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                541);
@@ -3008,7 +3008,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p543_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p543_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                543);
@@ -3016,7 +3016,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p545_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p545_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                545);
@@ -3024,7 +3024,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p547_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p547_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                547);
@@ -3032,7 +3032,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p551_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p551_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                551);
@@ -3040,7 +3040,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p552_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p552_Instr(String opcode, List<Operand> args, String syntax) {
         // SUB K16, [src,] dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: p.553 k4/K16
@@ -3049,7 +3049,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p556_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p556_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                556);
@@ -3057,7 +3057,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p558_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p558_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                558);
@@ -3065,7 +3065,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p560_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p560_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                560);
@@ -3073,7 +3073,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p561_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p561_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX,
                                                561);
@@ -3081,7 +3081,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p562_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p562_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                562);
@@ -3089,7 +3089,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p563_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p563_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                563);
@@ -3097,7 +3097,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p564_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p564_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                564);
@@ -3105,7 +3105,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p565_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p565_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                565);
@@ -3113,7 +3113,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p566_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p566_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                566);
@@ -3121,7 +3121,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p567_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p567_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                567);
@@ -3129,7 +3129,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p569_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p569_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                569);
@@ -3137,7 +3137,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p570_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p570_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                570);
@@ -3145,7 +3145,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p572_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p572_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                572);
@@ -3153,7 +3153,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p573_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p573_Instr(String opcode, List<Operand> args, String syntax) {
         // SUB ACx, dbl(Lmem), ACy
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
@@ -3162,7 +3162,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_p574_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_p574_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                574);
@@ -3188,7 +3188,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUB_xxx_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUB_xxx_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                999999);
@@ -3196,7 +3196,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUBADD_p578_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUBADD_p578_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                578);
@@ -3204,7 +3204,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUBADD_p580_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUBADD_p580_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                580);
@@ -3212,7 +3212,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SUBC_p582_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SUBC_p582_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                582);
@@ -3220,7 +3220,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SWAP_p585_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SWAP_p585_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
                                                585);
@@ -3228,7 +3228,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SWAPP_p590_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SWAPP_p590_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineAD, // TODO: p590 SWAPP AC0, AC2 X pipe???
                                                590);
@@ -3236,7 +3236,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_SWAP4_p595_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_SWAP4_p595_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineAD,
                                                595);
@@ -3245,7 +3245,7 @@ public class C55xMachine extends Machine {
     }
 
     // CFG
-    public C55xOperation make_XCC_p600_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XCC_p600_Instr(String opcode, List<Operand> args, String syntax) {
 
         // XCC [label], cond
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
@@ -3259,7 +3259,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XCCPART_p603_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XCCPART_p603_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 1, 0, 0, PipelineX,
                                                603);
@@ -3267,7 +3267,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p607_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p607_Instr(String opcode, List<Operand> args, String syntax) {
         // XOR src,dst
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 1, 0, 0, PipelineX,
@@ -3276,7 +3276,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p608_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p608_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: k8/k16
                                                608);
@@ -3284,7 +3284,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p610_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p610_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 1, 0, 0, PipelineX,
                                                610);
@@ -3292,7 +3292,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p611_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p611_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: k8/k16
                                                611);
@@ -3300,7 +3300,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p612_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p612_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                612);
@@ -3308,7 +3308,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p613_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p613_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                613);
@@ -3316,7 +3316,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_XOR_p614_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_XOR_p614_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
                                                614);
@@ -3324,7 +3324,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_UNKNOWN_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_UNKNOWN_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX, // TODO: instr doesn't exist ...
                                                777777);
@@ -3339,7 +3339,7 @@ public class C55xMachine extends Machine {
     //
     // B
     //
-    public C55xOperation make_B_p178_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_B_p178_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 10, 0, 0, PipelineX,
                                                178);
@@ -3353,7 +3353,7 @@ public class C55xMachine extends Machine {
     }
 
     // CFG
-    public C55xOperation make_B_p179_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_B_p179_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 3, 0, 0, PipelineAD, // TODO: L7/L16/P24
                                                179);
@@ -3370,7 +3370,7 @@ public class C55xMachine extends Machine {
     }
 
     // CFG
-    public C55xOperation make_BCC_p182_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCC_p182_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 0, 6, 5, PipelineR, // TODO: I4, L8, L16, P24
                                                182);
@@ -3386,7 +3386,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCC_p186_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCC_p186_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 0, 6, 5, PipelineAD, // TODO: 6/5 cycles
                                                186);
@@ -3402,7 +3402,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_BCC_p189_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_BCC_p189_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 0, 7, 6, PipelineX, // TODO: 7/6 cycles
                                                189);
@@ -3419,7 +3419,7 @@ public class C55xMachine extends Machine {
     }
 
     // dynamic CFG : CALL ACx
-    public C55xOperation make_CALL_p218_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CALL_p218_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 10, 0, 0, PipelineX,
                                                218);
@@ -3432,7 +3432,7 @@ public class C55xMachine extends Machine {
     }
 
     // CFG: CALL L16 / P24
-    public C55xOperation make_CALL_p219_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CALL_p219_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 6, 0, 0, PipelineAD, // TODO: L16/P24
                                                219);
@@ -3449,7 +3449,7 @@ public class C55xMachine extends Machine {
     }
 
     // CFG
-    public C55xOperation make_CALLCC_p223_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_CALLCC_p223_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 0, 6, 5, PipelineR, // TODO: L16/P24
                                                223);
@@ -3465,7 +3465,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_INTR_p249_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_INTR_p249_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 3, 0, 0, PipelineD,
                                                249);
@@ -3473,7 +3473,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p408_No20_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p408_No20_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 5, 0, 0, PipelineX,
                                                40820);
@@ -3481,7 +3481,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_MOV_p359_No20_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_MOV_p359_No20_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 3, 5, 0, 0, PipelineX, // TODO ????
                                                35920);
@@ -3489,7 +3489,7 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
-    public C55xOperation make_RESET_p465_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RESET_p465_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 0, 0, 0, PipelineD, // TODO: cycles = ?
                                                465);
@@ -3500,7 +3500,7 @@ public class C55xMachine extends Machine {
 
 
     // CFG
-    public C55xOperation make_RET_p469_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RET_p469_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 5, 0, 0, PipelineD,
                                                469);
@@ -3513,7 +3513,7 @@ public class C55xMachine extends Machine {
     }
 
     // CFG
-    public C55xOperation make_RETCC_p471_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RETCC_p471_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 0, 5, 5, PipelineR,
                                                471);
@@ -3527,7 +3527,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_RETI_p473_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_RETI_p473_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 2, 5, 0, 0, PipelineD,
                                                473);
@@ -3536,7 +3536,7 @@ public class C55xMachine extends Machine {
     }
 
 
-    public C55xOperation make_TRAP_p597_Instr(String opcode, List args, String syntax) {
+    public C55xOperation make_TRAP_p597_Instr(String opcode, List<Operand> args, String syntax) {
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 2, 0, 0, 0, PipelineAD, // TODO: cycles?
                                                597);

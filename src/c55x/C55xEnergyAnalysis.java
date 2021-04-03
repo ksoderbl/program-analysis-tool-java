@@ -150,18 +150,17 @@ public class C55xEnergyAnalysis implements Analysis
                                           Machine machine,
                                           double r)
     {
-        List nodes = bb.getNodes();
-        List labels = bb.getLabels();
+        List<CFGNode> nodes = bb.getNodes();
+        List<String> labels = bb.getLabels();
         String name = bb.getName();
-        Iterator iter;
         TiwariResults tr_bb = new TiwariResults(machine);
         bb.setTiwariResults(tr_bb);
 
         C55xInstruction prev_instr = null;
         // instructions of this basic block
-        iter = nodes.iterator();
+        Iterator<CFGNode> iter = nodes.iterator();
         while (iter.hasNext()) {
-            CFGNode node = (CFGNode) iter.next();
+            CFGNode node = iter.next();
             Instruction ins = node.getInstruction();
             int cycles = 1;
             double BI = 0.0, OI = 0.0;
@@ -193,21 +192,21 @@ public class C55xEnergyAnalysis implements Analysis
 
 
     private CFGNode getLastCFGNode(BasicBlock bb) {
-        List nodes = bb.getNodes();
-        Iterator iter = nodes.iterator();
+        List<CFGNode> nodes = bb.getNodes();
+        Iterator<CFGNode> iter = nodes.iterator();
         CFGNode node = null;
         while (iter.hasNext())
-            node = (CFGNode) iter.next();
+            node = iter.next();
         return node;
     }
 
     // 2 following methods could be in some form in BasicBlock.java
     private C55xInstruction getLastInstruction(BasicBlock bb) {
         C55xInstruction start_instr = null;
-        List nodes = bb.getNodes();
-        Iterator iter = nodes.iterator();
+        List<CFGNode> nodes = bb.getNodes();
+        Iterator<CFGNode> iter = nodes.iterator();
         while (iter.hasNext()) {
-            CFGNode node = (CFGNode) iter.next();
+            CFGNode node = iter.next();
             Instruction ins = node.getInstruction();
             if (ins == null || ins instanceof ProgramEntry || ins instanceof ProgramExit)
                 continue;
@@ -218,10 +217,10 @@ public class C55xEnergyAnalysis implements Analysis
 
     private C55xInstruction getFirstInstruction(BasicBlock bb) {
         C55xInstruction end_instr = null;
-        List nodes = bb.getNodes();
-        Iterator iter = nodes.iterator();
+        List<CFGNode> nodes = bb.getNodes();
+        Iterator<CFGNode> iter = nodes.iterator();
         if (iter.hasNext()) {
-            CFGNode node = (CFGNode) iter.next();
+            CFGNode node = iter.next();
             Instruction ins = node.getInstruction();
             if (!(ins == null || ins instanceof ProgramEntry || ins instanceof ProgramExit))
                 end_instr = (C55xInstruction)ins;
@@ -772,8 +771,8 @@ public class C55xEnergyAnalysis implements Analysis
      * @return contents of this basic block as a String
      */
     private String BBtoString(BasicBlock bb, Machine machine) {
-        List labels = bb.getLabels();
-        List nodes = bb.getNodes();
+        List<String> labels = bb.getLabels();
+        List<CFGNode> nodes = bb.getNodes();
         String result = new String(), s1;
         Iterator iter;
         TiwariResults tr_bb_total = new TiwariResults(machine);
@@ -857,7 +856,7 @@ public class C55xEnergyAnalysis implements Analysis
 
 
     private String BBEdgetoString(BasicBlockEdge edge) {
-        //List nodes = edge.getNodes();
+        //List<CFGNode> nodes = edge.getNodes();
         String result = new String();
         String s1;
 

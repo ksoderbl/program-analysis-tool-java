@@ -15,7 +15,7 @@ public class MemoryBank{
     public static final int INSTRUCTION_MEMORY = 1;
     public static final int DATA_INSTRUCTION_MEMORY = 2;
     
-    private TreeMap memory;
+    private TreeMap<Long, Object> memory;
     private long lowAdd;
     private long hiAdd;
     private long numReads = 0;
@@ -29,7 +29,7 @@ public class MemoryBank{
     public MemoryBank(long lowAdd, long hiAdd, int memType){
         this.lowAdd = lowAdd;
         this.hiAdd = hiAdd;
-        memory = new TreeMap(new AddressComparator());
+        memory = new TreeMap<Long, Object>(new AddressComparator());
         if (memType == DATA_MEMORY) dataMem = true;
         else if (memType == INSTRUCTION_MEMORY) instrMem = true;
         else if (memType == DATA_INSTRUCTION_MEMORY){ 
@@ -85,7 +85,7 @@ public class MemoryBank{
 
     public long readMem(long address){
         Long value;
-        Long longAdd = new Long(address);
+        Long longAdd = address;
         value = (Long)memory.get(longAdd);
         checkMemoryBoundaries(address);
         numReads++;
@@ -96,7 +96,7 @@ public class MemoryBank{
     // read memory without accounting reads, for internal use only
     public long readMemDebug(long address){
         Long value;
-        Long longAdd = new Long(address);
+        Long longAdd = address;
         value = (Long)memory.get(longAdd);
         checkMemoryBoundaries(address);
         if (value == null) return 0L;
@@ -107,8 +107,8 @@ public class MemoryBank{
 
 
     public void writeMem(long address, long value){
-        Long longAdd  = new Long(address);
-        Long longValue = new Long(value);
+        Long longAdd = address;
+        Long longValue = value;
         checkMemoryBoundaries(longAdd);
         numWrites++;
         memory.put(longAdd, longValue);
@@ -119,12 +119,12 @@ public class MemoryBank{
      * Prints the changes that has been made to memory
      */
     public void printChangesMemory(int bankNum, Machine machine){
-        Iterator i = memory.keySet().iterator();
+        Iterator<Long> i = memory.keySet().iterator();
         System.out.println("--- Bank: "+bankNum+" ---");
         if (dataMem){ 
             while (i.hasNext()){
                 String stack = "";
-                Long add = (Long)i.next();
+                Long add = i.next();
                 Long value = (Long)memory.get(add);
                 if (add.longValue() == machine.getRegister("sp").getValue())
                     stack = " <--stack here";

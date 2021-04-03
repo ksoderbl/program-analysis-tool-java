@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ArrayList;
 import simulation.SimulationStatistics;
 import basicblocks.BasicBlock;
+import traces.Trace;
 
 /**
  * Program representation.
@@ -44,10 +45,10 @@ public class Program {
     private Symbols labels;
 
     /** inputs that were used to read the program */
-    private List inputs;
+    private List<Input> inputs;
 
     /** procedures of the program */
-    private HashMap procedures;
+    private HashMap<Object, Procedure> procedures;
 
     /** 
      * loops of the program (basicblocks)
@@ -61,7 +62,7 @@ public class Program {
      * traces of the program embedded in Traces objects
      * each trace contains a number of basicblocks
      */
-    private HashMap traces;
+    private HashMap<String, Trace> traces;
     
     /** 
      * Basic blocks of the program. These are only available after basic
@@ -106,8 +107,8 @@ public class Program {
     public Program(UserOptions userOptions, Machine machine) {
         addresses = new Symbols();
         labels = new Symbols();
-        inputs = new ArrayList();
-        procedures = new HashMap();
+        inputs = new ArrayList<Input>();
+        procedures = new HashMap<Object, Procedure>();
         debugData = new DebugData();
         this.userOptions = userOptions;
         this.machine = machine;
@@ -273,7 +274,7 @@ public class Program {
     /**
      * @return inputs that were used to read the program
      */
-    public List getInputs() {
+    public List<Input> getInputs() {
         return inputs;
     }
 
@@ -290,7 +291,7 @@ public class Program {
     /**
      * @return procedures of the program 
      */
-    public HashMap getProcedures() {
+    public HashMap<Object, Procedure> getProcedures() {
         return procedures;
     }
 
@@ -363,14 +364,14 @@ public class Program {
     /**
      * @param Bucket of traces containing basicblocks
      */
-    public void setTraces(HashMap traces) {
+    public void setTraces(HashMap<String, Trace> traces) {
         this.traces = traces;
     }
 
     /**
      * @return Bucket of traces containing basicblocks
      */
-    public HashMap getTraces() {
+    public HashMap<String, Trace> getTraces() {
         return traces;
     }
     
