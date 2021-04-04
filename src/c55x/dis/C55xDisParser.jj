@@ -950,9 +950,9 @@ C55xImmediateOperand OPTHASH_k23()  : { C55xImmediateOperand imm; } { imm = Lite
 
 
 
-List k4_k4K16_dst() :
+List<Operand> k4_k4K16_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -1046,9 +1046,9 @@ C55xProgramAddressOperand Address() :
     }
 }
 
-List L16_ARn_mod_NE_0() :
+List<Operand> L16_ARn_mod_NE_0() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xProgramAddressOperand addr;
     C55xImmediateOperand zero; // zero must be #0
     C55xMemoryAccessOperand ma;
@@ -1603,9 +1603,9 @@ C55xBitOperand fname() :
 // ============================================================
 // operand lists
 
-List ACx_ACy_ACz_ACw() :
+List<Operand> ACx_ACy_ACz_ACw() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3, r4;
 }
 {
@@ -1619,9 +1619,9 @@ List ACx_ACy_ACz_ACw() :
     }
 }
 
-List ACx_ACy_ACz_ACw_TRNx() :
+List<Operand> ACx_ACy_ACz_ACw_TRNx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3, r4, r5;
 }
 {
@@ -1636,9 +1636,9 @@ List ACx_ACy_ACz_ACw_TRNx() :
     }
 }
 
-List ACx_Tx() :
+List<Operand> ACx_Tx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -1649,9 +1649,9 @@ List ACx_Tx() :
     }
 }
 
-List ACx_ACy() :
+List<Operand> ACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -1662,9 +1662,9 @@ List ACx_ACy() :
     }
 }
 
-List ACx_Tx_ACy() :
+List<Operand> ACx_Tx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3;
 }
 {
@@ -1676,9 +1676,9 @@ List ACx_Tx_ACy() :
     }
 }
 
-List ACx_Tx_OPTACy() :
+List<Operand> ACx_Tx_OPTACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3 = null;
 }
 {
@@ -1692,9 +1692,9 @@ List ACx_Tx_OPTACy() :
     }
 }
 
-List ACx_SHIFTW_OPTACy() :
+List<Operand> ACx_SHIFTW_OPTACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2 = null;
     C55xImmediateOperand imm;
 }
@@ -1711,9 +1711,9 @@ List ACx_SHIFTW_OPTACy() :
 
 
 // used for mac MISRG p. 256-257
-List ACxy_Tx_ACyx_ACy() :
+List<Operand> ACxy_Tx_ACyx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3, r4;
 }
 {
@@ -1726,9 +1726,9 @@ List ACxy_Tx_ACyx_ACy() :
     }
 }
 
-List ACx_LSHIFT_Tx_ACy() :
+List<Operand> ACx_LSHIFT_Tx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3;
     C55xShiftOperand s;
 }
@@ -1741,9 +1741,9 @@ List ACx_LSHIFT_Tx_ACy() :
     }
 }
 
-List ACx_LSHIFT_Tx_Smem() :
+List<Operand> ACx_LSHIFT_Tx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2;
     C55xMemoryAccessOperand ma;
@@ -1757,9 +1757,9 @@ List ACx_LSHIFT_Tx_Smem() :
     }
 }
 
-List RND_ACx_LSHIFT_Tx_Smem() :
+List<Operand> RND_ACx_LSHIFT_Tx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2;
     C55xMemoryAccessOperand ma;
@@ -1774,9 +1774,9 @@ List RND_ACx_LSHIFT_Tx_Smem() :
     }
 }
 
-List ACx_LSHIFT_SHIFTW_Smem() :
+List<Operand> ACx_LSHIFT_SHIFTW_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r;
     C55xImmediateOperand imm;
@@ -1793,7 +1793,7 @@ List ACx_LSHIFT_SHIFTW_Smem() :
 
 C55xRegisterOperand HI_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
 }
 {
@@ -1803,9 +1803,9 @@ C55xRegisterOperand HI_ACx() :
     }
 }
 
-List HI_ACx_LSHIFT_SHIFTW_Smem() :
+List<Operand> HI_ACx_LSHIFT_SHIFTW_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r;
     C55xImmediateOperand imm;
@@ -1835,9 +1835,9 @@ C55xShiftOperand HI_ACx_LSHIFT_SHIFTW() :
     }
 }
 
-List rnd_HI_ACx_LSHIFT_SHIFTW_Smem() :
+List<Operand> rnd_HI_ACx_LSHIFT_SHIFTW_Smem() :
 {
-    List list = new ArrayList(), l = null;
+    List<Operand> list = new ArrayList<Operand>(), l = null;
     C55xMemoryAccessOperand ma = null;
     C55xShiftOperand s = null;
 }
@@ -1854,9 +1854,9 @@ List rnd_HI_ACx_LSHIFT_SHIFTW_Smem() :
     }
 }
 
-List ACx_LSHIFT_SHIFTW_ACy() :
+List<Operand> ACx_LSHIFT_SHIFTW_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2;
     C55xImmediateOperand imm;
@@ -1870,9 +1870,9 @@ List ACx_LSHIFT_SHIFTW_ACy() :
     }
 }
 
-List ACx_LSHIFT_SHIFTW_OPTACy() :
+List<Operand> ACx_LSHIFT_SHIFTW_OPTACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2 = null;
     C55xImmediateOperand imm;
@@ -1888,9 +1888,9 @@ List ACx_LSHIFT_SHIFTW_OPTACy() :
     }
 }
 
-List ACx_ACy_TCx_Tx() :
+List<Operand> ACx_ACy_TCx_Tx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3;
     C55xBitOperand b;
 }
@@ -1907,9 +1907,9 @@ List ACx_ACy_TCx_Tx() :
 
 
 
-List Baddr_src() :
+List<Operand> Baddr_src() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xBaddrOperand b;
     C55xRegisterOperand r;
 }
@@ -1921,9 +1921,9 @@ List Baddr_src() :
     }
 }
 
-List Baddr_src_TCx() :
+List<Operand> Baddr_src_TCx() :
 {
-    List list = new ArrayList(), l;
+    List<Operand> list = new ArrayList<Operand>(), l;
     C55xBitOperand b;
 }
 {
@@ -1934,9 +1934,9 @@ List Baddr_src_TCx() :
     }
 }
 
-List BitIn_src_BitOut_dst() :
+List<Operand> BitIn_src_BitOut_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xBitOperand b1, b2;
     C55xRegisterOperand r1, r2;
 }
@@ -1960,9 +1960,9 @@ C55xRegisterOperand CSR() :
     }
 }
 
-List CSR_TAx() :
+List<Operand> CSR_TAx() :
 {
-    List list = new ArrayList(), l;
+    List<Operand> list = new ArrayList<Operand>(), l;
     C55xRegisterOperand csr, tax;
 }
 {
@@ -1973,9 +1973,9 @@ List CSR_TAx() :
     }
 }
 
-List CSR_k4() :
+List<Operand> CSR_k4() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand csr;
 }
@@ -2012,9 +2012,9 @@ C55xMemoryAccessOperand uns_low_byte_Smem() :
     }
 }
 
-List low_byte_Smem_LSHIFT_SHIFTW_ACx() :
+List<Operand> low_byte_Smem_LSHIFT_SHIFTW_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
@@ -2040,9 +2040,9 @@ C55xMemoryAccessOperand high_byte_Smem() :
     }
 }
 
-List high_byte_Smem_LSHIFT_SHIFTW_ACx() :
+List<Operand> high_byte_Smem_LSHIFT_SHIFTW_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
@@ -2069,7 +2069,7 @@ C55xMemoryAccessOperand UNS_high_byte_Smem() :
 
 C55xMemoryAccessOperand uns_high_byte_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
 }
 {
@@ -2079,9 +2079,9 @@ C55xMemoryAccessOperand uns_high_byte_Smem() :
 }
 
 
-List uns_high_byte_Smem_dst() :
+List<Operand> uns_high_byte_Smem_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2093,9 +2093,9 @@ List uns_high_byte_Smem_dst() :
     }
 }
 
-List uns_low_byte_Smem_dst() :
+List<Operand> uns_low_byte_Smem_dst() :
 {
-    List list = new ArrayList(), l;
+    List<Operand> list = new ArrayList<Operand>(), l;
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2108,9 +2108,9 @@ List uns_low_byte_Smem_dst() :
 }
 
 
-List src_dst() :
+List<Operand> src_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -2121,9 +2121,9 @@ List src_dst() :
     }
 }
 
-List xsrc_xdst() :
+List<Operand> xsrc_xdst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -2134,9 +2134,9 @@ List xsrc_xdst() :
     }
 }
 
-List src1_src2() :
+List<Operand> src1_src2() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -2147,9 +2147,9 @@ List src1_src2() :
     }
 }
 
-List dst1_dst2() :
+List<Operand> dst1_dst2() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -2160,9 +2160,9 @@ List dst1_dst2() :
     }
 }
 
-List dst_1() :
+List<Operand> dst_1() :
 {
-    List list = new ArrayList(), l1;
+    List<Operand> list = new ArrayList<Operand>(), l1;
     C55xRegisterOperand r;
     C55xImmediateOperand imm;
 }
@@ -2175,9 +2175,9 @@ List dst_1() :
     }
 }
 
-List src_RELOP_dst_TCx() :
+List<Operand> src_RELOP_dst_TCx() :
 {
-    List list = new ArrayList(), l1, l2, l3, l4;
+    List<Operand> list = new ArrayList<Operand>(), l1, l2, l3, l4;
     C55xRegisterOperand sr, dr;
     C55xBitOperand b;
     C55xRelOpOperand ro;
@@ -2192,9 +2192,9 @@ List src_RELOP_dst_TCx() :
     }
 }
 
-List src_RELOP_dst_OPTBANG_TCy_TCx() :
+List<Operand> src_RELOP_dst_OPTBANG_TCy_TCx() :
 {
-    List list = new ArrayList(), l1, l2, l3;
+    List<Operand> list = new ArrayList<Operand>(), l1, l2, l3;
     Token bang = null, t1, t2;
     C55xBitOperand tcx, tcy;
     C55xRegisterOperand r1, r2;
@@ -2219,9 +2219,9 @@ List src_RELOP_dst_OPTBANG_TCy_TCx() :
     }
 }
 
-List L8_src_RELOP_K8() :
+List<Operand> L8_src_RELOP_K8() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm1, imm2;
     C55xRegisterOperand r;
     C55xRelOpOperand ro;
@@ -2237,9 +2237,9 @@ List L8_src_RELOP_K8() :
 }
 
 // [src,] dst
-List OPTsrc_dst() :
+List<Operand> OPTsrc_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2 = null;
 }
 {
@@ -2253,9 +2253,9 @@ List OPTsrc_dst() :
 }
 
 // K16, [src,] dst
-List K16_OPTsrc_dst() :
+List<Operand> K16_OPTsrc_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -2271,9 +2271,9 @@ List K16_OPTsrc_dst() :
 }
 
 // k8|k16, [src,] dst
-List k8k16_OPTsrc_dst() :
+List<Operand> k8k16_OPTsrc_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -2289,9 +2289,9 @@ List k8k16_OPTsrc_dst() :
 }
 
 // k4K16, [src,] dst
-List k4K16_OPTsrc_dst() :
+List<Operand> k4K16_OPTsrc_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -2307,9 +2307,9 @@ List k4K16_OPTsrc_dst() :
     }
 }
 
-List K16_Smem() :
+List<Operand> K16_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand ma;
 }
@@ -2321,9 +2321,9 @@ List K16_Smem() :
     }
 }
 
-List K16_LSHIFT_16_ACx() :
+List<Operand> K16_LSHIFT_16_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm, imm2; // imm2 = 16
     C55xRegisterOperand r;
     C55xShiftOperand s;
@@ -2337,9 +2337,9 @@ List K16_LSHIFT_16_ACx() :
     }
 }
 
-List K16_LSHIFT_SHFT_ACx() :
+List<Operand> K16_LSHIFT_SHFT_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm, shft;
     C55xRegisterOperand r;
     C55xShiftOperand s;
@@ -2353,9 +2353,9 @@ List K16_LSHIFT_SHFT_ACx() :
     }
 }
 
-List k16_Smem() :
+List<Operand> k16_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand ma;
 }
@@ -2367,9 +2367,9 @@ List k16_Smem() :
     }
 }
 
-List k16_ACx_dst() :
+List<Operand> k16_ACx_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r1, r2;
 }
@@ -2382,9 +2382,9 @@ List k16_ACx_dst() :
     }
 }
 
-List K8K16_Smem() :
+List<Operand> K8K16_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand ma;
 }
@@ -2396,9 +2396,9 @@ List K8K16_Smem() :
     }
 }
 
-List k8k16_src_dst() :
+List<Operand> k8k16_src_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r1, r2;
 }
@@ -2412,9 +2412,9 @@ List k8k16_src_dst() :
     }
 }
 
-List k4_dst() :
+List<Operand> k4_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -2426,9 +2426,9 @@ List k4_dst() :
     }
 }
 
-List k4_Smem_TCx() :
+List<Operand> k4_Smem_TCx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand ma;
     C55xBitOperand b;
@@ -2442,8 +2442,8 @@ List k4_Smem_TCx() :
     }
 }
 
-List k4_STx() :
-{ List list = new ArrayList(); }
+List<Operand> k4_STx() :
+{ List<Operand> list = new ArrayList<Operand>(); }
 {
     (LOOKAHEAD(k4() <COMMA> STx())
     k4() <COMMA> STx()
@@ -2452,9 +2452,9 @@ List k4_STx() :
         { return list; /* kps todo */ }
 }
 
-List Smem_src_dst() :
+List<Operand> Smem_src_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
 }
@@ -2467,9 +2467,9 @@ List Smem_src_dst() :
     }
 }
 
-List Smem_dst() :
+List<Operand> Smem_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2481,9 +2481,9 @@ List Smem_dst() :
     }
 }
 
-List Smem_EQ_K16_TCx() :
+List<Operand> Smem_EQ_K16_TCx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm;
     C55xBitOperand b;
@@ -2499,9 +2499,9 @@ List Smem_EQ_K16_TCx() :
     }
 }
 
-List src_Smem_dst() :
+List<Operand> src_Smem_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
     C55xMemoryAccessOperand ma;
 }
@@ -2514,9 +2514,9 @@ List src_Smem_dst() :
     }
 }
 
-List src_Smem_TCx() :
+List<Operand> src_Smem_TCx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
     C55xBitOperand b;
@@ -2530,9 +2530,9 @@ List src_Smem_TCx() :
     }
 }
 
-List src_Smem() :
+List<Operand> src_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2544,9 +2544,9 @@ List src_Smem() :
     }
 }
 
-List src_high_byte_Smem() :
+List<Operand> src_high_byte_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2559,9 +2559,9 @@ List src_high_byte_Smem() :
     }
 }
 
-List src_low_byte_Smem() :
+List<Operand> src_low_byte_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2574,9 +2574,9 @@ List src_low_byte_Smem() :
     }
 }
 
-List dst_Smem() :
+List<Operand> dst_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2632,9 +2632,9 @@ C55xMemoryAccessOperand DBL_Ymem() :
     }
 }
 
-List DBL_Xmem_DBL_Ymem() :
+List<Operand> DBL_Xmem_DBL_Ymem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
 }
 {
@@ -2645,9 +2645,9 @@ List DBL_Xmem_DBL_Ymem() :
     }
 }
 
-List DBL_Lmem_ACx() :
+List<Operand> DBL_Lmem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2659,9 +2659,9 @@ List DBL_Lmem_ACx() :
     }
 }
 
-List ACx_DBL_Lmem_ACy() :
+List<Operand> ACx_DBL_Lmem_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
 }
@@ -2674,9 +2674,9 @@ List ACx_DBL_Lmem_ACy() :
     }
 }
 
-List XAsrc_DBL_Lmem() :
+List<Operand> XAsrc_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2688,9 +2688,9 @@ List XAsrc_DBL_Lmem() :
     }
 }
 
-List DBL_Lmem_XAdst() :
+List<Operand> DBL_Lmem_XAdst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2703,9 +2703,9 @@ List DBL_Lmem_XAdst() :
 }
 
 // dbl(Lmem), [ACx,] ACy
-List DBL_Lmem_OPTACx_ACy() :
+List<Operand> DBL_Lmem_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -2731,9 +2731,9 @@ C55xRegisterOperand PAIR_TAx() :
     }
 }
 
-List DBL_Lmem_PAIR_TAx() :
+List<Operand> DBL_Lmem_PAIR_TAx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2745,9 +2745,9 @@ List DBL_Lmem_PAIR_TAx() :
     }
 }
 
-List ACx_DBL_Lmem() :
+List<Operand> ACx_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -2782,9 +2782,9 @@ C55xRegisterOperand RND_HI_ACx() :
     }
 }
 
-List RND_HI_ACx_Smem() :
+List<Operand> RND_HI_ACx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2807,9 +2807,9 @@ C55xRegisterOperand rnd_HI_ACx() :
     }
 }
 
-List rnd_HI_ACx_Smem() :
+List<Operand> rnd_HI_ACx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2823,7 +2823,7 @@ List rnd_HI_ACx_Smem() :
 
 C55xShiftOperand HI_ACx_LSHIFT_Tx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
     C55xShiftOperand s;
 }
@@ -2837,7 +2837,7 @@ C55xShiftOperand HI_ACx_LSHIFT_Tx() :
 
 C55xShiftOperand RND_HI_ACx_LSHIFT_Tx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
 }
 {
@@ -2849,7 +2849,7 @@ C55xShiftOperand RND_HI_ACx_LSHIFT_Tx() :
 
 C55xShiftOperand rnd_HI_ACx_LSHIFT_Tx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s = null;
 }
 {
@@ -2858,9 +2858,9 @@ C55xShiftOperand rnd_HI_ACx_LSHIFT_Tx() :
     }
 }
 
-List rnd_HI_ACx_LSHIFT_Tx_Smem() :
+List<Operand> rnd_HI_ACx_LSHIFT_Tx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xMemoryAccessOperand ma;
 }
@@ -2883,9 +2883,9 @@ C55xRegisterOperand PAIR_HI_ACx() :
     }
 }
 
-List PAIR_HI_ACx_DBL_Lmem() :
+List<Operand> PAIR_HI_ACx_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2897,9 +2897,9 @@ List PAIR_HI_ACx_DBL_Lmem() :
     }
 }
 
-List PAIR_LO_ACx_DBL_Lmem() :
+List<Operand> PAIR_LO_ACx_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2911,9 +2911,9 @@ List PAIR_LO_ACx_DBL_Lmem() :
     }
 }
 
-List PAIR_TAx_DBL_Lmem() :
+List<Operand> PAIR_TAx_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2925,9 +2925,9 @@ List PAIR_TAx_DBL_Lmem() :
     }
 }
 
-List HI_ACx_TAx() :
+List<Operand> HI_ACx_TAx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -2938,9 +2938,9 @@ List HI_ACx_TAx() :
     }
 }
 
-List HI_ACx_Smem() :
+List<Operand> HI_ACx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2952,9 +2952,9 @@ List HI_ACx_Smem() :
     }
 }
 
-List TAx_HI_ACx() :
+List<Operand> TAx_HI_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -2965,9 +2965,9 @@ List TAx_HI_ACx() :
     }
 }
 
-List DBL_Lmem_PAIR_HI_ACx() :
+List<Operand> DBL_Lmem_PAIR_HI_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -2979,9 +2979,9 @@ List DBL_Lmem_PAIR_HI_ACx() :
     }
 }
 
-List DBL_Lmem_PAIR_LO_ACx() :
+List<Operand> DBL_Lmem_PAIR_LO_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -3004,9 +3004,9 @@ C55xMemoryAccessOperand DUAL_Lmem() :
     }
 }
 
-List DUAL_Lmem_OPTACx_ACy() :
+List<Operand> DUAL_Lmem_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -3021,9 +3021,9 @@ List DUAL_Lmem_OPTACx_ACy() :
     }
 }
 
-List ACx_DUAL_Lmem_ACy() :
+List<Operand> ACx_DUAL_Lmem_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
 }
@@ -3036,9 +3036,9 @@ List ACx_DUAL_Lmem_ACy() :
     }
 }
 
-List DUAL_Lmem_Tx_ACx() :
+List<Operand> DUAL_Lmem_Tx_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
 }
@@ -3051,9 +3051,9 @@ List DUAL_Lmem_Tx_ACx() :
     }
 }
 
-List ACx_RSHIFT_1_DUAL_Lmem() :
+List<Operand> ACx_RSHIFT_1_DUAL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xImmediateOperand imm; // =1
     C55xMemoryAccessOperand ma;
@@ -3069,9 +3069,9 @@ List ACx_RSHIFT_1_DUAL_Lmem() :
 }
 
 
-List Smem_k16_TCx() :
+List<Operand> Smem_k16_TCx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xBitOperand b;
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand ma;
@@ -3085,9 +3085,9 @@ List Smem_k16_TCx() :
     }
 }
 
-List Smem_XAdst() :
+List<Operand> Smem_XAdst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -3099,9 +3099,9 @@ List Smem_XAdst() :
     }
 }
 
-List Smem_ACx_TCx_ACy() :
+List<Operand> Smem_ACx_TCx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
     C55xBitOperand b;
@@ -3116,9 +3116,9 @@ List Smem_ACx_TCx_ACy() :
     }
 }
 
-List Smem_OPTACx_ACy() :
+List<Operand> Smem_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -3133,9 +3133,9 @@ List Smem_OPTACx_ACy() :
     }
 }
 
-List ACx_TCx() :
+List<Operand> ACx_TCx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xBitOperand b;
 }
@@ -3147,9 +3147,9 @@ List ACx_TCx() :
     }
 }
 
-List Smem_ACx_TC1_TC2_ACy() :
+List<Operand> Smem_ACx_TC1_TC2_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
     C55xBitOperand b1, b2;
@@ -3165,9 +3165,9 @@ List Smem_ACx_TC1_TC2_ACy() :
     }
 }
 
-List Smem_ACx_Tx_TC1_TC2_ACy() :
+List<Operand> Smem_ACx_Tx_TC1_TC2_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2, r3;
     C55xBitOperand b1, b2;
@@ -3198,9 +3198,9 @@ C55xRegisterOperand REG19() :
     }
 }
 
-List Smem_REG19() :
+List<Operand> Smem_REG19() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -3212,9 +3212,9 @@ List Smem_REG19() :
     }
 }
 
-List REG19_Smem() :
+List<Operand> REG19_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -3237,9 +3237,9 @@ C55xRegisterOperand RETA() :
     }
 }
 
-List RETA_DBL_Lmem() :
+List<Operand> RETA_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -3261,9 +3261,9 @@ C55xRegisterOperand REGLIST1() :
     }
 }
 
-List k12_REGLIST1() :
+List<Operand> k12_REGLIST1() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -3285,9 +3285,9 @@ C55xRegisterOperand DPH() :
     }
 }
 
-List k7_DPH() :
+List<Operand> k7_DPH() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -3309,9 +3309,9 @@ C55xRegisterOperand PDP() :
     }
 }
 
-List k9_PDP() :
+List<Operand> k9_PDP() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -3333,9 +3333,9 @@ C55xRegisterOperand REG9() :
     }
 }
 
-List k16_REG9() :
+List<Operand> k16_REG9() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -3357,9 +3357,9 @@ C55xRegisterOperand REGLIST2() :
     }
 }
 
-List TAx_REGLIST2() :
+List<Operand> TAx_REGLIST2() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -3380,9 +3380,9 @@ C55xRegisterOperand REGLIST3() :
     }
 }
 
-List REGLIST3_TAx() :
+List<Operand> REGLIST3_TAx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -3393,9 +3393,9 @@ List REGLIST3_TAx() :
     }
 }
 
-List DBL_Lmem_RETA() :
+List<Operand> DBL_Lmem_RETA() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -3408,9 +3408,9 @@ List DBL_Lmem_RETA() :
 }
 
 
-List Tx_DUAL_Lmem_ACx() :
+List<Operand> Tx_DUAL_Lmem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
 }
@@ -3423,9 +3423,9 @@ List Tx_DUAL_Lmem_ACx() :
     }
 }
 
-List Tx_Smem_ACx() :
+List<Operand> Tx_Smem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2;
 }
@@ -3438,9 +3438,9 @@ List Tx_Smem_ACx() :
     }
 }
 
-List Tx_K8K16_OPTACx_ACy() :
+List<Operand> Tx_K8K16_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3 = null;
     C55xImmediateOperand imm;
 }
@@ -3456,9 +3456,9 @@ List Tx_K8K16_OPTACx_ACy() :
     }
 }
 
-List K8K16_OPTACx_ACy() :
+List<Operand> K8K16_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2 = null;
     C55xImmediateOperand imm;
 }
@@ -3474,9 +3474,9 @@ List K8K16_OPTACx_ACy() :
 }
 
 
-List Smem_OPTsrc_dst() :
+List<Operand> Smem_OPTsrc_dst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2 = null;
     C55xMemoryAccessOperand ma;
 }
@@ -3492,9 +3492,9 @@ List Smem_OPTsrc_dst() :
 }
 
 
-List TAx_TAy() :
+List<Operand> TAx_TAy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2;
 }
 {
@@ -3506,9 +3506,9 @@ List TAx_TAy() :
     }
 }
 
-List P8_TAx() :
+List<Operand> P8_TAx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xImmediateOperand imm;
 }
@@ -3521,9 +3521,9 @@ List P8_TAx() :
 }
 
 // P8 or D16
-List P8D16_TAx() :
+List<Operand> P8D16_TAx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xImmediateOperand imm;
 }
@@ -3545,9 +3545,9 @@ C55xRegisterOperand SP() :
     }
 }
 
-List K8_SP() :
+List<Operand> K8_SP() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand sp;
 }
@@ -3559,9 +3559,9 @@ List K8_SP() :
     }
 }
 
-List k8_cond() :
+List<Operand> k8_cond() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xConditionFieldOperand cf;
 }
@@ -3573,9 +3573,9 @@ List k8_cond() :
     }
 }
 
-List k23_XAdst() :
+List<Operand> k23_XAdst() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
 }
@@ -3587,9 +3587,9 @@ List k23_XAdst() :
     }
 }
 
-List OPTACx_ACy() :
+List<Operand> OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2 = null;
 }
 {
@@ -3602,9 +3602,9 @@ List OPTACx_ACy() :
     }
 }
 
-List Cmem_Smem() :
+List<Operand> Cmem_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand c, s;
 }
 {
@@ -3615,9 +3615,9 @@ List Cmem_Smem() :
     }
 }
 
-List Cmem_DBL_Lmem() :
+List<Operand> Cmem_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand c, l;
 }
 {
@@ -3628,9 +3628,9 @@ List Cmem_DBL_Lmem() :
     }
 }
 
-List DBL_Lmem_Cmem() :
+List<Operand> DBL_Lmem_Cmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand l, c;
 }
 {
@@ -3641,9 +3641,9 @@ List DBL_Lmem_Cmem() :
     }
 }
 
-List Smem_Cmem() :
+List<Operand> Smem_Cmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand s, c;
 }
 {
@@ -3654,9 +3654,9 @@ List Smem_Cmem() :
     }
 }
 
-List Xmem_Ymem() :
+List<Operand> Xmem_Ymem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
 }
 {
@@ -3667,9 +3667,9 @@ List Xmem_Ymem() :
     }
 }
 
-List ACx_Xmem_Ymem() :
+List<Operand> ACx_Xmem_Ymem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand x, y;
 }
@@ -3682,9 +3682,9 @@ List ACx_Xmem_Ymem() :
     }
 }
 
-List Xmem_Ymem_ACx_ACy() :
+List<Operand> Xmem_Ymem_ACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
     C55xRegisterOperand r1, r2;
 }
@@ -3698,9 +3698,9 @@ List Xmem_Ymem_ACx_ACy() :
     }
 }
 
-List Xmem_Ymem_Cmem() :
+List<Operand> Xmem_Ymem_Cmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y, c;
 }
 {
@@ -3712,9 +3712,9 @@ List Xmem_Ymem_Cmem() :
     }
 }
 
-List Xmem_Ymem_Cmem_ACx_ACy() :
+List<Operand> Xmem_Ymem_Cmem_ACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y, c;
     C55xRegisterOperand r1, r2;
 }
@@ -3730,9 +3730,9 @@ List Xmem_Ymem_Cmem_ACx_ACy() :
 }
 
 // K16 << #16, [ACx,] ACy
-List K16_LSHIFT_16_OPTACx_ACy() :
+List<Operand> K16_LSHIFT_16_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm, imm2; // imm2 = 16
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2 = null;
@@ -3750,9 +3750,9 @@ List K16_LSHIFT_16_OPTACx_ACy() :
 }
 
 // k16 << #16, [ACx,] ACy
-List k16_LSHIFT_16_OPTACx_ACy() :
+List<Operand> k16_LSHIFT_16_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm, imm2; // imm2 = 16
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2 = null;
@@ -3769,9 +3769,9 @@ List k16_LSHIFT_16_OPTACx_ACy() :
     }
 }
 
-List K16_LSHIFT_SHFT_OPTACx_ACy() :
+List<Operand> K16_LSHIFT_SHFT_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm, shft;
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2 = null;
@@ -3789,9 +3789,9 @@ List K16_LSHIFT_SHFT_OPTACx_ACy() :
 }
 
 // same as above, but k16 instead of K16, sigh
-List k16_LSHIFT_SHFT_OPTACx_ACy() :
+List<Operand> k16_LSHIFT_SHFT_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm, shft;
     C55xShiftOperand s;
     C55xRegisterOperand r1, r2 = null;
@@ -3809,9 +3809,9 @@ List k16_LSHIFT_SHFT_OPTACx_ACy() :
 }
 
 // Smem << Tx, [ACx,] ACy
-List Smem_LSHIFT_Tx_OPTACx_ACy() :
+List<Operand> Smem_LSHIFT_Tx_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2, r3 = null;
     C55xShiftOperand s;
@@ -3828,9 +3828,9 @@ List Smem_LSHIFT_Tx_OPTACx_ACy() :
     }
 }
 
-List Smem_LSHIFT_16_OPTACx_ACy() :
+List<Operand> Smem_LSHIFT_16_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm; // 16
     C55xRegisterOperand r1, r2 = null;
@@ -3848,9 +3848,9 @@ List Smem_LSHIFT_16_OPTACx_ACy() :
     }
 }
 
-List Smem_LSHIFT_16_ACx() :
+List<Operand> Smem_LSHIFT_16_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm; // 16
     C55xRegisterOperand r;
@@ -3865,9 +3865,9 @@ List Smem_LSHIFT_16_ACx() :
     }
 }
 
-List ACx_Smem_LSHIFT_16_ACy() :
+List<Operand> ACx_Smem_LSHIFT_16_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm; // 16
     C55xRegisterOperand r1, r2;
@@ -3886,7 +3886,7 @@ List ACx_Smem_LSHIFT_16_ACy() :
 
 boolean OPTT3EQ() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     Token t3 = null, eq = null;
 }
 {
@@ -3909,9 +3909,9 @@ C55xMemoryAccessOperand OPTT3EQ_Smem() :
     }
 }
 
-List OPTT3EQ_Smem_Cmem_ACx() :
+List<Operand> OPTT3EQ_Smem_Cmem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand s, c;
     C55xRegisterOperand r;
 }
@@ -3924,9 +3924,9 @@ List OPTT3EQ_Smem_Cmem_ACx() :
     }
 }
 
-List OPTT3EQ_Smem_OPTACx_ACy() :
+List<Operand> OPTT3EQ_Smem_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand s;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -3941,9 +3941,9 @@ List OPTT3EQ_Smem_OPTACx_ACy() :
     }
 }
 
-List OPTT3EQ_Smem_ACx() :
+List<Operand> OPTT3EQ_Smem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand s;
     C55xRegisterOperand r;
 }
@@ -3955,9 +3955,9 @@ List OPTT3EQ_Smem_ACx() :
     }
 }
 
-List OPTT3EQ_Smem_Tx_OPTACx_ACy() :
+List<Operand> OPTT3EQ_Smem_Tx_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand s;
     C55xRegisterOperand r1, r2, r3 = null;
 }
@@ -3973,9 +3973,9 @@ List OPTT3EQ_Smem_Tx_OPTACx_ACy() :
     }
 }
 
-List OPTT3EQ_Smem_Tx_ACx() :
+List<Operand> OPTT3EQ_Smem_Tx_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand s;
     C55xRegisterOperand r1, r2;
 }
@@ -3990,9 +3990,9 @@ List OPTT3EQ_Smem_Tx_ACx() :
 
 
 
-List OPTT3EQ_Smem_K8_OPTACx_ACy() :
+List<Operand> OPTT3EQ_Smem_K8_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand s;
     C55xRegisterOperand r1, r2 = null;
@@ -4009,9 +4009,9 @@ List OPTT3EQ_Smem_K8_OPTACx_ACy() :
     }
 }
 
-List OPTT3EQ_Smem_K8_ACx() :
+List<Operand> OPTT3EQ_Smem_K8_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xImmediateOperand imm;
     C55xMemoryAccessOperand s;
     C55xRegisterOperand r;
@@ -4141,9 +4141,9 @@ C55xMemoryAccessOperand OPTT3EQ_Xmem() :
 }
 
 
-List OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() :
+List<Operand> OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -4159,9 +4159,9 @@ List OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() :
     }
 }
 
-List OPTT3EQ_unsXmem_unsYmem_ACx() :
+List<Operand> OPTT3EQ_unsXmem_unsYmem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
     C55xRegisterOperand r;
 }
@@ -4174,9 +4174,9 @@ List OPTT3EQ_unsXmem_unsYmem_ACx() :
     }
 }
 
-List OPTT3EQ_unsXmem_unsYmem_ACx_RSHIFT_16_OPTACy() :
+List<Operand> OPTT3EQ_unsXmem_unsYmem_ACx_RSHIFT_16_OPTACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
     C55xRegisterOperand r1, r2 = null;
     C55xImmediateOperand imm; // 16
@@ -4216,9 +4216,9 @@ C55xLabelOperand OPTlabel() :
     }
 }
 
-List OPTlabel_cond() :
+List<Operand> OPTlabel_cond() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xConditionFieldOperand c;
     C55xLabelOperand l = null;
 }
@@ -4235,9 +4235,9 @@ List OPTlabel_cond() :
 
     // kps - this is really [label, ] cond,
     // but in the disassembly, there always is just the cond
-List OPTlabel_cond() :
+List<Operand> OPTlabel_cond() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xConditionFieldOperand c;
 }
 {
@@ -4323,9 +4323,9 @@ C55xRegisterOperand uns_rnd_HI_saturateACx() :
     }
 }
 
-List uns_rnd_HI_saturateACx_Smem() :
+List<Operand> uns_rnd_HI_saturateACx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -4423,9 +4423,9 @@ C55xShiftOperand uns_rnd_HI_saturateACxLSHIFT_Tx() :
     }
 }
 
-List uns_rnd_HI_saturateACxLSHIFT_Tx_Smem() :
+List<Operand> uns_rnd_HI_saturateACxLSHIFT_Tx_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xMemoryAccessOperand ma;
 }
@@ -4525,9 +4525,9 @@ C55xShiftOperand uns_rnd_HI_saturateACxLSHIFT_SHIFTW() :
     }
 }
 
-List uns_rnd_HI_saturateACxLSHIFT_SHIFTW_Smem() :
+List<Operand> uns_rnd_HI_saturateACxLSHIFT_SHIFTW_Smem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xMemoryAccessOperand ma;
 }
@@ -4563,9 +4563,9 @@ C55xRegisterOperand uns_SATURATE_ACx() :
     }
 }
 
-List uns_SATURATE_ACx_DBL_Lmem() :
+List<Operand> uns_SATURATE_ACx_DBL_Lmem() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r;
     C55xMemoryAccessOperand ma;
 }
@@ -4610,9 +4610,9 @@ C55xShiftOperand rnd_Smem_LSHIFT_Tx() :
     }
 }
 
-List rnd_Smem_LSHIFT_Tx_ACx() :
+List<Operand> rnd_Smem_LSHIFT_Tx_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xShiftOperand s;
     C55xRegisterOperand r;
 }
@@ -4624,9 +4624,9 @@ List rnd_Smem_LSHIFT_Tx_ACx() :
     }
 }
 
-List unsSmem_CARRY_OPTACx_ACy() :
+List<Operand> unsSmem_CARRY_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xBitOperand b;
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2 = null;
@@ -4643,9 +4643,9 @@ List unsSmem_CARRY_OPTACx_ACy() :
     }
 }
 
-List unsSmem_BORROW_OPTACx_ACy() :
+List<Operand> unsSmem_BORROW_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xBitOperand b;
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2 = null;
@@ -4662,9 +4662,9 @@ List unsSmem_BORROW_OPTACx_ACy() :
     }
 }
 
-List unsSmem_ACx() :
+List<Operand> unsSmem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r;
 }
@@ -4676,9 +4676,9 @@ List unsSmem_ACx() :
     }
 }
 
-List unsSmem_OPTACx_ACy() :
+List<Operand> unsSmem_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xRegisterOperand r1, r2 = null;
 }
@@ -4694,9 +4694,9 @@ List unsSmem_OPTACx_ACy() :
 }
 
 // [uns(]Smem[)] << #SHIFTW, ACx
-List unsSmem_LSHIFT_SHIFTW_ACx() :
+List<Operand> unsSmem_LSHIFT_SHIFTW_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm;
     C55xRegisterOperand r;
@@ -4712,9 +4712,9 @@ List unsSmem_LSHIFT_SHIFTW_ACx() :
 }
 
 // [uns(]Smem[)] << #SHIFTW, [ACx,] ACy
-List unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() :
+List<Operand> unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     C55xImmediateOperand imm;
     C55xRegisterOperand r1, r2 = null;
@@ -4733,9 +4733,9 @@ List unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() :
 }
 
 
-List Xmem_Ymem_ACx() :
+List<Operand> Xmem_Ymem_ACx() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x, y;
     C55xRegisterOperand r;
 }
@@ -4748,9 +4748,9 @@ List Xmem_Ymem_ACx() :
     }
 }
 
-List Tx_OPTACx_ACy() :
+List<Operand> Tx_OPTACx_ACy() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r1, r2, r3 = null;
 }
 {
@@ -4785,9 +4785,9 @@ C55xRegisterOperand T2()  : { Token t; } { t=<T2>  { return new C55xRegisterOper
 C55xRegisterOperand T3()  : { Token t; } { t=<T3>  { return new C55xRegisterOperand(t.image); } }
 
 // MISRG p.633
-List SwapOps() :
+List<Operand> SwapOps() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r, s;
 }
 {
@@ -4828,9 +4828,9 @@ C55xRegisterOperand PAIR_T0() : { C55xRegisterOperand r; }
 C55xRegisterOperand PAIR_T2() : { C55xRegisterOperand r; }
 { <PAIR> <LPAREN> r=T2() <RPAREN> { r.setPairMod(); return r; } }
 
-List SwappOps() :
+List<Operand> SwappOps() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r, s;
 }
 {
@@ -4858,9 +4858,9 @@ C55xRegisterOperand BLOCK_AR4() : { C55xRegisterOperand r; }
 C55xRegisterOperand BLOCK_T0() : { C55xRegisterOperand r; }
 { <BLOCK> <LPAREN> r=T0() <RPAREN> { r.setBlockMod(); return r; } }
 
-List Swap4Ops() :
+List<Operand> Swap4Ops() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r, s;
 }
 {
@@ -4881,9 +4881,9 @@ List Swap4Ops() :
 //////////////////////////////////////////////////////////////////////
 
 // XCA16 = Xmem, Cmem, Accumulator, shift by 16
-List P_XCA16() :
+List<Operand> P_XCA16() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand xma, cma;
     C55xRegisterOperand r;
     C55xImmediateOperand imm; // 16
@@ -4899,9 +4899,9 @@ List P_XCA16() :
     }
 }
 
-List P_YCA16() :
+List<Operand> P_YCA16() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand yma, cma;
     C55xRegisterOperand r;
     C55xImmediateOperand imm; // 16
@@ -4917,9 +4917,9 @@ List P_YCA16() :
     }
 }
 
-List P_XCA() :
+List<Operand> P_XCA() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand xma, cma;
     C55xRegisterOperand r;
 }
@@ -4932,9 +4932,9 @@ List P_XCA() :
     }
 }
 
-List P_YCA() :
+List<Operand> P_YCA() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand yma, cma;
     C55xRegisterOperand r;
 }
@@ -4947,9 +4947,9 @@ List P_YCA() :
     }
 }
 
-List P_HASTY() :
+List<Operand> P_HASTY() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xRegisterOperand r, t2;
     C55xShiftOperand s;
     C55xMemoryAccessOperand yma;
@@ -4964,9 +4964,9 @@ List P_HASTY() :
     }
 }
 
-List P_OXTA() :
+List<Operand> P_OXTA() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x;
     C55xRegisterOperand r1, r2;
 }
@@ -4979,9 +4979,9 @@ List P_OXTA() :
     }
 }
 
-List P_XS16AA() :
+List<Operand> P_XS16AA() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x;
     C55xRegisterOperand r1, r2;
     C55xImmediateOperand imm; // 16
@@ -4997,9 +4997,9 @@ List P_XS16AA() :
     }
 }
 
-List P_XS16A() :
+List<Operand> P_XS16A() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand x;
     C55xRegisterOperand r;
     C55xImmediateOperand imm; // 16
@@ -5014,9 +5014,9 @@ List P_XS16A() :
     }
 }
 
-List P_YS16A() :
+List<Operand> P_YS16A() :
 {
-    List list = new ArrayList();
+    List<Operand> list = new ArrayList<Operand>();
     C55xMemoryAccessOperand y;
     C55xRegisterOperand r;
     C55xImmediateOperand imm; // 16
@@ -5236,7 +5236,7 @@ List P_XCA_MPY_YCA() :
 // :: MAC[R][40] [uns(]Ymem[)], [uns(]Cmem[)], ACy
 List P_XCA16_MAC_YCA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List list = new ArrayList<Operand>(), l1, l2;
     Token t;
 }
 {
@@ -5285,7 +5285,7 @@ List P_XCA_MAC_YCA16() :
 
 // [T3 = ]Xmem, Tx, ACx
 // :: MOV Ymem << #16, ACy
-List P_OXTA_MOV_YS16A() :
+List<Operand> P_OXTA_MOV_YS16A() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5300,7 +5300,7 @@ List P_OXTA_MOV_YS16A() :
 } // e.g. macm::mov, masm::mov
 
 
-List P_YS16A_MACM_OXTA() :
+List<Operand> P_YS16A_MACM_OXTA() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5315,7 +5315,7 @@ List P_YS16A_MACM_OXTA() :
 }  // e.g. mov::macm
 
 
-List P_YS16A_MASM_OXTA() :
+List<Operand> P_YS16A_MASM_OXTA() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5332,7 +5332,7 @@ List P_YS16A_MASM_OXTA() :
 
 // [T3 = ]Xmem, Tx, ACy
 // :: MOV HI(ACx << T2), Ymem
-List P_OXTA_MOV_HASTY() :
+List<Operand> P_OXTA_MOV_HASTY() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5347,7 +5347,7 @@ List P_OXTA_MOV_HASTY() :
 } // e.g. macm::mov, masm::mov, mpym::mov
 
 
-List P_HASTY_MACM_OXTA() :
+List<Operand> P_HASTY_MACM_OXTA() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5362,7 +5362,7 @@ List P_HASTY_MACM_OXTA() :
 }  // e.g. mov::macm
 
 
-List P_HASTY_MASM_OXTA() :
+List<Operand> P_HASTY_MASM_OXTA() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5377,7 +5377,7 @@ List P_HASTY_MASM_OXTA() :
 }  // e.g. mov::masm
 
 
-List P_HASTY_MPYM_OXTA() :
+List<Operand> P_HASTY_MPYM_OXTA() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5394,7 +5394,7 @@ List P_HASTY_MPYM_OXTA() :
 
 // Xmem << #16, ACy
 // :: MOV HI(ACx << T2), Ymem
-List P_XS16A_MOV_HASTY() :
+List<Operand> P_XS16A_MOV_HASTY() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5409,7 +5409,7 @@ List P_XS16A_MOV_HASTY() :
 } // e.g. mov::mov, sub::mov
 
 
-List P_HASTY_MOV_XS16A() :
+List<Operand> P_HASTY_MOV_XS16A() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5424,7 +5424,7 @@ List P_HASTY_MOV_XS16A() :
 } // e.g. mov::mov
 
 
-List P_HASTY_SUB_XS16A() :
+List<Operand> P_HASTY_SUB_XS16A() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5441,7 +5441,7 @@ List P_HASTY_SUB_XS16A() :
 
 // ACx, ACy
 // :: NEXP ACx, Tx
-List P_AA_NEXP_AT() :
+List<Operand> P_AA_NEXP_AT() :
 {
     List list = new ArrayList(), l1, l2;
     Token t;
@@ -5486,7 +5486,7 @@ C55xOperation Oper() :
 {
     C55xOperation op = null;
     Token t = null, t2 = null;
-    List args = new ArrayList();
+    List<Operand> args = new ArrayList<Operand>();
     C55xBitOperand b;
     C55xConditionFieldOperand cf;
     C55xImmediateOperand imm;
