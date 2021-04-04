@@ -5035,9 +5035,10 @@ List<Operand> P_YS16A() :
 
 // Xmem << #16, ACx, ACy
 // :: mov HI(ACy << T2), Ymem
-List P_XS16AA_MOV_HASTY() :
+List<Object> P_XS16AA_MOV_HASTY() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5050,9 +5051,10 @@ List P_XS16AA_MOV_HASTY() :
 }  // e.g. add::mov
 
 
-List P_HASTY_ADD_XS16AA() :
+List<Object> P_HASTY_ADD_XS16AA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5067,9 +5069,10 @@ List P_HASTY_ADD_XS16AA() :
 
 // Xmem
 // :: mac[r][40] [uns(]Ymem[)], [uns(]Cmem[)], ACx
-List P_Xmem_MAC_YCA() :
+List<Object> P_Xmem_MAC_YCA() :
 {
-    List list = new ArrayList(), l1 = new ArrayList(), l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1 = new ArrayList<Operand>(), l2;
     C55xMemoryAccessOperand ma;
     Token t;
 }
@@ -5085,9 +5088,10 @@ List P_Xmem_MAC_YCA() :
 } // e.g. amar::mac
 
 
-List P_YCA_AMAR_Xmem() :
+List<Object> P_YCA_AMAR_Xmem() :
 {
-    List list = new ArrayList(), l1, l2 = new ArrayList();
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2 = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     Token t;
 }
@@ -5107,7 +5111,8 @@ List P_YCA_AMAR_Xmem() :
 // :: mas[r][40] [uns(]Ymem[)], [uns(]Cmem[)], ACx
 List P_Xmem_MAS_YCA() :
 {
-    List list = new ArrayList(), l1 = new ArrayList(), l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1 = new ArrayList<Operand>(), l2;
     C55xMemoryAccessOperand ma;
     Token t;
 }
@@ -5125,9 +5130,10 @@ List P_Xmem_MAS_YCA() :
 
 // Xmem
 // :: mpy[r][40] [uns(]Ymem[)], [uns(]Cmem[)], ACx
-List P_Xmem_MPY_YCA() :
+List<Object> P_Xmem_MPY_YCA() :
 {
-    List list = new ArrayList(), l1 = new ArrayList(), l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1 = new ArrayList<Operand>(), l2;
     C55xMemoryAccessOperand ma;
     Token t;
 }
@@ -5145,9 +5151,10 @@ List P_Xmem_MPY_YCA() :
 
 // Xmem
 // :: mac [uns(]Ymem[)], [uns(]Cmem[)], AC >> #16"
-List P_Xmem_MAC_YCA16() :
+List<Object> P_Xmem_MAC_YCA16() :
 {
-    List list = new ArrayList(), l1 = new ArrayList(), l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1 = new ArrayList<Operand>(), l2;
     C55xMemoryAccessOperand ma;
     Token t;
 }
@@ -5163,9 +5170,10 @@ List P_Xmem_MAC_YCA16() :
 } // e.g. amar::mac
 
 
-List P_YCA16_AMAR_Xmem()  :
+List<Object> P_YCA16_AMAR_Xmem()  :
 {
-    List list = new ArrayList(), l1, l2 = new ArrayList();
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2 = new ArrayList<Operand>();
     C55xMemoryAccessOperand ma;
     Token t;
 }
@@ -5187,9 +5195,10 @@ List P_YCA16_AMAR_Xmem()  :
 // :: MAS[R][40] [uns(]Ymem[)], [uns(]Cmem[)], ACy
 // [uns(]Xmem[)], [uns(]Cmem[)], ACx
 // :: MPY[R][40] [uns(]Ymem[)], [uns(]Cmem[)], ACy
-List P_XCA_MAC_YCA() :
+List<Object> P_XCA_MAC_YCA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5202,9 +5211,10 @@ List P_XCA_MAC_YCA() :
 }   // e.g. mac::mac, mas::mac, mpy::mac
 
 
-List P_XCA_MAS_YCA() :
+List<Object> P_XCA_MAS_YCA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5217,9 +5227,10 @@ List P_XCA_MAS_YCA() :
 }   // e.g. mac::mas, mas::mas, mpy::mas
 
 
-List P_XCA_MPY_YCA() :
+List<Object> P_XCA_MPY_YCA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5234,9 +5245,10 @@ List P_XCA_MPY_YCA() :
 
 // [uns(]Xmem[)], [uns(]Cmem[)], ACx >> #16
 // :: MAC[R][40] [uns(]Ymem[)], [uns(]Cmem[)], ACy
-List P_XCA16_MAC_YCA() :
+List<Object> P_XCA16_MAC_YCA() :
 {
-    List list = new ArrayList<Operand>(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5251,9 +5263,10 @@ List P_XCA16_MAC_YCA() :
 
 // [uns(]Xmem[)], [uns(]Cmem[)], ACx >> #16
 // :: MAC[R][40] [uns(]Ymem[)], [uns(]Cmem[)], ACy >> #16
-List P_XCA16_MAC_YCA16() :
+List<Object> P_XCA16_MAC_YCA16() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5268,9 +5281,10 @@ List P_XCA16_MAC_YCA16() :
 
 // [uns(]Xmem[)], [uns(]Cmem[)], ACx
 // :: MAC[R][40] [uns(]Ymem[)], [uns(]Cmem[)], ACy >> #16
-List P_XCA_MAC_YCA16() :
+List<Object> P_XCA_MAC_YCA16() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5285,9 +5299,10 @@ List P_XCA_MAC_YCA16() :
 
 // [T3 = ]Xmem, Tx, ACx
 // :: MOV Ymem << #16, ACy
-List<Operand> P_OXTA_MOV_YS16A() :
+List<Object> P_OXTA_MOV_YS16A() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5300,9 +5315,10 @@ List<Operand> P_OXTA_MOV_YS16A() :
 } // e.g. macm::mov, masm::mov
 
 
-List<Operand> P_YS16A_MACM_OXTA() :
+List<Object> P_YS16A_MACM_OXTA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5315,9 +5331,10 @@ List<Operand> P_YS16A_MACM_OXTA() :
 }  // e.g. mov::macm
 
 
-List<Operand> P_YS16A_MASM_OXTA() :
+List<Object> P_YS16A_MASM_OXTA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5332,9 +5349,10 @@ List<Operand> P_YS16A_MASM_OXTA() :
 
 // [T3 = ]Xmem, Tx, ACy
 // :: MOV HI(ACx << T2), Ymem
-List<Operand> P_OXTA_MOV_HASTY() :
+List<Object> P_OXTA_MOV_HASTY() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5347,9 +5365,10 @@ List<Operand> P_OXTA_MOV_HASTY() :
 } // e.g. macm::mov, masm::mov, mpym::mov
 
 
-List<Operand> P_HASTY_MACM_OXTA() :
+List<Object> P_HASTY_MACM_OXTA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5362,9 +5381,10 @@ List<Operand> P_HASTY_MACM_OXTA() :
 }  // e.g. mov::macm
 
 
-List<Operand> P_HASTY_MASM_OXTA() :
+List<Object> P_HASTY_MASM_OXTA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5377,9 +5397,10 @@ List<Operand> P_HASTY_MASM_OXTA() :
 }  // e.g. mov::masm
 
 
-List<Operand> P_HASTY_MPYM_OXTA() :
+List<Object> P_HASTY_MPYM_OXTA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5394,9 +5415,10 @@ List<Operand> P_HASTY_MPYM_OXTA() :
 
 // Xmem << #16, ACy
 // :: MOV HI(ACx << T2), Ymem
-List<Operand> P_XS16A_MOV_HASTY() :
+List<Object> P_XS16A_MOV_HASTY() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5409,9 +5431,10 @@ List<Operand> P_XS16A_MOV_HASTY() :
 } // e.g. mov::mov, sub::mov
 
 
-List<Operand> P_HASTY_MOV_XS16A() :
+List<Object> P_HASTY_MOV_XS16A() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5424,9 +5447,10 @@ List<Operand> P_HASTY_MOV_XS16A() :
 } // e.g. mov::mov
 
 
-List<Operand> P_HASTY_SUB_XS16A() :
+List<Object> P_HASTY_SUB_XS16A() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5441,9 +5465,10 @@ List<Operand> P_HASTY_SUB_XS16A() :
 
 // ACx, ACy
 // :: NEXP ACx, Tx
-List<Operand> P_AA_NEXP_AT() :
+List<Object> P_AA_NEXP_AT() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5456,9 +5481,10 @@ List<Operand> P_AA_NEXP_AT() :
 }  // e.g. mant::nexp
 
 
-List P_AT_MANT_AA() :
+List<Object> P_AT_MANT_AA() :
 {
-    List list = new ArrayList(), l1, l2;
+    List<Object> list = new ArrayList<Object>();
+    List<Operand> l1, l2;
     Token t;
 }
 {
@@ -5487,7 +5513,7 @@ C55xOperation Oper() :
     C55xOperation op = null;
     Token t = null, t2 = null;
     List<Operand> operandList = new ArrayList<Operand>();
-    List<Object> objList = new ArrayList<Object>();
+    List<Object> objectList = new ArrayList<Object>();
     C55xBitOperand b;
     C55xConditionFieldOperand cf;
     C55xImmediateOperand imm;
@@ -5526,8 +5552,8 @@ C55xOperation Oper() :
 
     | t=<ADD> (
                LOOKAHEAD(P_XS16AA_MOV_HASTY())
-               operandList = P_XS16AA_MOV_HASTY() {
-                   return m.make_ADD_p130_Instr(t.image, operandList, "add Xmem << #16, ACx, ACy :: mov HI(ACy << T2), Ymem");
+               objectList = P_XS16AA_MOV_HASTY() {
+                   return m.make_ADD_p130_Instr(t.image, objectList, "add Xmem << #16, ACx, ACy :: mov HI(ACy << T2), Ymem");
                } // p.130 add::mov
 
                |LOOKAHEAD(k4K16_OPTsrc_dst())
@@ -5659,23 +5685,23 @@ C55xOperation Oper() :
 
     | t=<AMAR> (
                 LOOKAHEAD(P_Xmem_MAC_YCA16())
-                operandList = P_Xmem_MAC_YCA16() {
-                    return m.make_AMAR_p153_Instr(t.image, operandList, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx >> #16");
+                objectList = P_Xmem_MAC_YCA16() {
+                    return m.make_AMAR_p153_Instr(t.image, objectList, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx >> #16");
                 } // amar::mac
 
                 |LOOKAHEAD(P_Xmem_MAC_YCA())
-                operandList = P_Xmem_MAC_YCA() {
-                    return m.make_AMAR_p151_Instr(t.image, operandList, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx");
+                objectList = P_Xmem_MAC_YCA() {
+                    return m.make_AMAR_p151_Instr(t.image, objectList, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx");
                 } // amar::mac
 
                 |LOOKAHEAD(P_Xmem_MAS_YCA())
-                operandList = P_Xmem_MAS_YCA() {
-                    return m.make_AMAR_p155_Instr(t.image, operandList, "amar Xmem :: mas [uns(]Ymem[)], [uns(]Cmem[)], ACx");
+                objectList = P_Xmem_MAS_YCA() {
+                    return m.make_AMAR_p155_Instr(t.image, objectList, "amar Xmem :: mas [uns(]Ymem[)], [uns(]Cmem[)], ACx");
                 } // amar::mas
 
                 |LOOKAHEAD(P_Xmem_MPY_YCA())
-                operandList = P_Xmem_MPY_YCA() {
-                    return m.make_AMAR_p157_Instr(t.image, operandList, "amar Xmem :: mpy [uns(]Ymem[)], [uns(]Cmem[)], ACx");
+                objectList = P_Xmem_MPY_YCA() {
+                    return m.make_AMAR_p157_Instr(t.image, objectList, "amar Xmem :: mpy [uns(]Ymem[)], [uns(]Cmem[)], ACx");
                 } // amar::mpy
 
                 |LOOKAHEAD(Smem_XAdst())
@@ -6018,43 +6044,43 @@ C55xOperation Oper() :
 
     | t=<MAC> (
                LOOKAHEAD(P_XCA16_MAC_YCA16())
-               operandList = P_XCA16_MAC_YCA16() {
-                   return m.make_MAC_p276_Instr(t.image, operandList, "mac :: XCA16_MAC_YCA16");
+               objectList = P_XCA16_MAC_YCA16() {
+                   return m.make_MAC_p276_Instr(t.image, objectList, "mac :: XCA16_MAC_YCA16");
                } // mac::mac
 
                |LOOKAHEAD(P_YCA16_AMAR_Xmem())
-               operandList = P_YCA16_AMAR_Xmem() {
-                   return m.make_AMAR_p153_Instr(t.image, operandList, "mac :: YCA16_AMAR_Xmem");
+               objectList = P_YCA16_AMAR_Xmem() {
+                   return m.make_AMAR_p153_Instr(t.image, objectList, "mac :: YCA16_AMAR_Xmem");
                } // amar::mac reverse
 
                |LOOKAHEAD(P_XCA16_MAC_YCA())
-               operandList = P_XCA16_MAC_YCA() {
-                   return m.make_MAC_p274_Instr(t.image, operandList, "mac :: XCA16_MAC_YCA");
+               objectList = P_XCA16_MAC_YCA() {
+                   return m.make_MAC_p274_Instr(t.image, objectList, "mac :: XCA16_MAC_YCA");
                } // mac::mac
 
                |LOOKAHEAD(P_XCA_MAC_YCA16())
-               operandList = P_XCA_MAC_YCA16() {
-                   return m.make_MAC_p274_Instr(t.image, operandList, "mac :: XCA_MAC_YCA16");
+               objectList = P_XCA_MAC_YCA16() {
+                   return m.make_MAC_p274_Instr(t.image, objectList, "mac :: XCA_MAC_YCA16");
                } // mac::mac reverse
 
                |LOOKAHEAD(P_YCA_AMAR_Xmem())
-               operandList = P_YCA_AMAR_Xmem() {
-                   return m.make_AMAR_p151_Instr(t.image, operandList, "mac :: YCA_AMAR_Xmem");
+               objectList = P_YCA_AMAR_Xmem() {
+                   return m.make_AMAR_p151_Instr(t.image, objectList, "mac :: YCA_AMAR_Xmem");
                } // amar::mac reverse
 
                |LOOKAHEAD(P_XCA_MAC_YCA())
-               operandList = P_XCA_MAC_YCA() {
-                   return m.make_MAC_p272_Instr(t.image, operandList, "mac :: XCA_MAC_YCA");
+               objectList = P_XCA_MAC_YCA() {
+                   return m.make_MAC_p272_Instr(t.image, objectList, "mac :: XCA_MAC_YCA");
                } // mac::mac
 
                |LOOKAHEAD(P_XCA_MAS_YCA())
-               operandList = P_XCA_MAS_YCA() {
-                   return m.make_MAS_p297_Instr(t.image, operandList, "mac :: XCA_MAS_YCA");
+               objectList = P_XCA_MAS_YCA() {
+                   return m.make_MAS_p297_Instr(t.image, objectList, "mac :: XCA_MAS_YCA");
                } // mas::mac reverse
 
                |LOOKAHEAD(P_XCA_MPY_YCA())
-               operandList = P_XCA_MPY_YCA() {
-                   return m.make_MAC_p278_Instr(t.image, operandList, "mac :: XCA_MPY_YCA");
+               objectList = P_XCA_MPY_YCA() {
+                   return m.make_MAC_p278_Instr(t.image, objectList, "mac :: XCA_MPY_YCA");
                } // mac::mpy
 
                |LOOKAHEAD(7)
@@ -6076,13 +6102,13 @@ C55xOperation Oper() :
 
 
     | t=<MACM> (LOOKAHEAD(P_OXTA_MOV_YS16A())
-                operandList = P_OXTA_MOV_YS16A() {
-                    return m.make_MACM_p281_Instr(t.image, operandList, "macm :: OXTA_MOV_YS16A");
+                objectList = P_OXTA_MOV_YS16A() {
+                    return m.make_MACM_p281_Instr(t.image, objectList, "macm :: OXTA_MOV_YS16A");
                 } // macm::mov
 
                 |LOOKAHEAD(P_OXTA_MOV_HASTY())
-                operandList = P_OXTA_MOV_HASTY() {
-                    return m.make_MACM_p283_Instr(t.image, operandList, "macm :: OXTA_MOV_HASTY");
+                objectList = P_OXTA_MOV_HASTY() {
+                    return m.make_MACM_p283_Instr(t.image, objectList, "macm :: OXTA_MOV_HASTY");
                 } // macm::mov
 
                 |LOOKAHEAD(OPTT3EQ_unsXmem_unsYmem_ACx_RSHIFT_16_OPTACy())
@@ -6127,36 +6153,36 @@ C55xOperation Oper() :
 
 
     | t=<MANT> (
-                operandList = P_AA_NEXP_AT() {
-                    return m.make_MANT_p285_Instr(t.image, operandList, "mant::nexp");
+                objectList = P_AA_NEXP_AT() {
+                    return m.make_MANT_p285_Instr(t.image, objectList, "mant::nexp");
                 } // p.285 mant::nexp
                 ) { Main.fatal("mant error"); }
 
 
     | t=<MAS> (
                LOOKAHEAD(P_YCA_AMAR_Xmem())
-               operandList = P_YCA_AMAR_Xmem() {
-                   return m.make_AMAR_p155_Instr(t.image, operandList, "mas:: YCA_AMAR_Xmem");
+               objectList = P_YCA_AMAR_Xmem() {
+                   return m.make_AMAR_p155_Instr(t.image, objectList, "mas:: YCA_AMAR_Xmem");
                } // amar::mas reverse
 
                |LOOKAHEAD(P_XCA_MAC_YCA16())
-               operandList = P_XCA_MAC_YCA16() {
-                   return m.make_MAS_p299_Instr(t.image, operandList, "mas:: XCA_MAC_YCA16");
+               objectList = P_XCA_MAC_YCA16() {
+                   return m.make_MAS_p299_Instr(t.image, objectList, "mas:: XCA_MAC_YCA16");
                } // mas::mac
 
                |LOOKAHEAD(P_XCA_MAC_YCA())
-               operandList = P_XCA_MAC_YCA() {
-                   return m.make_MAS_p297_Instr(t.image, operandList, "mas:: XCA_MAC_YCA");
+               objectList = P_XCA_MAC_YCA() {
+                   return m.make_MAS_p297_Instr(t.image, objectList, "mas:: XCA_MAC_YCA");
                } // mas::mac
 
                |LOOKAHEAD(P_XCA_MAS_YCA())
-               operandList = P_XCA_MAS_YCA() {
-                   return m.make_MAS_p301_Instr(t.image, operandList, "mas:: XCA_MAS_YCA");
+               objectList = P_XCA_MAS_YCA() {
+                   return m.make_MAS_p301_Instr(t.image, objectList, "mas:: XCA_MAS_YCA");
                } // mas::mas
 
                |LOOKAHEAD(P_XCA_MPY_YCA())
-               operandList = P_XCA_MPY_YCA() {
-                   return m.make_MAS_p304_Instr(t.image, operandList, "mas:: XCA_MPY_YCA");
+               objectList = P_XCA_MPY_YCA() {
+                   return m.make_MAS_p304_Instr(t.image, objectList, "mas:: XCA_MPY_YCA");
                } // mas::mpy
 
                | operandList = Tx_OPTACx_ACy() {
@@ -6167,13 +6193,13 @@ C55xOperation Oper() :
 
     | t=<MASM> (
                 LOOKAHEAD(P_OXTA_MOV_YS16A())
-                operandList = P_OXTA_MOV_YS16A() {
-                    return m.make_MASM_p307_Instr(t.image, operandList, "masm :: OXTA_MOV_YS16A");
+                objectList = P_OXTA_MOV_YS16A() {
+                    return m.make_MASM_p307_Instr(t.image, objectList, "masm :: OXTA_MOV_YS16A");
                 } // masm::mov
 
                 |LOOKAHEAD(P_OXTA_MOV_HASTY())
-                operandList = P_OXTA_MOV_HASTY()  {
-                    return m.make_MASM_p309_Instr(t.image, operandList, "masm :: OXTA_MOV_HASTY");
+                objectList = P_OXTA_MOV_HASTY()  {
+                    return m.make_MASM_p309_Instr(t.image, objectList, "masm :: OXTA_MOV_HASTY");
                 } // masm::mov
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Cmem_ACx())
@@ -6245,48 +6271,48 @@ C55xOperation Oper() :
 
     | t=<MOV> (
                LOOKAHEAD(P_XS16A_MOV_HASTY())
-               operandList = P_XS16A_MOV_HASTY() {
-                   return m.make_MOV_p413_Instr(t.image, operandList, "mov :: XS16A_MOV_HASTY");
+               objectList = P_XS16A_MOV_HASTY() {
+                   return m.make_MOV_p413_Instr(t.image, objectList, "mov :: XS16A_MOV_HASTY");
                } // mov::mov
 
                |LOOKAHEAD(P_HASTY_MOV_XS16A())
-               operandList = P_HASTY_MOV_XS16A() {
-                   return m.make_MOV_p413_Instr(t.image, operandList, "mov :: HASTY_MOV_XS16A");
+               objectList = P_HASTY_MOV_XS16A() {
+                   return m.make_MOV_p413_Instr(t.image, objectList, "mov :: HASTY_MOV_XS16A");
                } // mov::mov reverse
 
                |LOOKAHEAD(P_HASTY_SUB_XS16A())
-               operandList = P_HASTY_SUB_XS16A() {
-                   return m.make_SUB_p575_Instr(t.image, operandList, "mov :: HASTY_SUB_XS16A");
+               objectList = P_HASTY_SUB_XS16A() {
+                   return m.make_SUB_p575_Instr(t.image, objectList, "mov :: HASTY_SUB_XS16A");
                } // sub::mov reverse
 
                |LOOKAHEAD(P_YS16A_MACM_OXTA())
-               operandList = P_YS16A_MACM_OXTA() {
-                   return m.make_MACM_p281_Instr(t.image, operandList, "mov :: YS16A_MACM_OXTA");
+               objectList = P_YS16A_MACM_OXTA() {
+                   return m.make_MACM_p281_Instr(t.image, objectList, "mov :: YS16A_MACM_OXTA");
                } // macm::mov reverse
 
                |LOOKAHEAD(P_YS16A_MASM_OXTA())
-               operandList = P_YS16A_MASM_OXTA() {
-                   return m.make_MASM_p307_Instr(t.image, operandList, "mov :: YS16A_MASM_OXTA");
+               objectList = P_YS16A_MASM_OXTA() {
+                   return m.make_MASM_p307_Instr(t.image, objectList, "mov :: YS16A_MASM_OXTA");
                } // masm::mov reverse
 
                |LOOKAHEAD(P_HASTY_ADD_XS16AA())
-               operandList = P_HASTY_ADD_XS16AA() {
-                   return m.make_ADD_p130_Instr(t.image, operandList, "mov :: HASTY_ADD_XS16AA"); // reverse add::mov
+               objectList = P_HASTY_ADD_XS16AA() {
+                   return m.make_ADD_p130_Instr(t.image, objectList, "mov :: HASTY_ADD_XS16AA"); // reverse add::mov
                } // add::mov reverse
 
                |LOOKAHEAD(P_HASTY_MACM_OXTA())
-               operandList = P_HASTY_MACM_OXTA() {
-                   return m.make_MACM_p283_Instr(t.image, operandList, "mov :: HASTY_MACM_OXTA");
+               objectList = P_HASTY_MACM_OXTA() {
+                   return m.make_MACM_p283_Instr(t.image, objectList, "mov :: HASTY_MACM_OXTA");
                } // macm::mov reverse
 
                |LOOKAHEAD(P_HASTY_MASM_OXTA())
-               operandList = P_HASTY_MASM_OXTA() {
-                   return m.make_MASM_p309_Instr(t.image, operandList, "mov :: HASTY_MASM_OXTA");
+               objectList = P_HASTY_MASM_OXTA() {
+                   return m.make_MASM_p309_Instr(t.image, objectList, "mov :: HASTY_MASM_OXTA");
                } // masm::mov reverse
 
                |LOOKAHEAD(P_HASTY_MPYM_OXTA())
-               operandList = P_HASTY_MPYM_OXTA() {
-                   return m.make_MPYM_p432_Instr(t.image, operandList, "mov :: HASTY_MPYM_OXTA");
+               objectList = P_HASTY_MPYM_OXTA() {
+                   return m.make_MPYM_p432_Instr(t.image, objectList, "mov :: HASTY_MPYM_OXTA");
                } // mpym::mov reverse
 
                |LOOKAHEAD(rnd_Smem_LSHIFT_Tx_ACx())
@@ -6589,28 +6615,28 @@ C55xOperation Oper() :
 
     | t=<MPY> (
                LOOKAHEAD(P_YCA_AMAR_Xmem())
-               operandList = P_YCA_AMAR_Xmem() {
-                   return m.make_AMAR_p157_Instr(t.image, operandList, "mpy :: YCA_AMAR_Xmem()");
+               objectList = P_YCA_AMAR_Xmem() {
+                   return m.make_AMAR_p157_Instr(t.image, objectList, "mpy :: YCA_AMAR_Xmem()");
                } // amar::mpy reverse
 
                |LOOKAHEAD(P_XCA_MAC_YCA16())
-               operandList = P_XCA_MAC_YCA16() {
-                   return m.make_MPY_p428_Instr(t.image, operandList, "mpy :: XCA_MAC_YCA16");
+               objectList = P_XCA_MAC_YCA16() {
+                   return m.make_MPY_p428_Instr(t.image, objectList, "mpy :: XCA_MAC_YCA16");
                } // mpy::mac
 
                |LOOKAHEAD(P_XCA_MAC_YCA())
-               operandList = P_XCA_MAC_YCA() {
-                   return m.make_MAC_p278_Instr(t.image, operandList, "mpy :: XCA_MAC_YCA");
+               objectList = P_XCA_MAC_YCA() {
+                   return m.make_MAC_p278_Instr(t.image, objectList, "mpy :: XCA_MAC_YCA");
                } // mac::mpy reverse
 
                |LOOKAHEAD(P_XCA_MAS_YCA())
-               operandList = P_XCA_MAS_YCA() {
-                   return m.make_MAS_p304_Instr(t.image, operandList, "mpy :: XCA_MAS_YCA");
+               objectList = P_XCA_MAS_YCA() {
+                   return m.make_MAS_p304_Instr(t.image, objectList, "mpy :: XCA_MAS_YCA");
                } // mas::mpy reverse
 
                |LOOKAHEAD(P_XCA_MPY_YCA())
-               operandList = P_XCA_MPY_YCA() {
-                   return m.make_MPY_p430_Instr(t.image, operandList, "mpy :: XCA_MPY_YCA");
+               objectList = P_XCA_MPY_YCA() {
+                   return m.make_MPY_p430_Instr(t.image, objectList, "mpy :: XCA_MPY_YCA");
                } // mpy::mpy
 
                | operandList = OPTACx_ACy() {
@@ -6632,8 +6658,8 @@ C55xOperation Oper() :
 
     | t=<MPYM> (
                 LOOKAHEAD(P_OXTA_MOV_HASTY())
-                operandList = P_OXTA_MOV_HASTY() {
-                    return m.make_MPYM_p432_Instr(t.image, operandList, "mpym :: OXTA_MOV_HASTY");
+                objectList = P_OXTA_MOV_HASTY() {
+                    return m.make_MPYM_p432_Instr(t.image, objectList, "mpym :: OXTA_MOV_HASTY");
                 } // mpym::mov
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Cmem_ACx())
@@ -6673,8 +6699,8 @@ C55xOperation Oper() :
 
 
     | t=<NEXP> (
-                operandList = P_AT_MANT_AA() {
-                    return m.make_NEXP_p285_Instr(t.image, operandList, "nexp::mant");
+                objectList = P_AT_MANT_AA() {
+                    return m.make_NEXP_p285_Instr(t.image, objectList, "nexp::mant");
                 } // nexp::mant p.285
                 ) { Main.fatal("nexp error"); }
 
@@ -7031,8 +7057,8 @@ C55xOperation Oper() :
 
     | t=<SUB> (
                LOOKAHEAD(P_XS16AA_MOV_HASTY())
-               operandList = P_XS16AA_MOV_HASTY() {
-                   return m.make_SUB_p575_Instr(t.image, operandList, "sub :: XS16AA_MOV_HASTY");
+               objectList = P_XS16AA_MOV_HASTY() {
+                   return m.make_SUB_p575_Instr(t.image, objectList, "sub :: XS16AA_MOV_HASTY");
                } // sub::mov
 
                | LOOKAHEAD(ACx_DBL_Lmem_ACy())

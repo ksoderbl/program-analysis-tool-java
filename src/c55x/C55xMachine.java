@@ -979,12 +979,24 @@ public class C55xMachine extends Machine {
         return oper;
     }
 
+    @SuppressWarnings("unchecked")
+    private List<Operand> getOperandList(List<Object> objectList, int index) {
+        Object obj = objectList.get(index);
+        return (List<Operand>)obj;
+    }
+
+    @SuppressWarnings("unchecked")
+    private String getOpcode(List<Object> objectList, int index) {
+        Object obj = objectList.get(index);
+        return (String)obj;
+    }
+
     public C55xOperation make_ADD_p130_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         // ADD Xmem << #16, ACx, ACy :: MOV HI(ACy << T2), Ymem
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
@@ -1075,11 +1087,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_AMAR_p151_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1093,11 +1105,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_AMAR_p153_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1111,11 +1123,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_AMAR_p155_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1129,11 +1141,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_AMAR_p157_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1587,11 +1599,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAC_p272_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1605,11 +1617,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAC_p274_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1623,11 +1635,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAC_p276_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1641,11 +1653,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAC_p278_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1659,11 +1671,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MACM_p281_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1677,11 +1689,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MACM_p283_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1695,11 +1707,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MANT_p285_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX2, // TODO: X2 is typo?
@@ -1713,11 +1725,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_NEXP_p285_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                true, 3, 1, 0, 0, PipelineX2, // TODO: X2 is typo?
@@ -1771,11 +1783,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAS_p297_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1789,11 +1801,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAS_p299_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1807,11 +1819,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAS_p301_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1825,11 +1837,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MAS_p304_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1843,11 +1855,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MASM_p307_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -1861,11 +1873,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MASM_p309_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -2415,11 +2427,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MOV_p413_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -2500,11 +2512,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MPY_p428_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -2518,11 +2530,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MPY_p430_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -2536,11 +2548,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_MPYM_p432_Instr(
-                                            String opcode, List args_opcode2_args2,
+                                            String opcode, List<Object> objectList,
                                             String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
@@ -3171,11 +3183,11 @@ public class C55xMachine extends Machine {
     }
 
     public C55xOperation make_SUB_p575_Instr(
-                                           String opcode, List args_opcode2_args2,
+                                           String opcode, List<Object> objectList,
                                            String syntax) {
-        List args      =   (List) args_opcode2_args2.get(0);
-        String opcode2 = (String) args_opcode2_args2.get(1);
-        List args2     =   (List) args_opcode2_args2.get(2);
+        List<Operand> args = getOperandList(objectList, 0);
+        String opcode2 = getOpcode(objectList, 1);
+        List<Operand> args2 = getOperandList(objectList, 2);
 
         C55xOperation oper = new C55xOperation(opcode, args, syntax,
                                                false, 4, 1, 0, 0, PipelineX,
