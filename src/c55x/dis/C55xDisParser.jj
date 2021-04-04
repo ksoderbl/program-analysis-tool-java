@@ -916,7 +916,7 @@ List Address() :
 */
 
 // Dx Data address label coded on x bits (absolute address)
-C55xImmediateOperand D16() : { C55xImmediateOperand imm;} { imm = Literal() { return imm; }}
+C55xImmediateOperand D16() : { C55xImmediateOperand imm; } { imm = Literal() { return imm; }}
 
 // 8-bit and 16-bit literals are allowed to be linktime-relocatable;
 // for other literals, the value must be known at assembly time.
@@ -1093,7 +1093,7 @@ C55xMemoryAccessOperand Cmem() : // Coefficient operand, MISRG p. 12, 28 ... CDP
         return new C55xMemoryAccessOperand("Cmem", C55xMemoryAccessOperand.PLUSREGOFFSET, cdp, r2);
     }
     | <STAR> cdp=CDP() {
-        return new C55xMemoryAccessOperand("Cmem", C55xMemoryAccessOperand.NOTMOD, cdp);        
+        return new C55xMemoryAccessOperand("Cmem", C55xMemoryAccessOperand.NOTMOD, cdp);
     }
 }
 
@@ -1194,7 +1194,7 @@ C55xMemoryAccessOperand Smem2() : // single data mem access (16 bit), MISRG p. 1
 
     |LOOKAHEAD(<STAR> CDP())
          <STAR> cdp=CDP() {
-             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.NOTMOD, cdp);        
+             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.NOTMOD, cdp);
     }
                    
     |LOOKAHEAD(<STAR> <PLUS> CDP() <LPAREN> OPTHASH_K16() <RPAREN>)
@@ -1231,17 +1231,17 @@ C55xMemoryAccessOperand Smem2() : // single data mem access (16 bit), MISRG p. 1
                    
     |LOOKAHEAD(<STAR> ARx() <PLUS>)  // *ARn+
          <STAR> arx=ARx() <PLUS> {
-             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.POSTINC, arx);        
+             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.POSTINC, arx);
     }
 
     |LOOKAHEAD(<STAR> ARx() <MINUS>) // *ARn-
          <STAR> arx=ARx() <MINUS> {
-             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.POSTDEC, arx);        
+             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.POSTDEC, arx);
     }
 
     |LOOKAHEAD(<STAR> ARx())  // *ARn 
          <STAR> arx=ARx() {
-             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.NOTMOD, arx);        
+             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.NOTMOD, arx);
     }
                    
     |LOOKAHEAD(<STAR> <PLUS> ARx() <LPAREN> OPTHASH_K16() <RPAREN>)
@@ -1251,12 +1251,12 @@ C55xMemoryAccessOperand Smem2() : // single data mem access (16 bit), MISRG p. 1
                    
     |LOOKAHEAD(<STAR> <PLUS> ARx()) 
          <STAR> <PLUS> arx=ARx() {
-             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.PREINC, arx);        
+             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.PREINC, arx);
     }
 
     |LOOKAHEAD(<STAR> <MINUS> ARx()) 
          <STAR> <MINUS> arx=ARx() {
-             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.PREDEC, arx);        
+             return new C55xMemoryAccessOperand("Smem", C55xMemoryAccessOperand.PREDEC, arx);
     }
          
     |LOOKAHEAD(<STAR> <SP> <LPAREN> (<HASH>)? Expr() <RPAREN>)
@@ -1343,7 +1343,7 @@ C55xMemoryAccessOperand Ymem2() : // single data mem access (16 bit), MISRG p. 1
         return new C55xMemoryAccessOperand("Ymem", C55xMemoryAccessOperand.REGOFFSET, arx, r);
     }
     | <STAR> arx=ARx() {
-        return new C55xMemoryAccessOperand("Ymem", C55xMemoryAccessOperand.NOTMOD, arx);        
+        return new C55xMemoryAccessOperand("Ymem", C55xMemoryAccessOperand.NOTMOD, arx);
     }
 }
 
@@ -2169,7 +2169,7 @@ List<Operand> dst_1() :
 {
     // Expr() must equal 1 or -1
     r = dst() <COMMA> imm = Literal() {
-        list.add(r); 
+        list.add(r);
         list.add(imm);
         return list;
     }
@@ -5486,7 +5486,8 @@ C55xOperation Oper() :
 {
     C55xOperation op = null;
     Token t = null, t2 = null;
-    List<Operand> args = new ArrayList<Operand>();
+    List<Operand> operandList = new ArrayList<Operand>();
+    List<Object> objList = new ArrayList<Object>();
     C55xBitOperand b;
     C55xConditionFieldOperand cf;
     C55xImmediateOperand imm;
@@ -5496,297 +5497,297 @@ C55xOperation Oper() :
 }
 {
     t=<AADD> (
-              args = TAx_TAy() {
-                  return m.make_AADD_p95_Instr(t.image, args, "aadd TAx, TAy");
+              operandList = TAx_TAy() {
+                  return m.make_AADD_p95_Instr(t.image, operandList, "aadd TAx, TAy");
               } // p.95
               | LOOKAHEAD(P8_TAx())  
-              args = P8_TAx() {
-                  return m.make_AADD_p97_Instr(t.image, args, "aadd P8, TAx"); 
+              operandList = P8_TAx() {
+                  return m.make_AADD_p97_Instr(t.image, operandList, "aadd P8, TAx");
               } // p.97
-              | args = K8_SP() {
-                  return m.make_AADD_p98_Instr(t.image, args, "aadd K8, SP"); 
+              | operandList = K8_SP() {
+                  return m.make_AADD_p98_Instr(t.image, operandList, "aadd K8, SP");
               } // p.98
               ) { Main.fatal("aadd error"); }
 
 
     | t=<ABDST> (
-                 args = Xmem_Ymem_ACx_ACy() {
-                     return m.make_ABDST_p99_Instr(t.image, args, "abdst Xmem, Ymem, ACx, ACy"); 
+                 operandList = Xmem_Ymem_ACx_ACy() {
+                     return m.make_ABDST_p99_Instr(t.image, operandList, "abdst Xmem, Ymem, ACx, ACy");
                  } // p.99
                ) { Main.fatal("abdst error"); }
 
 
     | t=<ABS> (
-               args = OPTsrc_dst() {
-                   return m.make_ABS_p101_Instr(t.image, args, "abs [src,] dst"); 
+               operandList = OPTsrc_dst() {
+                   return m.make_ABS_p101_Instr(t.image, operandList, "abs [src,] dst");
                } // p.101
                ) { Main.fatal("abs error"); }
 
 
     | t=<ADD> (
                LOOKAHEAD(P_XS16AA_MOV_HASTY())
-               args = P_XS16AA_MOV_HASTY() {
-                   return m.make_ADD_p130_Instr(t.image, args, "add Xmem << #16, ACx, ACy :: mov HI(ACy << T2), Ymem"); 
+               operandList = P_XS16AA_MOV_HASTY() {
+                   return m.make_ADD_p130_Instr(t.image, operandList, "add Xmem << #16, ACx, ACy :: mov HI(ACy << T2), Ymem");
                } // p.130 add::mov
 
                |LOOKAHEAD(k4K16_OPTsrc_dst())
-               args = k4K16_OPTsrc_dst() {
-                   return m.make_ADD_p107_Instr(t.image, args, "add k4|K16, [src,], dst"); 
+               operandList = k4K16_OPTsrc_dst() {
+                   return m.make_ADD_p107_Instr(t.image, operandList, "add k4|K16, [src,], dst");
                } // p.107,8
 
                | LOOKAHEAD(Smem_OPTsrc_dst())
-               args = Smem_OPTsrc_dst() {
-                   return m.make_ADD_p110_Instr(t.image, args, "add Smem, [src,], dst"); 
+               operandList = Smem_OPTsrc_dst() {
+                   return m.make_ADD_p110_Instr(t.image, operandList, "add Smem, [src,], dst");
                } // p.110
 
                | LOOKAHEAD(ACx_LSHIFT_Tx_ACy())
-               args = ACx_LSHIFT_Tx_ACy() {
-                   return m.make_ADD_p112_Instr(t.image, args, "add ACx << Tx, ACy"); 
+               operandList = ACx_LSHIFT_Tx_ACy() {
+                   return m.make_ADD_p112_Instr(t.image, operandList, "add ACx << Tx, ACy");
                } // p.112
 
                | LOOKAHEAD(ACx_LSHIFT_SHIFTW_ACy())
-               args = ACx_LSHIFT_SHIFTW_ACy() {
-                   return m.make_ADD_p113_Instr(t.image, args, "add ACx << #SHIFTW, ACy"); 
+               operandList = ACx_LSHIFT_SHIFTW_ACy() {
+                   return m.make_ADD_p113_Instr(t.image, operandList, "add ACx << #SHIFTW, ACy");
                } // p.113
 
                | LOOKAHEAD(K16_LSHIFT_16_OPTACx_ACy())
-               args = K16_LSHIFT_16_OPTACx_ACy() {
-                   return m.make_ADD_p114_Instr(t.image, args, "add K16 << #16, [ACx,], ACy");
+               operandList = K16_LSHIFT_16_OPTACx_ACy() {
+                   return m.make_ADD_p114_Instr(t.image, operandList, "add K16 << #16, [ACx,], ACy");
                } // p.114
 
                | LOOKAHEAD(K16_LSHIFT_SHFT_OPTACx_ACy())
-               args = K16_LSHIFT_SHFT_OPTACx_ACy() {
-                   return m.make_ADD_p115_Instr(t.image, args, "add K16 << #SHFT, [ACx,], ACy");
+               operandList = K16_LSHIFT_SHFT_OPTACx_ACy() {
+                   return m.make_ADD_p115_Instr(t.image, operandList, "add K16 << #SHFT, [ACx,], ACy");
                } // p.115
 
                | LOOKAHEAD(Smem_LSHIFT_Tx_OPTACx_ACy())
-               args = Smem_LSHIFT_Tx_OPTACx_ACy() {
-                   return m.make_ADD_p116_Instr(t.image, args, "add Smem << Tx, [ACx,], ACy");
+               operandList = Smem_LSHIFT_Tx_OPTACx_ACy() {
+                   return m.make_ADD_p116_Instr(t.image, operandList, "add Smem << Tx, [ACx,], ACy");
                } // p.116
 
                /*| LOOKAHEAD(Smem_LSHIFT_16_OPTACx_ACy())
-               args = Smem_LSHIFT_16_OPTACx_ACy() {
-                   return m.make_ADD_p118_Instr(t.image, args, "add Smem << #16, [ACx,], ACy");
+               operandList = Smem_LSHIFT_16_OPTACx_ACy() {
+                   return m.make_ADD_p118_Instr(t.image, operandList, "add Smem << #16, [ACx,], ACy");
                    } // p.118 */
 
                | LOOKAHEAD(unsSmem_CARRY_OPTACx_ACy())
-               args = unsSmem_CARRY_OPTACx_ACy() {
-                   return m.make_ADD_p119_Instr(t.image, args, "add [uns(]Smem[)], CARRY, [ACx,] ACy"); 
+               operandList = unsSmem_CARRY_OPTACx_ACy() {
+                   return m.make_ADD_p119_Instr(t.image, operandList, "add [uns(]Smem[)], CARRY, [ACx,] ACy");
                } // p.119
 
                | LOOKAHEAD(unsSmem_OPTACx_ACy())
-               args = unsSmem_OPTACx_ACy()  {
-                   return m.make_ADD_p120_Instr(t.image, args, "add [uns(]Smem[)], [ACx,] ACy"); 
+               operandList = unsSmem_OPTACx_ACy()  {
+                   return m.make_ADD_p120_Instr(t.image, operandList, "add [uns(]Smem[)], [ACx,] ACy");
                } // p.120
 
                | LOOKAHEAD(unsSmem_LSHIFT_SHIFTW_OPTACx_ACy())
-               args = unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() {
-                   return m.make_ADD_p121_Instr(t.image, args, "add [uns(]Smem[)] << #SHIFTW, [ACx,] ACy"); 
+               operandList = unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() {
+                   return m.make_ADD_p121_Instr(t.image, operandList, "add [uns(]Smem[)] << #SHIFTW, [ACx,] ACy");
                } // p.121
 
-               | args = DBL_Lmem_OPTACx_ACy() {
-                   return m.make_ADD_p122_Instr(t.image, args, "add dbl(Lmem), [ACx,] ACy"); 
+               | operandList = DBL_Lmem_OPTACx_ACy() {
+                   return m.make_ADD_p122_Instr(t.image, operandList, "add dbl(Lmem), [ACx,] ACy");
                } // p.122
 
                | LOOKAHEAD(Xmem_Ymem_ACx())
-               args = Xmem_Ymem_ACx() {
-                   return m.make_ADD_p123_Instr(t.image, args, "add Xmem, Ymem, ACx"); 
+               operandList = Xmem_Ymem_ACx() {
+                   return m.make_ADD_p123_Instr(t.image, operandList, "add Xmem, Ymem, ACx");
                } // p.123
 
-               | args = K16_Smem() {
-                   return m.make_ADD_p124_Instr(t.image, args, "add K16, Smem"); 
+               | operandList = K16_Smem() {
+                   return m.make_ADD_p124_Instr(t.image, operandList, "add K16, Smem");
                } // p.124
 
                | LOOKAHEAD(DUAL_Lmem_Tx_ACx())
-               args = DUAL_Lmem_Tx_ACx() {
-                   return m.make_ADD_p128_Instr(t.image, args, "add dual(Lmem), Tx, ACx"); 
+               operandList = DUAL_Lmem_Tx_ACx() {
+                   return m.make_ADD_p128_Instr(t.image, operandList, "add dual(Lmem), Tx, ACx");
                } // p.128
 
-               | args = DUAL_Lmem_OPTACx_ACy() {
-                   return m.make_ADD_p126_Instr(t.image, args, "add dual(Lmem), [ACx,] ACy"); 
+               | operandList = DUAL_Lmem_OPTACx_ACy() {
+                   return m.make_ADD_p126_Instr(t.image, operandList, "add dual(Lmem), [ACx,] ACy");
                } // p.126
 
                | LOOKAHEAD(OPTsrc_dst())
-               args = OPTsrc_dst() {
-                   return m.make_ADD_p106_Instr(t.image, args, "add [src,] dst"); 
+               operandList = OPTsrc_dst() {
+                   return m.make_ADD_p106_Instr(t.image, operandList, "add [src,] dst");
                } // p.106
                ) { Main.fatal("add error"); }
 
 
     | t=<ADDSUB> (
                   LOOKAHEAD(Tx_Smem_ACx())
-                  args = Tx_Smem_ACx() {
-                      return m.make_ADDSUB_p133_Instr(t.image, args, "addsub Tx, Smem, ACx"); 
+                  operandList = Tx_Smem_ACx() {
+                      return m.make_ADDSUB_p133_Instr(t.image, operandList, "addsub Tx, Smem, ACx");
                   } // p.133
 
                   |LOOKAHEAD(Tx_DUAL_Lmem_ACx())
-                  args = Tx_DUAL_Lmem_ACx() {
-                      return m.make_ADDSUB_p135_Instr(t.image, args, "addsub Tx, dual(Lmem), ACx"); 
+                  operandList = Tx_DUAL_Lmem_ACx() {
+                      return m.make_ADDSUB_p135_Instr(t.image, operandList, "addsub Tx, dual(Lmem), ACx");
                   } // p.135
 
-                  |args = DUAL_Lmem_Tx_ACx() { // for some reason disassmbler changes order of Tx and dual(Lmem) of p135 instr.
-                      return m.make_ADDSUB_p135_Instr(t.image, args, "addsub dual(Lmem), Tx, ACx"); 
+                  |operandList = DUAL_Lmem_Tx_ACx() { // for some reason disassmbler changes order of Tx and dual(Lmem) of p135 instr.
+                      return m.make_ADDSUB_p135_Instr(t.image, operandList, "addsub dual(Lmem), Tx, ACx");
                   } // p.135
                   ) { Main.fatal("addsub error"); }
 
 
     | t=<ADDSUBCC> (
                     LOOKAHEAD(Smem_ACx_TCx_ACy())
-                    args = Smem_ACx_TCx_ACy() {
-                        return m.make_ADDSUBCC_p137_Instr(t.image, args, "addsubcc Smem, ACx, TCx, ACy"); 
+                    operandList = Smem_ACx_TCx_ACy() {
+                        return m.make_ADDSUBCC_p137_Instr(t.image, operandList, "addsubcc Smem, ACx, TCx, ACy");
                     } // p.137
 
-                    | args = Smem_ACx_TC1_TC2_ACy() {
-                        return m.make_ADDSUBCC_p139_Instr(t.image, args, "addsubcc Smem, ACx, TC1, TC2, ACy"); 
+                    | operandList = Smem_ACx_TC1_TC2_ACy() {
+                        return m.make_ADDSUBCC_p139_Instr(t.image, operandList, "addsubcc Smem, ACx, TC1, TC2, ACy");
                     } // p.139
                     ) { Main.fatal("addsubcc error"); }
 
 
     | t=<ADDSUB2CC> (
-                     args = Smem_ACx_Tx_TC1_TC2_ACy() {
-                         return m.make_ADDSUB2CC_p141_Instr(t.image, args, "addsubcc Smem, ACx, Tx, TC1, TC2, ACy"); 
+                     operandList = Smem_ACx_Tx_TC1_TC2_ACy() {
+                         return m.make_ADDSUB2CC_p141_Instr(t.image, operandList, "addsubcc Smem, ACx, Tx, TC1, TC2, ACy");
                      } // p.141
                      ) { Main.fatal("addsub2cc error"); }
     
 
     | t=<ADDV> (
-                args = OPTACx_ACy() {
-                    return m.make_ADDV_p144_Instr(t.image, args, "addv [ACx,] ACy");
+                operandList = OPTACx_ACy() {
+                    return m.make_ADDV_p144_Instr(t.image, operandList, "addv [ACx,] ACy");
                 } // p.144
                 ) { Main.fatal("addv error"); }
 
 
     | t=<AMAR> (
                 LOOKAHEAD(P_Xmem_MAC_YCA16())
-                args = P_Xmem_MAC_YCA16() {
-                    return m.make_AMAR_p153_Instr(t.image, args, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx >> #16"); 
+                operandList = P_Xmem_MAC_YCA16() {
+                    return m.make_AMAR_p153_Instr(t.image, operandList, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx >> #16");
                 } // amar::mac
 
                 |LOOKAHEAD(P_Xmem_MAC_YCA())
-                args = P_Xmem_MAC_YCA() {
-                    return m.make_AMAR_p151_Instr(t.image, args, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx"); 
+                operandList = P_Xmem_MAC_YCA() {
+                    return m.make_AMAR_p151_Instr(t.image, operandList, "amar Xmem :: mac [uns(]Ymem[)], [uns(]Cmem[)], ACx");
                 } // amar::mac
 
                 |LOOKAHEAD(P_Xmem_MAS_YCA())
-                args = P_Xmem_MAS_YCA() {
-                    return m.make_AMAR_p155_Instr(t.image, args, "amar Xmem :: mas [uns(]Ymem[)], [uns(]Cmem[)], ACx"); 
+                operandList = P_Xmem_MAS_YCA() {
+                    return m.make_AMAR_p155_Instr(t.image, operandList, "amar Xmem :: mas [uns(]Ymem[)], [uns(]Cmem[)], ACx");
                 } // amar::mas
 
                 |LOOKAHEAD(P_Xmem_MPY_YCA())
-                args = P_Xmem_MPY_YCA() {
-                    return m.make_AMAR_p157_Instr(t.image, args, "amar Xmem :: mpy [uns(]Ymem[)], [uns(]Cmem[)], ACx"); 
+                operandList = P_Xmem_MPY_YCA() {
+                    return m.make_AMAR_p157_Instr(t.image, operandList, "amar Xmem :: mpy [uns(]Ymem[)], [uns(]Cmem[)], ACx");
                 } // amar::mpy
 
                 |LOOKAHEAD(Smem_XAdst())
-                args = Smem_XAdst() {
-                    return m.make_AMAR_p148_Instr(t.image, args, "amar Smem, XAdst"); 
+                operandList = Smem_XAdst() {
+                    return m.make_AMAR_p148_Instr(t.image, operandList, "amar Smem, XAdst");
                 } // p.148
 
                 |LOOKAHEAD(Xmem_Ymem_Cmem())
-                args = Xmem_Ymem_Cmem() {
-                    return m.make_AMAR_p149_Instr(t.image, args, "amar Xmem, Ymem, Cmem"); 
+                operandList = Xmem_Ymem_Cmem() {
+                    return m.make_AMAR_p149_Instr(t.image, operandList, "amar Xmem, Ymem, Cmem");
                 } // p.149
 
                 | ma = Smem() {
-                    args.add(ma);
-                    return m.make_AMAR_p146_Instr(t.image, args, "amar Smem"); 
+                    operandList.add(ma);
+                    return m.make_AMAR_p146_Instr(t.image, operandList, "amar Smem");
                 } // p.146
                 ) { Main.fatal("amar error"); }
 
 
     | t=<AMOV> (
                 LOOKAHEAD(k23_XAdst())
-                args = k23_XAdst() {
-                    return m.make_AMOV_p159_Instr(t.image, args, "amov k23, XAdst"); 
+                operandList = k23_XAdst() {
+                    return m.make_AMOV_p159_Instr(t.image, operandList, "amov k23, XAdst");
                 } // p.159
 
-                | args = TAx_TAy() {
-                    return m.make_AMOV_p161_Instr(t.image, args, "amov TAx, TAy"); 
+                | operandList = TAx_TAy() {
+                    return m.make_AMOV_p161_Instr(t.image, operandList, "amov TAx, TAy");
                 } // p.161
 
-                | args = P8D16_TAx() {
-                    return m.make_AMOV_p162_Instr(t.image, args, "amov P8|D16, TAx"); 
+                | operandList = P8D16_TAx() {
+                    return m.make_AMOV_p162_Instr(t.image, operandList, "amov P8|D16, TAx");
                 } // p.162-3
                 ) { Main.fatal("amov error"); }
 
 
     | t=<AND> (
                LOOKAHEAD(k8k16_OPTsrc_dst())
-               args = k8k16_OPTsrc_dst() {
-                   return m.make_AND_p166_Instr(t.image, args, "and k8|k16, src, dst"); 
+               operandList = k8k16_OPTsrc_dst() {
+                   return m.make_AND_p166_Instr(t.image, operandList, "and k8|k16, src, dst");
                } // p.166
 
-               | args =  Smem_OPTsrc_dst() {
-                   return m.make_AND_p168_Instr(t.image, args, "and Smem, src, dst"); 
+               | operandList =  Smem_OPTsrc_dst() {
+                   return m.make_AND_p168_Instr(t.image, operandList, "and Smem, src, dst");
                } // p.168
 
                | LOOKAHEAD(ACx_LSHIFT_SHIFTW_OPTACy())
-               args = ACx_LSHIFT_SHIFTW_OPTACy() {
-                   return m.make_AND_p169_Instr(t.image, args, "and ACx << #SHIFTW [,ACy]"); 
+               operandList = ACx_LSHIFT_SHIFTW_OPTACy() {
+                   return m.make_AND_p169_Instr(t.image, operandList, "and ACx << #SHIFTW [,ACy]");
                } // p.169
 
                | LOOKAHEAD(k16_LSHIFT_16_OPTACx_ACy())
-               args = k16_LSHIFT_16_OPTACx_ACy() {
-                   return m.make_AND_p170_Instr(t.image, args, "and k16 << #16, [ACx,] ACy"); 
+               operandList = k16_LSHIFT_16_OPTACx_ACy() {
+                   return m.make_AND_p170_Instr(t.image, operandList, "and k16 << #16, [ACx,] ACy");
                } // p.170
 
                | LOOKAHEAD(k16_LSHIFT_SHFT_OPTACx_ACy())
-               args = k16_LSHIFT_SHFT_OPTACx_ACy() {
-                   return m.make_AND_p171_Instr(t.image, args, "and k16 << #SHFT, [ACx,] ACy"); 
+               operandList = k16_LSHIFT_SHFT_OPTACx_ACy() {
+                   return m.make_AND_p171_Instr(t.image, operandList, "and k16 << #SHFT, [ACx,] ACy");
                } // p.171
 
-               | args =  k16_Smem() {
-                   return m.make_AND_p172_Instr(t.image, args, "and k16, Smem"); 
+               | operandList =  k16_Smem() {
+                   return m.make_AND_p172_Instr(t.image, operandList, "and k16, Smem");
                } // p.172
 
-               | args =  OPTsrc_dst() {
-                   return m.make_AND_p165_Instr(t.image, args, "and src, dst"); 
+               | operandList =  OPTsrc_dst() {
+                   return m.make_AND_p165_Instr(t.image, operandList, "and src, dst");
                } // p.165
                ) { Main.fatal("and error"); }
 
 
     | t=<ASUB> (
-                args = TAx_TAy() {
-                    return m.make_ASUB_p174_Instr(t.image, args, "asub TAx, TAy"); 
+                operandList = TAx_TAy() {
+                    return m.make_ASUB_p174_Instr(t.image, operandList, "asub TAx, TAy");
                 } // p.174
-                | args =  P8_TAx() {
-                    return m.make_ASUB_p176_Instr(t.image, args, "asub P8, TAx"); 
+                | operandList =  P8_TAx() {
+                    return m.make_ASUB_p176_Instr(t.image, operandList, "asub P8, TAx");
                 } // p.176
                 ) { Main.fatal("asub error"); }
 
 
     | t=<B> (
              r = ACx() {
-                 args.add(r);
-                 return m.make_B_p178_Instr(t.image, args, "b ACx"); 
+                 operandList.add(r);
+                 return m.make_B_p178_Instr(t.image, operandList, "b ACx");
              } // p.178
              | target = Address() {
-                 args.add(target);
-                 return m.make_B_p179_Instr(t.image, args, "b L7|L16|P24"); 
+                 operandList.add(target);
+                 return m.make_B_p179_Instr(t.image, operandList, "b L7|L16|P24");
              }
              ) { Main.fatal("b error"); }
 
 
     | t=<BAND> (
-                args = Smem_k16_TCx() {
-                    return m.make_BAND_p181_Instr(t.image, args, "band Smem, k16, TCx"); 
+                operandList = Smem_k16_TCx() {
+                    return m.make_BAND_p181_Instr(t.image, operandList, "band Smem, k16, TCx");
                 } // p.181
                 ) { Main.fatal("band error"); }
 
 
     | t=<BCC> (
                LOOKAHEAD(Address_cond())
-               args = Address_cond() {
-                   return m.make_BCC_p182_Instr(t.image, args, "bcc label, cond"); 
+               operandList = Address_cond() {
+                   return m.make_BCC_p182_Instr(t.image, operandList, "bcc label, cond");
                } // p.182-5
 
                |LOOKAHEAD(L8_src_RELOP_K8())
-               args = L8_src_RELOP_K8() {
-                   return m.make_BCC_p189_Instr(t.image, args, "bcc L8, src RELOP K8"); 
+               operandList = L8_src_RELOP_K8() {
+                   return m.make_BCC_p189_Instr(t.image, operandList, "bcc L8, src RELOP K8");
                } //p.189
 
-               |args = L16_ARn_mod_NE_0() {
-                   return m.make_BCC_p186_Instr(t.image, args, "bcc L16, ARn_mod != #0"); 
+               |operandList = L16_ARn_mod_NE_0() {
+                   return m.make_BCC_p186_Instr(t.image, operandList, "bcc L16, ARn_mod != #0");
                } //p.186
 
 
@@ -5795,937 +5796,937 @@ C55xOperation Oper() :
 
     | t=<BCLR> ( 
                 LOOKAHEAD(Baddr_src())
-                args = Baddr_src() {
-                    return m.make_BCLR_p192_Instr(t.image, args, "bclr Baddr, src"); 
+                operandList = Baddr_src() {
+                    return m.make_BCLR_p192_Instr(t.image, operandList, "bclr Baddr, src");
                 } // p.192
 
-                | args =  src_Smem() {
-                    return m.make_BCLR_p193_Instr(t.image, args, "bclr src, Smem"); 
+                | operandList =  src_Smem() {
+                    return m.make_BCLR_p193_Instr(t.image, operandList, "bclr src, Smem");
                 } // p.193
 
                 | LOOKAHEAD(k4_STx())
-                args = k4_STx() {
-                    return m.make_BCLR_p194_No1234_Instr(t.image, args, "bclr k4, STx"); 
+                operandList = k4_STx() {
+                    return m.make_BCLR_p194_No1234_Instr(t.image, operandList, "bclr k4, STx");
                 } // p.194
 
                 | b = fname()  {
-                    args.add(b);
-                    return m.make_BCLR_p194_No5_Instr(t.image, args, "bclr f-name"); 
+                    operandList.add(b);
+                    return m.make_BCLR_p194_No5_Instr(t.image, operandList, "bclr f-name");
                 } // p.194
 
                 ) { Main.fatal("bclr error"); }
 
 
     | t=<BCNT> (
-                args = ACx_ACy_TCx_Tx() {
-                    return m.make_BCNT_p197_Instr(t.image, args, "bcnt ACx, ACy, TCx, Tx"); 
+                operandList = ACx_ACy_TCx_Tx() {
+                    return m.make_BCNT_p197_Instr(t.image, operandList, "bcnt ACx, ACy, TCx, Tx");
                 } // p.197
                 ) { Main.fatal("bcnt error"); }
 
 
     | t=<BFXPA> (
-                 args = k16_ACx_dst() {
-                     return m.make_BFXPA_p198_Instr(t.image, args, "bfxpa k16, ACx, dst"); 
+                 operandList = k16_ACx_dst() {
+                     return m.make_BFXPA_p198_Instr(t.image, operandList, "bfxpa k16, ACx, dst");
                  } // p.198
                  ) { Main.fatal("bfxpa error"); }
 
 
     | t=<BFXTR> (
-                 args = k16_ACx_dst() {
-                     return m.make_BFXTR_p199_Instr(t.image, args, "bfxtr k16, ACx, dst"); 
+                 operandList = k16_ACx_dst() {
+                     return m.make_BFXTR_p199_Instr(t.image, operandList, "bfxtr k16, ACx, dst");
                  } // p.199
                  ) { Main.fatal("bfxtr error"); }
 
 
     | t=<BNOT> (
                 LOOKAHEAD(Baddr_src())
-                args = Baddr_src() {
-                    return m.make_BNOT_p200_Instr(t.image, args, "bnot Baddr, src"); 
+                operandList = Baddr_src() {
+                    return m.make_BNOT_p200_Instr(t.image, operandList, "bnot Baddr, src");
                 } // p.200
-                | args =  src_Smem() {
-                    return m.make_BNOT_p201_Instr(t.image, args, "bnot src, Smem"); 
+                | operandList =  src_Smem() {
+                    return m.make_BNOT_p201_Instr(t.image, operandList, "bnot src, Smem");
                 } // p.201
                 ) { Main.fatal("bnot error"); }
 
 
     | t=<BSET> (
               LOOKAHEAD(Baddr_src())
-              args = Baddr_src() {
-                  return m.make_BSET_p202_Instr(t.image, args, "bset Baddr, src"); 
+              operandList = Baddr_src() {
+                  return m.make_BSET_p202_Instr(t.image, operandList, "bset Baddr, src");
               } // p.202
 
-              | args =  src_Smem() {
-                  return m.make_BSET_p203_Instr(t.image, args, "bset src, Smem"); 
+              | operandList =  src_Smem() {
+                  return m.make_BSET_p203_Instr(t.image, operandList, "bset src, Smem");
               } // p.203
 
               |LOOKAHEAD(k4_STx())
-              args = k4_STx() {
-                  return m.make_BSET_p204_No1234_Instr(t.image, args, "bset k4, STx"); 
+              operandList = k4_STx() {
+                  return m.make_BSET_p204_No1234_Instr(t.image, operandList, "bset k4, STx");
               } // p.204
 
               | b = fname()  {
-                  args.add(b);
-                  return m.make_BSET_p204_No5_Instr(t.image, args, "bset f-name"); 
+                  operandList.add(b);
+                  return m.make_BSET_p204_No5_Instr(t.image, operandList, "bset f-name");
               } // p.204
               )
 
 
     | t=<BTST> (
                 LOOKAHEAD(Baddr_src_TCx())
-                args = Baddr_src_TCx() {
-                    return m.make_BTST_p207_Instr(t.image, args, "btst Baddr, src, TCx"); 
+                operandList = Baddr_src_TCx() {
+                    return m.make_BTST_p207_Instr(t.image, operandList, "btst Baddr, src, TCx");
                 } // p.207
 
-                | args =  src_Smem_TCx()  {
-                    return m.make_BTST_p210_Instr(t.image, args, "btst src, Smem, TCx"); 
+                | operandList =  src_Smem_TCx()  {
+                    return m.make_BTST_p210_Instr(t.image, operandList, "btst src, Smem, TCx");
                 } // p.210
 
-                | args =  k4_Smem_TCx()  {
-                    return m.make_BTST_p211_Instr(t.image, args, "btst k4, Smem, TCx"); 
+                | operandList =  k4_Smem_TCx()  {
+                    return m.make_BTST_p211_Instr(t.image, operandList, "btst k4, Smem, TCx");
                 } // p.211
 
                 ) { Main.fatal("btst error"); }
 
 
     | t=<BTSTCLR> (
-                   args = k4_Smem_TCx()  {
-                       return m.make_BTSTCLR_p212_Instr(t.image, args, "btstclr k4, Smem, TCx"); 
+                   operandList = k4_Smem_TCx()  {
+                       return m.make_BTSTCLR_p212_Instr(t.image, operandList, "btstclr k4, Smem, TCx");
                    } // p.212
                 ) { Main.fatal("btstclr error"); }
 
 
     | t=<BTSTNOT> (
-                   args = k4_Smem_TCx()  {
-                       return m.make_BTSTNOT_p213_Instr(t.image, args, "btstclr k4, Smem, TCx"); 
+                   operandList = k4_Smem_TCx()  {
+                       return m.make_BTSTNOT_p213_Instr(t.image, operandList, "btstclr k4, Smem, TCx");
                    } // p.213
                 ) { Main.fatal("btstnot error"); }
 
 
     | t=<BTSTP> (
-                 args = Baddr_src() {
-                     return m.make_BTSTP_p214_Instr(t.image, args, "btstp Baddr, src"); 
+                 operandList = Baddr_src() {
+                     return m.make_BTSTP_p214_Instr(t.image, operandList, "btstp Baddr, src");
                  } // p.214
                 ) { Main.fatal("btstp error"); }
 
 
     | t=<BTSTSET> (
-                   args = k4_Smem_TCx() {
-                       return m.make_BTSTSET_p216_Instr(t.image, args, "btstset k4, Smem, TCx"); 
+                   operandList = k4_Smem_TCx() {
+                       return m.make_BTSTSET_p216_Instr(t.image, operandList, "btstset k4, Smem, TCx");
                    } // p.216
                 ) { Main.fatal("btstset error"); }
 
 
     | t=<CALL> (
                 r = ACx() {
-                    args.add(r);
-                    return m.make_CALL_p218_Instr(t.image, args, "call ACx"); 
+                    operandList.add(r);
+                    return m.make_CALL_p218_Instr(t.image, operandList, "call ACx");
                 } // p.218
 
                 | target = Address() {
-                    args.add(target);
-                    return m.make_CALL_p219_Instr(t.image, args, "call label"); 
+                    operandList.add(target);
+                    return m.make_CALL_p219_Instr(t.image, operandList, "call label");
                 } // p.219-20
                 ) { Main.fatal("call error"); }
 
 
     | t=<CALLCC> (
-                  args = Address_cond() {
-                      return m.make_CALLCC_p223_Instr(t.image, args, "callcc label, cond"); 
+                  operandList = Address_cond() {
+                      return m.make_CALLCC_p223_Instr(t.image, operandList, "callcc label, cond");
                   } // p.223
                 ) { Main.fatal("callcc error"); }
 
 
     | t=<CMP> (
                LOOKAHEAD(Smem_EQ_K16_TCx())
-               args = Smem_EQ_K16_TCx() {
-                   return m.make_CMP_p227_Instr(t.image, args, "cmp Smem == K16, TCx"); 
+               operandList = Smem_EQ_K16_TCx() {
+                   return m.make_CMP_p227_Instr(t.image, operandList, "cmp Smem == K16, TCx");
                } // p.227
 
-               | args = src_RELOP_dst_TCx() {
-                   return m.make_CMP_p229_Instr(t.image, args, "cmp src RELOP dst, TCx"); 
+               | operandList = src_RELOP_dst_TCx() {
+                   return m.make_CMP_p229_Instr(t.image, operandList, "cmp src RELOP dst, TCx");
                } // p.229
                 ) { Main.fatal("cmp error"); }
 
 
     | t=<CMPU> (
-                args = src_RELOP_dst_TCx() {
-                    return m.make_CMPU_p229_Instr(t.image, args, "cmpu src RELOP dst, TCx"); 
+                operandList = src_RELOP_dst_TCx() {
+                    return m.make_CMPU_p229_Instr(t.image, operandList, "cmpu src RELOP dst, TCx");
                 } // p.229
                 ) { Main.fatal("cmpu error"); }
 
 
     | t=<CMPAND> (
-                  args = src_RELOP_dst_OPTBANG_TCy_TCx() {
-                      return m.make_CMPAND_p231_Instr(t.image, args, "cmpand src RELOP dst, [!]TCy, TCx"); 
+                  operandList = src_RELOP_dst_OPTBANG_TCy_TCx() {
+                      return m.make_CMPAND_p231_Instr(t.image, operandList, "cmpand src RELOP dst, [!]TCy, TCx");
                   } // p.231
                   ) { Main.fatal("cmpand error"); }
 
 
     | t=<CMPOR> (
-                 args = src_RELOP_dst_OPTBANG_TCy_TCx() {
-                     return m.make_CMPOR_p236_Instr(t.image, args, "cmpor src RELOP dst, [!]TCy, TCx"); 
+                 operandList = src_RELOP_dst_OPTBANG_TCy_TCx() {
+                     return m.make_CMPOR_p236_Instr(t.image, operandList, "cmpor src RELOP dst, [!]TCy, TCx");
                  } // p.236
                   ) { Main.fatal("cmpor error"); }
 
 
     | t=<DELAY> (
                  ma = Smem() {
-                     args.add(ma);
-                     return m.make_DELAY_p242_Instr(t.image, args, "delay Smem"); 
+                     operandList.add(ma);
+                     return m.make_DELAY_p242_Instr(t.image, operandList, "delay Smem");
                  } // p.242
                  ) { Main.fatal("delay error"); }
 
 
     | t=<EXP> (
-               args = ACx_Tx() {
-                   return m.make_EXP_p243_Instr(t.image, args, "exp ACx, Tx"); 
+               operandList = ACx_Tx() {
+                   return m.make_EXP_p243_Instr(t.image, operandList, "exp ACx, Tx");
                } // p.243
                  ) { Main.fatal("exp error"); }
 
 
     | t=<FIRSADD> (
-                   args = Xmem_Ymem_Cmem_ACx_ACy() {
-                       return m.make_FIRSADD_p244_Instr(t.image, args, "firsadd Xmem, Ymem, Cmem, ACx, ACy"); 
+                   operandList = Xmem_Ymem_Cmem_ACx_ACy() {
+                       return m.make_FIRSADD_p244_Instr(t.image, operandList, "firsadd Xmem, Ymem, Cmem, ACx, ACy");
                    } // p.244
                    ) { Main.fatal("firsadd error"); }
 
     | t=<FIRSSUB> (
-                   args = Xmem_Ymem_Cmem_ACx_ACy() {
-                       return m.make_FIRSSUB_p246_Instr(t.image, args, "firssub Xmem, Ymem, Cmem, ACx, ACy"); 
+                   operandList = Xmem_Ymem_Cmem_ACx_ACy() {
+                       return m.make_FIRSSUB_p246_Instr(t.image, operandList, "firssub Xmem, Ymem, Cmem, ACx, ACy");
                    } // p.246
                    ) { Main.fatal("firssub error"); }
 
     | t=<IDLE> {
-        return m.make_IDLE_p248_Instr(t.image, args, "idle"); 
+        return m.make_IDLE_p248_Instr(t.image, operandList, "idle");
     } // p.248
 
 
     | t=<INTR> (
                 imm = k5() {
-                    args.add(imm);
-                    return m.make_INTR_p249_Instr(t.image, args, "intr k5"); 
+                    operandList.add(imm);
+                    return m.make_INTR_p249_Instr(t.image, operandList, "intr k5");
                 } // p.249
                 ) { Main.fatal("intr error"); }
 
 
     | t=<LMS> (
-               args = Xmem_Ymem_ACx_ACy() {
-                   return m.make_LMS_p251_Instr(t.image, args, "lms Xmem, Ymem, ACx, ACy"); 
+               operandList = Xmem_Ymem_ACx_ACy() {
+                   return m.make_LMS_p251_Instr(t.image, operandList, "lms Xmem, Ymem, ACx, ACy");
                } // p.251
                ) { Main.fatal("lms error"); }
 
 
     | t=<MAC> (
                LOOKAHEAD(P_XCA16_MAC_YCA16())
-               args = P_XCA16_MAC_YCA16() {
-                   return m.make_MAC_p276_Instr(t.image, args, "mac :: XCA16_MAC_YCA16"); 
+               operandList = P_XCA16_MAC_YCA16() {
+                   return m.make_MAC_p276_Instr(t.image, operandList, "mac :: XCA16_MAC_YCA16");
                } // mac::mac
 
                |LOOKAHEAD(P_YCA16_AMAR_Xmem())
-               args = P_YCA16_AMAR_Xmem() {
-                   return m.make_AMAR_p153_Instr(t.image, args, "mac :: YCA16_AMAR_Xmem"); 
+               operandList = P_YCA16_AMAR_Xmem() {
+                   return m.make_AMAR_p153_Instr(t.image, operandList, "mac :: YCA16_AMAR_Xmem");
                } // amar::mac reverse
 
                |LOOKAHEAD(P_XCA16_MAC_YCA())
-               args = P_XCA16_MAC_YCA() {
-                   return m.make_MAC_p274_Instr(t.image, args, "mac :: XCA16_MAC_YCA"); 
+               operandList = P_XCA16_MAC_YCA() {
+                   return m.make_MAC_p274_Instr(t.image, operandList, "mac :: XCA16_MAC_YCA");
                } // mac::mac
 
                |LOOKAHEAD(P_XCA_MAC_YCA16())
-               args = P_XCA_MAC_YCA16() {
-                   return m.make_MAC_p274_Instr(t.image, args, "mac :: XCA_MAC_YCA16"); 
+               operandList = P_XCA_MAC_YCA16() {
+                   return m.make_MAC_p274_Instr(t.image, operandList, "mac :: XCA_MAC_YCA16");
                } // mac::mac reverse
 
                |LOOKAHEAD(P_YCA_AMAR_Xmem())
-               args = P_YCA_AMAR_Xmem() {
-                   return m.make_AMAR_p151_Instr(t.image, args, "mac :: YCA_AMAR_Xmem"); 
+               operandList = P_YCA_AMAR_Xmem() {
+                   return m.make_AMAR_p151_Instr(t.image, operandList, "mac :: YCA_AMAR_Xmem");
                } // amar::mac reverse
 
                |LOOKAHEAD(P_XCA_MAC_YCA())
-               args = P_XCA_MAC_YCA() {
-                   return m.make_MAC_p272_Instr(t.image, args, "mac :: XCA_MAC_YCA"); 
+               operandList = P_XCA_MAC_YCA() {
+                   return m.make_MAC_p272_Instr(t.image, operandList, "mac :: XCA_MAC_YCA");
                } // mac::mac
 
                |LOOKAHEAD(P_XCA_MAS_YCA())
-               args = P_XCA_MAS_YCA() {
-                   return m.make_MAS_p297_Instr(t.image, args, "mac :: XCA_MAS_YCA"); 
+               operandList = P_XCA_MAS_YCA() {
+                   return m.make_MAS_p297_Instr(t.image, operandList, "mac :: XCA_MAS_YCA");
                } // mas::mac reverse
 
                |LOOKAHEAD(P_XCA_MPY_YCA())
-               args = P_XCA_MPY_YCA() {
-                   return m.make_MAC_p278_Instr(t.image, args, "mac :: XCA_MPY_YCA"); 
+               operandList = P_XCA_MPY_YCA() {
+                   return m.make_MAC_p278_Instr(t.image, operandList, "mac :: XCA_MPY_YCA");
                } // mac::mpy
 
                |LOOKAHEAD(7)
-               args = ACxy_Tx_ACyx_ACy() {
-                   return m.make_MAC_p257_Instr(t.image, args, "mac ACxy, Tx, ACyx, ACy"); 
+               operandList = ACxy_Tx_ACyx_ACy() {
+                   return m.make_MAC_p257_Instr(t.image, operandList, "mac ACxy, Tx, ACyx, ACy");
                } // p.257
 
-               | args = ACx_Tx_ACy() {
-                   return m.make_MAC_p256_Instr(t.image, args, "mac ACx, Tx, ACy"); 
+               | operandList = ACx_Tx_ACy() {
+                   return m.make_MAC_p256_Instr(t.image, operandList, "mac ACx, Tx, ACy");
                } // p.256
                ) { Main.fatal("mac error"); }
 
 
     | t=<MACK> (
-                args = Tx_K8K16_OPTACx_ACy() {
-                    return m.make_MACK_p258_Instr(t.image, args, "mack Tx, Kx, [ACx,] ACy"); 
+                operandList = Tx_K8K16_OPTACx_ACy() {
+                    return m.make_MACK_p258_Instr(t.image, operandList, "mack Tx, Kx, [ACx,] ACy");
                 } // p.258, 259
                 ) { Main.fatal("mack error"); }
 
 
     | t=<MACM> (LOOKAHEAD(P_OXTA_MOV_YS16A())
-                args = P_OXTA_MOV_YS16A() {
-                    return m.make_MACM_p281_Instr(t.image, args, "macm :: OXTA_MOV_YS16A"); 
+                operandList = P_OXTA_MOV_YS16A() {
+                    return m.make_MACM_p281_Instr(t.image, operandList, "macm :: OXTA_MOV_YS16A");
                 } // macm::mov
 
                 |LOOKAHEAD(P_OXTA_MOV_HASTY())
-                args = P_OXTA_MOV_HASTY() {
-                    return m.make_MACM_p283_Instr(t.image, args, "macm :: OXTA_MOV_HASTY"); 
+                operandList = P_OXTA_MOV_HASTY() {
+                    return m.make_MACM_p283_Instr(t.image, operandList, "macm :: OXTA_MOV_HASTY");
                 } // macm::mov
 
                 |LOOKAHEAD(OPTT3EQ_unsXmem_unsYmem_ACx_RSHIFT_16_OPTACy())
-                args = OPTT3EQ_unsXmem_unsYmem_ACx_RSHIFT_16_OPTACy() {
-                    return m.make_MACM_p267_Instr(t.image, args, "macm[r][40] [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], ACx >> #16[, ACy]"); 
+                operandList = OPTT3EQ_unsXmem_unsYmem_ACx_RSHIFT_16_OPTACy() {
+                    return m.make_MACM_p267_Instr(t.image, operandList, "macm[r][40] [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], ACx >> #16[, ACy]");
                 } // p.267
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Cmem_ACx())
-                args = OPTT3EQ_Smem_Cmem_ACx() {
-                    return m.make_MACM_p260_Instr(t.image, args, "macm [T3 =]Smem, Cmem, ACx"); 
+                operandList = OPTT3EQ_Smem_Cmem_ACx() {
+                    return m.make_MACM_p260_Instr(t.image, operandList, "macm [T3 =]Smem, Cmem, ACx");
                 } // p.260
 
                 |LOOKAHEAD(OPTT3EQ_Smem_OPTACx_ACy())
-                args = OPTT3EQ_Smem_OPTACx_ACy() {
-                    return m.make_MACM_p262_Instr(t.image, args, "macm [T3 =]Smem, [ACx,] ACy"); 
+                operandList = OPTT3EQ_Smem_OPTACx_ACy() {
+                    return m.make_MACM_p262_Instr(t.image, operandList, "macm [T3 =]Smem, [ACx,] ACy");
                 } // p.262
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Tx_OPTACx_ACy())
-                args = OPTT3EQ_Smem_Tx_OPTACx_ACy() {
-                    return m.make_MACM_p263_Instr(t.image, args, "macm [T3 =]Smem, Tx, [ACx,] ACy"); 
+                operandList = OPTT3EQ_Smem_Tx_OPTACx_ACy() {
+                    return m.make_MACM_p263_Instr(t.image, operandList, "macm [T3 =]Smem, Tx, [ACx,] ACy");
                 } // p.263
 
                 |LOOKAHEAD(OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy())
-                args = OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() {                   
-                    return m.make_MACM_p265_Instr(t.image, args, "macm[r][40] [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], [ACx,] ACy"); 
+                operandList = OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() {                   
+                    return m.make_MACM_p265_Instr(t.image, operandList, "macm[r][40] [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], [ACx,] ACy");
                 } // p.265
                 ) { Main.fatal("macm error"); }
 
 
     | t=<MACMK> (
-                 args = OPTT3EQ_Smem_K8_OPTACx_ACy() {
-                     return m.make_MACMK_p264_Instr(t.image, args, "macmk [T3 = ]Smem, K8, [ACx,] ACy"); 
+                 operandList = OPTT3EQ_Smem_K8_OPTACx_ACy() {
+                     return m.make_MACMK_p264_Instr(t.image, operandList, "macmk [T3 = ]Smem, K8, [ACx,] ACy");
                  } // p.264
                  ) { Main.fatal("macmk error"); }
 
 
     | t=<MACMZ> (
-                 args = OPTT3EQ_Smem_Cmem_ACx() {
-                     return m.make_MACMZ_p269_Instr(t.image, args, "macmz [T3 = ]Smem, Cmem, ACx"); 
+                 operandList = OPTT3EQ_Smem_Cmem_ACx() {
+                     return m.make_MACMZ_p269_Instr(t.image, operandList, "macmz [T3 = ]Smem, Cmem, ACx");
                  } // p.269
                  ) { Main.fatal("macmz error"); }
 
 
     | t=<MANT> (
-                args = P_AA_NEXP_AT() {
-                    return m.make_MANT_p285_Instr(t.image, args, "mant::nexp"); 
+                operandList = P_AA_NEXP_AT() {
+                    return m.make_MANT_p285_Instr(t.image, operandList, "mant::nexp");
                 } // p.285 mant::nexp
                 ) { Main.fatal("mant error"); }
 
 
     | t=<MAS> (
                LOOKAHEAD(P_YCA_AMAR_Xmem())
-               args = P_YCA_AMAR_Xmem() {
-                   return m.make_AMAR_p155_Instr(t.image, args, "mas:: YCA_AMAR_Xmem"); 
+               operandList = P_YCA_AMAR_Xmem() {
+                   return m.make_AMAR_p155_Instr(t.image, operandList, "mas:: YCA_AMAR_Xmem");
                } // amar::mas reverse
 
                |LOOKAHEAD(P_XCA_MAC_YCA16())
-               args = P_XCA_MAC_YCA16() {
-                   return m.make_MAS_p299_Instr(t.image, args, "mas:: XCA_MAC_YCA16"); 
+               operandList = P_XCA_MAC_YCA16() {
+                   return m.make_MAS_p299_Instr(t.image, operandList, "mas:: XCA_MAC_YCA16");
                } // mas::mac
 
                |LOOKAHEAD(P_XCA_MAC_YCA())
-               args = P_XCA_MAC_YCA() {
-                   return m.make_MAS_p297_Instr(t.image, args, "mas:: XCA_MAC_YCA"); 
+               operandList = P_XCA_MAC_YCA() {
+                   return m.make_MAS_p297_Instr(t.image, operandList, "mas:: XCA_MAC_YCA");
                } // mas::mac
 
                |LOOKAHEAD(P_XCA_MAS_YCA())
-               args = P_XCA_MAS_YCA() {
-                   return m.make_MAS_p301_Instr(t.image, args, "mas:: XCA_MAS_YCA"); 
+               operandList = P_XCA_MAS_YCA() {
+                   return m.make_MAS_p301_Instr(t.image, operandList, "mas:: XCA_MAS_YCA");
                } // mas::mas
 
                |LOOKAHEAD(P_XCA_MPY_YCA())
-               args = P_XCA_MPY_YCA() {
-                   return m.make_MAS_p304_Instr(t.image, args, "mas:: XCA_MPY_YCA"); 
+               operandList = P_XCA_MPY_YCA() {
+                   return m.make_MAS_p304_Instr(t.image, operandList, "mas:: XCA_MPY_YCA");
                } // mas::mpy
 
-               | args = Tx_OPTACx_ACy() {
-                   return m.make_MAS_p288_Instr(t.image, args, "mas Tx, [ACx,] ACy"); 
+               | operandList = Tx_OPTACx_ACy() {
+                   return m.make_MAS_p288_Instr(t.image, operandList, "mas Tx, [ACx,] ACy");
                } // p.288
                ) { Main.fatal("mas error"); }
 
 
     | t=<MASM> (
                 LOOKAHEAD(P_OXTA_MOV_YS16A())
-                args = P_OXTA_MOV_YS16A() {
-                    return m.make_MASM_p307_Instr(t.image, args, "masm :: OXTA_MOV_YS16A"); 
+                operandList = P_OXTA_MOV_YS16A() {
+                    return m.make_MASM_p307_Instr(t.image, operandList, "masm :: OXTA_MOV_YS16A");
                 } // masm::mov
 
                 |LOOKAHEAD(P_OXTA_MOV_HASTY())
-                args = P_OXTA_MOV_HASTY()  {
-                    return m.make_MASM_p309_Instr(t.image, args, "masm :: OXTA_MOV_HASTY"); 
+                operandList = P_OXTA_MOV_HASTY()  {
+                    return m.make_MASM_p309_Instr(t.image, operandList, "masm :: OXTA_MOV_HASTY");
                 } // masm::mov
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Cmem_ACx())
-                args = OPTT3EQ_Smem_Cmem_ACx() {
-                    return m.make_MASM_p290_Instr(t.image, args, "masm [T3 =]Smem, Cmem, ACx"); 
+                operandList = OPTT3EQ_Smem_Cmem_ACx() {
+                    return m.make_MASM_p290_Instr(t.image, operandList, "masm [T3 =]Smem, Cmem, ACx");
                 } // p.290
 
                 |LOOKAHEAD(OPTT3EQ_Smem_OPTACx_ACy())
-                args = OPTT3EQ_Smem_OPTACx_ACy() {
-                    return m.make_MASM_p292_Instr(t.image, args, "masm [T3 =]Smem, [ACx,] ACy"); 
+                operandList = OPTT3EQ_Smem_OPTACx_ACy() {
+                    return m.make_MASM_p292_Instr(t.image, operandList, "masm [T3 =]Smem, [ACx,] ACy");
                 } // p.292
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Tx_OPTACx_ACy())
-                args = OPTT3EQ_Smem_Tx_OPTACx_ACy() {
-                    return m.make_MASM_p293_Instr(t.image, args, "masm [T3 =]Smem, Tx, [ACx,] ACy"); 
+                operandList = OPTT3EQ_Smem_Tx_OPTACx_ACy() {
+                    return m.make_MASM_p293_Instr(t.image, operandList, "masm [T3 =]Smem, Tx, [ACx,] ACy");
                 } // p.293
 
                 |LOOKAHEAD(OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy())
-                args = OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() {
-                    return m.make_MASM_p294_Instr(t.image, args, "masm [T3 =][uns(]Xmem[)], [uns(]Ymem[)], [ACx,] ACy"); 
+                operandList = OPTT3EQ_unsXmem_unsYmem_OPTACx_ACy() {
+                    return m.make_MASM_p294_Instr(t.image, operandList, "masm [T3 =][uns(]Xmem[)], [uns(]Ymem[)], [ACx,] ACy");
                 } // p.294
                ) { Main.fatal("masm error"); }
 
     | t=<MAX> (
-               args = OPTsrc_dst() {
-                   return m.make_MAX_p311_Instr(t.image, args, "max [src,] dst"); 
+               operandList = OPTsrc_dst() {
+                   return m.make_MAX_p311_Instr(t.image, operandList, "max [src,] dst");
                } // p.311
                ) { Main.fatal("max error"); }
 
 
     | t=<MAXDIFF> (
-                   args = ACx_ACy_ACz_ACw() {
-                       return m.make_MAXDIFF_p315_Instr(t.image, args, "maxdiff ACx, ACy, ACz, ACw"); 
+                   operandList = ACx_ACy_ACz_ACw() {
+                       return m.make_MAXDIFF_p315_Instr(t.image, operandList, "maxdiff ACx, ACy, ACz, ACw");
                    } // p.315
                    ) { Main.fatal("maxdiff error"); }
 
 
     | t=<DMAXDIFF> (
-                    args = ACx_ACy_ACz_ACw_TRNx() {
-                        return m.make_DMAXDIFF_p318_Instr(t.image, args, "dmaxdiff ACx, ACy, ACz, ACw, TRNx"); 
+                    operandList = ACx_ACy_ACz_ACw_TRNx() {
+                        return m.make_DMAXDIFF_p318_Instr(t.image, operandList, "dmaxdiff ACx, ACy, ACz, ACw, TRNx");
                     } // p.318
                    ) { Main.fatal("dmaxdiff error"); }
 
 
     | t=<MIN> (
-               args = OPTsrc_dst() {
-                   return m.make_MIN_p320_Instr(t.image, args, "min [src,] dst"); 
+               operandList = OPTsrc_dst() {
+                   return m.make_MIN_p320_Instr(t.image, operandList, "min [src,] dst");
                } // p.320
                ) { Main.fatal("min error"); }
 
 
     | t=<MINDIFF> (
-                   args = ACx_ACy_ACz_ACw() {
-                       return m.make_MINDIFF_p324_Instr(t.image, args, "mindiff ACx, ACy, ACz, ACw"); 
+                   operandList = ACx_ACy_ACz_ACw() {
+                       return m.make_MINDIFF_p324_Instr(t.image, operandList, "mindiff ACx, ACy, ACz, ACw");
                    } // p.324
                    ) { Main.fatal("mindiff error"); }
 
     | t=<DMINDIFF> (
-                    args = ACx_ACy_ACz_ACw_TRNx() {
-                        return m.make_DMINDIFF_p327_Instr(t.image, args, "dmindiff ACx, ACy, ACz, ACw, TRNx"); 
+                    operandList = ACx_ACy_ACz_ACw_TRNx() {
+                        return m.make_DMINDIFF_p327_Instr(t.image, operandList, "dmindiff ACx, ACy, ACz, ACw, TRNx");
                     } // p.327
                    ) { Main.fatal("dmindiff error"); }
 
 
     | t=<MMAP> {
-        return m.make_MMAP_p329_Instr(t.image, args, "mmap"); 
+        return m.make_MMAP_p329_Instr(t.image, operandList, "mmap");
     } // mmap - used for Lmem and Smem ... p.329
 
 
     | t=<MOV> (
                LOOKAHEAD(P_XS16A_MOV_HASTY())
-               args = P_XS16A_MOV_HASTY() {
-                   return m.make_MOV_p413_Instr(t.image, args, "mov :: XS16A_MOV_HASTY"); 
+               operandList = P_XS16A_MOV_HASTY() {
+                   return m.make_MOV_p413_Instr(t.image, operandList, "mov :: XS16A_MOV_HASTY");
                } // mov::mov
 
                |LOOKAHEAD(P_HASTY_MOV_XS16A())
-               args = P_HASTY_MOV_XS16A() {
-                   return m.make_MOV_p413_Instr(t.image, args, "mov :: HASTY_MOV_XS16A"); 
+               operandList = P_HASTY_MOV_XS16A() {
+                   return m.make_MOV_p413_Instr(t.image, operandList, "mov :: HASTY_MOV_XS16A");
                } // mov::mov reverse
 
                |LOOKAHEAD(P_HASTY_SUB_XS16A())
-               args = P_HASTY_SUB_XS16A() {
-                   return m.make_SUB_p575_Instr(t.image, args, "mov :: HASTY_SUB_XS16A"); 
+               operandList = P_HASTY_SUB_XS16A() {
+                   return m.make_SUB_p575_Instr(t.image, operandList, "mov :: HASTY_SUB_XS16A");
                } // sub::mov reverse
 
                |LOOKAHEAD(P_YS16A_MACM_OXTA())
-               args = P_YS16A_MACM_OXTA() {
-                   return m.make_MACM_p281_Instr(t.image, args, "mov :: YS16A_MACM_OXTA"); 
+               operandList = P_YS16A_MACM_OXTA() {
+                   return m.make_MACM_p281_Instr(t.image, operandList, "mov :: YS16A_MACM_OXTA");
                } // macm::mov reverse
 
                |LOOKAHEAD(P_YS16A_MASM_OXTA())
-               args = P_YS16A_MASM_OXTA() {
-                   return m.make_MASM_p307_Instr(t.image, args, "mov :: YS16A_MASM_OXTA"); 
+               operandList = P_YS16A_MASM_OXTA() {
+                   return m.make_MASM_p307_Instr(t.image, operandList, "mov :: YS16A_MASM_OXTA");
                } // masm::mov reverse
 
                |LOOKAHEAD(P_HASTY_ADD_XS16AA())
-               args = P_HASTY_ADD_XS16AA() {
-                   return m.make_ADD_p130_Instr(t.image, args, "mov :: HASTY_ADD_XS16AA");  // reverse add::mov
+               operandList = P_HASTY_ADD_XS16AA() {
+                   return m.make_ADD_p130_Instr(t.image, operandList, "mov :: HASTY_ADD_XS16AA"); // reverse add::mov
                } // add::mov reverse
 
                |LOOKAHEAD(P_HASTY_MACM_OXTA())
-               args = P_HASTY_MACM_OXTA() {
-                   return m.make_MACM_p283_Instr(t.image, args, "mov :: HASTY_MACM_OXTA"); 
+               operandList = P_HASTY_MACM_OXTA() {
+                   return m.make_MACM_p283_Instr(t.image, operandList, "mov :: HASTY_MACM_OXTA");
                } // macm::mov reverse
 
                |LOOKAHEAD(P_HASTY_MASM_OXTA())
-               args = P_HASTY_MASM_OXTA() {
-                   return m.make_MASM_p309_Instr(t.image, args, "mov :: HASTY_MASM_OXTA"); 
+               operandList = P_HASTY_MASM_OXTA() {
+                   return m.make_MASM_p309_Instr(t.image, operandList, "mov :: HASTY_MASM_OXTA");
                } // masm::mov reverse
 
                |LOOKAHEAD(P_HASTY_MPYM_OXTA())
-               args = P_HASTY_MPYM_OXTA() {
-                   return m.make_MPYM_p432_Instr(t.image, args, "mov :: HASTY_MPYM_OXTA"); 
+               operandList = P_HASTY_MPYM_OXTA() {
+                   return m.make_MPYM_p432_Instr(t.image, operandList, "mov :: HASTY_MPYM_OXTA");
                } // mpym::mov reverse
 
                |LOOKAHEAD(rnd_Smem_LSHIFT_Tx_ACx())
-               args = rnd_Smem_LSHIFT_Tx_ACx() {
-                   return m.make_MOV_p332_Instr(t.image, args, "mov [rnd(]Smem << Tx[)], ACx"); 
+               operandList = rnd_Smem_LSHIFT_Tx_ACx() {
+                   return m.make_MOV_p332_Instr(t.image, operandList, "mov [rnd(]Smem << Tx[)], ACx");
                }
 
                |LOOKAHEAD(low_byte_Smem_LSHIFT_SHIFTW_ACx())
-               args = low_byte_Smem_LSHIFT_SHIFTW_ACx() {
-                   return m.make_MOV_p333_Instr(t.image, args, "mov low_byte(Smem) << #SHIFTW, ACx"); 
+               operandList = low_byte_Smem_LSHIFT_SHIFTW_ACx() {
+                   return m.make_MOV_p333_Instr(t.image, operandList, "mov low_byte(Smem) << #SHIFTW, ACx");
                }
 
                |LOOKAHEAD(high_byte_Smem_LSHIFT_SHIFTW_ACx())
-               args = high_byte_Smem_LSHIFT_SHIFTW_ACx() {
-                   return m.make_MOV_p334_Instr(t.image, args, "mov high_byte(Smem) << #SHIFTW, ACx"); 
+               operandList = high_byte_Smem_LSHIFT_SHIFTW_ACx() {
+                   return m.make_MOV_p334_Instr(t.image, operandList, "mov high_byte(Smem) << #SHIFTW, ACx");
                }
 
                |LOOKAHEAD(Smem_LSHIFT_16_ACx())
-               args = Smem_LSHIFT_16_ACx() {
-                   return m.make_MOV_p335_Instr(t.image, args, "mov Smem << #16, ACx"); 
+               operandList = Smem_LSHIFT_16_ACx() {
+                   return m.make_MOV_p335_Instr(t.image, operandList, "mov Smem << #16, ACx");
                }
 
                |LOOKAHEAD(unsSmem_ACx())
-               args = unsSmem_ACx() {
-                   return m.make_MOV_p336_Instr(t.image, args, "mov [uns(]Smem[)], ACx"); 
+               operandList = unsSmem_ACx() {
+                   return m.make_MOV_p336_Instr(t.image, operandList, "mov [uns(]Smem[)], ACx");
                } // p.336
 
                |LOOKAHEAD(unsSmem_LSHIFT_SHIFTW_ACx())
-               args = unsSmem_LSHIFT_SHIFTW_ACx() {
-                   return m.make_MOV_p337_Instr(t.image, args, "mov [uns(]Smem[)] << #SHIFTW, ACx"); 
+               operandList = unsSmem_LSHIFT_SHIFTW_ACx() {
+                   return m.make_MOV_p337_Instr(t.image, operandList, "mov [uns(]Smem[)] << #SHIFTW, ACx");
                } // p.337
 
                |LOOKAHEAD(DBL_Lmem_ACx())
-               args = DBL_Lmem_ACx() {
-                   return m.make_MOV_p338_Instr(t.image, args, "mov dbl(Lmem), ACx"); 
+               operandList = DBL_Lmem_ACx() {
+                   return m.make_MOV_p338_Instr(t.image, operandList, "mov dbl(Lmem), ACx");
                } // p.338
 
                |LOOKAHEAD(Xmem_Ymem_ACx())
-               args = Xmem_Ymem_ACx() {
-                   return m.make_MOV_p339_Instr(t.image, args, "mov Xmem, Ymem, ACx"); 
+               operandList = Xmem_Ymem_ACx() {
+                   return m.make_MOV_p339_Instr(t.image, operandList, "mov Xmem, Ymem, ACx");
                } // p.339
 
                |LOOKAHEAD(DBL_Lmem_PAIR_HI_ACx())
-               args = DBL_Lmem_PAIR_HI_ACx() {
-                   return m.make_MOV_p341_Instr(t.image, args, "mov dbl(Lmem), pair(HI(ACx))"); 
+               operandList = DBL_Lmem_PAIR_HI_ACx() {
+                   return m.make_MOV_p341_Instr(t.image, operandList, "mov dbl(Lmem), pair(HI(ACx))");
                } // p.341
 
                |LOOKAHEAD(DBL_Lmem_PAIR_LO_ACx())
-               args = DBL_Lmem_PAIR_LO_ACx() {
-                   return m.make_MOV_p342_Instr(t.image, args, "mov dbl(Lmem), pair(LO(ACx))"); 
+               operandList = DBL_Lmem_PAIR_LO_ACx() {
+                   return m.make_MOV_p342_Instr(t.image, operandList, "mov dbl(Lmem), pair(LO(ACx))");
                } // p.342
 
                |LOOKAHEAD(K16_LSHIFT_16_ACx())
-               args = K16_LSHIFT_16_ACx() {
-                   return m.make_MOV_p344_Instr(t.image, args, "mov K16 << #16, ACx"); 
+               operandList = K16_LSHIFT_16_ACx() {
+                   return m.make_MOV_p344_Instr(t.image, operandList, "mov K16 << #16, ACx");
                } // p.344
 
                |LOOKAHEAD(K16_LSHIFT_SHFT_ACx())
-               args = K16_LSHIFT_SHFT_ACx() {
-                   return m.make_MOV_p345_Instr(t.image, args, "mov K16 << #SHFT, ACx"); 
+               operandList = K16_LSHIFT_SHFT_ACx() {
+                   return m.make_MOV_p345_Instr(t.image, operandList, "mov K16 << #SHFT, ACx");
                } // p.345
 
                |LOOKAHEAD(Smem_dst())
-               args = Smem_dst() {
-                   return m.make_MOV_p347_Instr(t.image, args, "mov Smem, dst"); 
+               operandList = Smem_dst() {
+                   return m.make_MOV_p347_Instr(t.image, operandList, "mov Smem, dst");
                } // p.347
 
                |LOOKAHEAD(uns_high_byte_Smem_dst())
-               args = uns_high_byte_Smem_dst() {
-                   return m.make_MOV_p348_Instr(t.image, args, "[uns(]high_byte(Smem)[)], dst"); 
+               operandList = uns_high_byte_Smem_dst() {
+                   return m.make_MOV_p348_Instr(t.image, operandList, "[uns(]high_byte(Smem)[)], dst");
                } // p.348
 
                |LOOKAHEAD(uns_low_byte_Smem_dst())
-               args = uns_low_byte_Smem_dst() {
-                   return m.make_MOV_p350_Instr(t.image, args, "[uns(]low_byte(Smem)[)], dst"); 
+               operandList = uns_low_byte_Smem_dst() {
+                   return m.make_MOV_p350_Instr(t.image, operandList, "[uns(]low_byte(Smem)[)], dst");
                } // p.350
 
                |LOOKAHEAD(k4_k4K16_dst())
-               args = k4_k4K16_dst() {
-                   return m.make_MOV_p353_Instr(t.image, args, "mov ((-)?k4|K16), dst"); 
+               operandList = k4_k4K16_dst() {
+                   return m.make_MOV_p353_Instr(t.image, operandList, "mov ((-)?k4|K16), dst");
                } // p.353-5
 
                |LOOKAHEAD(DBL_Lmem_PAIR_TAx())
-               args = DBL_Lmem_PAIR_TAx() {
-                   return m.make_MOV_p356_Instr(t.image, args, "mov dbl(Lmem), pair(TAx)"); 
+               operandList = DBL_Lmem_PAIR_TAx() {
+                   return m.make_MOV_p356_Instr(t.image, operandList, "mov dbl(Lmem), pair(TAx)");
                } // p.356
 
                |LOOKAHEAD(Smem_REG19())
-               args = Smem_REG19() {
-                   return m.make_MOV_p359_Instr(t.image, args, "mov Smem, REG19"); 
+               operandList = Smem_REG19() {
+                   return m.make_MOV_p359_Instr(t.image, operandList, "mov Smem, REG19");
                } // p.359
 
                |LOOKAHEAD(DBL_Lmem_RETA())
-               args = DBL_Lmem_RETA() {
-                   return m.make_MOV_p359_No20_Instr(t.image, args, "mov dbl(Lmem), RETA"); 
+               operandList = DBL_Lmem_RETA() {
+                   return m.make_MOV_p359_No20_Instr(t.image, operandList, "mov dbl(Lmem), RETA");
                } 
 
                |LOOKAHEAD(k12_REGLIST1())
-               args = k12_REGLIST1() {
-                   return m.make_MOV_p360_k12_Instr(t.image, args, "mov k12, REG6"); 
+               operandList = k12_REGLIST1() {
+                   return m.make_MOV_p360_k12_Instr(t.image, operandList, "mov k12, REG6");
                } // p.360
 
                |LOOKAHEAD(k7_DPH())
-               args = k7_DPH() {
-                   return m.make_MOV_p360_k7_Instr(t.image, args, "mov k7, DPH"); 
+               operandList = k7_DPH() {
+                   return m.make_MOV_p360_k7_Instr(t.image, operandList, "mov k7, DPH");
                }
                |LOOKAHEAD(k9_PDP())
-               args = k9_PDP() {
-                   return m.make_MOV_p360_k9_Instr(t.image, args, "mov k9, PDP"); 
+               operandList = k9_PDP() {
+                   return m.make_MOV_p360_k9_Instr(t.image, operandList, "mov k9, PDP");
                }
                |LOOKAHEAD(k16_REG9())
-               args = k16_REG9() {
-                   return m.make_MOV_p360_k16_Instr(t.image, args, "mov k16, REG9"); 
+               operandList = k16_REG9() {
+                   return m.make_MOV_p360_k16_Instr(t.image, operandList, "mov k16, REG9");
                } // p.360
 
                |LOOKAHEAD(DBL_Lmem_XAdst())
-               args = DBL_Lmem_XAdst() {
-                   return m.make_MOV_p362_Instr(t.image, args, "mov dbl(Lmem), XAdst"); 
+               operandList = DBL_Lmem_XAdst() {
+                   return m.make_MOV_p362_Instr(t.image, operandList, "mov dbl(Lmem), XAdst");
                } // p.362
 
-               | args = K8K16_Smem() {
-                   return m.make_MOV_p363_Instr(t.image, args, "mov K8|K16, Smem"); 
+               | operandList = K8K16_Smem() {
+                   return m.make_MOV_p363_Instr(t.image, operandList, "mov K8|K16, Smem");
                } // p.363
 
                |LOOKAHEAD(HI_ACx_TAx())
-               args = HI_ACx_TAx() {
-                   return m.make_MOV_p364_Instr(t.image, args, "mov HI(ACx), TAx"); 
+               operandList = HI_ACx_TAx() {
+                   return m.make_MOV_p364_Instr(t.image, operandList, "mov HI(ACx), TAx");
                } // p.364
 
                |LOOKAHEAD(src_dst())
-               args = src_dst() {
-                   return m.make_MOV_p365_Instr(t.image, args, "mov src, dst"); 
+               operandList = src_dst() {
+                   return m.make_MOV_p365_Instr(t.image, operandList, "mov src, dst");
                }        // p.365
 
                |LOOKAHEAD(TAx_HI_ACx())
-               args = TAx_HI_ACx() {
-                   return m.make_MOV_p367_Instr(t.image, args, "mov TAx, HI(ACx)"); 
+               operandList = TAx_HI_ACx() {
+                   return m.make_MOV_p367_Instr(t.image, operandList, "mov TAx, HI(ACx)");
                } // p.367
 
                |LOOKAHEAD(TAx_REGLIST2())
-               args = TAx_REGLIST2() {
-                   return m.make_MOV_p368_Instr(t.image, args, "mov TAx, REG6"); 
+               operandList = TAx_REGLIST2() {
+                   return m.make_MOV_p368_Instr(t.image, operandList, "mov TAx, REG6");
                } // p.368
 
                |LOOKAHEAD(REGLIST3_TAx())
-               args = REGLIST3_TAx() {
-                   return m.make_MOV_p370_Instr(t.image, args, "mov REG6, TAx"); 
+               operandList = REGLIST3_TAx() {
+                   return m.make_MOV_p370_Instr(t.image, operandList, "mov REG6, TAx");
                } // p.370
 
                |LOOKAHEAD(xsrc_xdst())
-               args = xsrc_xdst() {
-                   return m.make_MOV_p372_Instr(t.image, args, "mov xsrc, xdst"); 
+               operandList = xsrc_xdst() {
+                   return m.make_MOV_p372_Instr(t.image, operandList, "mov xsrc, xdst");
                } // p.372
 
                |LOOKAHEAD(Cmem_Smem())
-               args = Cmem_Smem() {
-                   return m.make_MOV_p374_Instr(t.image, args, "mov Cmem, Smem"); 
+               operandList = Cmem_Smem() {
+                   return m.make_MOV_p374_Instr(t.image, operandList, "mov Cmem, Smem");
                } // p.374
 
                |LOOKAHEAD(Smem_Cmem())
-               args = Smem_Cmem() {
-                   return m.make_MOV_p375_Instr(t.image, args, "mov Smem, Cmem"); 
+               operandList = Smem_Cmem() {
+                   return m.make_MOV_p375_Instr(t.image, operandList, "mov Smem, Cmem");
                } // p.375
 
                |LOOKAHEAD(Cmem_DBL_Lmem())
-               args = Cmem_DBL_Lmem() {
-                   return m.make_MOV_p376_Instr(t.image, args, "mov Cmem, dbl(Lmem)"); 
+               operandList = Cmem_DBL_Lmem() {
+                   return m.make_MOV_p376_Instr(t.image, operandList, "mov Cmem, dbl(Lmem)");
                } // p.376
 
                |LOOKAHEAD(DBL_Lmem_Cmem())
-               args = DBL_Lmem_Cmem() {
-                   return m.make_MOV_p377_Instr(t.image, args, "mov dbl(Lmem), Cmem"); 
+               operandList = DBL_Lmem_Cmem() {
+                   return m.make_MOV_p377_Instr(t.image, operandList, "mov dbl(Lmem), Cmem");
                } // p.377
 
-               | args = DBL_Xmem_DBL_Ymem() {
-                   return m.make_MOV_p378_Instr(t.image, args, "mov dbl(Xmem), dbl(Ymem)"); 
+               | operandList = DBL_Xmem_DBL_Ymem() {
+                   return m.make_MOV_p378_Instr(t.image, operandList, "mov dbl(Xmem), dbl(Ymem)");
                } // p.378
 
                |LOOKAHEAD(Xmem_Ymem())
-               args = Xmem_Ymem() {
-                   return m.make_MOV_p379_Instr(t.image, args, "mov Xmem, Ymem"); 
+               operandList = Xmem_Ymem() {
+                   return m.make_MOV_p379_Instr(t.image, operandList, "mov Xmem, Ymem");
                } // p.379
 
                |LOOKAHEAD(HI_ACx_Smem())
-               args = HI_ACx_Smem() {
-                   return m.make_MOV_p382_Instr(t.image, args, "mov HI(ACx), Smem"); 
+               operandList = HI_ACx_Smem() {
+                   return m.make_MOV_p382_Instr(t.image, operandList, "mov HI(ACx), Smem");
                } // p.382
 
                |LOOKAHEAD(rnd_HI_ACx_Smem())
-               args = rnd_HI_ACx_Smem() {
-                   return m.make_MOV_p383_Instr(t.image, args, "mov [rnd(]HI(ACx)[)], Smem"); 
+               operandList = rnd_HI_ACx_Smem() {
+                   return m.make_MOV_p383_Instr(t.image, operandList, "mov [rnd(]HI(ACx)[)], Smem");
                } // p.383
 
                |LOOKAHEAD(ACx_LSHIFT_Tx_Smem())
-               args = ACx_LSHIFT_Tx_Smem() {
-                   return m.make_MOV_p384_Instr(t.image, args, "mov ACx << Tx, Smem"); 
+               operandList = ACx_LSHIFT_Tx_Smem() {
+                   return m.make_MOV_p384_Instr(t.image, operandList, "mov ACx << Tx, Smem");
                } // p.384
 
                |LOOKAHEAD(rnd_HI_ACx_LSHIFT_Tx_Smem())
-               args = rnd_HI_ACx_LSHIFT_Tx_Smem() {
-                   return m.make_MOV_p385_Instr(t.image, args, "mov [rnd(]HI(ACx << Tx)[)], Smem"); 
+               operandList = rnd_HI_ACx_LSHIFT_Tx_Smem() {
+                   return m.make_MOV_p385_Instr(t.image, operandList, "mov [rnd(]HI(ACx << Tx)[)], Smem");
                } // p.385
 
                |LOOKAHEAD(ACx_LSHIFT_SHIFTW_Smem())
-               args = ACx_LSHIFT_SHIFTW_Smem() {
-                   return m.make_MOV_p386_Instr(t.image, args, "mov ACx << #SHIFTW, Smem"); 
+               operandList = ACx_LSHIFT_SHIFTW_Smem() {
+                   return m.make_MOV_p386_Instr(t.image, operandList, "mov ACx << #SHIFTW, Smem");
                } // p.386
 
                |LOOKAHEAD(HI_ACx_LSHIFT_SHIFTW_Smem())
-               args = HI_ACx_LSHIFT_SHIFTW_Smem() {
-                   return m.make_MOV_p387_Instr(t.image, args, "mov HI(ACx << #SHIFTW), Smem"); 
+               operandList = HI_ACx_LSHIFT_SHIFTW_Smem() {
+                   return m.make_MOV_p387_Instr(t.image, operandList, "mov HI(ACx << #SHIFTW), Smem");
                } // p.387
 
                |LOOKAHEAD(rnd_HI_ACx_LSHIFT_SHIFTW_Smem())
-               args = rnd_HI_ACx_LSHIFT_SHIFTW_Smem() {
-                   return m.make_MOV_p388_Instr(t.image, args, "mov [rnd(]HI(ACx << #SHIFTW)[)], Smem"); 
+               operandList = rnd_HI_ACx_LSHIFT_SHIFTW_Smem() {
+                   return m.make_MOV_p388_Instr(t.image, operandList, "mov [rnd(]HI(ACx << #SHIFTW)[)], Smem");
                } // p.388
 
                |LOOKAHEAD(uns_rnd_HI_saturateACx_Smem())
-               args = uns_rnd_HI_saturateACx_Smem() {
-                   return m.make_MOV_p389_Instr(t.image, args, "mov [uns(][rnd(]HI[(saturate](ACx)[)))], Smem"); 
+               operandList = uns_rnd_HI_saturateACx_Smem() {
+                   return m.make_MOV_p389_Instr(t.image, operandList, "mov [uns(][rnd(]HI[(saturate](ACx)[)))], Smem");
                } // p.389
 
                |LOOKAHEAD(uns_rnd_HI_saturateACxLSHIFT_Tx_Smem())
-               args = uns_rnd_HI_saturateACxLSHIFT_Tx_Smem() {
-                   return m.make_MOV_p391_Instr(t.image, args, "mov [uns(][rnd(]HI[(saturate](ACx << Tx)[)))], Smem"); 
+               operandList = uns_rnd_HI_saturateACxLSHIFT_Tx_Smem() {
+                   return m.make_MOV_p391_Instr(t.image, operandList, "mov [uns(][rnd(]HI[(saturate](ACx << Tx)[)))], Smem");
                } // p.391
 
                |LOOKAHEAD(uns_rnd_HI_saturateACxLSHIFT_SHIFTW_Smem())
-               args = uns_rnd_HI_saturateACxLSHIFT_SHIFTW_Smem() {
-                   return m.make_MOV_p393_Instr(t.image, args, "mov [uns(][rnd(]HI[(saturate](ACx << #SHIFTW)[)))], Smem"); 
+               operandList = uns_rnd_HI_saturateACxLSHIFT_SHIFTW_Smem() {
+                   return m.make_MOV_p393_Instr(t.image, operandList, "mov [uns(][rnd(]HI[(saturate](ACx << #SHIFTW)[)))], Smem");
                } // p.393
 
                |LOOKAHEAD(ACx_DBL_Lmem())
-               args = ACx_DBL_Lmem() {
-                   return m.make_MOV_p395_Instr(t.image, args, "mov ACx, dbl(Lmem)"); 
+               operandList = ACx_DBL_Lmem() {
+                   return m.make_MOV_p395_Instr(t.image, operandList, "mov ACx, dbl(Lmem)");
                } // p.395
 
-               | args = uns_SATURATE_ACx_DBL_Lmem() {
-                   return m.make_MOV_p396_Instr(t.image, args, "mov [uns(]saturate(ACx)[)], dbl(Lmem)"); 
+               | operandList = uns_SATURATE_ACx_DBL_Lmem() {
+                   return m.make_MOV_p396_Instr(t.image, operandList, "mov [uns(]saturate(ACx)[)], dbl(Lmem)");
                } // p.396
 
                |LOOKAHEAD(ACx_RSHIFT_1_DUAL_Lmem())
-               args = ACx_RSHIFT_1_DUAL_Lmem() {
-                   return m.make_MOV_p398_Instr(t.image, args, "mov ACx >> #1, dual(Lmem)"); 
+               operandList = ACx_RSHIFT_1_DUAL_Lmem() {
+                   return m.make_MOV_p398_Instr(t.image, operandList, "mov ACx >> #1, dual(Lmem)");
                } // p.398
 
                |LOOKAHEAD(ACx_Xmem_Ymem())
-               args = ACx_Xmem_Ymem() {
-                   return m.make_MOV_p399_Instr(t.image, args, "mov ACx, Xmem, Ymem"); 
+               operandList = ACx_Xmem_Ymem() {
+                   return m.make_MOV_p399_Instr(t.image, operandList, "mov ACx, Xmem, Ymem");
                } // p.399
 
                |LOOKAHEAD(PAIR_HI_ACx_DBL_Lmem())
-               args = PAIR_HI_ACx_DBL_Lmem() {
-                   return m.make_MOV_p401_Instr(t.image, args, "mov pair(HI(ACx)), dbl(Lmem)"); 
+               operandList = PAIR_HI_ACx_DBL_Lmem() {
+                   return m.make_MOV_p401_Instr(t.image, operandList, "mov pair(HI(ACx)), dbl(Lmem)");
                } // p.401
 
                |LOOKAHEAD(PAIR_LO_ACx_DBL_Lmem())
-               args = PAIR_LO_ACx_DBL_Lmem() {
-                   return m.make_MOV_p402_Instr(t.image, args, "mov pair(LO(ACx)), dbl(Lmem)"); 
+               operandList = PAIR_LO_ACx_DBL_Lmem() {
+                   return m.make_MOV_p402_Instr(t.image, operandList, "mov pair(LO(ACx)), dbl(Lmem)");
                } // p.402
 
                |LOOKAHEAD(src_Smem())
-               args = src_Smem() {
-                   return m.make_MOV_p404_Instr(t.image, args, "mov src, Smem"); 
+               operandList = src_Smem() {
+                   return m.make_MOV_p404_Instr(t.image, operandList, "mov src, Smem");
                } // p.404
 
                |LOOKAHEAD(src_high_byte_Smem())
-               args = src_high_byte_Smem() {
-                   return m.make_MOV_p405_Instr(t.image, args, "mov src, high_byte(Smem)"); 
+               operandList = src_high_byte_Smem() {
+                   return m.make_MOV_p405_Instr(t.image, operandList, "mov src, high_byte(Smem)");
                } // p.405
 
-               | args = src_low_byte_Smem() {
-                   return m.make_MOV_p406_Instr(t.image, args, "mov src, low_byte(Smem)"); 
+               | operandList = src_low_byte_Smem() {
+                   return m.make_MOV_p406_Instr(t.image, operandList, "mov src, low_byte(Smem)");
                } // p.406
 
-               | args = PAIR_TAx_DBL_Lmem() {
-                   return m.make_MOV_p407_Instr(t.image, args, "mov pair(TAx), dbl(Lmem)"); 
+               | operandList = PAIR_TAx_DBL_Lmem() {
+                   return m.make_MOV_p407_Instr(t.image, operandList, "mov pair(TAx), dbl(Lmem)");
                } // p.407
 
-               | args = REG19_Smem() {
-                   return m.make_MOV_p408_Instr(t.image, args, "mov REG19, Smem"); 
+               | operandList = REG19_Smem() {
+                   return m.make_MOV_p408_Instr(t.image, operandList, "mov REG19, Smem");
                } // p.408
 
-               | args = RETA_DBL_Lmem() {
-                   return m.make_MOV_p408_No20_Instr(t.image, args, "mov RETA, dbl(Lmem)"); 
+               | operandList = RETA_DBL_Lmem() {
+                   return m.make_MOV_p408_No20_Instr(t.image, operandList, "mov RETA, dbl(Lmem)");
                }
-               | args = XAsrc_DBL_Lmem() {
-                   return m.make_MOV_p412_Instr(t.image, args, "mov XAsrc, dbl(Lmem)"); 
+               | operandList = XAsrc_DBL_Lmem() {
+                   return m.make_MOV_p412_Instr(t.image, operandList, "mov XAsrc, dbl(Lmem)");
                } // p.412
                ) { Main.fatal("mov error"); }
 
 
     | t=<MOV40> ( 
-                 args = DBL_Lmem_ACx() {
-                     return m.make_MOV40_p338_Instr(t.image, args, "mov40 dbl(Lmem), ACx"); 
+                 operandList = DBL_Lmem_ACx() {
+                     return m.make_MOV40_p338_Instr(t.image, operandList, "mov40 dbl(Lmem), ACx");
                  } // p.338
                    ) { Main.fatal("mov40 error"); }
 
 
     | t=<MPY> (
                LOOKAHEAD(P_YCA_AMAR_Xmem())
-               args = P_YCA_AMAR_Xmem() {
-                   return m.make_AMAR_p157_Instr(t.image, args, "mpy :: YCA_AMAR_Xmem()"); 
+               operandList = P_YCA_AMAR_Xmem() {
+                   return m.make_AMAR_p157_Instr(t.image, operandList, "mpy :: YCA_AMAR_Xmem()");
                } // amar::mpy reverse
 
                |LOOKAHEAD(P_XCA_MAC_YCA16())
-               args = P_XCA_MAC_YCA16() {
-                   return m.make_MPY_p428_Instr(t.image, args, "mpy :: XCA_MAC_YCA16"); 
+               operandList = P_XCA_MAC_YCA16() {
+                   return m.make_MPY_p428_Instr(t.image, operandList, "mpy :: XCA_MAC_YCA16");
                } // mpy::mac
 
                |LOOKAHEAD(P_XCA_MAC_YCA())
-               args = P_XCA_MAC_YCA() {
-                   return m.make_MAC_p278_Instr(t.image, args, "mpy :: XCA_MAC_YCA"); 
+               operandList = P_XCA_MAC_YCA() {
+                   return m.make_MAC_p278_Instr(t.image, operandList, "mpy :: XCA_MAC_YCA");
                } // mac::mpy reverse
 
                |LOOKAHEAD(P_XCA_MAS_YCA())
-               args = P_XCA_MAS_YCA() {
-                   return m.make_MAS_p304_Instr(t.image, args, "mpy :: XCA_MAS_YCA"); 
+               operandList = P_XCA_MAS_YCA() {
+                   return m.make_MAS_p304_Instr(t.image, operandList, "mpy :: XCA_MAS_YCA");
                } // mas::mpy reverse
 
                |LOOKAHEAD(P_XCA_MPY_YCA())
-               args = P_XCA_MPY_YCA() {
-                   return m.make_MPY_p430_Instr(t.image, args, "mpy :: XCA_MPY_YCA"); 
+               operandList = P_XCA_MPY_YCA() {
+                   return m.make_MPY_p430_Instr(t.image, operandList, "mpy :: XCA_MPY_YCA");
                } // mpy::mpy
 
-               | args = OPTACx_ACy() {
-                   return m.make_MPY_p417_Instr(t.image, args, "mpy [ACx,] ACy"); 
+               | operandList = OPTACx_ACy() {
+                   return m.make_MPY_p417_Instr(t.image, operandList, "mpy [ACx,] ACy");
                } // p.417
 
-               | args = Tx_OPTACx_ACy() {
-                   return m.make_MPY_p418_Instr(t.image, args, "mpy Tx, [ACx,] ACy"); 
+               | operandList = Tx_OPTACx_ACy() {
+                   return m.make_MPY_p418_Instr(t.image, operandList, "mpy Tx, [ACx,] ACy");
                } // p.418
                ) { Main.fatal("mpy error"); }
 
 
     | t=<MPYK> (
-                args = K8K16_OPTACx_ACy() {
-                    return m.make_MPYK_p420_Instr(t.image, args, "mpyk K8|K16 [ACx,] ACy"); 
+                operandList = K8K16_OPTACx_ACy() {
+                    return m.make_MPYK_p420_Instr(t.image, operandList, "mpyk K8|K16 [ACx,] ACy");
                 } // p.420
                 ) { Main.fatal("mpyk error"); }
 
 
     | t=<MPYM> (
                 LOOKAHEAD(P_OXTA_MOV_HASTY())
-                args = P_OXTA_MOV_HASTY() {
-                    return m.make_MPYM_p432_Instr(t.image, args, "mpym :: OXTA_MOV_HASTY"); 
+                operandList = P_OXTA_MOV_HASTY() {
+                    return m.make_MPYM_p432_Instr(t.image, operandList, "mpym :: OXTA_MOV_HASTY");
                 } // mpym::mov
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Cmem_ACx())
-                args = OPTT3EQ_Smem_Cmem_ACx() {
-                    return m.make_MPYM_p421_Instr(t.image, args, "mpym [T3 =]Smem, Cmem, ACx"); 
+                operandList = OPTT3EQ_Smem_Cmem_ACx() {
+                    return m.make_MPYM_p421_Instr(t.image, operandList, "mpym [T3 =]Smem, Cmem, ACx");
                 } // p.421
 
                 |LOOKAHEAD(OPTT3EQ_Smem_OPTACx_ACy())
-                args = OPTT3EQ_Smem_OPTACx_ACy() {
-                    return m.make_MPYM_p423_Instr(t.image, args, "mpym [T3 =]Smem, [ACx,] ACy"); 
+                operandList = OPTT3EQ_Smem_OPTACx_ACy() {
+                    return m.make_MPYM_p423_Instr(t.image, operandList, "mpym [T3 =]Smem, [ACx,] ACy");
                 } // p.423
 
                 |LOOKAHEAD(OPTT3EQ_unsXmem_unsYmem_ACx())
-                args = OPTT3EQ_unsXmem_unsYmem_ACx() {
-                    return m.make_MPYM_p425_Instr(t.image, args, "mpym [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], ACx"); 
+                operandList = OPTT3EQ_unsXmem_unsYmem_ACx() {
+                    return m.make_MPYM_p425_Instr(t.image, operandList, "mpym [T3 = ][uns(]Xmem[)], [uns(]Ymem[)], ACx");
                 } //p.425
 
                 |LOOKAHEAD(OPTT3EQ_Smem_Tx_ACx())
-                args = OPTT3EQ_Smem_Tx_ACx() {
-                    return m.make_MPYM_p427_Instr(t.image, args, "mpym [T3 = ]Smem, Tx, ACx"); 
+                operandList = OPTT3EQ_Smem_Tx_ACx() {
+                    return m.make_MPYM_p427_Instr(t.image, operandList, "mpym [T3 = ]Smem, Tx, ACx");
                 } // p.427
                 ) { Main.fatal("mpym error"); }
 
 
     | t=<MPYMK> (
-                 args = OPTT3EQ_Smem_K8_ACx() {
-                     return m.make_MPYMK_p424_Instr(t.image, args, "mpymk [T3 =]Smem, K8, ACx"); 
+                 operandList = OPTT3EQ_Smem_K8_ACx() {
+                     return m.make_MPYMK_p424_Instr(t.image, operandList, "mpymk [T3 =]Smem, K8, ACx");
                  } // p.424
                  ) { Main.fatal("mpymk error"); }
 
 
     | t=<NEG> (
-               args = OPTsrc_dst() {
-                   return m.make_NEG_p434_Instr(t.image, args, "neg [src,] dst"); 
+               operandList = OPTsrc_dst() {
+                   return m.make_NEG_p434_Instr(t.image, operandList, "neg [src,] dst");
                } // p.434
                ) { Main.fatal("neg error"); }
 
 
     | t=<NEXP> (
-                args = P_AT_MANT_AA() {
-                    return m.make_NEXP_p285_Instr(t.image, args, "nexp::mant"); 
+                operandList = P_AT_MANT_AA() {
+                    return m.make_NEXP_p285_Instr(t.image, operandList, "nexp::mant");
                 } // nexp::mant p.285
                 ) { Main.fatal("nexp error"); }
 
 
     | t=<NOP> {
-        return m.make_NOP_p436_Instr(t.image, args, "nop"); 
+        return m.make_NOP_p436_Instr(t.image, operandList, "nop");
     } // p.436
 
 
     | t=<NOP_16> {
-        return m.make_NOP16_p436_Instr(t.image, args, "nop_16"); 
+        return m.make_NOP16_p436_Instr(t.image, operandList, "nop_16");
     } // p.436
 
 
     | t=<NOT> (
-               args = OPTsrc_dst() {
-                   return m.make_NOT_p437_Instr(t.image, args, "not [src,] dst"); 
+               operandList = OPTsrc_dst() {
+                   return m.make_NOT_p437_Instr(t.image, operandList, "not [src,] dst");
                } // p.437
                ) { Main.fatal("not error"); }
 
 
     | t=<OR> (
               LOOKAHEAD(k8k16_OPTsrc_dst())
-              args = k8k16_OPTsrc_dst() {
-                  return m.make_OR_p440_Instr(t.image, args, "or k8|k16, src, dst"); 
+              operandList = k8k16_OPTsrc_dst() {
+                  return m.make_OR_p440_Instr(t.image, operandList, "or k8|k16, src, dst");
               } // p.440
 
-              | args =  Smem_OPTsrc_dst() {
-                  return m.make_OR_p442_Instr(t.image, args, "or Smem, src, dst"); 
+              | operandList =  Smem_OPTsrc_dst() {
+                  return m.make_OR_p442_Instr(t.image, operandList, "or Smem, src, dst");
               } // p.442
 
               | LOOKAHEAD(ACx_LSHIFT_SHIFTW_OPTACy())
-              args = ACx_LSHIFT_SHIFTW_OPTACy() {
-                  return m.make_OR_p443_Instr(t.image, args, "or ACx << #SHIFTW [,ACy]"); 
+              operandList = ACx_LSHIFT_SHIFTW_OPTACy() {
+                  return m.make_OR_p443_Instr(t.image, operandList, "or ACx << #SHIFTW [,ACy]");
               } // p.443
 
               | LOOKAHEAD(k16_LSHIFT_16_OPTACx_ACy())
-              args = k16_LSHIFT_16_OPTACx_ACy() {
-                  return m.make_OR_p444_Instr(t.image, args, "or k16 << #16, [ACx,] ACy"); 
+              operandList = k16_LSHIFT_16_OPTACx_ACy() {
+                  return m.make_OR_p444_Instr(t.image, operandList, "or k16 << #16, [ACx,] ACy");
               } // p.444
 
               | LOOKAHEAD(k16_LSHIFT_SHFT_OPTACx_ACy())
-              args = k16_LSHIFT_SHFT_OPTACx_ACy() {
-                  return m.make_OR_p445_Instr(t.image, args, "or k16 << #SHFT, [ACx,] ACy"); 
+              operandList = k16_LSHIFT_SHFT_OPTACx_ACy() {
+                  return m.make_OR_p445_Instr(t.image, operandList, "or k16 << #SHFT, [ACx,] ACy");
               } // p.445
 
-              | args =  k16_Smem() {
-                  return m.make_OR_p446_Instr(t.image, args, "or k16, Smem"); 
+              | operandList =  k16_Smem() {
+                  return m.make_OR_p446_Instr(t.image, operandList, "or k16, Smem");
               } // p.446
 
-              | args =  OPTsrc_dst() {
-                  return m.make_OR_p439_Instr(t.image, args, "or src, dst"); 
+              | operandList =  OPTsrc_dst() {
+                  return m.make_OR_p439_Instr(t.image, operandList, "or src, dst");
               } // p.439
               ) { Main.fatal("or error"); }
 
@@ -6733,41 +6734,41 @@ C55xOperation Oper() :
     // p.448
     | t=<POP> (
                LOOKAHEAD(dst1_dst2())
-               args = dst1_dst2() {
-                   return m.make_POP_p448_Instr(t.image, args, "pop dst, dst"); 
+               operandList = dst1_dst2() {
+                   return m.make_POP_p448_Instr(t.image, operandList, "pop dst, dst");
                } // p.448
 
                |LOOKAHEAD(dst_Smem())
-               args = dst_Smem() {
-                   return m.make_POP_p450_Instr(t.image, args, "pop dst, Smem"); 
+               operandList = dst_Smem() {
+                   return m.make_POP_p450_Instr(t.image, operandList, "pop dst, Smem");
                } // p.450
 
                | r = dst() {
-                   args.add(r);
-                   return m.make_POP_p449_Instr(t.image, args, "pop dst"); 
+                   operandList.add(r);
+                   return m.make_POP_p449_Instr(t.image, operandList, "pop dst");
                } // p.449
 
                |LOOKAHEAD(DBL_ACx())
                r = DBL_ACx() {
-                   args.add(r);
-                   return m.make_POP_p451_Instr(t.image, args, "pop dbl(ACx)");
+                   operandList.add(r);
+                   return m.make_POP_p451_Instr(t.image, operandList, "pop dbl(ACx)");
                } // p.451
 
                | ma = Smem() {
-                   args.add(ma);
-                   return m.make_POP_p452_Instr(t.image, args, "pop Smem");
+                   operandList.add(ma);
+                   return m.make_POP_p452_Instr(t.image, operandList, "pop Smem");
                } // p.452
 
                | ma = DBL_Lmem() {
-                   args.add(ma);
-                   return m.make_POP_p453_Instr(t.image, args, "pop dbl(Lmem)");
+                   operandList.add(ma);
+                   return m.make_POP_p453_Instr(t.image, operandList, "pop dbl(Lmem)");
                } // p.453
                ) { Main.fatal("pop error"); }
 
     // p.454
     | t=<POPBOTH> r = xdst() {
-        args.add(r);
-        return m.make_POPBOTH_p454_Instr(t.image, args, "popboth xdst"); 
+        operandList.add(r);
+        return m.make_POPBOTH_p454_Instr(t.image, operandList, "popboth xdst");
     }
 
 
@@ -6777,469 +6778,469 @@ C55xOperation Oper() :
     // p.457
     | t=<PSH> (
                LOOKAHEAD(src1_src2())
-               args = src1_src2() {
-                   return m.make_PSH_p458_Instr(t.image, args, "psh src, src"); 
+               operandList = src1_src2() {
+                   return m.make_PSH_p458_Instr(t.image, operandList, "psh src, src");
                } // p.458
 
                |LOOKAHEAD(src_Smem())
-               args = src_Smem() {
-                   return m.make_PSH_p460_Instr(t.image, args, "psh src, Smem"); 
+               operandList = src_Smem() {
+                   return m.make_PSH_p460_Instr(t.image, operandList, "psh src, Smem");
                } // p.460
 
                | r = src() {
-                   args.add(r);
-                   return m.make_PSH_p459_Instr(t.image, args, "psh src"); 
+                   operandList.add(r);
+                   return m.make_PSH_p459_Instr(t.image, operandList, "psh src");
                } // p.459
 
                |LOOKAHEAD(DBL_ACx())
                r = DBL_ACx() {
-                   args.add(r);
-                   return m.make_PSH_p461_Instr(t.image, args, "psh dbl(ACx)");
+                   operandList.add(r);
+                   return m.make_PSH_p461_Instr(t.image, operandList, "psh dbl(ACx)");
                } // p.461
 
                | ma = Smem() {
-                   args.add(ma);
-                   return m.make_PSH_p462_Instr(t.image, args, "psh Smem");
+                   operandList.add(ma);
+                   return m.make_PSH_p462_Instr(t.image, operandList, "psh Smem");
                } // p.462
 
                | ma = DBL_Lmem() {
-                   args.add(ma);
-                   return m.make_PSH_p463_Instr(t.image, args, "psh dbl(Lmem)");
+                   operandList.add(ma);
+                   return m.make_PSH_p463_Instr(t.image, operandList, "psh dbl(Lmem)");
                } // p.463
                ) { Main.fatal("psh error"); }
 
 
     // p.464
     | t=<PSHBOTH> r = xsrc() {
-        args.add(r);
-        return m.make_PSHBOTH_p464_Instr(t.image, args, "pshboth xsrc"); 
+        operandList.add(r);
+        return m.make_PSHBOTH_p464_Instr(t.image, operandList, "pshboth xsrc");
     }
 
 
     // p.465
     | t=<RESET> {
-        return m.make_RESET_p465_Instr(t.image, args, "reset"); 
+        return m.make_RESET_p465_Instr(t.image, operandList, "reset");
     }
 
 
     // p.469
     | t=<RET> {
-        return m.make_RET_p469_Instr(t.image, args, "ret"); 
+        return m.make_RET_p469_Instr(t.image, operandList, "ret");
     }
 
 
     // p.471
     | t=<RETCC> (
                  cf = cond() {
-                     args.add(cf);
-                     return m.make_RETCC_p471_Instr(t.image, args, "retcc cond"); 
+                     operandList.add(cf);
+                     return m.make_RETCC_p471_Instr(t.image, operandList, "retcc cond");
                  }
                  ) { Main.fatal("retcc error"); }
 
 
     // p.473
     | t=<RETI> {
-        return m.make_RETI_p473_Instr(t.image, args, "reti"); 
+        return m.make_RETI_p473_Instr(t.image, operandList, "reti");
     }
 
 
     // p.475
     | t=<ROL> (
-               args = BitIn_src_BitOut_dst() {
-                   return m.make_ROL_p475_Instr(t.image, args, "rol BitIn, src, BitOut, dst"); 
+               operandList = BitIn_src_BitOut_dst() {
+                   return m.make_ROL_p475_Instr(t.image, operandList, "rol BitIn, src, BitOut, dst");
                }
                ) { Main.fatal("rol error"); }
 
 
     // p.477
     | t=<ROR> (
-               args = BitIn_src_BitOut_dst() {
-                   return m.make_ROR_p477_Instr(t.image, args, "ror BitIn, src, BitOut, dst"); 
+               operandList = BitIn_src_BitOut_dst() {
+                   return m.make_ROR_p477_Instr(t.image, operandList, "ror BitIn, src, BitOut, dst");
                }
                ) { Main.fatal("ror error"); }
     
 
     // p.479
     | t=<ROUND> (
-                 args = OPTACx_ACy() {
-                     return m.make_ROUND_p479_Instr(t.image, args, "round [ACx,] ACy"); 
+                 operandList = OPTACx_ACy() {
+                     return m.make_ROUND_p479_Instr(t.image, operandList, "round [ACx,] ACy");
                  }
                  ) { Main.fatal("round error"); }
 
 
     | t=<RPT> (
                imm = k8k16() {
-                   args.add(imm);
-                   return m.make_RPT_p482_Instr(t.image, args, "rpt k8|k16"); 
+                   operandList.add(imm);
+                   return m.make_RPT_p482_Instr(t.image, operandList, "rpt k8|k16");
                } // p.482
                | r = CSR() {
-                   args.add(r);
-                   return m.make_RPT_p484_Instr(t.image, args, "rpt csr"); 
+                   operandList.add(r);
+                   return m.make_RPT_p484_Instr(t.image, operandList, "rpt csr");
                } // p.484
                ) { Main.fatal("rpt error"); }
 
 
     | t=<RPTADD> (
                   LOOKAHEAD(CSR_TAx())
-                  args = CSR_TAx() {
-                      return m.make_RPTADD_p487_Instr(t.image, args, "rptadd CSR, TAx"); 
+                  operandList = CSR_TAx() {
+                      return m.make_RPTADD_p487_Instr(t.image, operandList, "rptadd CSR, TAx");
                   } // p.487
 
-                  | args = CSR_k4() {
-                      return m.make_RPTADD_p488_Instr(t.image, args, "rptadd CSR, k4"); 
+                  | operandList = CSR_k4() {
+                      return m.make_RPTADD_p488_Instr(t.image, operandList, "rptadd CSR, k4");
                   } // p.488
                   ) { Main.fatal("rptadd error"); }
 
 
     | t=<RPTBLOCAL> (
                      target = Address() {
-                         args.add(target);
-                         return m.make_RPTBLOCAL_p490_Instr(t.image, args, "rptblocal pmad"); 
+                         operandList.add(target);
+                         return m.make_RPTBLOCAL_p490_Instr(t.image, operandList, "rptblocal pmad");
                      } // p.490
                      ) { Main.fatal("rptblocal error"); }
 
 
     | t=<RPTB> (
                 target = Address() {
-                    args.add(target);
-                    return m.make_RPTB_p497_Instr(t.image, args, "rptb pmad"); 
+                    operandList.add(target);
+                    return m.make_RPTB_p497_Instr(t.image, operandList, "rptb pmad");
                 } // p.497
                 ) { Main.fatal("rptb error"); }
 
 
     | t=<RPTCC> (
-                 args = k8_cond() {
-                     return m.make_RPTCC_p500_Instr(t.image, args, "rptcc k8, cond"); 
+                 operandList = k8_cond() {
+                     return m.make_RPTCC_p500_Instr(t.image, operandList, "rptcc k8, cond");
                  } // p.500
                  ) { Main.fatal("rptcc error"); }
 
 
     | t=<RPTSUB> (
-                  args = CSR_k4() {
-                      return m.make_RPTSUB_p503_Instr(t.image, args, "rptsub csr, k4"); 
+                  operandList = CSR_k4() {
+                      return m.make_RPTSUB_p503_Instr(t.image, operandList, "rptsub csr, k4");
                   } // p.503
                  ) { Main.fatal("rptcc error"); }
 
 
     | t=<SAT> (
-               args = OPTACx_ACy() {
-                   return m.make_SAT_p505_Instr(t.image, args, "sat [ACx,] ACy"); 
+               operandList = OPTACx_ACy() {
+                   return m.make_SAT_p505_Instr(t.image, operandList, "sat [ACx,] ACy");
                } // p.505
                ) { Main.fatal("sat error"); }
 
 
     | t=<SFTCC> (
-                 args = ACx_TCx() {
-                     return m.make_SFTCC_p507_Instr(t.image, args, "sftcc ACx, TCx"); 
+                 operandList = ACx_TCx() {
+                     return m.make_SFTCC_p507_Instr(t.image, operandList, "sftcc ACx, TCx");
                  } // p.507
                  )  { Main.fatal("sftcc error"); }
 
 
     | t=<SFTL> (
                 LOOKAHEAD(ACx_Tx_OPTACy())
-                args = ACx_Tx_OPTACy() {
-                    return m.make_SFTL_p510_Instr(t.image, args, "sftl ACx, Tx[, ACy]"); 
+                operandList = ACx_Tx_OPTACy() {
+                    return m.make_SFTL_p510_Instr(t.image, operandList, "sftl ACx, Tx[, ACy]");
                 } // p.510
                 |LOOKAHEAD(ACx_SHIFTW_OPTACy())
-                args = ACx_SHIFTW_OPTACy() {
-                    return m.make_SFTL_p511_Instr(t.image, args, "sftl ACx, #SHIFTW[, ACy]"); 
+                operandList = ACx_SHIFTW_OPTACy() {
+                    return m.make_SFTL_p511_Instr(t.image, operandList, "sftl ACx, #SHIFTW[, ACy]");
                 } // p.511
-                | args = dst_1() {
-                    return m.make_SFTL_p513_Instr(t.image, args, "sftl dst, #(-)?1"); 
+                | operandList = dst_1() {
+                    return m.make_SFTL_p513_Instr(t.image, operandList, "sftl dst, #(-)?1");
                 } // p.513,4
                 ) { Main.fatal("sftl error"); }
 
 
     | t=<SFTS> (
                 LOOKAHEAD(ACx_Tx_OPTACy())
-                args = ACx_Tx_OPTACy() {
-                    return m.make_SFTS_p516_Instr(t.image, args, "sfts ACx, Tx[, ACy]"); 
+                operandList = ACx_Tx_OPTACy() {
+                    return m.make_SFTS_p516_Instr(t.image, operandList, "sfts ACx, Tx[, ACy]");
                 } // p.516
                 |LOOKAHEAD(ACx_SHIFTW_OPTACy())
-                args = ACx_SHIFTW_OPTACy() {
-                    return m.make_SFTS_p520_Instr(t.image, args, "sfts ACx, #SHIFTW[, ACy]"); 
+                operandList = ACx_SHIFTW_OPTACy() {
+                    return m.make_SFTS_p520_Instr(t.image, operandList, "sfts ACx, #SHIFTW[, ACy]");
                 } // p.520
-                | args = dst_1() {
-                    return m.make_SFTS_p525_Instr(t.image, args, "sfts dst, #(-)1"); 
+                | operandList = dst_1() {
+                    return m.make_SFTS_p525_Instr(t.image, operandList, "sfts dst, #(-)1");
                 } // p.525,7
                 ) { Main.fatal("sfts error"); }
 
 
     | t=<SFTSC> (
                 LOOKAHEAD(ACx_Tx_OPTACy())
-                args = ACx_Tx_OPTACy() {
-                    return m.make_SFTSC_p518_Instr(t.image, args, "sfts ACx, Tx[, ACy]"); 
+                operandList = ACx_Tx_OPTACy() {
+                    return m.make_SFTSC_p518_Instr(t.image, operandList, "sfts ACx, Tx[, ACy]");
                 } // p.518
-                | args = ACx_SHIFTW_OPTACy() {
-                    return m.make_SFTSC_p522_Instr(t.image, args, "sftsc ACx, #SHIFTW[, ACy]"); 
+                | operandList = ACx_SHIFTW_OPTACy() {
+                    return m.make_SFTSC_p522_Instr(t.image, operandList, "sftsc ACx, #SHIFTW[, ACy]");
                 } // p.522
                 ) { Main.fatal("sftsc error"); }
 
     | t=<SIM_TRIG> {
-        return m.make_UNKNOWN_Instr(t.image, args, "sim_trig");  // 
+        return m.make_UNKNOWN_Instr(t.image, operandList, "sim_trig"); // 
     }
 
     | t=<SQA> (
-               args = OPTACx_ACy() {
-                   return m.make_SQA_p530_Instr(t.image, args, "sqa [ACx, ]ACy"); 
+               operandList = OPTACx_ACy() {
+                   return m.make_SQA_p530_Instr(t.image, operandList, "sqa [ACx, ]ACy");
                } // p.530
                ) { Main.fatal("sqa error"); }
 
 
     | t=<SQAM> (
-                args = OPTT3EQ_Smem_OPTACx_ACy() {
-                    return m.make_SQAM_p531_Instr(t.image, args, "sqam [T3 = ]Smem, [ACx,] ACy"); 
+                operandList = OPTT3EQ_Smem_OPTACx_ACy() {
+                    return m.make_SQAM_p531_Instr(t.image, operandList, "sqam [T3 = ]Smem, [ACx,] ACy");
                 } // p.531
                 ) { Main.fatal("sqam error"); }
 
 
     | t=<SQDST> (
-                 args = Xmem_Ymem_ACx_ACy() {
-                     return m.make_SQDST_p532_Instr(t.image, args, "sqdst Xmem, Ymem, ACx, ACy"); 
+                 operandList = Xmem_Ymem_ACx_ACy() {
+                     return m.make_SQDST_p532_Instr(t.image, operandList, "sqdst Xmem, Ymem, ACx, ACy");
                  } // p.532
                  ) { Main.fatal("sqdst error"); }
 
 
     | t=<SQR> (
-               args = OPTACx_ACy() {
-                   return m.make_SQR_p535_Instr(t.image, args, "sqr [ACx, ]ACy"); 
+               operandList = OPTACx_ACy() {
+                   return m.make_SQR_p535_Instr(t.image, operandList, "sqr [ACx, ]ACy");
                } // p.535
                ) { Main.fatal("sqr error"); }
 
 
     | t=<SQRM> (
-                args = OPTT3EQ_Smem_ACx() {
-                    return m.make_SQRM_p536_Instr(t.image, args, "sqrm [T3 = ]Smem, ACx"); 
+                operandList = OPTT3EQ_Smem_ACx() {
+                    return m.make_SQRM_p536_Instr(t.image, operandList, "sqrm [T3 = ]Smem, ACx");
                 } // p.536
                 ) { Main.fatal("sqrm error"); }
 
 
     | t=<SQS> (
-               args = OPTACx_ACy() {
-                   return m.make_SQS_p538_Instr(t.image, args, "sqs [ACx, ]ACy"); 
+               operandList = OPTACx_ACy() {
+                   return m.make_SQS_p538_Instr(t.image, operandList, "sqs [ACx, ]ACy");
                } // p.538
                ) { Main.fatal("sqs error"); }
 
     
     | t=<SQSM> (
-                args = OPTT3EQ_Smem_OPTACx_ACy() {
-                    return m.make_SQSM_p539_Instr(t.image, args, "sqsm [T3 = ]Smem, [ACx, ]ACy"); 
+                operandList = OPTT3EQ_Smem_OPTACx_ACy() {
+                    return m.make_SQSM_p539_Instr(t.image, operandList, "sqsm [T3 = ]Smem, [ACx, ]ACy");
                 } // p.539
                 ) { Main.fatal("sqsm error"); }
 
 
     | t=<SUB> (
                LOOKAHEAD(P_XS16AA_MOV_HASTY())
-               args = P_XS16AA_MOV_HASTY() {
-                   return m.make_SUB_p575_Instr(t.image, args, "sub :: XS16AA_MOV_HASTY"); 
+               operandList = P_XS16AA_MOV_HASTY() {
+                   return m.make_SUB_p575_Instr(t.image, operandList, "sub :: XS16AA_MOV_HASTY");
                } // sub::mov
 
                | LOOKAHEAD(ACx_DBL_Lmem_ACy())
-               args = ACx_DBL_Lmem_ACy() {
-                   return m.make_SUB_p573_Instr(t.image, args, "sub ACx, dbl(Lmem), ACy"); 
+               operandList = ACx_DBL_Lmem_ACy() {
+                   return m.make_SUB_p573_Instr(t.image, operandList, "sub ACx, dbl(Lmem), ACy");
                } // p.573
 
                | LOOKAHEAD(DUAL_Lmem_OPTACx_ACy())
-               args = DUAL_Lmem_OPTACx_ACy() {
-                   return m.make_SUB_p541_Instr(t.image, args, "sub dual(Lmem), [ACx, ]ACy"); 
+               operandList = DUAL_Lmem_OPTACx_ACy() {
+                   return m.make_SUB_p541_Instr(t.image, operandList, "sub dual(Lmem), [ACx, ]ACy");
                } // p.541 (typo on page)
 
                | LOOKAHEAD(ACx_DUAL_Lmem_ACy())
-               args = ACx_DUAL_Lmem_ACy() {
-                   return m.make_SUB_p543_Instr(t.image, args, "sub ACx, dual(Lmem), ACy"); 
+               operandList = ACx_DUAL_Lmem_ACy() {
+                   return m.make_SUB_p543_Instr(t.image, operandList, "sub ACx, dual(Lmem), ACy");
                } // p.543
 
                | LOOKAHEAD(DUAL_Lmem_Tx_ACx())
-               args = DUAL_Lmem_Tx_ACx() {
-                   return m.make_SUB_p545_Instr(t.image, args, "sub dual(Lmem), Tx, ACx"); 
+               operandList = DUAL_Lmem_Tx_ACx() {
+                   return m.make_SUB_p545_Instr(t.image, operandList, "sub dual(Lmem), Tx, ACx");
                } // p.545
 
                | LOOKAHEAD(Tx_DUAL_Lmem_ACx())
-               args = Tx_DUAL_Lmem_ACx() {
-                   return m.make_SUB_p547_Instr(t.image, args, "sub Tx, dual(Lmem), ACx"); 
+               operandList = Tx_DUAL_Lmem_ACx() {
+                   return m.make_SUB_p547_Instr(t.image, operandList, "sub Tx, dual(Lmem), ACx");
                } // p.547
 
                | LOOKAHEAD(k4K16_OPTsrc_dst())
-               args = k4K16_OPTsrc_dst() {
-                   return m.make_SUB_p552_Instr(t.image, args, "sub k4|K16, [src,], dst"); 
+               operandList = k4K16_OPTsrc_dst() {
+                   return m.make_SUB_p552_Instr(t.image, operandList, "sub k4|K16, [src,], dst");
                } // p.552,4
 
                | LOOKAHEAD(Smem_OPTsrc_dst())
-               args = Smem_OPTsrc_dst() {
-                   return m.make_SUB_p556_Instr(t.image, args, "sub Smem, [src,], dst"); 
+               operandList = Smem_OPTsrc_dst() {
+                   return m.make_SUB_p556_Instr(t.image, operandList, "sub Smem, [src,], dst");
                } // p.556
 
                | LOOKAHEAD(src_Smem_dst())
-               args = src_Smem_dst() {
-                   return m.make_SUB_p558_Instr(t.image, args, "sub src, Smem, dst"); 
+               operandList = src_Smem_dst() {
+                   return m.make_SUB_p558_Instr(t.image, operandList, "sub src, Smem, dst");
                } // p.558
 
                | LOOKAHEAD(ACx_LSHIFT_Tx_ACy())
-               args = ACx_LSHIFT_Tx_ACy() {
-                   return m.make_SUB_p560_Instr(t.image, args, "sub ACx << Tx, ACy"); 
+               operandList = ACx_LSHIFT_Tx_ACy() {
+                   return m.make_SUB_p560_Instr(t.image, operandList, "sub ACx << Tx, ACy");
                } // p.560
 
                | LOOKAHEAD(ACx_LSHIFT_SHIFTW_ACy())
-               args = ACx_LSHIFT_SHIFTW_ACy() {
-                   return m.make_SUB_p561_Instr(t.image, args, "sub ACx << #SHIFTW, ACy"); 
+               operandList = ACx_LSHIFT_SHIFTW_ACy() {
+                   return m.make_SUB_p561_Instr(t.image, operandList, "sub ACx << #SHIFTW, ACy");
                } // p.561
 
                | LOOKAHEAD(K16_LSHIFT_16_OPTACx_ACy())
-               args = K16_LSHIFT_16_OPTACx_ACy() {
-                   return m.make_SUB_p562_Instr(t.image, args, "sub K16 << #16, [ACx, ]ACy"); 
+               operandList = K16_LSHIFT_16_OPTACx_ACy() {
+                   return m.make_SUB_p562_Instr(t.image, operandList, "sub K16 << #16, [ACx, ]ACy");
                } // p.562
 
                |LOOKAHEAD(K16_LSHIFT_SHFT_OPTACx_ACy())
-               args = K16_LSHIFT_SHFT_OPTACx_ACy() {
-                   return m.make_SUB_p563_Instr(t.image, args, "sub K16 << #SHFT, [ACx, ]ACy"); 
+               operandList = K16_LSHIFT_SHFT_OPTACx_ACy() {
+                   return m.make_SUB_p563_Instr(t.image, operandList, "sub K16 << #SHFT, [ACx, ]ACy");
                } // p.563
 
                |LOOKAHEAD(Smem_LSHIFT_Tx_OPTACx_ACy())
-               args = Smem_LSHIFT_Tx_OPTACx_ACy() {
-                   return m.make_SUB_p564_Instr(t.image, args, "sub Smem << Tx, [ACx, ]ACy"); 
+               operandList = Smem_LSHIFT_Tx_OPTACx_ACy() {
+                   return m.make_SUB_p564_Instr(t.image, operandList, "sub Smem << Tx, [ACx, ]ACy");
                } // p.564
 
                |LOOKAHEAD(ACx_Smem_LSHIFT_16_ACy())
-               args = ACx_Smem_LSHIFT_16_ACy() {
-                   return m.make_SUB_p566_Instr(t.image, args, "sub ACx, Smem << #16, ACy"); 
+               operandList = ACx_Smem_LSHIFT_16_ACy() {
+                   return m.make_SUB_p566_Instr(t.image, operandList, "sub ACx, Smem << #16, ACy");
                } // p.566
 
                |LOOKAHEAD(unsSmem_BORROW_OPTACx_ACy())
-               args = unsSmem_BORROW_OPTACx_ACy() {
-                   return m.make_SUB_p567_Instr(t.image, args, "sub [uns(]Smem[)], BORROW, [ACx, ]ACy"); 
+               operandList = unsSmem_BORROW_OPTACx_ACy() {
+                   return m.make_SUB_p567_Instr(t.image, operandList, "sub [uns(]Smem[)], BORROW, [ACx, ]ACy");
                } // p.567
 
                |LOOKAHEAD(unsSmem_OPTACx_ACy())
-               args = unsSmem_OPTACx_ACy() {
-                   return m.make_SUB_p569_Instr(t.image, args, "sub [uns(]Smem[)], [ACx, ]ACy"); 
+               operandList = unsSmem_OPTACx_ACy() {
+                   return m.make_SUB_p569_Instr(t.image, operandList, "sub [uns(]Smem[)], [ACx, ]ACy");
                } // p.569
 
                |LOOKAHEAD(unsSmem_LSHIFT_SHIFTW_OPTACx_ACy())
-               args = unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() {
-                   return m.make_SUB_p570_Instr(t.image, args, "sub [uns(]Smem[)] << #SHIFTW, [ACx, ]ACy"); 
+               operandList = unsSmem_LSHIFT_SHIFTW_OPTACx_ACy() {
+                   return m.make_SUB_p570_Instr(t.image, operandList, "sub [uns(]Smem[)] << #SHIFTW, [ACx, ]ACy");
                } //p.570
 
                |LOOKAHEAD(Smem_LSHIFT_16_OPTACx_ACy())
-               args = Smem_LSHIFT_16_OPTACx_ACy() {
-                   return m.make_SUB_p565_Instr(t.image, args, "sub Smem << #16, [ACx, ]ACy"); 
+               operandList = Smem_LSHIFT_16_OPTACx_ACy() {
+                   return m.make_SUB_p565_Instr(t.image, operandList, "sub Smem << #16, [ACx, ]ACy");
                } // p.565
 
-               | args = DBL_Lmem_OPTACx_ACy() {
-                   return m.make_SUB_p572_Instr(t.image, args, "sub dbl(Lmem), [ACx, ]ACy"); 
+               | operandList = DBL_Lmem_OPTACx_ACy() {
+                   return m.make_SUB_p572_Instr(t.image, operandList, "sub dbl(Lmem), [ACx, ]ACy");
                } // p.572
 
                |LOOKAHEAD(Xmem_Ymem_ACx())
-               args = Xmem_Ymem_ACx() {
-                   return m.make_SUB_p574_Instr(t.image, args, "sub Xmem, Ymem, ACx"); 
+               operandList = Xmem_Ymem_ACx() {
+                   return m.make_SUB_p574_Instr(t.image, operandList, "sub Xmem, Ymem, ACx");
                } // p.574
 
-               | args = OPTsrc_dst() {
-                   return m.make_SUB_p551_Instr(t.image, args, "sub [src,] dst"); 
+               | operandList = OPTsrc_dst() {
+                   return m.make_SUB_p551_Instr(t.image, operandList, "sub [src,] dst");
                } // p.551
 
-               | args =  K16_Smem() {
-                   return m.make_SUB_xxx_Instr(t.image, args, "sub K16, Smem"); 
+               | operandList =  K16_Smem() {
+                   return m.make_SUB_xxx_Instr(t.image, operandList, "sub K16, Smem");
                } // doesn't exist, really an add instruction; example:  SUB #1, *SP(#12)
                ) { Main.fatal("sub error"); }
 
     | t=<SUBB> (
-               args = unsSmem_OPTACx_ACy() {
-                   return m.make_SUB_p567_Instr(t.image, args, "subb [uns(]Smem[)], [ACx, ]ACy"); 
+               operandList = unsSmem_OPTACx_ACy() {
+                   return m.make_SUB_p567_Instr(t.image, operandList, "subb [uns(]Smem[)], [ACx, ]ACy");
                } // p.567
                ) { Main.fatal("subb error"); }
 
     | t=<SUBADD> (
                   LOOKAHEAD(Tx_Smem_ACx())
-                  args = Tx_Smem_ACx() {
-                      return m.make_SUBADD_p578_Instr(t.image, args, "subadd Tx, Smem, ACx"); 
+                  operandList = Tx_Smem_ACx() {
+                      return m.make_SUBADD_p578_Instr(t.image, operandList, "subadd Tx, Smem, ACx");
                   } // p.578
 
-                  | args = Tx_DUAL_Lmem_ACx() {
-                      return m.make_SUBADD_p580_Instr(t.image, args, "subadd Tx, dual(Lmem), ACx"); 
+                  | operandList = Tx_DUAL_Lmem_ACx() {
+                      return m.make_SUBADD_p580_Instr(t.image, operandList, "subadd Tx, dual(Lmem), ACx");
                   } // p.580
                   ) { Main.fatal("subadd error"); }
 
     | t=<SUBC> (
-                args = Smem_OPTACx_ACy() {
-                    return m.make_SUBC_p582_Instr(t.image, args, "subc Smem, [ACx, ]ACy"); 
+                operandList = Smem_OPTACx_ACy() {
+                    return m.make_SUBC_p582_Instr(t.image, operandList, "subc Smem, [ACx, ]ACy");
                 } // p.582
                 ) { Main.fatal("subc error"); }
 
     | t=<SWAP> (
                 LOOKAHEAD(SwapOps())
-                args = SwapOps() {
-                    return m.make_SWAP_p585_Instr(t.image, args, "swap ..."); 
+                operandList = SwapOps() {
+                    return m.make_SWAP_p585_Instr(t.image, operandList, "swap ...");
                 } // p.585, 633
                 |LOOKAHEAD(SwappOps())
-                args = SwappOps() {
-                    return m.make_SWAPP_p590_Instr(t.image, args, "swapp ..."); 
+                operandList = SwappOps() {
+                    return m.make_SWAPP_p590_Instr(t.image, operandList, "swapp ...");
                 } // p.590
-                |args = Swap4Ops() {
-                    return m.make_SWAP4_p595_Instr(t.image, args, "swap4 ..."); 
+                |operandList = Swap4Ops() {
+                    return m.make_SWAP4_p595_Instr(t.image, operandList, "swap4 ...");
                 } // p.595
                 ) { Main.fatal("swap error"); }
 
     //    | t=<SWAPP> (
-    //                 args = SwappOps() {
-    //                     return m.make_SWAPP_p590_Instr(t.image, args, "swapp ..."); 
+    //                 operandList = SwappOps() {
+    //                     return m.make_SWAPP_p590_Instr(t.image, operandList, "swapp ...");
     //                 } // p.590
     //                 ) { Main.fatal("swapp error"); }
     //
 //    | t=<SWAP4> (
-//                 args = Swap4Ops() {
-//                     return m.make_SWAP4_p595_Instr(t.image, args, "swap4 ..."); 
+//                 operandList = Swap4Ops() {
+//                     return m.make_SWAP4_p595_Instr(t.image, operandList, "swap4 ...");
 //                 } // p.595
 //                 ) { Main.fatal("swap4 error"); }
     | t=<TRAP> (
                 imm = k5() {
-                    args.add(imm);
-                    return m.make_TRAP_p597_Instr(t.image, args, "trap k5"); 
+                    operandList.add(imm);
+                    return m.make_TRAP_p597_Instr(t.image, operandList, "trap k5");
                 } // p.597
                 ) { Main.fatal("trap error"); }
 
     | t=<XCC> (
-               args = OPTlabel_cond() {
-                   return m.make_XCC_p600_Instr(t.image, args, "xcc [label, ]cond"); 
+               operandList = OPTlabel_cond() {
+                   return m.make_XCC_p600_Instr(t.image, operandList, "xcc [label, ]cond");
                } // p.600
                ) { Main.fatal("xcc error"); }
 
     | t=<XCCPART> (
-                   args = OPTlabel_cond() {
-                       return m.make_XCCPART_p603_Instr(t.image, args, "xccpart [label, ]cond"); 
+                   operandList = OPTlabel_cond() {
+                       return m.make_XCCPART_p603_Instr(t.image, operandList, "xccpart [label, ]cond");
                    } // p.603
                ) { Main.fatal("xcc error"); }
 
     | t=<XOR> (
                LOOKAHEAD(k8k16_OPTsrc_dst())
-               args = k8k16_OPTsrc_dst() {
-                   return m.make_XOR_p608_Instr(t.image, args, "xor k8|k16, src, dst"); 
+               operandList = k8k16_OPTsrc_dst() {
+                   return m.make_XOR_p608_Instr(t.image, operandList, "xor k8|k16, src, dst");
                } // p.608
 
-               | args =  Smem_OPTsrc_dst() {
-                   return m.make_XOR_p610_Instr(t.image, args, "xor Smem, src, dst"); 
+               | operandList =  Smem_OPTsrc_dst() {
+                   return m.make_XOR_p610_Instr(t.image, operandList, "xor Smem, src, dst");
                } // p.610
 
                | LOOKAHEAD(ACx_LSHIFT_SHIFTW_OPTACy())
-               args = ACx_LSHIFT_SHIFTW_OPTACy() {
-                   return m.make_XOR_p611_Instr(t.image, args, "xor ACx << #SHIFTW [,ACy]"); 
+               operandList = ACx_LSHIFT_SHIFTW_OPTACy() {
+                   return m.make_XOR_p611_Instr(t.image, operandList, "xor ACx << #SHIFTW [,ACy]");
                } // p.611
 
                | LOOKAHEAD(k16_LSHIFT_16_OPTACx_ACy())
-               args = k16_LSHIFT_16_OPTACx_ACy() {
-                   return m.make_XOR_p612_Instr(t.image, args, "xor k16 << #16, [ACx,] ACy"); 
+               operandList = k16_LSHIFT_16_OPTACx_ACy() {
+                   return m.make_XOR_p612_Instr(t.image, operandList, "xor k16 << #16, [ACx,] ACy");
                } // p.612
 
                | LOOKAHEAD(k16_LSHIFT_SHFT_OPTACx_ACy())
-               args = k16_LSHIFT_SHFT_OPTACx_ACy() {
-                   return m.make_XOR_p613_Instr(t.image, args, "xor k16 << #SHFT, [ACx,] ACy"); 
+               operandList = k16_LSHIFT_SHFT_OPTACx_ACy() {
+                   return m.make_XOR_p613_Instr(t.image, operandList, "xor k16 << #SHFT, [ACx,] ACy");
                } // p.613
 
-               | args =  k16_Smem() {
-                   return m.make_XOR_p614_Instr(t.image, args, "xor k16, Smem"); 
+               | operandList =  k16_Smem() {
+                   return m.make_XOR_p614_Instr(t.image, operandList, "xor k16, Smem");
                } // p.614
 
-               | args =  OPTsrc_dst() {
-                   return m.make_XOR_p607_Instr(t.image, args, "xor src, dst"); 
+               | operandList =  OPTsrc_dst() {
+                   return m.make_XOR_p607_Instr(t.image, operandList, "xor src, dst");
                } // p.607
                ) { Main.fatal("xor error"); }
 
@@ -7314,7 +7315,7 @@ Expression expression() :
 }
 {
     expr = additive_expression() {
-        //System.out.println("jj: expression got inclusive or expression '" + expr + "'");        
+        //System.out.println("jj: expression got inclusive or expression '" + expr + "'");
         return expr;
     }
 }
