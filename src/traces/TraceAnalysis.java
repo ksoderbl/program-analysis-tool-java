@@ -40,13 +40,13 @@ public class TraceAnalysis implements Analysis {
     
     
     public void makeTraces(Program program){
-        HashMap traces = new HashMap();
+        HashMap<String, Trace> traces = new HashMap<String, Trace>();
         Bucket loops = program.getLoops();
-        Iterator iter = loops.listIterator();
+        Iterator<LinkedList<Object>> iter = loops.listIterator();
         int traceNum = 0;
         // iterate over loop headers
         while (iter.hasNext()){
-            LinkedList loop = (LinkedList)(iter.next());
+            LinkedList<Object> loop = iter.next();
 
             BasicBlock loopHeader = (BasicBlock)loop.getFirst();
             
@@ -71,19 +71,19 @@ public class TraceAnalysis implements Analysis {
     
     
      public static void printTraces(Program program){
-        HashMap traces = program.getTraces();
-        Iterator iter = traces.values().iterator();
+        HashMap<String, Trace> traces = program.getTraces();
+        Iterator<Trace> iter = traces.values().iterator();
         while (iter.hasNext()){
-            Trace trace = (Trace)(iter.next());
+            Trace trace = iter.next();
             System.out.println("trace:"+trace.getName());
             printTrace(trace);
         }
     }
 
     public static void printTrace(Trace trace){
-        Iterator li = trace.getIterator();
+        Iterator<BasicBlock> li = trace.getIterator();
         while (li.hasNext()){
-            Node node = (Node)li.next();
+            Node node = li.next();
             System.out.println(node.getName());
         }
     }
@@ -93,9 +93,10 @@ public class TraceAnalysis implements Analysis {
    
     /** for testing purposes */
     public void initTraces(Graph bb){
-        List edges, nodes;
+        List<Edge> edges;
+        List<Node> nodes;
         edges = bb.getEdges();
-        Iterator edgeIter = edges.iterator(); 
+        Iterator<Edge> edgeIter = edges.iterator(); 
         // sort edges according to their dynamic execution weight
         while (edgeIter.hasNext()){
             BasicBlockEdge bbEdge = (BasicBlockEdge)edgeIter.next();
@@ -103,7 +104,7 @@ public class TraceAnalysis implements Analysis {
         }
 
         nodes = bb.getNodes();
-        Iterator nodeIter = nodes.iterator();
+        Iterator<Node> nodeIter = nodes.iterator();
         while (nodeIter.hasNext()){
             BasicBlock bbNode = (BasicBlock)nodeIter.next();
             bbNode.setExecutions((int) (Math.random() * 100));

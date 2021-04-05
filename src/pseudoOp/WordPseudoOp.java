@@ -17,9 +17,9 @@ import main.*;
 public class WordPseudoOp extends PseudoOp {
 
     /** Attributes */
-    private ArrayList exprList;
+    private ArrayList<Expression> exprList;
 
-    public ArrayList getExpressions() {
+    public ArrayList<Expression> getExpressions() {
         return exprList;
     }
 
@@ -29,7 +29,7 @@ public class WordPseudoOp extends PseudoOp {
      * @param expr expression
      * @return the new word pseudo op
      */
-    public WordPseudoOp(ArrayList exprList) {
+    public WordPseudoOp(ArrayList<Expression> exprList) {
         if (exprList.size() < 1)
             Main.fatal("exprList size < 1 in WordPseudoOp constructor.");
         this.exprList = exprList;
@@ -37,12 +37,12 @@ public class WordPseudoOp extends PseudoOp {
 
     public String toString() {
         String s = ".word\t";
-        Iterator it = exprList.iterator();
-        Expression expr = (Expression)it.next();
+        Iterator<Expression> it = exprList.iterator();
+        Expression expr = it.next();
 
         s += expr.toString();
         while (it.hasNext()) {
-            expr = (Expression)it.next();
+            expr = it.next();
             s += ", " + expr.toString();
         }
 

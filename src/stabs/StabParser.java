@@ -399,7 +399,7 @@ public class StabParser {
         String name = null, next = null;
         char symdesc = 0; // unknown
         String typeInfo = null, typeRef = null;
-        ArrayList typeDef = null; // list for type information
+        ArrayList<StabTypeInfo> typeDef = null; // list for type information
 
         if (value == null)
             return parseStabd(type, other, desc);
@@ -477,7 +477,7 @@ public class StabParser {
                  * Defining Types:
                  * http://theory.uwinnipeg.ca/gnu/gdb/stabs_29.html#SEC29
                  */
-                typeDef = new ArrayList();
+                typeDef = new ArrayList<StabTypeInfo>();
 
                 StringTokenizer st = new StringTokenizer(typeInfo, "=");
                 while (st.hasMoreTokens()) {

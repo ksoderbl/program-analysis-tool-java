@@ -94,10 +94,11 @@ public class Bucket{
         }
         ListIterator<Object> LL = l.listIterator();
           System.out.print("key: "+key+"\t\t");
-        while (LL.hasNext()){
-            Node node = (Node)(LL.next());
-            System.out.print(node.getName()+" ");
-        }
+        // How can this code assume objects can be cast to Node?
+        // while (LL.hasNext()){
+        //     Node node = (Node)(LL.next());
+        //     System.out.print(node.getName()+" ");
+        // }
         System.out.println();
     }
     

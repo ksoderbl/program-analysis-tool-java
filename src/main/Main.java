@@ -284,11 +284,11 @@ public class Main {
     public static void parseInputFiles(Program program, Machine machine) {
         UserOptions userOptions = program.getOptions();
 
-        Iterator iter = userOptions.getInputFiles().iterator();
+        Iterator<String> iter = userOptions.getInputFiles().iterator();
         
         while (iter.hasNext()) {
             Input input;
-            String inputFile = (String) iter.next();
+            String inputFile = iter.next();
             String arch = userOptions.getMachineArch();
 
             if ((inputFile.length()) < 3) {

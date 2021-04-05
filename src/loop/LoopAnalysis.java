@@ -15,10 +15,10 @@ public class LoopAnalysis{
 
     public static void analyzeNaturalLoops(Program program, Graph bb, Tree dominators){
         Bucket naturalLoops = new Bucket();
-        List edges = bb.getEdges();
-        Iterator edgeIter = edges.iterator();
+        List<Edge> edges = bb.getEdges();
+        Iterator<Edge> edgeIter = edges.iterator();
         while (edgeIter.hasNext()){
-            Edge edge = (Edge)edgeIter.next();
+            Edge edge = edgeIter.next();
             if (dominators.dominates(edge.getStart(), edge.getEnd())){
                 //System.out.println("loops:"+ edge.getStart().getName() +" "+ edge.getEnd().getName());
                 assembleLoop(edge.getStart(), edge.getEnd());
@@ -36,21 +36,21 @@ public class LoopAnalysis{
         printLoops(program);
     }
     
-    public static LinkedList assembleLoop(Node N, Node H){
-        LinkedList body = new LinkedList();
-        Stack stack = new Stack();
+    public static LinkedList<Object> assembleLoop(Node N, Node H){
+        LinkedList<Object> body = new LinkedList<Object>();
+        Stack<Node> stack = new Stack<Node>();
         Node D;
         body.add(H);
         stack.push(N);
         while (!stack.isEmpty()){
-            D = (Node)stack.pop();
+            D = stack.pop();
             if (!body.contains(D)){
                 body.add(D);
                 /* each predecessor of d */
                 //System.out.print("Node: "+D.getName()+ " Edges: ");
-                Iterator edgeIter = D.getIncomingEdges().iterator();
+                Iterator<Edge> edgeIter = D.getIncomingEdges().iterator();
                 while (edgeIter.hasNext()){
-                    Edge edge = (Edge)edgeIter.next();
+                    Edge edge = edgeIter.next();
                     //    System.out.print(edge.getStart().getName()+" ");
                     stack.push(edge.getStart());
                 }
@@ -65,11 +65,11 @@ public class LoopAnalysis{
         System.out.println("MergeNaturalLoops");
         Bucket loops = program.getLoops();
         System.out.println("Loops Size:"+loops.size());
-        Iterator loopIter = loops.listIterator();
+        Iterator<LinkedList<Object>> loopIter = loops.listIterator();
 
         while (loopIter.hasNext()){
-          LinkedList loop = (LinkedList)loopIter.next();
-          ListIterator bbIter = loop.listIterator();
+          LinkedList<Object> loop = loopIter.next();
+          ListIterator<Object> bbIter = loop.listIterator();
           BasicBlock bbLoopHeader = (BasicBlock)bbIter.next();
           checkLoopHeader(loop, loops);
         }
@@ -77,12 +77,12 @@ public class LoopAnalysis{
         System.out.println("loops size: "+loops.size());
     }
 
-    public static void checkLoopHeader(LinkedList loop1, Bucket loops){
-        ListIterator bbIter = loop1.listIterator();
+    public static void checkLoopHeader(LinkedList<Object> loop1, Bucket loops){
+        ListIterator<Object> bbIter = loop1.listIterator();
         BasicBlock bbLoopHeader = (BasicBlock)bbIter.next();
-        Iterator loopIter = loops.listIterator();
+        Iterator<LinkedList<Object>> loopIter = loops.listIterator();
         while (loopIter.hasNext()){
-          LinkedList loop2 = (LinkedList)loopIter.next();
+          LinkedList<Object> loop2 = loopIter.next();
           bbIter = loop2.listIterator();
           if (!bbIter.hasNext()) continue;
           BasicBlock bbLoopHeader2 = (BasicBlock)bbIter.next();
@@ -99,8 +99,8 @@ public class LoopAnalysis{
     /** 
       * merges one loop with another if both have same headers, *
       * the other loop that is merged is removed from the list  */
-    public static void mergeOneLoop(LinkedList loop1, LinkedList loop2){
-        ListIterator bbIter1 = loop1.listIterator();
+    public static void mergeOneLoop(LinkedList<Object> loop1, LinkedList<Object> loop2){
+        ListIterator<Object> bbIter1 = loop1.listIterator();
         boolean added = false;
         while (bbIter1.hasNext()){
           BasicBlock bb1 = (BasicBlock)bbIter1.next();
@@ -118,17 +118,17 @@ public class LoopAnalysis{
 
     public static void printLoops(Program program){
         Bucket loops = program.getLoops();
-        Iterator iter = loops.listIterator();
+        Iterator<LinkedList<Object>> iter = loops.listIterator();
         while (iter.hasNext()){
-            LinkedList loop = (LinkedList)(iter.next());
+            LinkedList<Object> loop = iter.next();
             System.out.println("Loop");
             printLoop(loop);
         }
     }
 
-    public static void printLoop(LinkedList body){
+    public static void printLoop(LinkedList<Object> body){
         int size = 0;
-        ListIterator li = body.listIterator();
+        ListIterator<Object> li = body.listIterator();
         while (li.hasNext()){
             BasicBlock bb = (BasicBlock)li.next();
             size +=bb.getByteSize();
@@ -137,36 +137,36 @@ public class LoopAnalysis{
         System.out.println("Size:"+size);
     }
 
-     /** does a given object exist in a linked list? */
-    public static boolean objectExists(Object o1, LinkedList list){
-     ListIterator iter = list.listIterator();
+     /** does a given node exist in a linked list? */
+    public static boolean objectExists(Object o1, LinkedList<Object> list){
+        ListIterator<Object> iter = list.listIterator();
         while (iter.hasNext()){
-          Object o2 = (Object)iter.next();
+          Object o2 = iter.next();
           if (o1.equals(o2)) return true;
         }
         return false;
     }
 
-    public static Object getObject(Object o1, LinkedList list){
-     ListIterator iter = list.listIterator();
+    public static Object getObject(Object o1, LinkedList<Object> list){
+        ListIterator<Object> iter = list.listIterator();
         while (iter.hasNext()){
-          Object o2 = (Object)iter.next();
+          Object o2 = iter.next();
           if (o1.equals(o2)) return o2;
         }
         return null;
     }
 
     /** adds loop depth for each basicblock in a loop */
-    public static void addLoopDepth(LinkedList list){
-     ListIterator iter = list.listIterator();
+    public static void addLoopDepth(LinkedList<Object> list){
+        ListIterator<Object> iter = list.listIterator();
         while (iter.hasNext()){
            BasicBlock bb = (BasicBlock)iter.next();
            bb.addLoopDepth();
         }
     }
 
-    public static void setExecutions(LinkedList list){
-     ListIterator iter = list.listIterator();
+    public static void setExecutions(LinkedList<Object> list){
+        ListIterator<Object> iter = list.listIterator();
         while (iter.hasNext()){
            BasicBlock bb = (BasicBlock)iter.next();
            int executions = (int)Math.pow(10,bb.getLoopDepth()*2);
@@ -189,19 +189,19 @@ public class LoopAnalysis{
    public static void markInnerloops(Program program){
      Bucket loops = program.getLoops();        
      Graph basicBlocks = program.getBasicBlocks();
-     Iterator basicBlockiter = basicBlocks.getNodes().iterator();
+     Iterator<Node> basicBlockiter = basicBlocks.getNodes().iterator();
 
 
-     Iterator loopIter = loops.listIterator();
+     Iterator<LinkedList<Object>> loopIter = loops.listIterator();
         while (loopIter.hasNext()){
-          LinkedList loop = (LinkedList)loopIter.next();
+          LinkedList<Object> loop = loopIter.next();
           addLoopDepth(loop);
         }
 
 
      loopIter = loops.listIterator();
         while (loopIter.hasNext()){
-          LinkedList loop = (LinkedList)loopIter.next();
+          LinkedList<Object> loop = loopIter.next();
           setExecutions(loop);
         }
 

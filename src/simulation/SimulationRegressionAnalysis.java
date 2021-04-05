@@ -17,7 +17,7 @@ import input.Input;
 import pseudoOp.*;
 import c55x.dis.*;
 import microinstr.Microinstruction;
-
+import input.InputLineObject;
 
 /**
  * Simulation analysis
@@ -181,24 +181,24 @@ public class SimulationRegressionAnalysis implements Analysis {
     
     public static void executeMicroinstructions(Instruction instr, Program program, Machine machine){
         SimulationStatistics simulationStatistics = program.getSimulationStatistics();
-        List list = instr.getOperations();
-        Iterator iter = list.iterator();
+        List<Operation> list = instr.getOperations();
+        Iterator<Operation> iter = list.iterator();
 
         instr.addExecutions();
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op == null)
                 continue;
-            ArrayList micros = (ArrayList)op.getMicroinstrs(machine);
+            List<Microinstruction> micros = op.getMicroinstrs(machine);
             simulationStatistics.addExecutedInstrs();
         }
         
                
-        ArrayList parallel = (ArrayList)instr.getParallelMicroinstrs(machine);
+        List<Microinstruction> parallel = instr.getParallelMicroinstrs(machine);
         
         
         for (int i = 0; i < parallel.size(); i++){
-            Microinstruction mi = (Microinstruction)parallel.get(i);
+            Microinstruction mi = parallel.get(i);
             machine.setMachineResultOffset(mi.getResultOffset());
             mi.execute(program, machine);
         }        
@@ -208,14 +208,14 @@ public class SimulationRegressionAnalysis implements Analysis {
 
 
     public void makeInstructionHashTable(Program program, Machine machine){
-        List inputs = program.getInputs();
-        Iterator iter = inputs.iterator();
+        List<Input> inputs = program.getInputs();
+        Iterator<Input> iter = inputs.iterator();
         while (iter.hasNext()){
-            Input input = (Input)iter.next();
-            List inputLines = input.getInputLines();
-            Iterator iter2 = inputLines.iterator();
+            Input input = iter.next();
+            List<InputLineObject> inputLines = input.getInputLines();
+            Iterator<InputLineObject> iter2 = inputLines.iterator();
             while (iter2.hasNext()){
-                Object o = (Object)iter2.next();
+                InputLineObject o = iter2.next();
                 //                System.out.println(o.toString());
 
                 if (o instanceof C55xDisSectionPseudoOp){

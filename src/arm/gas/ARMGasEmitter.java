@@ -40,7 +40,7 @@ public class ARMGasEmitter extends Emitter {
     private Program program;
 
     /** Contains output PrintStreams, which are accessed with their filename */
-    private HashMap outputStreams = new HashMap();
+    private HashMap<String, PrintStream> outputStreams = new HashMap<String, PrintStream>();
 
     /** Emitter for single instruction */
     private EmitInstruction instrEmitter;
@@ -55,10 +55,10 @@ public class ARMGasEmitter extends Emitter {
         instrEmitter = new EmitARMInstruction();
         UserOptions options = program.getOptions();
         String directory = options.getDirName();
-        Iterator iter = options.getInputFiles().iterator();
+        Iterator<String> iter = options.getInputFiles().iterator();
 
         while (iter.hasNext()) {
-            String fileName = (String)iter.next();
+            String fileName = iter.next();
             PrintStream emitStream = null;
             FileOutputStream fileStream = null;
             if (fileName.length() > 0) {
@@ -88,16 +88,16 @@ public class ARMGasEmitter extends Emitter {
     /** emit from inputlist */
     public void orderedEmit3(){
         PrintStream outputStream = null;
-        List inputs = program.getInputs();
+        List<Input> inputs = program.getInputs();
         int n = inputs.size();
 
         for (int i = 0; i < n; i++){
-            Input input = (Input)inputs.get(i);
-            outputStream = (PrintStream)outputStreams.get(input.getFileName());
-            List lines = input.getInputLines();
+            Input input = inputs.get(i);
+            outputStream = outputStreams.get(input.getFileName());
+            List<InputLineObject> lines = input.getInputLines();
             int k = lines.size();
             for (int j = 0; j < k; j++){
-                Object o = lines.get(j);
+                InputLineObject o = lines.get(j);
                 if (o instanceof Instruction){
                     Instruction instruction = (Instruction)lines.get(j);
                     outputStream.println("\t" +instrEmitter.emit(instruction));

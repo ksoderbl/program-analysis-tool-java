@@ -16,7 +16,7 @@ public class StabsParser{
         String line = "";
         System.out.println(parseNumberField("*ghjhgj12343ffdfg"));
         System.out.println(parseStringField("*ghjhgj12343ffdfg"));
-        Vector ints = new Vector();
+        Vector<Integer> ints = new Vector<Integer>();
         ints = parseValueField("(23,43)");
         
         for (int i=0; i < ints.size(); i++){
@@ -124,9 +124,9 @@ public class StabsParser{
         UserOptions options = program.getOptions();
         char sym1 = token.charAt(0);
         char sym2 = token.charAt(1);
-        Vector args = new Vector();
-        HashMap types = program.getDebugData().getTypes();
-        HashMap vars = program.getDebugData().getVariables();
+        Vector<Integer> args = new Vector<Integer>();
+        HashMap<String, Type> types = program.getDebugData().getTypes();
+        HashMap<String, Variable> vars = program.getDebugData().getVariables();
         Type type;
         switch (sym1){
         case 'a':
@@ -141,12 +141,12 @@ public class StabsParser{
         case 'G':
             if (options.getDebugStabs()) System.out.println(" global variable");
             args = parseValueField(token.substring(1, token.length()));
-            type = (Type)types.get(args.get(1));
+            type = types.get(args.get(1).toString());
             if (type == null){
                 type = new Type(typeName);
-                types.put(args.get(1), type);
+                types.put(args.get(1).toString(), type);
                 Variable var = new Variable(type, typeName);
-                vars.put(args.get(1), var);
+                vars.put(args.get(1).toString(), var);
             }
             else {
                 Variable var = new Variable(type, typeName);
@@ -164,13 +164,13 @@ public class StabsParser{
             if (options.getDebugStabs()) System.out.println(" type name");
             args = parseValueField(token.substring(1, token.length()));
             type = new Type(typeName);
-            types.put(args.get(1), type);
+            types.put(args.get(1).toString(), type);
             break;
         case 'T':
             if (options.getDebugStabs()) System.out.println(" enumeration, structure or union");
             args = parseValueField(token.substring(1, token.length()));
             type = new Type(typeName);
-            types.put(args.get(1), type);
+            types.put(args.get(1).toString(), type);
             
             break;  
         default:

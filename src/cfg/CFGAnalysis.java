@@ -16,6 +16,7 @@ import pseudoOp.PseudoOp;
 import instr.*;
 import main.*;
 import graph.Edge;
+import graph.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +84,11 @@ public class CFGAnalysis implements Analysis
     private void convertLabels(Program program, Machine machine) {
         CFG cfg = program.getCFG();
         Symbols labels = program.getLabels();
-        Iterator iter = cfg.getNodes().iterator();
+        Iterator<Node> iter = cfg.getNodes().iterator();
 
         while (iter.hasNext()) {
             CFGNode node = (CFGNode) iter.next();
-            Instruction instr = (Instruction) node.getInstruction();
+            Instruction instr = node.getInstruction();
 
             if (instr == null)
                 continue;
@@ -100,7 +101,7 @@ public class CFGAnalysis implements Analysis
                 //String targetLabelName = branch.getTargetLabel();
                 //Label targetLabel = program.getBranchTargetLabel(branch);
                 //CFGNode target = (CFGNode) program.getNode(targetLabel);
-                CFGNode target = (CFGNode) program.getBranchTargetNode(instr);
+                CFGNode target = program.getBranchTargetNode(instr);
 
                 if (target == null) {
                     Main.warn("CFGAnalysis.convertLabels: Branch " + branch
@@ -128,7 +129,7 @@ public class CFGAnalysis implements Analysis
                                   String procname,
                                   Procedure caller) {
         //Main.info("analyzing procedure " + procname);
-        CFGNode entry = (CFGNode) program.getNode(address);
+        CFGNode entry = program.getNode(address);
 
         if (entry == null) {
             Main.warn("CFGAnalysis.analyzeProcedure: no procedure with entry " + procname);
@@ -171,7 +172,7 @@ public class CFGAnalysis implements Analysis
 
         node.setProcedure(proc);
 
-        Instruction instr = (Instruction) node.getInstruction();
+        Instruction instr = node.getInstruction();
 
         // calculate procedure sizes
         proc.addByteSize(instr.getSize());
@@ -222,7 +223,7 @@ public class CFGAnalysis implements Analysis
                                 CFGNode node) {
         // an instruction that stays inside this procedure
         // iterate through successors of this node
-        Iterator iter = node.getOutgoingEdges().iterator();
+        Iterator<Edge> iter = node.getOutgoingEdges().iterator();
 
         while (iter.hasNext()) {
             CFGEdge edge = (CFGEdge) iter.next();
@@ -241,7 +242,7 @@ public class CFGAnalysis implements Analysis
      */
     private void retTargets(Program program, Machine machine) {
         CFG cfg = program.getCFG();
-        Iterator iter = cfg.getNodes().iterator();
+        Iterator<Node> iter = cfg.getNodes().iterator();
 
         // iterate through all nodes of the cfg
         while (iter.hasNext()) {
@@ -256,15 +257,15 @@ public class CFGAnalysis implements Analysis
                 if (proc == null)
                     continue;
 
-                List procExits = proc.getExits();
+                List<CFGNode> procExits = proc.getExits();
 
                 if (procExits == null)
                     continue;
 
-                Iterator procExitsIter = procExits.iterator();
+                Iterator<CFGNode> procExitsIter = procExits.iterator();
 
                 while (procExitsIter.hasNext()) {
-                    CFGNode retNode = (CFGNode) procExitsIter.next();
+                    CFGNode retNode = procExitsIter.next();
                     cfg.createEdge(retNode, nextNode, Edge.EdgeReturn);
                 }
             }

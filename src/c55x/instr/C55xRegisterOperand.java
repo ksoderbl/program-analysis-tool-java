@@ -109,8 +109,8 @@ public class C55xRegisterOperand extends Operand {
         return s;
     }
 
-    public List getRegisters() {
-        List list = new ArrayList();
+    public List<String> getRegisters() {
+        List<String> list = new ArrayList<String>();
         list.add(name);
         return list;
     }

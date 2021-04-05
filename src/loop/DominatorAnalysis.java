@@ -73,16 +73,16 @@ public class DominatorAnalysis implements Analysis {
 
 
     public static void printBB(Graph bb){
-        List nodes = bb.getNodes();
-        Iterator nodeIter = nodes.iterator();
+        List<Node> nodes = bb.getNodes();
+        Iterator<Node> nodeIter = nodes.iterator();
         //System.out.println("-------------BasicBlocks---Incoming edges------");
         while (nodeIter.hasNext()){
-            Node node = (Node)nodeIter.next();
-            List edges = node.getIncomingEdges();
-            Iterator edgeIter = edges.iterator();
+            Node node = nodeIter.next();
+            List<Edge> edges = node.getIncomingEdges();
+            Iterator<Edge> edgeIter = edges.iterator();
             //System.out.print(node.getName()+" ");
             while (edgeIter.hasNext()){
-                Edge edge = (Edge)edgeIter.next();
+                Edge edge = edgeIter.next();
                 //System.out.print(" "+edge.getStart().getName());
             }
             //System.out.println();
@@ -92,12 +92,12 @@ public class DominatorAnalysis implements Analysis {
         nodeIter = nodes.iterator();
         //System.out.println("-------------BasicBlocks---Outgoing edges------");
         while (nodeIter.hasNext()){
-            Node node = (Node)nodeIter.next();
-            List edges = node.getOutgoingEdges();
-            Iterator edgeIter = edges.iterator();
+            Node node = nodeIter.next();
+            List<Edge> edges = node.getOutgoingEdges();
+            Iterator<Edge> edgeIter = edges.iterator();
             //System.out.print(node.getName()+" ");
             while (edgeIter.hasNext()){
-                Edge edge = (Edge)edgeIter.next();
+                Edge edge = edgeIter.next();
                 //System.out.print(" "+edge.getEnd().getName());
             }
             //System.out.println();
@@ -111,29 +111,29 @@ public class DominatorAnalysis implements Analysis {
 
 
     public Node[] dfsTraverse(Graph g){
-        Stack stack = new Stack();
-        Hashtable visited = new Hashtable();
-        List nodes = g.getNodes();
+        Stack<Node> stack = new Stack<Node>();
+        Hashtable<String, Boolean> visited = new Hashtable<String, Boolean>();
+        List<Node> nodes = g.getNodes();
         Node from;
         //System.out.println("nodes size "+nodes.size());
         Node[] dfsNodes = new Node[nodes.size()];
         int i = 0;
         //int j = 0;
 
-        from = (Node)nodes.get(0);
+        from = nodes.get(0);
         //        from.setDFSNum(j++); 
 
         stack.push(from);
         while (!stack.isEmpty()){
-            visited.put(from.getName(), new Boolean(true));
+            visited.put(from.getName(), true);
             from.setDFSNum(i);
             dfsNodes[i++] = from;
-            Iterator edgeIter = from.getOutgoingEdges().iterator();
+            Iterator<Edge> edgeIter = from.getOutgoingEdges().iterator();
             //Enumeration adjEdges = g.getAdj(from);
 
               while (edgeIter.hasNext()) {
                 //while (adjEdges.hasMoreElements()) {
-                Edge tempEdge = (Edge)edgeIter.next();
+                Edge tempEdge = edgeIter.next();
                 Node tempNode = tempEdge.getEnd();
                 //Node tempNode = ((Edge)(adjEdges.nextElement())).getEndNode();
                 if (! visited.containsKey(tempNode.getName())) {
@@ -148,7 +148,7 @@ public class DominatorAnalysis implements Analysis {
             //from.setDFSEndNum(i);
             //dfsNodes[i++] = from;
             
-            from = (Node)(stack.pop());
+            from = (stack.pop());
         }
         return dfsNodes;
     }
@@ -159,11 +159,11 @@ public class DominatorAnalysis implements Analysis {
         /* depth-first search spanning tree */
 
         Node n, p = null, s, v = null, sprime, y, predn;
-        Hashtable semi = new Hashtable();
+        Hashtable<String, Node> semi = new Hashtable<String, Node>();
         /* spanning forest */
-        Hashtable ancestor = new Hashtable();
-        Hashtable idom = new Hashtable();
-        Hashtable sameDom = new Hashtable();
+        Hashtable<String, Node> ancestor = new Hashtable<String, Node>();
+        Hashtable<String, Node> idom = new Hashtable<String, Node>();
+        Hashtable<String, Node> sameDom = new Hashtable<String, Node>();
         Tree dominator = new Tree("dominator");
         /* bucket of all nodes that s semidominates */
         Bucket semiDoms = new Bucket();
@@ -171,24 +171,24 @@ public class DominatorAnalysis implements Analysis {
 
         for (int i = dfsNodes.length - 1; i > 0; i--){ // Skip over root node
             //System.out.println("i:"+i);
-            n = (Node)dfsNodes[i]; p = n.getParent(); s = p;
+            n = dfsNodes[i]; p = n.getParent(); s = p;
             //System.out.println("************ n node: "+n.getName() + " dfsNum "+n.getDFSNum());
        
             //    v = v.getParent();
-            List predecessors = n.getIncomingEdges();
-            Iterator edgeIter = predecessors.iterator();
+            List<Edge> predecessors = n.getIncomingEdges();
+            Iterator<Edge> edgeIter = predecessors.iterator();
     
 
             while (edgeIter.hasNext()){
-                Edge edge = (Edge)edgeIter.next();
-                v = (Node)edge.getStart();
+                Edge edge = edgeIter.next();
+                v = edge.getStart();
                 
                 //System.out.println("v node: "+v.getName());
                 if (v.getDFSNum() <= n.getDFSNum())
                     sprime = v;
                 else {
                 //    System.out.println("------------------------------------- special ----");
-                    sprime = (Node)semi.get(ancestorWithLowestSemi(semi, ancestor, v).getName());
+                    sprime = semi.get(ancestorWithLowestSemi(semi, ancestor, v).getName());
                 }
                 if (sprime.getDFSNum() < s.getDFSNum())
                     s = sprime;
@@ -209,18 +209,18 @@ public class DominatorAnalysis implements Analysis {
         
             Node bucketNode = p;
             if (bucketNode != null){
-                LinkedList lL = (LinkedList)semiDoms.getEntry(bucketNode.getName());
+                LinkedList<Object> lL = semiDoms.getEntry(bucketNode.getName());
                 //System.out.println("attempting to fetch from bucket:"+p.getName());
                 if (lL != null) {
                   //  System.out.println("++++++++++++++");
-                    ListIterator lI = lL.listIterator();
+                    ListIterator<Object> lI = lL.listIterator();
                     // for each v in bucket 
                     while (lI.hasNext()){
                         v = (Node)lI.next();
                         y = ancestorWithLowestSemi(semi, ancestor, v);
                         //System.out.println("y:"+y.getName()+ " v:"+v.getName());
-                        Node n1 = (Node)semi.get(y.getName());
-                        Node n2 = (Node)semi.get(v.getName());
+                        Node n1 = semi.get(y.getName());
+                        Node n2 = semi.get(v.getName());
                         if (n1.getName().equals(n2.getName())){
                             idom.put(v.getName(), p);
                             Dominator v1 = new Dominator(v.getName());
@@ -242,10 +242,10 @@ public class DominatorAnalysis implements Analysis {
         }
         
         for (int i = 0; i < dfsNodes.length -1 ; i++){
-            n = (Node)dfsNodes[i];
+            n = dfsNodes[i];
             if (sameDom.get(n.getName()) != null){
-                v = (Node)sameDom.get(n.getName());
-                Node iNode = (Node)idom.get(v.getName());
+                v = sameDom.get(n.getName());
+                Node iNode = idom.get(v.getName());
                 Dominator iNode2 = new Dominator(iNode.getName());
                 Dominator n2 = new Dominator(n.getName());
                 idom.put(n.getName(), iNode);
@@ -262,17 +262,17 @@ public class DominatorAnalysis implements Analysis {
     
     
     
-    public Node ancestorWithLowestSemi(Hashtable semi, Hashtable ancestor, Node v){
+    public Node ancestorWithLowestSemi(Hashtable<String, Node> semi, Hashtable<String, Node> ancestor, Node v){
         Node u;
         u = v;
         while (ancestor.get(v.getName())!= null){
             //System.out.println("Ancestorwithlowest: "+v.getName());
-            Node v1 = (Node)semi.get(v.getName());
-            Node u1 = (Node)semi.get(u.getName());
+            Node v1 = semi.get(v.getName());
+            Node u1 = semi.get(u.getName());
             if (v1.getDFSNum() < u1.getDFSNum())
                 u = v;
             //System.out.println("before"+v.getName());
-            v = (Node)ancestor.get(v.getName());
+            v = ancestor.get(v.getName());
           //  System.out.println("after"+v.getName());
         }
         //System.out.println("AncestorExit: lowest semi: "+u.getName());
@@ -294,14 +294,14 @@ public class DominatorAnalysis implements Analysis {
         fw.write("digraph \"" + "foobar" + "\" {\n");
         fw.write("size=\"7.44,10.87\";\n");
         fw.write("margin=0.41;\n");
-          fw.write("node [shape=record];\n");
+        fw.write("node [shape=record];\n");
         fw.write("center=1;\n");
         fw.write("rankdir = \"BT\";\n");
         
-        List edges = dominator.getEdges();
-        Iterator edgeIter = edges.iterator();
+        List<Edge> edges = dominator.getEdges();
+        Iterator<Edge> edgeIter = edges.iterator();
         while (edgeIter.hasNext()){
-            Edge edge = (Edge)edgeIter.next();
+            Edge edge = edgeIter.next();
             fw.write(edge.getStart().getName()+ " -> "+ edge.getEnd().getName()+";\n");
         }
         
@@ -323,12 +323,12 @@ public class DominatorAnalysis implements Analysis {
 
 
 
-    public void printHashtable(Hashtable hT, String tableName){
-        Enumeration e = hT.keys();
+    public void printHashtable(Hashtable<String, Node> hT, String tableName){
+        Enumeration<String> e = hT.keys();
         System.out.println(tableName);
         while (e.hasMoreElements()){
-            String key = (String)e.nextElement();
-            Node node = (Node)hT.get(key);
+            String key = e.nextElement();
+            Node node = hT.get(key);
         
             if (node.getParent() == null)
                 System.out.println("key:"+key+" name: "+node.getName()+ " dfnum: "+ 

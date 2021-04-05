@@ -19,6 +19,7 @@ import microinstr.Microinstruction;
 import microinstr.BitUtils;
 import c55x.instr.C55xOperation;
 import c55x.C55xMachine;
+import input.InputLineObject;
 
 /**
  * Simulation analysis
@@ -335,15 +336,15 @@ public class SimulationAnalysis implements Analysis {
 
     public static void executeMicroinstructions(Instruction instr, Program program, Machine machine){
         SimulationStatistics simulationStatistics = program.getSimulationStatistics();
-        List list = instr.getOperations();
-        Iterator iter = list.iterator();
+        List<Operation> list = instr.getOperations();
+        Iterator<Operation> iter = list.iterator();
         boolean skipped = false;
         instr.addExecutions();
         simulationStatistics.addExecutedInstrs();
         
         // calculate operations statistics
         while (iter.hasNext()) {
-            Operation op = (Operation)iter.next();
+            Operation op = iter.next();
             if (op == null)
                 continue;
             if (program.getOptions().getDebugMC())
@@ -360,11 +361,11 @@ public class SimulationAnalysis implements Analysis {
         }
         
         // all microinstructions are in parallel list whether they are parallel or not
-        ArrayList parallel = (ArrayList)instr.getParallelMicroinstrs(machine);
+        List<Microinstruction> parallel = instr.getParallelMicroinstrs(machine);
         
         //        System.out.println(parallel.size());
         for (int i = 0; i < parallel.size(); i++){
-            Microinstruction mi = (Microinstruction)parallel.get(i);
+            Microinstruction mi = parallel.get(i);
             machine.setMachineResultOffset(mi.getResultOffset()); // kps hack
             //System.out.println("res offset before = " + machine.getMachineResultOffset()); // kps hack
             if (machine.isPartialExecutionMode()) { skipped = true; continue;}
@@ -384,12 +385,12 @@ public class SimulationAnalysis implements Analysis {
 
 
     public void makeInstructionHashTable(Program program, Machine machine){
-        List inputs = program.getInputs();
-        Iterator iter = inputs.iterator();
+        List<Input> inputs = program.getInputs();
+        Iterator<Input> iter = inputs.iterator();
         while (iter.hasNext()){
-            Input input = (Input)iter.next();
-            List inputLines = input.getInputLines();
-            Iterator iter2 = inputLines.iterator();
+            Input input = iter.next();
+            List<InputLineObject> inputLines = input.getInputLines();
+            Iterator<InputLineObject> iter2 = inputLines.iterator();
             while (iter2.hasNext()){
                 Object o = (Object)iter2.next();
                 //                System.out.println(o.toString());

@@ -316,17 +316,17 @@ public class C55xMemoryAccessOperand extends Operand
 
     ///////////////////////////////////////////////////////////////////////////////
 
-    public List getRegisters() {
+    public List<String> getRegisters() {
         
-        List list = new ArrayList();
+        List<String> list = new ArrayList<String>();
 
         if (reg1 != null) {
-            List l = reg1.getRegisters();
+            List<String> l = reg1.getRegisters();
             list.addAll(l);
         }
 
         if (reg2 != null) {
-            List l = reg2.getRegisters();
+            List<String> l = reg2.getRegisters();
             list.addAll(l);
         }
         return list;

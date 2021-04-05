@@ -26,7 +26,7 @@ public class TestMOV{
         long dest = 0L;
         
         Machine c55xMachine = new C55xMachine("c55x");
-        List micros = new ArrayList();
+        List<Microinstruction> micros = new ArrayList<Microinstruction>();
 
         Registers regs  = c55xMachine.getRegisters();
         C55xMicroRegisterOperand  reg0  = new C55xMicroRegisterOperand(regs.getRegister("ac0"), 4);

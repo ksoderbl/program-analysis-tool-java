@@ -54,7 +54,7 @@ public class MicroArithmetic extends Microinstruction{
             // we're now doing signed arithmetic
             long bit1 = BitUtils.testBit(op1, (int)source.getSign());
             long bit2 = BitUtils.testBit(op2, (int)destination.getSign());
-            long bit3 = BitUtils.testBit(result, (int)source.getBitSize());
+            long bit3 = BitUtils.testBit(result, source.getBitSize());
             
             
             // positive overflow

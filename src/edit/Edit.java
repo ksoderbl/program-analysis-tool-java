@@ -46,7 +46,7 @@ public abstract class Edit{
 
     /* delete a single instr */
     protected void deleteInstr(BasicBlock bb, int index){
-        List cfgNodes = bb.getNodes();
+        List<CFGNode> cfgNodes = bb.getNodes();
         cfgNodes.remove(index);
 
     }
@@ -103,7 +103,7 @@ public abstract class Edit{
     
     protected int matchInstruction(Instruction cfgInstruction){
 
-        List inputLines = cfgInstruction.getInput().getInputLines();
+        List<InputLineObject> inputLines = cfgInstruction.getInput().getInputLines();
         int n = inputLines.size();
         
         for (int i = 0; i < n; i++){
@@ -129,7 +129,7 @@ public abstract class Edit{
     protected int getIndexObjList(CFGNode cfgNode){
         Instruction instruction = cfgNode.getInstruction();
         Input input = instruction.getInput();
-        List inputLines = input.getInputLines();
+        List<InputLineObject> inputLines = input.getInputLines();
         int n = inputLines.size();
         for (int i = 0; i < n; i++){
             if (inputLines.get(i) instanceof Instruction){
@@ -145,27 +145,27 @@ public abstract class Edit{
     }
    
     
-    protected List locateInstr(BasicBlock bb, Instruction instr){
+    protected List<Integer> locateInstr(BasicBlock bb, Instruction instr){
 
         // kps  - uncommented this, don't know if this works very well
         // e.g. an instruction can have several opcodes
-        //        List indices = new ArrayList();
-        //        Input input = bb.getInput();
-        //        if (input == null) return indices;
-        //        List inputLines = input.getInputLines();
-        //        int start = bb.getFirst();
-        //        int end   = bb.getLast();
-        //        for (int i = start; i <= end; i++){
-        //            if (inputLines.get(i) instanceof Instruction){
-        //                Instruction ins1 = (Instruction)inputLines.get(i);
-        //                if (ins1.getOper().equals(instr.getOper()))
-        //                    indices.add(new Integer(i));
-        //                System.out.println(ins1.toString());
-        //            }
-        //            
-        //        }
-        //        
-        //        return indices;
+            //    List<Integer> indices = new ArrayList();
+            //    Input input = bb.getInput();
+            //    if (input == null) return indices;
+            //    List<InputLineObject> inputLines = input.getInputLines();
+            //    int start = bb.getFirst();
+            //    int end   = bb.getLast();
+            //    for (int i = start; i <= end; i++){
+            //        if (inputLines.get(i) instanceof Instruction){
+            //            Instruction ins1 = (Instruction)inputLines.get(i);
+            //            if (ins1.getOper().equals(instr.getOper()))
+            //                indices.add(new Integer(i));
+            //            System.out.println(ins1.toString());
+            //        }
+                   
+            //    }
+               
+            //    return indices;
 
         return null;
     }
@@ -186,17 +186,17 @@ public abstract class Edit{
       }*/
 
      public void printProcedures(){
-        Iterator iter = program.getProcedures().values().iterator();
+        Iterator<Procedure> iter = program.getProcedures().values().iterator();
         System.out.println("*** Functions ***");
         while (iter.hasNext()){
-            Procedure proc = (Procedure)iter.next();
+            Procedure proc = iter.next();
             System.out.println(proc.toString());
         }
         
      }
     
     public void printBasicBlocks(){
-        Iterator iter = program.getBasicBlocks().getNodes().iterator();
+        Iterator<Node> iter = program.getBasicBlocks().getNodes().iterator();
         System.out.println("*** Basic Blocks ***");
         while (iter.hasNext()){
             BasicBlock bb = (BasicBlock)iter.next();
@@ -210,11 +210,11 @@ public abstract class Edit{
     /* correct jumps to a function */
     protected void changeIncomingJumps(Procedure procedure, String newTargetLabel){
         CFGNode firstNode = procedure.getEntry();
-        List inJumps = firstNode.getIncomingEdges();
-        Iterator edgeIter = inJumps.iterator();
+        List<Edge> inJumps = firstNode.getIncomingEdges();
+        Iterator<Edge> edgeIter = inJumps.iterator();
         while (edgeIter.hasNext()) {
                 //while (adjEdges.hasMoreElements()) {
-                Edge edge = (Edge)edgeIter.next();
+                Edge edge = edgeIter.next();
                 CFGNode jumpNode = (CFGNode)edge.getStart();
                 Instruction instr = jumpNode.getInstruction();
                 System.out.println("****"+newTargetLabel);
@@ -271,7 +271,7 @@ public abstract class Edit{
     }
 
     /* for edit of RISC-type load/stores */
-    protected void editLoadInstr(List loads, BasicBlock bb){
+    protected void editLoadInstr(List<Integer> loads, BasicBlock bb){
         // kps - might need a rewrite ...
         //        Input input = bb.getInput();
         //        if (input == null) return;

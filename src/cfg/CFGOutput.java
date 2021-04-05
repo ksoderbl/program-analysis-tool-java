@@ -79,9 +79,9 @@ public class CFGOutput extends Output {
             }
             // output cfg nodes (instructions) of the program
 
-            Iterator iter = cfg.getNodes().iterator();
-            while (iter.hasNext()) {
-                CFGNode node = (CFGNode) iter.next();
+            Iterator<Node> nodeIter = cfg.getNodes().iterator();
+            while (nodeIter.hasNext()) {
+                CFGNode node = (CFGNode) nodeIter.next();
                 Instruction instr = node.getInstruction();
                 String type = ",color=\"#a0a0a0\"";
 
@@ -139,9 +139,9 @@ public class CFGOutput extends Output {
             */
 
             // output edges between cfg nodes
-            iter = program.getCFG().getEdges().iterator();
-            while (iter.hasNext()) {
-                Edge edge = (Edge) iter.next();
+            Iterator<Edge> edgeIter = program.getCFG().getEdges().iterator();
+            while (edgeIter.hasNext()) {
+                Edge edge = edgeIter.next();
                 if (edge == null) {
                     Main.warn("null edge between cfg nodes");
                 } else {

@@ -23,8 +23,8 @@ public class BlockOptimizationResult{
     private int[] cost;
     private boolean[] take; 
     /** map the array indices to objects */
-    private Vector allObjects = new Vector();
-    private Vector takenObjects = new Vector();
+    private Vector<CodeAllocationObject> allObjects = new Vector<CodeAllocationObject>();
+    private Vector<CodeAllocationObject> takenObjects = new Vector<CodeAllocationObject>();
     private int maxWeight = 0;
     private int startIndex = 1;
     private int spmSize;
@@ -54,12 +54,12 @@ public class BlockOptimizationResult{
         this.take = new boolean[allObjects.size()+1];
 
 
-        Enumeration e = allObjects.elements();
+        Enumeration<CodeAllocationObject> e = allObjects.elements();
 
         while (e.hasMoreElements()){
             // System.out.println(key.intValue());
 
-            CodeAllocationObject cao = (CodeAllocationObject)e.nextElement();
+            CodeAllocationObject cao = e.nextElement();
                 cost[i]   = cao.getCost(spmEnergy, mainMemoryEnergy);
                 weight[i] = cao.getWeight();
                 i++;
@@ -74,7 +74,7 @@ public class BlockOptimizationResult{
         int n = take.length;
         for (i = startIndex; i < n; i++){
             if (take[i]){
-                CodeAllocationObject cao = (CodeAllocationObject)allObjects.elementAt(i-1);
+                CodeAllocationObject cao = allObjects.elementAt(i-1);
                 takenObjects.add(cao);
                 cao.setAllocated();
             }
@@ -114,7 +114,7 @@ public class BlockOptimizationResult{
         int n = weight.length;
         System.out.println("item" + "\t" +"name"+ "\t\t\t" + "cost" + "\t" + "weight" + "\t" + "take");
         for (int i = 1; i < n; i++){
-            System.out.println(i +"\t"+ ((CodeAllocationObject)allObjects.elementAt(i-1)).getName()+ "\t\t\t" + cost[i] + "\t" + weight[i] + "\t" + take[i]);
+            System.out.println(i +"\t"+ (allObjects.elementAt(i-1)).getName()+ "\t\t\t" + cost[i] + "\t" + weight[i] + "\t" + take[i]);
             if (take[i]){
                 totalWeight +=weight[i];
                 totalCost +=cost[i];

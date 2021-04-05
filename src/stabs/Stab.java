@@ -77,7 +77,7 @@ public class Stab extends PseudoOp {
     private char symDesc;
     private String typeInfo;
     private String typeRef;
-    private ArrayList typeDef;
+    private ArrayList<StabTypeInfo> typeDef;
     private long type;
     private long other;
     private long desc;
@@ -140,11 +140,11 @@ public class Stab extends PseudoOp {
     }
 
 
-    public ArrayList getTypeDef() {
+    public ArrayList<StabTypeInfo> getTypeDef() {
         return typeDef;
     }
 
-    public void setTypeDef(ArrayList typeDef) {
+    public void setTypeDef(ArrayList<StabTypeInfo> typeDef) {
         this.typeDef = typeDef;
     }
 

@@ -33,7 +33,7 @@ public class ScratchpadAnalysis implements Analysis {
         public static final double b256 = 0.61;
         public static final double b512 = 0.69;
 
-        HashMap memoryEnergy = new HashMap();
+        HashMap<Integer, Double> memoryEnergy = new HashMap<Integer, Double>();
 
     /**
      * Performs a scratchpad analysis. Doesn't edit code to use the analysis results.
@@ -45,18 +45,18 @@ public class ScratchpadAnalysis implements Analysis {
      */
     public void analyze(Program program, Machine machine) {
         UserOptions userOptions = program.getOptions();
-        Iterator iter;
+        Iterator<Node> iter;
         int SPMSize = program.getOptions().getSPMSize();
-        memoryEnergy.put(new Integer(32), new Double(b32));
-        memoryEnergy.put(new Integer(64), new Double(b64));
-        memoryEnergy.put(new Integer(128), new Double(b128));
-        memoryEnergy.put(new Integer(256), new Double(b256));
-        memoryEnergy.put(new Integer(512), new Double(b512));
-        memoryEnergy.put(new Integer(1024), new Double(kB1));
-        memoryEnergy.put(new Integer(2048), new Double(kB2));
-        memoryEnergy.put(new Integer(4096), new Double(kB4));
-        memoryEnergy.put(new Integer(8192), new Double(kB8));
-        memoryEnergy.put(new Integer(16384), new Double(kB16));
+        memoryEnergy.put(32, b32);
+        memoryEnergy.put(64, b64);
+        memoryEnergy.put(128, b128);
+        memoryEnergy.put(256, b256);
+        memoryEnergy.put(512, b512);
+        memoryEnergy.put(1024, kB1);
+        memoryEnergy.put(2048, kB2);
+        memoryEnergy.put(4096, kB4);
+        memoryEnergy.put(8192, kB8);
+        memoryEnergy.put(16384, kB16);
 
 //        Random random = new Random(54);
         BlockOptimizationResult result = new BlockOptimizationResult(SPMSize, getEnergy(SPMSize), machine.getMainMemoryEnergy());
@@ -124,7 +124,7 @@ public class ScratchpadAnalysis implements Analysis {
 
 
  public double getEnergy(int SPMSize){
-    Double energy = (Double)memoryEnergy.get(new Integer(SPMSize));
+    Double energy = memoryEnergy.get(SPMSize);
     return energy.doubleValue();        
  }
 

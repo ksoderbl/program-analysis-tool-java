@@ -43,7 +43,7 @@ public class Testc55xMicro{
         C55xMachine c55xMachine = new C55xMachine("c55x");
         UserOptions options = new UserOptions(args);
         Program program = new Program(options, c55xMachine);
-        List micros = new ArrayList();
+        List<Microinstruction> micros = new ArrayList<Microinstruction>();
 
 
         
@@ -262,9 +262,9 @@ public class Testc55xMicro{
 
 
 
-    public static void executeMicroinstructions(List micros, Program program, Machine c55xMachine){
+    public static void executeMicroinstructions(List<Microinstruction> micros, Program program, Machine c55xMachine){
         for (int i = 0; i < micros.size(); i++){
-            Microinstruction mi = (Microinstruction)micros.get(i);
+            Microinstruction mi = micros.get(i);
             System.out.println(mi.getName());
             //            if (i > 0) System.out.println("joo:"+c55xMachine.getDataResult(0).getValue());
             mi.execute(program, c55xMachine);
