@@ -166,7 +166,7 @@ public abstract class Machine {
     /**
      * Set the registers of the machine
      */
-    public void setRegisters(ArrayList regNames) {
+    public void setRegisters(ArrayList<Register> regNames) {
         // initialize the registers
         registers = new Registers(regNames);
     }

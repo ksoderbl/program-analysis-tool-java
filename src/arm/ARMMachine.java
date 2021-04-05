@@ -58,7 +58,7 @@ public class ARMMachine extends Machine {
     public ARMMachine(String arch) {
         
         super(arch);
-        ArrayList<ARMRegister> a = new ArrayList<ARMRegister>();
+        ArrayList<Register> a = new ArrayList<Register>();
 
         a.add(new ARMRegister("r0", REGSIZE, 0, 0, this));
         a.add(new ARMRegister("r1", REGSIZE, 1, 0, this));

@@ -1,7 +1,6 @@
 
 .PHONY: clean
 
-# javac `find . -name '*.java'`
 all:
 	$(MAKE) -C arm/gas
 	$(MAKE) -C c55x/dis

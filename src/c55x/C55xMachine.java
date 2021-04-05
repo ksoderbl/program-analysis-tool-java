@@ -107,7 +107,7 @@ public class C55xMachine extends Machine {
         setSupplyVoltage(1.6); // 1.6 volts
         setClockFrequency(24 * 1e6); // 24 MHz
 
-        ArrayList a = new ArrayList();
+        ArrayList<Register> a = new ArrayList<Register>();
 
         // accumulators
         a.add(new C55xRegister("ac0", 40, DUNIT, this, true));        // spru371f, p. 2-9
