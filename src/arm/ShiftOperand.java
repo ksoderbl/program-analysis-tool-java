@@ -4,13 +4,15 @@
 
 package arm;
 
+import instr.Operand;
+
 /**
  * A shift operand of ARM.
  *
  * @author Juha Tukkinen
  */
 
-public class ShiftOperand {
+public class ShiftOperand extends Operand {
 
     public static final int LSL = 0;
     public static final int LSR = 1;

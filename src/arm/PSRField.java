@@ -4,13 +4,15 @@
 
 package arm;
 
+import instr.Operand;
+
 /**
  * A PSR field of ARM.
  *
  * @author Juha Tukkinen
  */
 
-public class PSRField {
+public class PSRField extends Operand {
 
     private String psr;
 
@@ -23,8 +25,8 @@ public class PSRField {
      *
      * @return the new PSR field
      */
-    public PSRField(String _psr) {
-        psr = _psr;
+    public PSRField(String psr) {
+        this.psr = psr;
     }
 
     public String toString() {

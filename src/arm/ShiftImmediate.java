@@ -4,13 +4,15 @@
 
 package arm;
 
+import instr.Operand;
+
 /**
  * An immediate shift of ARM.
  *
  * @author Kristian Söderblom
  */
 
-public class ShiftImmediate {
+public class ShiftImmediate extends Operand {
 
     private ShiftOperand operand;
     private int numbits;

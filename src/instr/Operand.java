@@ -6,12 +6,8 @@
 
 package instr;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.PrintStream;
-import input.Input;
-import main.*;
 import machine.Register;
 import machine.Machine;
 
