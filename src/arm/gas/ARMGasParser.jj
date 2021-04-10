@@ -15,6 +15,8 @@ PARSER_BEGIN(ARMGasParser)
 package arm.gas;
 
 import input.Input;
+import input.InputLineObject;
+import instr.Operand;
 import arm.instr.*;
 import machine.Machine;
 import machine.Register;
@@ -34,7 +36,7 @@ import java.io.*;
 public class ARMGasParser {
 
     private Input input;
-    private List inputLines;
+    private List<InputLineObject> inputLines;
     private Machine machine;
     private Registers registers;
     private String filename;
@@ -207,11 +209,11 @@ TOKEN : /* Literals and separators */
  * GCC ARM Assembler grammar *
  *****************************/
 
-Object SourceLine() :
+InputLineObject SourceLine() :
 {
     Label l;
     PseudoOp pop;
-    Object next, node;
+    InputLineObject next, node;
 }
 {
     node = Instr() {
@@ -227,7 +229,7 @@ Object SourceLine() :
 
 void ParseInput():
 {
-    Object next;
+    InputLineObject next;
 }
 {
     (next=SourceLine()
