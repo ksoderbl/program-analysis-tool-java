@@ -449,7 +449,7 @@ Expression Expr() :
     }
 }
 
-Register Reg() :
+ARMRegister Reg() :
 {
     Token t;
     int regNum;
@@ -471,7 +471,7 @@ Register Reg() :
         } else {
             regNum = Integer.parseInt(t.image.substring(1));
         }
-        return registers.r[regNum];
+        return (ARMRegister)registers.r[regNum];
     }
 }
 
@@ -558,7 +558,7 @@ ARMInstruction Branch():
 {
     Token t;
     String l;
-    Register reg;
+    ARMRegister reg;
     List args;
     ARMInstruction i;
 }
@@ -586,7 +586,7 @@ ARMInstruction BranchAndLink():
 {
     Token t;
     String l;
-    Register reg;
+    ARMRegister reg;
     List args;
     ARMInstruction i;
 }
@@ -679,7 +679,7 @@ ARMInstruction Misc():
  ************************/
 List SwapList():
 {
-    Register target, source1, source2;
+    ARMRegister target, source1, source2;
     List args;
 }
 {
@@ -696,7 +696,7 @@ List SwapList():
 List Regs():
 {
     List l,l2;
-    Register r,r2,s;
+    ARMRegister r,r2,s;
     int i;
 }
 {
@@ -746,7 +746,7 @@ List Operand1():
 {
     ArrayList list;
     Integer val;
-    Register reg1, reg2;
+    ARMRegister reg1, reg2;
     Token t1, t2;
     ShiftRegister sr;
     ShiftImmediate si;
@@ -812,7 +812,7 @@ ShiftImmediate ShiftImm():
 ShiftRegister ShiftReg():
 {
     ShiftOperand so;
-    Register reg;
+    ARMRegister reg;
 }
 {
     so=ShiftOp() reg=Reg() {
@@ -860,7 +860,7 @@ boolean Hat():
 
 List MultipleRegs():
 {
-    Register target;
+    ARMRegister target;
     boolean exclamation;
     boolean hat;
     int specialargs;
@@ -888,7 +888,7 @@ List MultipleRegs():
 List RegCommaId():
 {
     List args;
-    Register target;
+    ARMRegister target;
     //  String s;
 }
 {
@@ -903,7 +903,7 @@ List RegCommaId():
 List RegCommaOperand1(): 
 {
     List args, tail;
-    Register target;
+    ARMRegister target;
 }
 {
     target=Reg() <COMMA> tail=Operand1() {
@@ -918,7 +918,7 @@ List RegCommaOperand1():
 List RegCommaRegCommaOperand1():
 {
     List args, tail;
-    Register target, source;
+    ARMRegister target, source;
 }
 {
     target=Reg() <COMMA> source=Reg() <COMMA> tail=Operand1() {
@@ -940,7 +940,7 @@ List RegCommaAddr2():
      * For "type" see ARM DDI 0100E page A5-18
      */
     Integer val;
-    Register target, source1, source2;  
+    ARMRegister target, source1, source2;
     String sign;
     ShiftOperand so;
     ShiftImmediate si;
@@ -1054,7 +1054,7 @@ List RegCommaAddr3():
      * For "type" see ARM DDI 0100E page A5-34
      */
     Integer val;
-    Register target, source1, source2;  
+    ARMRegister target, source1, source2;
     String sign;
     Token s;
     boolean exclamation;
@@ -1121,7 +1121,7 @@ List RegCommaAddr3():
 List RegList1():
 {
     List args, tail;
-    Register target, source;
+    ARMRegister target, source;
 }
 {
     target=Reg() <COMMA> source=Reg() {
@@ -1135,7 +1135,7 @@ List RegList1():
 List RegList2():
 {
     List args, tail;
-    Register target, source1, source2;
+    ARMRegister target, source1, source2;
 }
 {
     target=Reg() <COMMA> source1=Reg() <COMMA> source2=Reg() {
@@ -1150,7 +1150,7 @@ List RegList2():
 List RegList3():
 {
     List args, tail;
-    Register target, source1, source2, source3;
+    ARMRegister target, source1, source2, source3;
 }
 {
     target=Reg() <COMMA> source1=Reg() <COMMA> source2=Reg() <COMMA>
@@ -1168,7 +1168,7 @@ List RegCommaPSR():
 {
     Token t;
     List args;
-    Register target;
+    ARMRegister target;
 }
 {
     LOOKAHEAD(3) target=Reg() <COMMA> t=<CPSR> {
@@ -1191,7 +1191,7 @@ List PSRfieldsCommaRegORImm():
 {
     Token t;
     List args;
-    Register target;
+    ARMRegister target;
     Integer val;
 }
 {

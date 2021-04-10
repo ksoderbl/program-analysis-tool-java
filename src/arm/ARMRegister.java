@@ -5,7 +5,7 @@ import machine.AbstractRegister;
 import machine.Machine;
 import machine.Register;
 
-public class ARMRegister extends AbstractRegister{
+public class ARMRegister extends AbstractRegister {
     
 
     public ARMRegister(String regName, int bitSize, int pos, long value, Machine machine) {
