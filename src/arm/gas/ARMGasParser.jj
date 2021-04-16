@@ -35,6 +35,8 @@ import java.io.*;
 
 public class ARMGasParser {
 
+    private static final long serialVersionUID = 1L;
+
     private Input input;
     private List<InputLineObject> inputLines;
     private Machine machine;
@@ -284,7 +286,7 @@ PseudoOp PseudoOp() :
     long len, align, value;
     String fileName, string;
     Expression expr;
-    ArrayList list = new ArrayList();
+    ArrayList<Object> list = new ArrayList<Object>();
 }
 {
     <FILE> [Num()] fileName = QuotedString() {
@@ -519,7 +521,7 @@ Integer Int() :
 ARMInstruction Arithmetic():
 {
     Token t;
-    List args;
+    List<Object> args;
     ARMInstruction i;
 }
 {
@@ -559,7 +561,7 @@ ARMInstruction Branch():
     Token t;
     String l;
     ARMRegister reg;
-    List args;
+    List<Object> args;
     ARMInstruction i;
 }
 {
@@ -573,7 +575,7 @@ ARMInstruction Branch():
             conditional = false;
         }
 
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         i = new ARMInstruction(t.image, args, 4, conditional);
         i.setBranch(conditional);
         i.setBranchTarget(l/*targetLabel*/);
@@ -587,12 +589,12 @@ ARMInstruction BranchAndLink():
     Token t;
     String l;
     ARMRegister reg;
-    List args;
+    List<Object> args;
     ARMInstruction i;
 }
 {
     (t=<BL> l=Id()) {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         i = new ARMInstruction(t.image, args, 4, false);
         i.setBranch(false);
         i.setBranchTarget(l/*targetLabel*/);
@@ -610,7 +612,7 @@ ARMInstruction BranchAndLink():
 ARMInstruction Misc(): 
 {
     Token t;
-    List args;
+    List<Object> args;
     ARMInstruction i;
     Integer val;
 }
@@ -644,12 +646,12 @@ ARMInstruction Misc():
     }
     |(
       t=<SWI> val=Int() {
-          args = new ArrayList();
+          args = new ArrayList<Object>();
           args.add(val);
       }
      |t=<SWP> args=SwapList()
      |t=<NOP> {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
      }
       ) {
         i = new ARMInstruction(t.image, args, 1, false); 
@@ -677,15 +679,15 @@ ARMInstruction Misc():
 /************************
  * Helper non-terminals *
  ************************/
-List SwapList():
+List<Object> SwapList():
 {
     ARMRegister target, source1, source2;
-    List args;
+    List<Object> args;
 }
 {
     target=Reg() <COMMA> source1=Reg() <COMMA>
         <LBRACKET> source2=Reg() <RBRACKET> {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(source2); 
@@ -693,15 +695,15 @@ List SwapList():
     }
 }
 
-List Regs():
+List<Object> Regs():
 {
-    List l,l2;
+    List<Object> l,l2;
     ARMRegister r,r2,s;
     int i;
 }
 {
     LOOKAHEAD(5) r=Reg() <MINUS> r2=Reg() <COMMA> l=Regs() {
-        l2 = new ArrayList();
+        l2 = new ArrayList<Object>();
         i = r.getPos();
         while (i <= r2.getPos()) {
             l2.add(registers.r[i]);
@@ -711,7 +713,7 @@ List Regs():
         return l2;
     }
     |LOOKAHEAD(3) r=Reg() <MINUS> r2=Reg() {
-        l2 = new ArrayList();
+        l2 = new ArrayList<Object>();
         i = r.getPos();
         while (i <= r2.getPos()) {
             l2.add(registers.r[i]);
@@ -720,21 +722,21 @@ List Regs():
         return l2;
     }
     |LOOKAHEAD(2) r=Reg() <COMMA> l=Regs() {
-        l2 = new ArrayList();
+        l2 = new ArrayList<Object>();
         l2.add(r);
         l2.addAll(l);
         return l2;
     }
     |r=Reg() {
-        l = new ArrayList();
+        l = new ArrayList<Object>();
         l.add(r);
         return l;
     }
 }
 
-List RegList():
+List<Object> RegList():
 {
-    List r;
+    List<Object> r;
 }
 {
     <LBRACE> r=Regs() <RBRACE> {
@@ -742,9 +744,9 @@ List RegList():
     }
 }
 
-List Operand1():
+List<Object> Operand1():
 {
-    ArrayList list;
+    ArrayList<Object> list;
     Integer val;
     ARMRegister reg1, reg2;
     Token t1, t2;
@@ -753,28 +755,28 @@ List Operand1():
 }
 {
     val=Int() {
-        list = new ArrayList();
+        list = new ArrayList<Object>();
         list.add(val);
         return list;
     }
     |LOOKAHEAD(4) reg1=Reg() <COMMA> sr=ShiftReg() {
-        list = new ArrayList();
+        list = new ArrayList<Object>();
         list.add(reg1);
         list.add(sr);
         return list; }
     |LOOKAHEAD(4) reg1=Reg() <COMMA> si=ShiftImm() {
-        list = new ArrayList();
+        list = new ArrayList<Object>();
         list.add(reg1);
         list.add(si);
         return list; }
     |LOOKAHEAD(4) reg1=Reg() <COMMA> <RRX> {
-        list = new ArrayList();
+        list = new ArrayList<Object>();
         list.add(reg1);
         list.add(new ShiftOperand(ShiftOperand.RRX));
         return list;
     }
     | reg1=Reg() {
-        list = new ArrayList();
+        list = new ArrayList<Object>();
         list.add(reg1);
         return list;
     }
@@ -858,18 +860,18 @@ boolean Hat():
     }
 }
 
-List MultipleRegs():
+List<Object> MultipleRegs():
 {
     ARMRegister target;
     boolean exclamation;
     boolean hat;
     int specialargs;
-    List args, tail;
+    List<Object> args, tail;
 }
 {
     target=Reg() exclamation=Exclamation() <COMMA>
         tail=RegList() hat=Hat() /* [<HAT>] /* zzz hattu ja huutomerkki */ {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.addAll(tail);
         specialargs = 0;
@@ -885,29 +887,29 @@ List MultipleRegs():
     }
 }
 
-List RegCommaId():
+List<Object> RegCommaId():
 {
-    List args;
+    List<Object> args;
     ARMRegister target;
     //  String s;
 }
 {
     target=Reg() <COMMA> Expr() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         //      args.add(s); zzz
         return args;
     }
 }
 
-List RegCommaOperand1(): 
+List<Object> RegCommaOperand1(): 
 {
-    List args, tail;
+    List<Object> args, tail;
     ARMRegister target;
 }
 {
     target=Reg() <COMMA> tail=Operand1() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         if (tail != null)
             args.addAll(tail);
@@ -915,14 +917,14 @@ List RegCommaOperand1():
     }
 }
 
-List RegCommaRegCommaOperand1():
+List<Object> RegCommaRegCommaOperand1():
 {
-    List args, tail;
+    List<Object> args, tail;
     ARMRegister target, source;
 }
 {
     target=Reg() <COMMA> source=Reg() <COMMA> tail=Operand1() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source);
         if (tail != null)
@@ -932,9 +934,9 @@ List RegCommaRegCommaOperand1():
 }
 
 // this includes RegCommaAddr2Post, assuming gcc will produce valid assembler
-List RegCommaAddr2():
+List<Object> RegCommaAddr2():
 {
-    List args;
+    List<Object> args;
     /*
      * target, source1, sign, source2, val, shift, type
      * For "type" see ARM DDI 0100E page A5-18
@@ -952,14 +954,14 @@ List RegCommaAddr2():
     (  //LOOKAHEAD(5) target=Reg() <COMMA> Id() <PLUS> Num()
     
      LOOKAHEAD(3) target=Reg() <COMMA> expr=Expr() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(expr); // kps hack
          return args;
      } // zzz
      |LOOKAHEAD(7) target=Reg() <COMMA> <LBRACKET> source1=Reg() <COMMA>
      val=Int() <RBRACKET> exclamation=Exclamation() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(source1);
          args.add(null);
@@ -975,7 +977,7 @@ List RegCommaAddr2():
      }
      |LOOKAHEAD(8) target=Reg() <COMMA> <LBRACKET> source1=Reg() <COMMA>
      sign=Sign() source2=Reg() <RBRACKET> exclamation=Exclamation() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(source1);
          args.add(sign);
@@ -992,7 +994,7 @@ List RegCommaAddr2():
      |LOOKAHEAD(9) target=Reg() <COMMA> <LBRACKET> source1=Reg() <COMMA>
      sign=Sign() source2=Reg() <COMMA>
      si=ShiftImm() <RBRACKET> exclamation=Exclamation() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(source1);
          args.add(sign);
@@ -1007,7 +1009,7 @@ List RegCommaAddr2():
      }
      |LOOKAHEAD(7) target=Reg() <COMMA>
      <LBRACKET> source1=Reg() <RBRACKET> <COMMA> val=Int() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(source1);
          args.add(null);
@@ -1020,7 +1022,7 @@ List RegCommaAddr2():
      |LOOKAHEAD(10) target=Reg() <COMMA>
      <LBRACKET> source1=Reg() <RBRACKET> <COMMA>
      sign=Sign() source2=Reg() <COMMA> si=ShiftImm() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(source1);
          args.add(sign);
@@ -1031,7 +1033,7 @@ List RegCommaAddr2():
      }
      |LOOKAHEAD(7) target=Reg() <COMMA>
      <LBRACKET> source1=Reg() <RBRACKET> <COMMA> sign=Sign() source2=Reg() {
-         args = new ArrayList();
+         args = new ArrayList<Object>();
          args.add(target);
          args.add(source1);
          args.add(sign);
@@ -1046,9 +1048,9 @@ List RegCommaAddr2():
      })
 }
 
-List RegCommaAddr3():
+List<Object> RegCommaAddr3():
 {
-    List args;
+    List<Object> args;
     /*
      * target, source1, sign, source2, val, shift, type
      * For "type" see ARM DDI 0100E page A5-34
@@ -1062,7 +1064,7 @@ List RegCommaAddr3():
 {
     LOOKAHEAD(6) target=Reg() <COMMA> <LBRACKET> source1=Reg() <COMMA> 
         val=Int() <RBRACKET> exclamation=Exclamation() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(null);
@@ -1078,7 +1080,7 @@ List RegCommaAddr3():
     }
     |LOOKAHEAD(6) target=Reg() <COMMA> <LBRACKET> source1=Reg() <COMMA>
          sign=Sign() source2=Reg() <RBRACKET> exclamation=Exclamation() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(sign);
@@ -1094,7 +1096,7 @@ List RegCommaAddr3():
     }
     |LOOKAHEAD(6) target=Reg() <COMMA>
          <LBRACKET> source1=Reg() <RBRACKET> <COMMA> val=Int() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(null);
@@ -1106,7 +1108,7 @@ List RegCommaAddr3():
     }
     |LOOKAHEAD(6) target=Reg() <COMMA>
          <LBRACKET> source1=Reg() <RBRACKET> sign=Sign() source2=Reg() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(sign);
@@ -1118,28 +1120,28 @@ List RegCommaAddr3():
     }
 }
 
-List RegList1():
+List<Object> RegList1():
 {
-    List args, tail;
+    List<Object> args, tail;
     ARMRegister target, source;
 }
 {
     target=Reg() <COMMA> source=Reg() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source);
         return args;
     }
 }
 
-List RegList2():
+List<Object> RegList2():
 {
-    List args, tail;
+    List<Object> args, tail;
     ARMRegister target, source1, source2;
 }
 {
     target=Reg() <COMMA> source1=Reg() <COMMA> source2=Reg() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(source2);
@@ -1147,15 +1149,15 @@ List RegList2():
     }
 }
 
-List RegList3():
+List<Object> RegList3():
 {
-    List args, tail;
+    List<Object> args, tail;
     ARMRegister target, source1, source2, source3;
 }
 {
     target=Reg() <COMMA> source1=Reg() <COMMA> source2=Reg() <COMMA>
         source3=Reg() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(target);
         args.add(source1);
         args.add(source2);
@@ -1164,22 +1166,22 @@ List RegList3():
     }
 }
 
-List RegCommaPSR():
+List<Object> RegCommaPSR():
 {
     Token t;
-    List args;
+    List<Object> args;
     ARMRegister target;
 }
 {
     LOOKAHEAD(3) target=Reg() <COMMA> t=<CPSR> {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(new PSRField(t.toString()));
         args.add(target);
         args.add(registers.r[ARMMachine.CPSR]);
         return args;
     } 
     | target=Reg() <COMMA> t=<SPSR> {
-        args = new ArrayList();  
+        args = new ArrayList<Object>();  
         args.add(new PSRField(t.toString()));
         args.add(target);
         args.add(registers.r[1]); // zzz 
@@ -1187,37 +1189,37 @@ List RegCommaPSR():
     }
 }
 
-List PSRfieldsCommaRegORImm():
+List<Object> PSRfieldsCommaRegORImm():
 {
     Token t;
-    List args;
+    List<Object> args;
     ARMRegister target;
     Integer val;
 }
 {
     LOOKAHEAD(4) t=<CPSR> <COMMA> target=Reg() {
-        args = new ArrayList();
+        args = new ArrayList<Object>();
         args.add(new PSRField(t.toString()));
         args.add(target);
         args.add(registers.r[ARMMachine.CPSR]);
         return args;
     } 
     | LOOKAHEAD(4) t=<SPSR> <COMMA> target=Reg() {
-        args = new ArrayList();  
+        args = new ArrayList<Object>();  
         args.add(new PSRField(t.toString()));
         args.add(target);
         args.add(registers.r[1]); // zzz 
         return args;
     }
     | LOOKAHEAD(4) t=<CPSR> <COMMA> val=Int() {
-        args = new ArrayList();  
+        args = new ArrayList<Object>();  
         args.add(new PSRField(t.toString()));
         args.add(val);
         args.add(registers.r[16]);
         return args;
     }
     | LOOKAHEAD(4) t=<SPSR>  <COMMA> val=Int() {
-        args = new ArrayList();  
+        args = new ArrayList<Object>();  
         args.add(new PSRField(t.toString()));
         args.add(val);
         args.add(registers.r[1]); // zzz 

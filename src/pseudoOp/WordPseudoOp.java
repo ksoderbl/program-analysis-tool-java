@@ -8,6 +8,7 @@ package pseudoOp;
 
 import misc.Expression;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 import main.*;
 
@@ -17,9 +18,9 @@ import main.*;
 public class WordPseudoOp extends PseudoOp {
 
     /** Attributes */
-    private ArrayList<Expression> exprList;
+    private List<Expression> exprList;
 
-    public ArrayList<Expression> getExpressions() {
+    public List<Expression> getExpressions() {
         return exprList;
     }
 
@@ -29,10 +30,13 @@ public class WordPseudoOp extends PseudoOp {
      * @param expr expression
      * @return the new word pseudo op
      */
-    public WordPseudoOp(ArrayList<Expression> exprList) {
+    public WordPseudoOp(List<Object> exprList) {
         if (exprList.size() < 1)
             Main.fatal("exprList size < 1 in WordPseudoOp constructor.");
-        this.exprList = exprList;
+        this.exprList = new ArrayList<Expression>();
+        for ( Object o : exprList ) {
+            this.exprList.add((Expression)o);
+        }
     }
 
     public String toString() {
